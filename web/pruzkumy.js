@@ -87,12 +87,15 @@ async function loadPolls() {
 // ══ Stav ══════════════════════════════════════════════════
 const S1  = { view:"parties", chart:null };
 const S1b = { chart:null };
-const S2  = { view:"parties", ag:new Set(), hide:new Set(), chart:null };
+const S2  = { view:"parties", showAvg:true, ag:new Set(), hide:new Set(), chart:null };
 
 // ══ Init ══════════════════════════════════════════════════
 function init() {
-  POLLS = POLLS.filter(p => Object.values(p.parties).every(v => v <= 45));
-  [...new Set(POLLS.map(p => p.agency))].forEach(a => S2.ag.add(a));
+  POLLS = POLLS.filter(p =>
+    p.agency !== 'Evropsk\xe9 volby 2024' &&
+    Object.values(p.parties).every(v => v <= 45)
+  );
+  // S2.ag starts empty — výchozí je jen Průměr
   buildChips2();
   showBanner();
   render1();
@@ -143,6 +146,21 @@ function getParties(polls, view) {
       if (!PC[pid]) return;
       if (view === "parties"    &&  COAL_IDS.has(pid)) return;
       if (view === "coalitions" && !COAL_IDS.has(pid)) return;
+      scores[pid] = (scores[pid] || 0) + val;
+      count[pid]  = (count[pid]  || 0) + 1;
+    });
+  });
+  return Object.keys(scores).sort((a,b) =>
+    (scores[b]/count[b]) - (scores[a]/count[a])
+  );
+}
+
+// ══ Strany z průzkumů bez filtru koalic (pro graf 3) ══════
+function getPartiesRaw(polls) {
+  const scores = {}, count = {};
+  polls.forEach(p => {
+    Object.entries(p.parties).forEach(([pid, val]) => {
+      if (!PC[pid]) return;
       scores[pid] = (scores[pid] || 0) + val;
       count[pid]  = (count[pid]  || 0) + 1;
     });
@@ -361,51 +379,85 @@ function fmtMonth(ym) {
   return `${cs[parseInt(m)-1]} ${y.slice(2)}`;
 }
 
-// ══ GRAF 2 — spojnicový ═══════════════════════════════════
+// ══ GRAF 2 — spojnicový (Průměr + agentury) ═══════════════
 function render2() {
-  const polls = POLLS
-    .filter(p => S2.ag.has(p.agency))
+  // Průzkumy pro aktuální pohled (strany / koalice)
+  const viewPolls = POLLS
+    .filter(p => p.view === S2.view)
     .sort((a,b) => a.date_fieldwork_to.localeCompare(b.date_fieldwork_to));
 
-  if (!polls.length) return;
+  const agPolls   = viewPolls.filter(p => S2.ag.has(p.agency));
 
-  const allParties = getParties(polls, S2.view);
+  if (!S2.showAvg && !agPolls.length) {
+    if (S2.chart) { S2.chart.destroy(); S2.chart = null; }
+    return;
+  }
+
+  // Strany bez filtru COAL_IDS — vše co je v daných průzkumech
+  const allParties = getPartiesRaw(viewPolls);
   const parties    = allParties.filter(p => !S2.hide.has(p));
-  const agencies   = [...new Set(polls.map(p => p.agency))].sort();
+  const agencies   = [...new Set(agPolls.map(p => p.agency))].sort();
 
-  const monthPollMap = {};
-  polls.forEach(p => {
-    const mo = p.date_fieldwork_to.substring(0, 7);
-    if (!monthPollMap[mo]) monthPollMap[mo] = {};
-    const prev = monthPollMap[mo][p.agency];
+  // Mapa: měsíc → agentura → nejnovější průzkum toho měsíce
+  const mpm = {};
+  viewPolls.forEach(p => {
+    const mo = p.date_fieldwork_to.substring(0,7);
+    if (!mpm[mo]) mpm[mo] = {};
+    const prev = mpm[mo][p.agency];
     if (!prev || p.date_fieldwork_to > prev.date_fieldwork_to)
-      monthPollMap[mo][p.agency] = p;
+      mpm[mo][p.agency] = p;
   });
 
   const allMonths   = getAllMonths();
   const monthLabels = allMonths.map(fmtMonth);
+  const datasets    = [];
 
-  const datasets = [];
+  // ── Průměr přes všechny agentury ────────────────────────
+  if (S2.showAvg) {
+    parties.forEach(pid => {
+      const cfg = PC[pid] || { d:pid, c:"#888" };
+      const rawData = allMonths.map(mo => {
+        const agVals = Object.values(mpm[mo] || {})
+          .map(p => p.parties[pid]).filter(v => v != null);
+        return agVals.length ? agVals.reduce((s,v)=>s+v,0)/agVals.length : null;
+      });
+      if (!rawData.some(v => v !== null)) return;
+      datasets.push({
+        label: `${cfg.d} \xb7 Pr\u016fm\u011br`,
+        isAvg: true,
+        data: interpolate(rawData),
+        borderColor: cfg.c,
+        backgroundColor: "transparent",
+        borderWidth: 3.5,
+        borderDash: [],
+        pointRadius: 4, pointHoverRadius: 6,
+        pointBackgroundColor: cfg.c,
+        pointBorderColor: "#fff", pointBorderWidth: 1.5,
+        tension: 0.3, spanGaps: false,
+      });
+    });
+  }
+
+  // ── Jednotlivé agentury ──────────────────────────────────
   parties.forEach(pid => {
     const cfg = PC[pid] || { d:pid, c:"#888" };
     agencies.forEach(ag => {
-      const hasAny = allMonths.some(m => monthPollMap[m]?.[ag]?.parties[pid] != null);
+      const hasAny = allMonths.some(m => mpm[m]?.[ag]?.parties[pid] != null);
       if (!hasAny) return;
-      const pubDates = allMonths.map(m => monthPollMap[m]?.[ag]?.date_published ?? null);
-      const rawData  = allMonths.map(m => {
-        const p = monthPollMap[m]?.[ag];
+      const rawData = allMonths.map(m => {
+        const p = mpm[m]?.[ag];
         return (p && p.parties[pid] != null) ? p.parties[pid] : null;
       });
       datasets.push({
         label: `${cfg.d} \xb7 ${ag}`,
-        pubDates,
+        isAvg: false,
         data: interpolate(rawData),
-        borderColor: cfg.c,
+        borderColor: cfg.c + "99",
         backgroundColor: "transparent",
-        borderWidth: 2,
+        borderWidth: 1.5,
         borderDash: AGENCY_DASH[ag] || [],
-        pointRadius: 3, pointHoverRadius: 5,
-        pointBackgroundColor: cfg.c,
+        pointRadius: 2.5, pointHoverRadius: 4,
+        pointBackgroundColor: cfg.c + "99",
         pointBorderColor: "#fff", pointBorderWidth: 1,
         tension: 0.3, spanGaps: false,
       });
@@ -420,7 +472,20 @@ function render2() {
     options: {
       responsive:true, maintainAspectRatio:false,
       interaction:{ mode:"index", axis:"x", intersect:false },
-      plugins:{ legend:{display:false}, tooltip:tooltipOpts() },
+      plugins:{ legend:{display:false}, tooltip:{
+        backgroundColor:"#2A2E4A",
+        titleFont:{ family:"'Source Sans 3',sans-serif", size:11, weight:"600" },
+        bodyFont: { family:"'Source Sans 3',sans-serif", size:12 },
+        padding:9,
+        callbacks:{
+          label: c => {
+            const val = c.parsed.y;
+            if (val == null) return null;
+            const suf = c.dataset.isAvg ? " (pr\u016fm\u011br)" : "";
+            return ` ${c.dataset.label}${suf}: ${val.toFixed(1)} %`;
+          }
+        }
+      }},
       scales: {
         x: { grid:{color:"#E8EAF0"},
              ticks:{ ...ticksOpts(), maxRotation:0, maxTicksLimit:18,
@@ -431,6 +496,7 @@ function render2() {
     },
   });
 
+  // ── Legenda stran ────────────────────────────────────────
   let legHtml = `<div style="display:flex;flex-wrap:wrap;gap:4px 12px;width:100%">`;
   allParties.forEach(pid => {
     const cfg = PC[pid]; if (!cfg) return;
@@ -444,7 +510,16 @@ function render2() {
   });
   legHtml += `</div><div class="leg-div"></div>`;
 
+  // ── Legenda agentur ──────────────────────────────────────
   legHtml += `<div style="display:flex;flex-wrap:wrap;gap:4px 16px;width:100%">`;
+  if (S2.showAvg) {
+    legHtml += `<div class="li nodim">
+      <svg width="24" height="12" style="flex-shrink:0">
+        <line x1="0" y1="6" x2="24" y2="6" stroke="#3D4263" stroke-width="3.5"/>
+      </svg>
+      <span><b>Pr\u016fm\u011br</b></span>
+    </div>`;
+  }
   agencies.forEach(ag => {
     const dash = AGENCY_DASH[ag] || [];
     const isP  = AGENCY_TYPE[ag] === "preference";
@@ -452,7 +527,7 @@ function render2() {
       <svg width="24" height="12" style="flex-shrink:0">
         <line x1="0" y1="6" x2="24" y2="6"
           stroke="${AC[ag]||'#888'}" stroke-width="2"
-          stroke-dasharray="${dash.join(' ')}"/>
+          stroke-dasharray="${dash.join(' ')}" opacity="0.6"/>
       </svg>
       <span>${ag}${isP ? ' <span class="pref-badge">pref</span>' : ''}</span>
     </div>`;
@@ -460,14 +535,14 @@ function render2() {
   legHtml += `</div>`;
   document.getElementById("leg2").innerHTML = legHtml;
 
-  const dates   = polls.map(p => p.date_fieldwork_to).sort();
-  const agLinks = agencies.map(ag =>
+  const allDates = viewPolls.map(p => p.date_fieldwork_to).sort();
+  const agLinks  = [...new Set(viewPolls.map(p => p.agency))].sort().map(ag =>
     `<a href="${AGENCY_URLS[ag]||'#'}" target="_blank">${ag}</a>`
   ).join(", ");
   document.getElementById("meta2").innerHTML = `
     <span>Agentury: <b>${agLinks}</b></span>
-    <span>Pruzkumu: <b>${polls.length}</b></span>
-    <span>Obdobi: <b>${fmt(dates[0])} &ndash; ${fmt(dates[dates.length-1])}</b></span>`;
+    <span>Pr\u016fzkum\u016f: <b>${viewPolls.length}</b></span>
+    <span>Obdob\xed: <b>${fmt(allDates[0])} &ndash; ${fmt(allDates[allDates.length-1])}</b></span>`;
 }
 
 function toggleParty2(pid) {
@@ -477,14 +552,38 @@ function toggleParty2(pid) {
 
 // ══ Agency chips ══════════════════════════════════════════
 function buildChips2() {
+  const avgCol = "#3D4263";
+  const avgChip = `<div class="ac on" id="af2-avg" data-color="${avgCol}"
+    style="background:${avgCol};border-color:${avgCol};color:#fff;font-weight:600"
+    onclick="toggleAvg2()">\u2713 Pr\u016fm\u011br</div>`;
+
   const agencies = [...new Set(POLLS.map(p => p.agency))];
-  document.getElementById("af2").innerHTML = agencies.map(a => {
+  const agHtml = agencies.map(a => {
     const col = AC[a] || '#888';
-    return `<div class="ac on" id="af2-${a}"
+    return `<div class="ac" id="af2-${a}"
       data-color="${col}"
-      style="background:${col};border-color:${col};color:#fff"
-      onclick="toggleAg2('${a}')">\u2713 ${a}</div>`;
+      style="border-color:${col};color:${col}"
+      onclick="toggleAg2('${a}')">${a}</div>`;
   }).join("");
+  document.getElementById("af2").innerHTML = avgChip + agHtml;
+}
+
+function toggleAvg2() {
+  const chip = document.getElementById('af2-avg');
+  const col  = chip.dataset.color;
+  S2.showAvg = !S2.showAvg;
+  if (S2.showAvg) {
+    chip.classList.add("on");
+    chip.style.background  = col;
+    chip.style.color       = '#fff';
+    chip.textContent       = '\u2713 Pr\u016fm\u011br';
+  } else {
+    chip.classList.remove("on");
+    chip.style.background  = '';
+    chip.style.color       = col;
+    chip.textContent       = 'Pr\u016fm\u011br';
+  }
+  render2();
 }
 
 function toggleAg2(agency) {

@@ -21,7 +21,9 @@
   --text2:  #4A5070;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Source Sans 3', sans-serif; background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.5; }
+/* scrollbar skryt přes iframe scrolling="no" — overflow musí být visible pro správný výpočet výšky */
+html, body { overflow-x: hidden; }
+body { font-family: 'Source Sans 3', sans-serif; background: transparent; color: var(--text); font-size: 15px; line-height: 1.5; }
 
 /* ── Header — pouze pro standalone stránku (v embed.html vynecháno) ── */
 .hdr { background: var(--white); border-bottom: 2px solid var(--navy); padding: 16px 24px; }
@@ -29,7 +31,8 @@ body { font-family: 'Source Sans 3', sans-serif; background: var(--bg); color: v
 .hdr h1 .r { color: var(--red); }
 
 /* ── Layout ── */
-.main { max-width: 1100px; margin: 0 auto; padding: 28px 24px 56px; display: flex; flex-direction: column; gap: 28px; }
+.main { max-width: 100%; margin: 0; padding: 12px 20px 32px; display: flex; flex-direction: column; gap: 28px; }
+
 
 /* ── Karta ── */
 .card { background: var(--white); border: 1px solid var(--border); }
@@ -45,21 +48,24 @@ body { font-family: 'Source Sans 3', sans-serif; background: var(--bg); color: v
 .lbox-item a:hover { text-decoration: underline; }
 .lbox-item .dt { font-size: 11px; opacity: .75; }
 
-/* ── Card head row — nadpis + přepínače vedle sebe ── */
-.card-head-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; padding: 18px 24px 14px; gap: 10px; }
-.card-head-row .lbox { width: 100%; margin-bottom: 10px; }
-.ctitle { font-family: 'Merriweather', serif; font-size: 16px; font-weight: 400; color: var(--navy2); margin: 0; }
+/* ── Nadpis ── */
+.ctitle { font-family: 'Merriweather', serif; font-size: 16px; font-weight: 400; color: var(--navy2); margin-bottom: 16px; }
+
+/* ── Toolbar ── */
+.tb { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: flex-end; padding: 14px 24px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: #FAFBFD; }
+.cg { display: flex; flex-direction: column; gap: 4px; }
+.cl { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
 .bg { display: flex; }
-.bg .b { padding: 5px 13px; font-family: 'Source Sans 3', sans-serif; font-size: 12.5px; font-weight: 400; border: 1px solid var(--border); background: var(--white); color: var(--text2); cursor: pointer; border-radius: 0; margin-right: -1px; position: relative; white-space: nowrap; transition: background .1s, color .1s; }
+.bg .b { padding: 6px 13px; font-family: 'Source Sans 3', sans-serif; font-size: 12.5px; font-weight: 400; border: 1px solid var(--border); background: var(--white); color: var(--text2); cursor: pointer; border-radius: 0; margin-right: -1px; position: relative; white-space: nowrap; transition: background .1s, color .1s; }
 .bg .b:hover { background: var(--bg); color: var(--navy); }
 .bg .b.on { background: var(--navy); border-color: var(--navy); color: #fff; font-weight: 500; z-index: 1; }
-/* ── Řádek agentur (graf 2) ── */
-.af-row { padding: 0 24px 14px; }
 
 /* ── Filtry agentur (graf 2) ── */
 .af { display: flex; flex-wrap: wrap; gap: 5px; }
-.ac { display: inline-flex; align-items: center; padding: 5px 12px; font-size: 12px; font-weight: 500; border: 1.5px solid var(--border); background: var(--white); color: var(--text2); cursor: pointer; user-select: none; transition: all .15s; }
-.ac.on { color: #fff; }
+.ac { display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px; font-size: 12px; font-weight: 500; border: 1px solid var(--border); background: var(--white); color: var(--text2); cursor: pointer; user-select: none; transition: all .1s; }
+.ac .dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+.ac.on { background: var(--navy); border-color: var(--navy); color: #fff; }
+.ac.on .dot { background: #fff !important; }
 
 /* ── Graf ── */
 .cw { padding: 20px 24px 10px; }
@@ -90,30 +96,30 @@ body { font-family: 'Source Sans 3', sans-serif; background: var(--bg); color: v
 
 @media(max-width:640px) {
   .main { padding: 14px 12px 36px; }
-  .card-head, .card-head-row, .af-row, .cw, .avg-row, .leg, .meta { padding-left: 14px; padding-right: 14px; }
+  .card-head, .tb, .cw, .avg-row, .leg, .meta { padding-left: 14px; padding-right: 14px; }
 }
 </style>
 </head>
 <body>
 
-<!-- Hlavička pouze pro samostatnou stránku. V embed verzi (embed.html) není. -->
-<header class="hdr">
-  <h1><span class="r">Č</span>eské volby — Volební průzkumy</h1>
-</header>
-
 <main class="main">
 
   <!-- ══ GRAF 1 — Aktuální preference ══ -->
   <div class="card">
-    <div class="card-head-row">
-      <div class="lbox" id="lbox" style="width:100%;margin-bottom:10px">
+    <div class="card-head">
+      <div class="lbox" id="lbox">
         <div class="lbox-label">Aktuální průzkumy preferencí</div>
         <div class="lbox-items" id="lboxItems"></div>
       </div>
       <div class="ctitle">Aktuální volební preference</div>
-      <div class="bg">
-        <button class="b on" id="g1vP" onclick="g1setView('parties')">Strany</button>
-        <button class="b"    id="g1vC" onclick="g1setView('coalitions')">Koalice</button>
+    </div>
+    <div class="tb">
+      <div class="cg">
+        <span class="cl">Zobrazit jako</span>
+        <div class="bg">
+          <button class="b on" id="g1vP" onclick="g1setView('parties')">Strany</button>
+          <button class="b"    id="g1vC" onclick="g1setView('coalitions')">Koalice</button>
+        </div>
       </div>
     </div>
     <div class="cw"><canvas id="c1" height="360"></canvas></div>
@@ -124,15 +130,21 @@ body { font-family: 'Source Sans 3', sans-serif; background: var(--bg); color: v
 
   <!-- ══ GRAF 2 — Vývoj v čase ══ -->
   <div class="card">
-    <div class="card-head-row">
-      <div class="ctitle">Vývoj preferencí v čase</div>
-      <div class="bg">
-        <button class="b on" id="g2vP" onclick="g2setView('parties')">Strany</button>
-        <button class="b"    id="g2vC" onclick="g2setView('coalitions')">Koalice</button>
-      </div>
+    <div class="card-head">
+      <div class="ctitle" style="margin-top:20px">Vývoj preferencí v čase</div>
     </div>
-    <div class="af-row">
-      <div class="af" id="af2"></div>
+    <div class="tb">
+      <div class="cg">
+        <span class="cl">Zobrazit jako</span>
+        <div class="bg">
+          <button class="b on" id="g2vP" onclick="g2setView('parties')">Strany</button>
+          <button class="b"    id="g2vC" onclick="g2setView('coalitions')">Koalice</button>
+        </div>
+      </div>
+      <div class="cg" style="flex-basis:100%">
+        <span class="cl">Agentury</span>
+        <div class="af" id="af2"></div>
+      </div>
     </div>
     <div class="cw"><canvas id="c2" height="420"></canvas></div>
     <div class="leg" id="leg2"></div>
@@ -205,7 +217,7 @@ let POLLS = [];
 
 async function loadPolls() {
   try {
-    const r = await fetch("../data/polls.json");
+    const r = await fetch("https://patrikpilous-dev.github.io/ceske-volby-pruzkumy/data/polls.json");
     if (!r.ok) throw new Error();
     POLLS = await r.json();
   } catch {
@@ -220,13 +232,16 @@ const S2 = { view:"parties", ag:new Set(), hide:new Set(), chart:null };
 
 // ══ Init ══════════════════════════════════════════════════
 function init() {
-  // Odfiltruj záznamy s nereálnými hodnotami (>45 %)
-  POLLS = POLLS.filter(p => Object.values(p.parties).every(v => v <= 45));
   [...new Set(POLLS.map(p => p.agency))].forEach(a => S2.ag.add(a));
   buildChips2();
   showBanner();
   render1();
   render2();
+  // Po dokončení renderování grafů (2× rAF = po prvním vykreslení) nahlásíme výšku
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    reportHeight();
+    setTimeout(reportHeight, 800); // druhý pokus pro jistotu
+  }));
 }
 
 // ══ Banner — 3 nejnovější průzkumy (bez podmínek) ═════════
@@ -398,7 +413,7 @@ function render1() {
     const isP = AGENCY_TYPE[poll.agency] === "preference";
     return `<div class="li nodim">
       <div class="ld" style="background:${AC[poll.agency]||'#888'}"></div>
-      <span>${poll.agency}${isP ? ' <span class="pref-badge">pref</span>' : ''} — ${fmt(poll.date_published)}</span>
+      <span>${poll.agency}${isP ? ' <span class="pref-badge">pref</span>' : ''} — ${fmt(poll.date_fieldwork_to)}</span>
     </div>`;
   }).join("");
 
@@ -427,32 +442,6 @@ function fmtMonth(ym) {
   const cs = ['led','úno','bře','dub','kvě','čvn','čvc','srp','zář','říj','lis','pro'];
   const [y, m] = ym.split('-');
   return `${cs[parseInt(m)-1]} ${y.slice(2)}`;
-}
-
-// Lineární interpolace krátkých mezer (max 2 měsíce) pro plynulou čáru
-function interpolateSeries(arr) {
-  const MAX_GAP = 2;
-  const result = [...arr];
-  let i = 0;
-  while (i < result.length) {
-    if (result[i] === null) {
-      let gapStart = i;
-      while (i < result.length && result[i] === null) i++;
-      const gapEnd = i;
-      const gapLen = gapEnd - gapStart;
-      if (gapLen <= MAX_GAP) {
-        const prev = gapStart > 0 ? result[gapStart - 1] : null;
-        const next = gapEnd < result.length ? result[gapEnd] : null;
-        if (prev !== null && next !== null) {
-          for (let j = gapStart; j < gapEnd; j++) {
-            const t = (j - gapStart + 1) / (gapLen + 1);
-            result[j] = Math.round((prev + (next - prev) * t) * 10) / 10;
-          }
-        }
-      }
-    } else { i++; }
-  }
-  return result;
 }
 
 // ══ GRAF 2 — spojnicový, měsíční agregace ══════════════════
@@ -489,10 +478,10 @@ function render2() {
       datasets.push({
         label: `${cfg.d} · ${ag}`,
         pubDates,
-        data: interpolateSeries(allMonths.map(m => {
+        data: allMonths.map(m => {
           const p = monthPollMap[m]?.[ag];
           return (p && p.parties[pid] != null) ? p.parties[pid] : null;
-        })),
+        }),
         borderColor: cfg.c,
         backgroundColor: "transparent",
         borderWidth: 2,
@@ -570,31 +559,22 @@ function toggleParty2(pid) {
 // ══ Agency chips (graf 2) ══════════════════════════════════
 function buildChips2() {
   const agencies = [...new Set(POLLS.map(p => p.agency))];
-  document.getElementById("af2").innerHTML = agencies.map(a => {
-    const col = AC[a] || '#888';
-    return `<div class="ac on" id="af2-${a}"
-      data-color="${col}"
-      style="background:${col};border-color:${col};color:#fff"
-      onclick="toggleAg2('${a}')">${a}</div>`;
-  }).join("");
+  document.getElementById("af2").innerHTML = agencies.map(a =>
+    `<div class="ac on" id="af2-${a}" onclick="toggleAg2('${a}')">
+       <span class="dot" style="background:${AC[a]||'#888'}"></span>${a}
+     </div>`
+  ).join("");
 }
 
 function toggleAg2(agency) {
   const chip = document.getElementById(`af2-${agency}`);
-  const col = chip.dataset.color;
   if (S2.ag.has(agency)) {
     if (S2.ag.size <= 1) return;
     S2.ag.delete(agency);
     chip.classList.remove("on");
-    chip.style.background = '';
-    chip.style.borderColor = col;
-    chip.style.color = col;
   } else {
     S2.ag.add(agency);
     chip.classList.add("on");
-    chip.style.background = col;
-    chip.style.borderColor = col;
-    chip.style.color = '#fff';
   }
   render2();
 }
@@ -669,6 +649,20 @@ const EMBEDDED = [
 ];
 
 loadPolls();
+</script>
+
+<!-- Dynamické hlášení výšky rodičovské stránce — opakovaně po renderování grafů -->
+<script>
+function reportHeight() {
+  // offsetHeight je spolehlivější než scrollHeight pro výpočet skutečné výšky obsahu
+  const h = document.body.offsetHeight;
+  if (h > 400) {
+    window.parent.postMessage({ type: 'pruzkumyHeight', height: h }, '*');
+  }
+}
+// Zavolej reportHeight z init() po dokončení renderování grafů
+window._reportHeight = reportHeight;
+window.addEventListener('resize', reportHeight);
 </script>
 </body>
 </html>

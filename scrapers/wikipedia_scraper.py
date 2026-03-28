@@ -21,15 +21,13 @@ from normalizer import build_poll_record, save_poll, normalize_party_name, valid
 
 # Kandidátní URL — Wikipedie mění názvy článků, zkusíme více variant
 WIKI_URLS = [
-    # 2025 volby
-    "https://cs.wikipedia.org/wiki/Průzkumy_veřejného_mínění_k_volbám_do_Poslanecké_sněmovny_Parlamentu_ČR_(2025)",
-    "https://cs.wikipedia.org/wiki/Průzkumy_před_volbami_do_Poslanecké_sněmovny_2025",
-    "https://cs.wikipedia.org/wiki/Volební_průzkumy_do_Poslanecké_sněmovny_2025",
-    "https://cs.wikipedia.org/wiki/Průzkumy_volební_preference_do_Sněmovny_ČR_(2021–2025)",
-    "https://cs.wikipedia.org/wiki/Průzkumy_volebních_preferencí_do_sněmovny_2021–2025",
-    # Obecná stránka o průzkumech
-    "https://cs.wikipedia.org/wiki/Průzkumy_volební_preference_do_Sněmovny_ČR",
-    "https://cs.wikipedia.org/wiki/Volební_průzkumy_v_Česku",
+    # URL-encoded — ověřené funkční URL
+    "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
+    # Starší volebni období (2021)
+    "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2021",
+    # Fallback varianty
+    "https://cs.wikipedia.org/wiki/Volby_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
+    "https://cs.wikipedia.org/wiki/Volby_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2021",
 ]
 
 # Mapování názvů agentur z Wikipedie na naše identifikátory

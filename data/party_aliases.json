@@ -34,7 +34,7 @@
     "Trikolora": { "display":"Trikolora","color":"#CC0022", "type":"party",
                    "aliases":["trikolora","trikolora (spd)","hnutí trikolora"] },
     "NašeČesko": { "display":"Naše Česko","color":"#0050A0","type":"party",
-                   "aliases":["naše česko","hnutí naše česko"] }
+                   "aliases":["naše česko","hnutí naše česko","našečesko","nasecesko","naše_česko","nase česko"] }
   },
   "coalitions": {
     "SPOLU":          { "display":"SPOLU",          "color":"#034FA0", "type":"coalition",

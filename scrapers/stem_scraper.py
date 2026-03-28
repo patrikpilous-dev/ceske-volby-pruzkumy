@@ -23,10 +23,11 @@ BASE = "https://www.stem.cz"
 # STEM má předvídatelnou URL strukturu
 MONTHS_URL = {v: k for k, v in MONTHS_CS.items() if len(k) > 4}  # bez zkrácených tvarů
 # Opravíme na primární tvar pro každý měsíc
+# ASCII verze měsíců pro URL (bez háčků/čárek)
 MONTH_PRIMARY = {
-    "01": "leden", "02": "únor",    "03": "březen",  "04": "duben",
-    "05": "květen", "06": "červen", "07": "červenec", "08": "srpen",
-    "09": "září",   "10": "říjen",  "11": "listopad", "12": "prosinec",
+    "01": "leden",    "02": "unor",     "03": "brezen",   "04": "duben",
+    "05": "kveten",   "06": "cerven",   "07": "cervenec", "08": "srpen",
+    "09": "zari",     "10": "rijen",    "11": "listopad", "12": "prosinec",
 }
 
 

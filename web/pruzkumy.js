@@ -282,10 +282,11 @@ function render1() {
 // ══ GRAF 1b — Průměr přes všechny agentury ════════════════
 function render1b(latestPolls, parties) {
   const partyData = parties.map(pid => {
-    const vals = latestPolls.map(p => p.parties[pid]).filter(v => v != null);
-    const avg  = vals.length ? vals.reduce((s,v) => s+v, 0) / vals.length : null;
+    // Agentury, které stranu neměřily → 2 % (stejně jako v grafu 1)
+    const vals = latestPolls.map(p => p.parties[pid] ?? 2.0);
+    const avg  = vals.reduce((s,v) => s+v, 0) / vals.length;
     return { pid, avg };
-  }).filter(d => d.avg != null);
+  });
 
   if (!partyData.length) {
     if (S1b.chart) { S1b.chart.destroy(); S1b.chart = null; }
@@ -435,8 +436,9 @@ function render2() {
     const cfg = PC[pid]; if (!cfg) return;
     const hidden = S2.hide.has(pid);
     legHtml += `<div class="li ${hidden?"off":""}" onclick="toggleParty2('${pid}')">
-      <input type="checkbox" ${hidden?"":"checked"} onclick="event.preventDefault()" style="cursor:pointer;margin:0;flex-shrink:0;accent-color:${cfg.c}">
-      <div class="ld" style="background:${cfg.c}"></div>
+      <div style="width:14px;height:14px;flex-shrink:0;background:${hidden?"#D8DAEA":cfg.c};display:flex;align-items:center;justify-content:center;border:1px solid ${cfg.c}">
+        ${hidden?"":"<span style=\"color:#fff;font-size:9px;line-height:1;font-weight:700\">\u2713</span>"}
+      </div>
       <span>${cfg.d}</span>
     </div>`;
   });
@@ -481,7 +483,7 @@ function buildChips2() {
     return `<div class="ac on" id="af2-${a}"
       data-color="${col}"
       style="background:${col};border-color:${col};color:#fff"
-      onclick="toggleAg2('${a}')">${a}</div>`;
+      onclick="toggleAg2('${a}')">\u2713 ${a}</div>`;
   }).join("");
 }
 
@@ -495,12 +497,14 @@ function toggleAg2(agency) {
     chip.style.background = '';
     chip.style.borderColor = col;
     chip.style.color = col;
+    chip.textContent = agency;
   } else {
     S2.ag.add(agency);
     chip.classList.add("on");
     chip.style.background = col;
     chip.style.borderColor = col;
     chip.style.color = '#fff';
+    chip.textContent = '\u2713 ' + agency;
   }
   render2();
 }

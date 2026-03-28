@@ -105,9 +105,15 @@ function init() {
 
 // ══ Banner ════════════════════════════════════════════════
 function showBanner() {
-  const latest = [...POLLS]
+  // Nejnovější průzkum za každou agenturu (1× per agentura)
+  const byAgency = {};
+  POLLS.forEach(p => {
+    if (!byAgency[p.agency] || p.date_fieldwork_to > byAgency[p.agency].date_fieldwork_to)
+      byAgency[p.agency] = p;
+  });
+  const latest = Object.values(byAgency)
     .sort((a,b) => b.date_fieldwork_to.localeCompare(a.date_fieldwork_to))
-    .slice(0, 5);
+    .slice(0, 6);
   if (!latest.length) return;
   document.getElementById("lboxItems").innerHTML = latest.map(p => {
     const url = AGENCY_URLS[p.agency] || "#";
@@ -215,9 +221,9 @@ function render1() {
     const col = AC[poll.agency] || "#888";
     return {
       label: poll.agency,
-      data: parties.map(pid => poll.parties[pid] ?? null),
-      backgroundColor: col + "CC",
-      borderColor: col,
+      data:            parties.map(pid => poll.parties[pid] ?? 2.0),
+      backgroundColor: parties.map(pid => poll.parties[pid] != null ? col+"CC" : col+"30"),
+      borderColor:     parties.map(pid => poll.parties[pid] != null ? col      : col+"55"),
       borderWidth: 1.5,
     };
   });
@@ -362,8 +368,9 @@ function render2() {
 
   if (!polls.length) return;
 
-  const parties  = getParties(polls, S2.view).filter(p => !S2.hide.has(p));
-  const agencies = [...new Set(polls.map(p => p.agency))].sort();
+  const allParties = getParties(polls, S2.view);
+  const parties    = allParties.filter(p => !S2.hide.has(p));
+  const agencies   = [...new Set(polls.map(p => p.agency))].sort();
 
   const monthPollMap = {};
   polls.forEach(p => {
@@ -424,9 +431,11 @@ function render2() {
   });
 
   let legHtml = `<div style="display:flex;flex-wrap:wrap;gap:4px 12px;width:100%">`;
-  parties.forEach(pid => {
+  allParties.forEach(pid => {
     const cfg = PC[pid]; if (!cfg) return;
-    legHtml += `<div class="li ${S2.hide.has(pid)?"off":""}" onclick="toggleParty2('${pid}')">
+    const hidden = S2.hide.has(pid);
+    legHtml += `<div class="li ${hidden?"off":""}" onclick="toggleParty2('${pid}')">
+      <input type="checkbox" ${hidden?"":"checked"} onclick="event.preventDefault()" style="cursor:pointer;margin:0;flex-shrink:0;accent-color:${cfg.c}">
       <div class="ld" style="background:${cfg.c}"></div>
       <span>${cfg.d}</span>
     </div>`;

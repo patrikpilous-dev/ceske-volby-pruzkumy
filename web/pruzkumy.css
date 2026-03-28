@@ -13,7 +13,7 @@
 html, body { overflow-x: hidden; }
 body { font-family: 'Source Sans 3', sans-serif; background: transparent; color: var(--text); font-size: 15px; line-height: 1.5; }
 
-.main { max-width: 100%; margin: 0; padding: 12px 20px 32px; display: flex; flex-direction: column; gap: 28px; }
+.main { max-width: 1100px; margin: 0 auto; padding: 12px 20px 32px; display: flex; flex-direction: column; gap: 28px; }
 
 .card { background: var(--white); border: 1px solid var(--border); }
 .card-head { padding: 20px 24px 0; }

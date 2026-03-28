@@ -85,8 +85,9 @@ async function loadPolls() {
 }
 
 // ══ Stav ══════════════════════════════════════════════════
-const S1 = { view:"parties", chart:null };
-const S2 = { view:"parties", ag:new Set(), hide:new Set(), chart:null };
+const S1  = { view:"parties", chart:null };
+const S1b = { chart:null };
+const S2  = { view:"parties", ag:new Set(), hide:new Set(), chart:null };
 
 // ══ Init ══════════════════════════════════════════════════
 function init() {
@@ -105,14 +106,14 @@ function init() {
 // ══ Banner ════════════════════════════════════════════════
 function showBanner() {
   const latest = [...POLLS]
-    .sort((a,b) => b.date_published.localeCompare(a.date_published))
+    .sort((a,b) => b.date_fieldwork_to.localeCompare(a.date_fieldwork_to))
     .slice(0, 5);
   if (!latest.length) return;
   document.getElementById("lboxItems").innerHTML = latest.map(p => {
     const url = AGENCY_URLS[p.agency] || "#";
     return `<div class="lbox-item">
       <a href="${url}" target="_blank">${p.agency}</a>
-      <span class="dt">${fmt(p.date_published)}</span>
+      <span class="dt">${fmt(p.date_fieldwork_to)}</span>
     </div>`;
   }).join("");
   document.getElementById("lbox").classList.add("on");
@@ -240,7 +241,7 @@ function render1() {
     plugins: [barLabelsPlugin, censusLinePlugin],
   });
 
-  let avgHtml = `<div class="avg-row-label">Aktualni prumer volemnich preferenci ze vsech agentur</div>`;
+  let avgHtml = `<div class="avg-row-label">Aktu\u00e1ln\u00ed pr\u016fm\u011br volebn\u00edch preferenc\u00ed v\u0161ech agentur</div>`;
   parties.forEach(pid => {
     const vals = latestPolls.map(p => p.parties[pid]).filter(v => v != null);
     if (!vals.length) return;
@@ -268,6 +269,71 @@ function render1() {
   document.getElementById("meta1").innerHTML = `
     <span>Agentury: <b>${agLinks}</b></span>
     <span>Zobrazeno: <b>${S1.view === "parties" ? "Strany" : "Koalice"}</b></span>`;
+
+  render1b(latestPolls, parties);
+}
+
+// ══ GRAF 1b — Průměr přes všechny agentury ════════════════
+function render1b(latestPolls, parties) {
+  const partyData = parties.map(pid => {
+    const vals = latestPolls.map(p => p.parties[pid]).filter(v => v != null);
+    const avg  = vals.length ? vals.reduce((s,v) => s+v, 0) / vals.length : null;
+    return { pid, avg };
+  }).filter(d => d.avg != null);
+
+  if (!partyData.length) {
+    if (S1b.chart) { S1b.chart.destroy(); S1b.chart = null; }
+    return;
+  }
+
+  const ctx = document.getElementById("c1b").getContext("2d");
+  if (S1b.chart) S1b.chart.destroy();
+  S1b.chart = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: partyData.map(d => PC[d.pid]?.d || d.pid),
+      datasets: [{
+        label: "Pr\u016fm\u011br",
+        data:  partyData.map(d => +d.avg.toFixed(1)),
+        backgroundColor: partyData.map(d => (PC[d.pid]?.c || "#888") + "CC"),
+        borderColor:     partyData.map(d => PC[d.pid]?.c || "#888"),
+        borderWidth: 1.5,
+      }],
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: "#2A2E4A",
+          titleFont: { family:"'Source Sans 3',sans-serif", size:11, weight:"600" },
+          bodyFont:  { family:"'Source Sans 3',sans-serif", size:12 },
+          padding: 9,
+          callbacks: { label: c => ` Pr\u016fm\u011br: ${c.parsed.y} %` },
+        },
+      },
+      scales: {
+        x: { grid:{ display:false }, ticks: ticksOpts() },
+        y: { min:0, max:45, grid:{ color:"#E8EAF0" },
+             ticks:{ ...ticksOpts(), callback: v => v+" %" } },
+      },
+    },
+    plugins: [barLabelsPlugin, censusLinePlugin],
+  });
+}
+
+// ══ Lineární interpolace chybějících měsíců ═══════════════
+function interpolate(data) {
+  const r = data.slice();
+  for (let i = 1; i < r.length - 1; i++) {
+    if (r[i] !== null) continue;
+    let prev = -1, next = -1;
+    for (let j = i-1; j >= 0; j--)            { if (r[j] !== null) { prev = j; break; } }
+    for (let j = i+1; j < r.length; j++)       { if (r[j] !== null) { next = j; break; } }
+    if (prev >= 0 && next >= 0)
+      r[i] = +(r[prev] + (r[next] - r[prev]) * (i - prev) / (next - prev)).toFixed(1);
+  }
+  return r;
 }
 
 // ══ Pomocné: všechny měsíce od 2022-01 do dnes ═══════════
@@ -318,13 +384,14 @@ function render2() {
       const hasAny = allMonths.some(m => monthPollMap[m]?.[ag]?.parties[pid] != null);
       if (!hasAny) return;
       const pubDates = allMonths.map(m => monthPollMap[m]?.[ag]?.date_published ?? null);
+      const rawData  = allMonths.map(m => {
+        const p = monthPollMap[m]?.[ag];
+        return (p && p.parties[pid] != null) ? p.parties[pid] : null;
+      });
       datasets.push({
         label: `${cfg.d} \xb7 ${ag}`,
         pubDates,
-        data: allMonths.map(m => {
-          const p = monthPollMap[m]?.[ag];
-          return (p && p.parties[pid] != null) ? p.parties[pid] : null;
-        }),
+        data: interpolate(rawData),
         borderColor: cfg.c,
         backgroundColor: "transparent",
         borderWidth: 2,

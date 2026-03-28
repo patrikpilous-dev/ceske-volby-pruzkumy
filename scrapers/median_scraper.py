@@ -43,21 +43,31 @@ PARTY_PATTERNS = [
 ]
 
 
-def get_article_list():
-    try:
-        r = requests.get(CAT, headers=HEADERS, timeout=15)
-        soup = BeautifulSoup(r.text, "html.parser")
-        articles = []
-        for a in soup.find_all("a", href=True):
-            href = a["href"]
-            txt  = a.get_text().lower()
-            if any(kw in txt for kw in ["model","preference","volební","sněmovn"]) or "volebni" in href.lower():
-                full = href if href.startswith("http") else BASE + href
-                articles.append({"url": full, "title": a.get_text().strip()})
-        return articles[:20]
-    except Exception as e:
-        print(f"[ERROR] Median seznam: {e}")
-        return []
+def get_article_list(max_pages=1):
+    articles = []
+    seen = set()
+    for page in range(1, max_pages + 1):
+        url = CAT if page == 1 else f"{BASE}/cs/?cat=6&paged={page}"
+        try:
+            r = requests.get(url, headers=HEADERS, timeout=15)
+            soup = BeautifulSoup(r.text, "html.parser")
+            found = 0
+            for a in soup.find_all("a", href=True):
+                href = a["href"]
+                txt  = a.get_text().lower()
+                if any(kw in txt for kw in ["model","preference","volební","sněmovn"]) or "volebni" in href.lower():
+                    full = href if href.startswith("http") else BASE + href
+                    if full not in seen:
+                        seen.add(full)
+                        articles.append({"url": full, "title": a.get_text().strip()})
+                        found += 1
+            if found == 0:
+                break  # Žádná další stránka
+            time.sleep(1)
+        except Exception as e:
+            print(f"[ERROR] Median stránka {page}: {e}")
+            break
+    return articles
 
 
 def extract_dates(text):
@@ -149,7 +159,7 @@ def scrape_article(url, title=""):
 
 def run_scraper(historical=False):
     print(f"[Median] start (historical={historical})")
-    articles = get_article_list()
+    articles = get_article_list(max_pages=5 if historical else 1)
     limit = len(articles) if historical else 3
     new = 0
     for a in articles[:limit]:

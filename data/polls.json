@@ -1,5 +1,29 @@
 [
   {
+    "id": "nms-2026-03-28",
+    "agency": "NMS",
+    "date_published": "2026-03-28",
+    "date_fieldwork_from": "2026-03-01",
+    "date_fieldwork_to": "2026-03-28",
+    "type": "model",
+    "view": "coalitions",
+    "sample_size": null,
+    "method": "CAWI",
+    "client": "Novinky.cz",
+    "parties": {
+      "ANO": 30.0,
+      "STAN": 15.7,
+      "Piráti": 15.4,
+      "SPD": 8.0,
+      "Motoristé": 5.8,
+      "Stačilo": 4.9,
+      "SPOLU": 20.4
+    },
+    "coalition_notes": {},
+    "source_url": "https://nms.global/cz/media-blog?id=posts-cz&ucat=869",
+    "scraped_at": "2026-03-28T13:45:42.535618Z"
+  },
+  {
     "id": "median-2026-02-28",
     "agency": "Median",
     "date_published": "2026-03-07",
@@ -22,6 +46,30 @@
     },
     "coalition_notes": {},
     "source_url": "https://www.median.eu/cs/?cat=6"
+  },
+  {
+    "id": "nms-2026-02-28",
+    "agency": "NMS",
+    "date_published": "2026-03-28",
+    "date_fieldwork_from": "2026-02-01",
+    "date_fieldwork_to": "2026-02-28",
+    "type": "model",
+    "view": "parties",
+    "sample_size": 1,
+    "method": "CAWI",
+    "client": "Novinky.cz",
+    "parties": {
+      "ANO": 32.6,
+      "STAN": 14.6,
+      "Piráti": 7.2,
+      "Motoristé": 4.7,
+      "TOP09": 2.4,
+      "KSČM": 1.7,
+      "PRO": 1.6
+    },
+    "coalition_notes": {},
+    "source_url": "https://nms.global/cz/volebni-model-unor-2026-dari-se-ano-a-starostum-stranicky-system-se-ale-dale-droli-a-propadla-by-az-ctvrtina-hlasu/",
+    "scraped_at": "2026-03-28T13:45:47.983447Z"
   },
   {
     "id": "kantar-2026-02-15",
@@ -1089,6 +1137,26 @@
     "scraped_at": "2026-03-28T11:17:12.591665Z"
   },
   {
+    "id": "stem-2024-01-28",
+    "agency": "STEM",
+    "date_published": "2026-03-28",
+    "date_fieldwork_from": "2024-01-01",
+    "date_fieldwork_to": "2024-01-28",
+    "type": "model",
+    "view": "parties",
+    "sample_size": null,
+    "method": "CAWI",
+    "client": "CNN Prima News",
+    "parties": {
+      "ODS": 13.2,
+      "Piráti": 11.3,
+      "SPD": 21.0
+    },
+    "coalition_notes": {},
+    "source_url": "https://www.stem.cz/volebni-tendence-ceske-verejnosti-leden-2024/",
+    "scraped_at": "2026-03-28T13:37:45.494526Z"
+  },
+  {
     "id": "median-2023-12-28",
     "agency": "Median",
     "date_published": "2026-03-28",
@@ -1133,6 +1201,26 @@
     "coalition_notes": {},
     "source_url": "https://www.median.eu/cs/?p=3258",
     "scraped_at": "2026-03-28T11:17:18.570539Z"
+  },
+  {
+    "id": "stem-2023-11-28",
+    "agency": "STEM",
+    "date_published": "2026-03-28",
+    "date_fieldwork_from": "2023-11-01",
+    "date_fieldwork_to": "2023-11-28",
+    "type": "model",
+    "view": "parties",
+    "sample_size": null,
+    "method": "CAWI",
+    "client": "CNN Prima News",
+    "parties": {
+      "ODS": 11.6,
+      "Piráti": 10.2,
+      "SPD": 23.0
+    },
+    "coalition_notes": {},
+    "source_url": "https://www.stem.cz/volebni-tendence-ceske-verejnosti-listopad-2023/",
+    "scraped_at": "2026-03-28T13:37:51.159303Z"
   },
   {
     "id": "median-2023-10-28",

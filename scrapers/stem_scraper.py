@@ -144,7 +144,7 @@ def scrape_article(url):
 
 def run_scraper(historical=False):
     print(f"[STEM] start (historical={historical})")
-    urls = get_urls_last_n_months(7 if historical else 2)
+    urls = get_urls_last_n_months(24 if historical else 2)
     new = 0
     for url in urls:
         rec = scrape_article(url)

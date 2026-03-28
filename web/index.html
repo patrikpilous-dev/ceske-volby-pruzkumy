@@ -68,8 +68,8 @@ body { font-family: 'Source Sans 3', sans-serif; background: var(--bg); color: v
 .cw { padding: 20px 24px 10px; }
 
 /* ── Průměrový řádek ── */
-.avg-row { display: flex; flex-wrap: wrap; gap: 6px 8px; padding: 10px 24px 14px; border-top: 1px solid var(--border); }
-.avg-row-label { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); width: 100%; margin-bottom: 2px; }
+.avg-row { display: flex; flex-wrap: wrap; gap: 6px 8px; padding: 16px 24px 18px; border-top: 2px solid var(--border); }
+.avg-row-label { font-family: 'Merriweather', serif; font-size: 15px; font-weight: 400; color: var(--navy2); width: 100%; margin-bottom: 10px; }
 .avg-chip { display: inline-flex; align-items: center; gap: 5px; padding: 3px 9px; border: 1px solid var(--border); font-size: 12px; color: var(--text2); }
 .avg-chip .dot { width: 8px; height: 8px; border-radius: 0; flex-shrink: 0; }
 .avg-chip strong { color: var(--text); font-weight: 600; margin-left: 2px; }
@@ -244,7 +244,7 @@ function init() {
 function showBanner() {
   const latest = [...POLLS]
     .sort((a,b) => b.date_published.localeCompare(a.date_published))
-    .slice(0, 3);
+    .slice(0, 5);
   if (!latest.length) return;
   document.getElementById("lboxItems").innerHTML = latest.map(p => {
     const url = AGENCY_URLS[p.agency] || "#";
@@ -294,16 +294,44 @@ const barLabelsPlugin = {
       if (meta.type !== "bar") return;
       meta.data.forEach((bar, j) => {
         const val = ds.data[j];
-        if (val == null || val === 0) return;
+        // Zobraz pouze hodnoty >= 3 % aby se čísla nepřekrývala
+        if (val == null || val < 3) return;
         ctx.save();
         ctx.fillStyle = "#4A5070";
-        ctx.font = "500 9px 'Source Sans 3', sans-serif";
+        ctx.font = "500 8.5px 'Source Sans 3', sans-serif";
         ctx.textAlign = "center";
         ctx.textBaseline = "bottom";
         ctx.fillText(val.toFixed(1), bar.x, bar.y - 2);
         ctx.restore();
       });
     });
+  }
+};
+
+// ══ Plugin: červená čára volebního cenzu (5 %) ════════════
+const censusLinePlugin = {
+  id: "censusLine",
+  afterDraw(chart) {
+    const { ctx, scales: { y } } = chart;
+    if (!y) return;
+    const yPos = y.getPixelForValue(5);
+    const left  = chart.chartArea.left;
+    const right = chart.chartArea.right;
+    ctx.save();
+    ctx.strokeStyle = "#C0272D";
+    ctx.lineWidth = 1.5;
+    ctx.setLineDash([5, 4]);
+    ctx.beginPath();
+    ctx.moveTo(left, yPos);
+    ctx.lineTo(right, yPos);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = "#C0272D";
+    ctx.font = "600 10px 'Source Sans 3', sans-serif";
+    ctx.textAlign = "right";
+    ctx.textBaseline = "bottom";
+    ctx.fillText("5 % — volební cenzus", right - 4, yPos - 3);
+    ctx.restore();
   }
 };
 
@@ -350,15 +378,24 @@ function render1() {
       plugins: { legend:{display:false}, tooltip:tooltipOpts() },
       scales: {
         x: { grid:{display:false}, ticks:ticksOpts() },
-        y: { min:0, max:45, grid:{color:"#E8EAF0"},
-             ticks:{ ...ticksOpts(), callback:v => v+" %" } },
+        y: { min:0, max:45, grid:{
+               color: ctx => ctx.tick.value === 5 ? "#C0272D44" : "#E8EAF0",
+               lineWidth: ctx => ctx.tick.value === 5 ? 1.5 : 1,
+             },
+             ticks:{ ...ticksOpts(),
+               callback: v => v+" %",
+               color: ctx => ctx.tick.value === 5 ? "#C0272D" : "#8890B0",
+               font: ctx => ctx.tick.value === 5
+                 ? { family:"'Source Sans 3',sans-serif", size:11, weight:"600" }
+                 : { family:"'Source Sans 3',sans-serif", size:11 },
+             } },
       },
     },
-    plugins: [barLabelsPlugin],
+    plugins: [barLabelsPlugin, censusLinePlugin],
   });
 
   // Průměrový řádek
-  let avgHtml = `<div class="avg-row-label">Průměr ze všech agentur</div>`;
+  let avgHtml = `<div class="avg-row-label">Aktuální průměr volebních preferencí ze všech agentur</div>`;
   parties.forEach(pid => {
     const vals = latestPolls.map(p => p.parties[pid]).filter(v => v != null);
     if (!vals.length) return;
@@ -390,7 +427,25 @@ function render1() {
     <span>Zobrazeno: <b>${S1.view === "parties" ? "Strany" : "Koalice"}</b></span>`;
 }
 
-// ══ GRAF 2 — spojnicový ════════════════════════════════════
+// ══ Pomocné: všechny měsíce od 2022-01 do dnes ═══════════
+function getAllMonths() {
+  const months = [];
+  let d = new Date(2022, 0, 1);
+  const now = new Date();
+  while (d <= now) {
+    months.push(`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`);
+    d.setMonth(d.getMonth() + 1);
+  }
+  return months;
+}
+
+function fmtMonth(ym) {
+  const cs = ['led','úno','bře','dub','kvě','čvn','čvc','srp','zář','říj','lis','pro'];
+  const [y, m] = ym.split('-');
+  return `${cs[parseInt(m)-1]} ${y.slice(2)}`;
+}
+
+// ══ GRAF 2 — spojnicový, měsíční agregace ══════════════════
 function render2() {
   const polls = POLLS
     .filter(p => S2.ag.has(p.agency))
@@ -401,25 +456,39 @@ function render2() {
   const parties  = getParties(polls, S2.view).filter(p => !S2.hide.has(p));
   const agencies = [...new Set(polls.map(p => p.agency))].sort();
 
+  // Agregace: pro každý měsíc a agenturu vezmi nejnovější průzkum
+  const monthPollMap = {}; // { "YYYY-MM": { agency: latestPoll } }
+  polls.forEach(p => {
+    const mo = p.date_fieldwork_to.substring(0, 7);
+    if (!monthPollMap[mo]) monthPollMap[mo] = {};
+    const prev = monthPollMap[mo][p.agency];
+    if (!prev || p.date_fieldwork_to > prev.date_fieldwork_to)
+      monthPollMap[mo][p.agency] = p;
+  });
+
+  const allMonths   = getAllMonths();
+  const monthLabels = allMonths.map(fmtMonth);
+
   const datasets = [];
   parties.forEach(pid => {
     const cfg = PC[pid] || { d:pid, c:"#888" };
     agencies.forEach(ag => {
-      const ap = polls.filter(p =>
-        p.agency === ag && p.parties[pid] != null
-      );
-      if (!ap.length) return;
+      const hasAny = allMonths.some(m => monthPollMap[m]?.[ag]?.parties[pid] != null);
+      if (!hasAny) return;
       datasets.push({
         label: `${cfg.d} · ${ag}`,
-        data: ap.map(p => ({ x: fmt(p.date_fieldwork_to), y: p.parties[pid] })),
+        data: allMonths.map(m => {
+          const p = monthPollMap[m]?.[ag];
+          return (p && p.parties[pid] != null) ? p.parties[pid] : null;
+        }),
         borderColor: cfg.c,
         backgroundColor: "transparent",
         borderWidth: 2,
         borderDash: AGENCY_DASH[ag] || [],
-        pointRadius: 4, pointHoverRadius: 6,
+        pointRadius: 3, pointHoverRadius: 5,
         pointBackgroundColor: cfg.c,
-        pointBorderColor: "#fff", pointBorderWidth: 1.5,
-        tension: 0.2, spanGaps:false, parsing:false,
+        pointBorderColor: "#fff", pointBorderWidth: 1,
+        tension: 0.3, spanGaps: false,
       });
     });
   });
@@ -428,15 +497,15 @@ function render2() {
   if (S2.chart) S2.chart.destroy();
   S2.chart = new Chart(ctx, {
     type: "line",
-    data: { datasets },
+    data: { labels: monthLabels, datasets },
     options: {
       responsive:true, maintainAspectRatio:false,
-      interaction:{ mode:"nearest", axis:"x", intersect:false },
+      interaction:{ mode:"index", axis:"x", intersect:false },
       plugins:{ legend:{display:false}, tooltip:tooltipOpts() },
       scales: {
-        x: { type:"category", grid:{color:"#E8EAF0"},
-             ticks:{ ...ticksOpts(), maxRotation:0,
-               font:{ ...ticksOpts().font, size:10 } } },
+        x: { grid:{color:"#E8EAF0"},
+             ticks:{ ...ticksOpts(), maxRotation:0, maxTicksLimit:18,
+               font:{ family:"'Source Sans 3',sans-serif", size:10 } } },
         y: { min:0, max:45, grid:{color:"#E8EAF0"},
              ticks:{ ...ticksOpts(), callback:v => v+" %" } },
       },

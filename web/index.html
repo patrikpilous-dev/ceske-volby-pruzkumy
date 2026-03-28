@@ -23,7 +23,7 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: 'Source Sans 3', sans-serif; background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.5; }
 
-/* ── Header ── */
+/* ── Header — pouze pro standalone stránku (v embed.html vynecháno) ── */
 .hdr { background: var(--white); border-bottom: 2px solid var(--navy); padding: 16px 24px; }
 .hdr h1 { font-family: 'Merriweather', serif; font-size: 22px; font-weight: 400; color: var(--navy); letter-spacing: -.01em; }
 .hdr h1 .r { color: var(--red); }
@@ -99,6 +99,7 @@ body { font-family: 'Source Sans 3', sans-serif; background: var(--bg); color: v
 </head>
 <body>
 
+<!-- Hlavička pouze pro samostatnou stránku. V embed verzi (embed.html) není. -->
 <header class="hdr">
   <h1><span class="r">Č</span>eské volby — Volební průzkumy</h1>
 </header>
@@ -470,8 +471,10 @@ function render2() {
     agencies.forEach(ag => {
       const hasAny = allMonths.some(m => monthPollMap[m]?.[ag]?.parties[pid] != null);
       if (!hasAny) return;
+      const pubDates = allMonths.map(m => monthPollMap[m]?.[ag]?.date_published ?? null);
       datasets.push({
         label: `${cfg.d} · ${ag}`,
+        pubDates,
         data: allMonths.map(m => {
           const p = monthPollMap[m]?.[ag];
           return (p && p.parties[pid] != null) ? p.parties[pid] : null;
@@ -603,7 +606,14 @@ function tooltipOpts() {
     bodyFont:{ family:"'Source Sans 3',sans-serif", size:12 },
     padding:9,
     callbacks:{
-      label: c => ` ${c.dataset.label}: ${c.parsed.y != null ? c.parsed.y+" %" : "—"}`
+      label: c => {
+        const val = c.parsed.y;
+        if (val == null) return null;
+        // Zobraz datum vydání průzkumu pokud je uloženo v datasetu
+        const pub = c.dataset.pubDates?.[c.dataIndex];
+        const dateStr = pub ? `  (vydáno ${fmt(pub)})` : "";
+        return ` ${c.dataset.label}: ${val} %${dateStr}`;
+      }
     },
   };
 }

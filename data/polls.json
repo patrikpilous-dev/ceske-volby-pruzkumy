@@ -557,6 +557,25 @@
     "scraped_at": "2026-03-28T10:01:07.469850Z"
   },
   {
+    "id": "stem-2025-08-28",
+    "agency": "STEM",
+    "date_published": "2026-03-28",
+    "date_fieldwork_from": "2025-08-01",
+    "date_fieldwork_to": "2025-08-28",
+    "type": "model",
+    "view": "parties",
+    "sample_size": 1548,
+    "method": "CAWI",
+    "client": "CNN Prima News",
+    "parties": {
+      "STAN": 10.1,
+      "SOCDEM": 6.5
+    },
+    "coalition_notes": {},
+    "source_url": "https://www.stem.cz/volebni-tendence-ceske-verejnosti-srpen-2025/",
+    "scraped_at": "2026-03-28T11:14:57.031914Z"
+  },
+  {
     "id": "kantar-2025-08-17",
     "agency": "Kantar",
     "date_published": "2025-08-24",
@@ -761,6 +780,24 @@
     "scraped_at": "2026-03-28T10:09:02.397144Z"
   },
   {
+    "id": "stem-2025-01-28",
+    "agency": "STEM",
+    "date_published": "2026-03-28",
+    "date_fieldwork_from": "2025-01-01",
+    "date_fieldwork_to": "2025-01-28",
+    "type": "model",
+    "view": "coalitions",
+    "sample_size": null,
+    "method": "CAWI",
+    "client": "CNN Prima News",
+    "parties": {
+      "SPOLU": 18.0
+    },
+    "coalition_notes": {},
+    "source_url": "https://www.stem.cz/volebni-tendence-ceske-verejnosti-leden-2025/",
+    "scraped_at": "2026-03-28T11:15:20.579166Z"
+  },
+  {
     "id": "median-2024-12-28",
     "agency": "Median",
     "date_published": "2026-03-28",
@@ -806,6 +843,24 @@
     "coalition_notes": {},
     "source_url": "https://www.median.eu/cs/?p=3447",
     "scraped_at": "2026-03-28T10:09:08.786723Z"
+  },
+  {
+    "id": "stem-2024-11-28",
+    "agency": "STEM",
+    "date_published": "2026-03-28",
+    "date_fieldwork_from": "2024-11-01",
+    "date_fieldwork_to": "2024-11-28",
+    "type": "model",
+    "view": "coalitions",
+    "sample_size": null,
+    "method": "CAWI",
+    "client": "CNN Prima News",
+    "parties": {
+      "SPOLU": 21.0
+    },
+    "coalition_notes": {},
+    "source_url": "https://www.stem.cz/volebni-tendence-ceske-verejnosti-listopad-2024/",
+    "scraped_at": "2026-03-28T11:15:26.169199Z"
   },
   {
     "id": "median-2024-10-28",
@@ -986,5 +1041,716 @@
     "coalition_notes": {},
     "source_url": "https://www.median.eu/cs/?p=3323",
     "scraped_at": "2026-03-28T10:09:34.008374Z"
+  },
+  {
+    "id": "median-2024-02-28",
+    "agency": "Median",
+    "date_published": "2026-03-28",
+    "date_fieldwork_from": "2024-02-01",
+    "date_fieldwork_to": "2024-02-28",
+    "type": "model",
+    "view": "parties",
+    "sample_size": null,
+    "method": "CAPI",
+    "client": "Český rozhlas",
+    "parties": {
+      "ANO": 31.0,
+      "ODS": 12.5,
+      "STAN": 9.0,
+      "Piráti": 11.0,
+      "SPD": 9.5,
+      "TOP09": 5.5
+    },
+    "coalition_notes": {},
+    "source_url": "https://www.median.eu/cs/?p=3316",
+    "scraped_at": "2026-03-28T11:17:09.637415Z"
+  },
+  {
+    "id": "median-2024-01-28",
+    "agency": "Median",
+    "date_published": "2026-03-28",
+    "date_fieldwork_from": "2024-01-01",
+    "date_fieldwork_to": "2024-01-28",
+    "type": "model",
+    "view": "parties",
+    "sample_size": null,
+    "method": "CAPI",
+    "client": "Český rozhlas",
+    "parties": {
+      "ANO": 31.5,
+      "ODS": 12.0,
+      "STAN": 7.0,
+      "Piráti": 13.0,
+      "SPD": 10.5,
+      "TOP09": 5.5
+    },
+    "coalition_notes": {},
+    "source_url": "https://www.median.eu/cs/?p=3297",
+    "scraped_at": "2026-03-28T11:17:12.591665Z"
+  },
+  {
+    "id": "median-2023-12-28",
+    "agency": "Median",
+    "date_published": "2026-03-28",
+    "date_fieldwork_from": "2023-12-01",
+    "date_fieldwork_to": "2023-12-28",
+    "type": "model",
+    "view": "parties",
+    "sample_size": null,
+    "method": "CAPI",
+    "client": "Český rozhlas",
+    "parties": {
+      "ANO": 35.0,
+      "ODS": 13.0,
+      "STAN": 6.5,
+      "Piráti": 10.5,
+      "SPD": 9.0,
+      "TOP09": 6.0
+    },
+    "coalition_notes": {},
+    "source_url": "https://www.median.eu/cs/?p=3264",
+    "scraped_at": "2026-03-28T11:17:15.508269Z"
+  },
+  {
+    "id": "median-2023-11-28",
+    "agency": "Median",
+    "date_published": "2026-03-28",
+    "date_fieldwork_from": "2023-11-01",
+    "date_fieldwork_to": "2023-11-28",
+    "type": "model",
+    "view": "parties",
+    "sample_size": null,
+    "method": "CAPI",
+    "client": "Český rozhlas",
+    "parties": {
+      "ANO": 34.5,
+      "ODS": 15.5,
+      "STAN": 16.5,
+      "Piráti": 11.0,
+      "SPD": 8.5,
+      "TOP09": 14.0
+    },
+    "coalition_notes": {},
+    "source_url": "https://www.median.eu/cs/?p=3258",
+    "scraped_at": "2026-03-28T11:17:18.570539Z"
+  },
+  {
+    "id": "median-2023-10-28",
+    "agency": "Median",
+    "date_published": "2026-03-28",
+    "date_fieldwork_from": "2023-10-01",
+    "date_fieldwork_to": "2023-10-28",
+    "type": "model",
+    "view": "parties",
+    "sample_size": null,
+    "method": "CAPI",
+    "client": "Český rozhlas",
+    "parties": {
+      "ANO": 35.0,
+      "ODS": 13.5,
+      "STAN": 14.5,
+      "Piráti": 17.5,
+      "SPD": 10.5,
+      "TOP09": 15.0
+    },
+    "coalition_notes": {},
+    "source_url": "https://www.median.eu/cs/?p=3248",
+    "scraped_at": "2026-03-28T11:17:21.512279Z"
+  },
+  {
+    "id": "median-2023-09-28",
+    "agency": "Median",
+    "date_published": "2026-03-28",
+    "date_fieldwork_from": "2023-09-01",
+    "date_fieldwork_to": "2023-09-28",
+    "type": "model",
+    "view": "parties",
+    "sample_size": null,
+    "method": "CAPI",
+    "client": "Český rozhlas",
+    "parties": {
+      "ANO": 34.0,
+      "ODS": 13.0,
+      "STAN": 18.5,
+      "Piráti": 11.5,
+      "SPD": 9.5,
+      "TOP09": 14.0
+    },
+    "coalition_notes": {},
+    "source_url": "https://www.median.eu/cs/?p=3213",
+    "scraped_at": "2026-03-28T11:17:24.910499Z"
+  },
+  {
+    "id": "median-2023-07-28",
+    "agency": "Median",
+    "date_published": "2026-03-28",
+    "date_fieldwork_from": "2023-07-01",
+    "date_fieldwork_to": "2023-07-28",
+    "type": "model",
+    "view": "parties",
+    "sample_size": null,
+    "method": "CAPI",
+    "client": "Český rozhlas",
+    "parties": {
+      "ANO": 33.0,
+      "ODS": 15.0,
+      "STAN": 14.5,
+      "Piráti": 12.0,
+      "SPD": 8.0,
+      "TOP09": 13.0
+    },
+    "coalition_notes": {},
+    "source_url": "https://www.median.eu/cs/?p=3191",
+    "scraped_at": "2026-03-28T11:17:27.848696Z"
+  },
+  {
+    "id": "median-2023-06-28",
+    "agency": "Median",
+    "date_published": "2026-03-28",
+    "date_fieldwork_from": "2023-06-01",
+    "date_fieldwork_to": "2023-06-28",
+    "type": "model",
+    "view": "parties",
+    "sample_size": null,
+    "method": "CAPI",
+    "client": "Český rozhlas",
+    "parties": {
+      "ANO": 35.5,
+      "ODS": 14.0,
+      "STAN": 16.0,
+      "Piráti": 11.0,
+      "SPD": 10.5
+    },
+    "coalition_notes": {},
+    "source_url": "https://www.median.eu/cs/?p=3167",
+    "scraped_at": "2026-03-28T11:17:30.787900Z"
+  },
+  {
+    "id": "median-2023-05-28",
+    "agency": "Median",
+    "date_published": "2026-03-28",
+    "date_fieldwork_from": "2023-05-01",
+    "date_fieldwork_to": "2023-05-28",
+    "type": "model",
+    "view": "parties",
+    "sample_size": null,
+    "method": "CAPI",
+    "client": "Český rozhlas",
+    "parties": {
+      "ANO": 34.5,
+      "ODS": 15.0,
+      "STAN": 13.5,
+      "Piráti": 10.5,
+      "SPD": 8.5
+    },
+    "coalition_notes": {},
+    "source_url": "https://www.median.eu/cs/?p=3130",
+    "scraped_at": "2026-03-28T11:17:33.714297Z"
+  },
+  {
+    "id": "median-2023-04-28",
+    "agency": "Median",
+    "date_published": "2026-03-28",
+    "date_fieldwork_from": "2023-04-01",
+    "date_fieldwork_to": "2023-04-28",
+    "type": "model",
+    "view": "parties",
+    "sample_size": null,
+    "method": "CAPI",
+    "client": "Český rozhlas",
+    "parties": {
+      "ANO": 31.0,
+      "ODS": 15.0,
+      "STAN": 14.5,
+      "Piráti": 10.5,
+      "SPD": 8.5
+    },
+    "coalition_notes": {},
+    "source_url": "https://www.median.eu/cs/?p=3099",
+    "scraped_at": "2026-03-28T11:17:36.656487Z"
+  },
+  {
+    "id": "median-2023-03-28",
+    "agency": "Median",
+    "date_published": "2026-03-28",
+    "date_fieldwork_from": "2023-03-01",
+    "date_fieldwork_to": "2023-03-28",
+    "type": "model",
+    "view": "parties",
+    "sample_size": null,
+    "method": "CAPI",
+    "client": "Český rozhlas",
+    "parties": {
+      "ANO": 34.5,
+      "ODS": 15.5,
+      "STAN": 15.5,
+      "Piráti": 8.5,
+      "SPD": 10.0
+    },
+    "coalition_notes": {},
+    "source_url": "https://www.median.eu/cs/?p=3058",
+    "scraped_at": "2026-03-28T11:17:39.609545Z"
+  },
+  {
+    "id": "median-2023-02-28",
+    "agency": "Median",
+    "date_published": "2026-03-28",
+    "date_fieldwork_from": "2023-02-01",
+    "date_fieldwork_to": "2023-02-28",
+    "type": "model",
+    "view": "parties",
+    "sample_size": null,
+    "method": "CAPI",
+    "client": "Český rozhlas",
+    "parties": {
+      "ANO": 32.0,
+      "ODS": 14.5,
+      "STAN": 16.5,
+      "Piráti": 11.5,
+      "SPD": 9.5
+    },
+    "coalition_notes": {},
+    "source_url": "https://www.median.eu/cs/?p=3049",
+    "scraped_at": "2026-03-28T11:17:42.523798Z"
+  },
+  {
+    "id": "median-2022-10-28",
+    "agency": "Median",
+    "date_published": "2026-03-28",
+    "date_fieldwork_from": "2022-10-01",
+    "date_fieldwork_to": "2022-10-28",
+    "type": "model",
+    "view": "parties",
+    "sample_size": null,
+    "method": "CAPI",
+    "client": "Český rozhlas",
+    "parties": {
+      "ANO": 31.5,
+      "Piráti": 11.0,
+      "SPD": 12.0
+    },
+    "coalition_notes": {},
+    "source_url": "https://www.median.eu/cs/?p=2964",
+    "scraped_at": "2026-03-28T11:18:03.468412Z"
+  },
+  {
+    "id": "median-2022-09-28",
+    "agency": "Median",
+    "date_published": "2026-03-28",
+    "date_fieldwork_from": "2022-09-01",
+    "date_fieldwork_to": "2022-09-28",
+    "type": "model",
+    "view": "parties",
+    "sample_size": null,
+    "method": "CAPI",
+    "client": "Český rozhlas",
+    "parties": {
+      "ANO": 30.5,
+      "ODS": 16.0,
+      "STAN": 16.5,
+      "Piráti": 11.0,
+      "SPD": 11.5
+    },
+    "coalition_notes": {},
+    "source_url": "https://www.median.eu/cs/?p=2929",
+    "scraped_at": "2026-03-28T11:18:12.377130Z"
+  },
+  {
+    "id": "median-2022-08-28",
+    "agency": "Median",
+    "date_published": "2026-03-28",
+    "date_fieldwork_from": "2022-08-01",
+    "date_fieldwork_to": "2022-08-28",
+    "type": "model",
+    "view": "parties",
+    "sample_size": null,
+    "method": "CAPI",
+    "client": "Český rozhlas",
+    "parties": {
+      "ANO": 29.0,
+      "ODS": 16.0,
+      "Piráti": 11.5,
+      "SPD": 14.0
+    },
+    "coalition_notes": {},
+    "source_url": "https://www.median.eu/cs/?p=2920",
+    "scraped_at": "2026-03-28T11:18:15.315024Z"
+  },
+  {
+    "id": "median-2022-07-28",
+    "agency": "Median",
+    "date_published": "2026-03-28",
+    "date_fieldwork_from": "2022-07-01",
+    "date_fieldwork_to": "2022-07-28",
+    "type": "model",
+    "view": "parties",
+    "sample_size": null,
+    "method": "CAPI",
+    "client": "Český rozhlas",
+    "parties": {
+      "ANO": 30.0,
+      "ODS": 15.5,
+      "STAN": 5.5,
+      "SPD": 12.5
+    },
+    "coalition_notes": {},
+    "source_url": "https://www.median.eu/cs/?p=2869",
+    "scraped_at": "2026-03-28T11:18:24.383779Z"
+  },
+  {
+    "id": "median-2022-06-28",
+    "agency": "Median",
+    "date_published": "2026-03-28",
+    "date_fieldwork_from": "2022-06-01",
+    "date_fieldwork_to": "2022-06-28",
+    "type": "model",
+    "view": "parties",
+    "sample_size": null,
+    "method": "CAPI",
+    "client": "Český rozhlas",
+    "parties": {
+      "ANO": 29.5,
+      "ODS": 16.1,
+      "STAN": 4.8,
+      "SPD": 12.5
+    },
+    "coalition_notes": {},
+    "source_url": "https://www.median.eu/cs/?p=2833",
+    "scraped_at": "2026-03-28T11:18:30.251272Z"
+  },
+  {
+    "id": "median-2022-05-28",
+    "agency": "Median",
+    "date_published": "2026-03-28",
+    "date_fieldwork_from": "2022-05-01",
+    "date_fieldwork_to": "2022-05-28",
+    "type": "model",
+    "view": "parties",
+    "sample_size": null,
+    "method": "CAPI",
+    "client": "Český rozhlas",
+    "parties": {
+      "ANO": 28.5,
+      "ODS": 16.5,
+      "STAN": 17.5,
+      "SPD": 11.5
+    },
+    "coalition_notes": {},
+    "source_url": "https://www.median.eu/cs/?p=2824",
+    "scraped_at": "2026-03-28T11:18:33.312059Z"
+  },
+  {
+    "id": "median-2022-03-28",
+    "agency": "Median",
+    "date_published": "2026-03-28",
+    "date_fieldwork_from": "2022-03-01",
+    "date_fieldwork_to": "2022-03-28",
+    "type": "model",
+    "view": "coalitions",
+    "sample_size": null,
+    "method": "CAPI",
+    "client": "Český rozhlas",
+    "parties": {
+      "ANO": 27.5,
+      "SPOLU": 26.5
+    },
+    "coalition_notes": {},
+    "source_url": "https://www.median.eu/cs/?p=2779",
+    "scraped_at": "2026-03-28T11:18:39.318260Z"
+  },
+  {
+    "id": "median-2020-01-28",
+    "agency": "Median",
+    "date_published": "2026-03-28",
+    "date_fieldwork_from": "2020-01-01",
+    "date_fieldwork_to": "2020-01-28",
+    "type": "model",
+    "view": "parties",
+    "sample_size": null,
+    "method": "CAPI",
+    "client": "Český rozhlas",
+    "parties": {
+      "ANO": 30.0,
+      "ODS": 14.0,
+      "Piráti": 11.5,
+      "SPD": 7.5,
+      "KSČM": 8.0,
+      "SOCDEM": 7.0
+    },
+    "coalition_notes": {},
+    "source_url": "https://www.median.eu/cs/?p=2133",
+    "scraped_at": "2026-03-28T11:19:18.157747Z"
+  },
+  {
+    "id": "median-2019-10-28",
+    "agency": "Median",
+    "date_published": "2026-03-28",
+    "date_fieldwork_from": "2019-10-01",
+    "date_fieldwork_to": "2019-10-28",
+    "type": "model",
+    "view": "parties",
+    "sample_size": null,
+    "method": "CAPI",
+    "client": "Český rozhlas",
+    "parties": {
+      "ODS": 12.5
+    },
+    "coalition_notes": {},
+    "source_url": "https://www.median.eu/cs/?p=2062",
+    "scraped_at": "2026-03-28T11:19:24.170528Z"
+  },
+  {
+    "id": "median-2019-09-28",
+    "agency": "Median",
+    "date_published": "2026-03-28",
+    "date_fieldwork_from": "2019-09-01",
+    "date_fieldwork_to": "2019-09-28",
+    "type": "model",
+    "view": "parties",
+    "sample_size": null,
+    "method": "CAPI",
+    "client": "Český rozhlas",
+    "parties": {
+      "ODS": 13.5
+    },
+    "coalition_notes": {},
+    "source_url": "https://www.median.eu/cs/?p=2032",
+    "scraped_at": "2026-03-28T11:19:27.225706Z"
+  },
+  {
+    "id": "median-2019-08-28",
+    "agency": "Median",
+    "date_published": "2026-03-28",
+    "date_fieldwork_from": "2019-08-01",
+    "date_fieldwork_to": "2019-08-28",
+    "type": "model",
+    "view": "parties",
+    "sample_size": null,
+    "method": "CAPI",
+    "client": "Český rozhlas",
+    "parties": {
+      "TOP09": 5.5
+    },
+    "coalition_notes": {},
+    "source_url": "https://www.median.eu/cs/?p=2000",
+    "scraped_at": "2026-03-28T11:19:30.277408Z"
+  },
+  {
+    "id": "median-2019-07-28",
+    "agency": "Median",
+    "date_published": "2026-03-28",
+    "date_fieldwork_from": "2019-07-01",
+    "date_fieldwork_to": "2019-07-28",
+    "type": "model",
+    "view": "parties",
+    "sample_size": null,
+    "method": "CAPI",
+    "client": "Český rozhlas",
+    "parties": {
+      "Piráti": 22.0
+    },
+    "coalition_notes": {},
+    "source_url": "https://www.median.eu/cs/?p=1962",
+    "scraped_at": "2026-03-28T11:19:33.324813Z"
+  },
+  {
+    "id": "median-2019-05-28",
+    "agency": "Median",
+    "date_published": "2026-03-28",
+    "date_fieldwork_from": "2019-05-01",
+    "date_fieldwork_to": "2019-05-28",
+    "type": "model",
+    "view": "parties",
+    "sample_size": null,
+    "method": "CAPI",
+    "client": "Český rozhlas",
+    "parties": {
+      "ODS": 18.0
+    },
+    "coalition_notes": {},
+    "source_url": "https://www.median.eu/cs/?p=1912",
+    "scraped_at": "2026-03-28T11:19:39.452738Z"
+  },
+  {
+    "id": "median-2019-04-28",
+    "agency": "Median",
+    "date_published": "2026-03-28",
+    "date_fieldwork_from": "2019-04-01",
+    "date_fieldwork_to": "2019-04-28",
+    "type": "model",
+    "view": "parties",
+    "sample_size": null,
+    "method": "CAPI",
+    "client": "Český rozhlas",
+    "parties": {
+      "ODS": 18.0
+    },
+    "coalition_notes": {},
+    "source_url": "https://www.median.eu/cs/?p=1892",
+    "scraped_at": "2026-03-28T11:19:45.564304Z"
+  },
+  {
+    "id": "median-2019-03-28",
+    "agency": "Median",
+    "date_published": "2026-03-28",
+    "date_fieldwork_from": "2019-03-01",
+    "date_fieldwork_to": "2019-03-28",
+    "type": "model",
+    "view": "parties",
+    "sample_size": null,
+    "method": "CAPI",
+    "client": "Český rozhlas",
+    "parties": {
+      "ODS": 17.0,
+      "Piráti": 14.0
+    },
+    "coalition_notes": {},
+    "source_url": "https://www.median.eu/cs/?p=1881",
+    "scraped_at": "2026-03-28T11:19:48.621548Z"
+  },
+  {
+    "id": "median-2019-02-28",
+    "agency": "Median",
+    "date_published": "2026-03-28",
+    "date_fieldwork_from": "2019-02-01",
+    "date_fieldwork_to": "2019-02-28",
+    "type": "model",
+    "view": "parties",
+    "sample_size": null,
+    "method": "CAPI",
+    "client": "Český rozhlas",
+    "parties": {
+      "ODS": 17.0
+    },
+    "coalition_notes": {},
+    "source_url": "https://www.median.eu/cs/?p=1860",
+    "scraped_at": "2026-03-28T11:19:51.676628Z"
+  },
+  {
+    "id": "median-2018-12-28",
+    "agency": "Median",
+    "date_published": "2026-03-28",
+    "date_fieldwork_from": "2018-12-01",
+    "date_fieldwork_to": "2018-12-28",
+    "type": "model",
+    "view": "parties",
+    "sample_size": null,
+    "method": "CAPI",
+    "client": "Český rozhlas",
+    "parties": {
+      "ANO": 30.0
+    },
+    "coalition_notes": {},
+    "source_url": "https://www.median.eu/cs/?p=1843",
+    "scraped_at": "2026-03-28T11:19:54.747542Z"
+  },
+  {
+    "id": "median-2018-08-28",
+    "agency": "Median",
+    "date_published": "2026-03-28",
+    "date_fieldwork_from": "2018-08-01",
+    "date_fieldwork_to": "2018-08-28",
+    "type": "model",
+    "view": "parties",
+    "sample_size": null,
+    "method": "CAPI",
+    "client": "Český rozhlas",
+    "parties": {
+      "ODS": 14.0
+    },
+    "coalition_notes": {},
+    "source_url": "https://www.median.eu/cs/?p=1741",
+    "scraped_at": "2026-03-28T11:20:03.909895Z"
+  },
+  {
+    "id": "median-2018-07-28",
+    "agency": "Median",
+    "date_published": "2026-03-28",
+    "date_fieldwork_from": "2018-07-01",
+    "date_fieldwork_to": "2018-07-28",
+    "type": "model",
+    "view": "parties",
+    "sample_size": null,
+    "method": "CAPI",
+    "client": "Český rozhlas",
+    "parties": {
+      "Piráti": 16.0
+    },
+    "coalition_notes": {},
+    "source_url": "https://www.median.eu/cs/?p=1691",
+    "scraped_at": "2026-03-28T11:20:06.966078Z"
+  },
+  {
+    "id": "median-2017-10-28",
+    "agency": "Median",
+    "date_published": "2026-03-28",
+    "date_fieldwork_from": "2017-10-01",
+    "date_fieldwork_to": "2017-10-28",
+    "type": "model",
+    "view": "parties",
+    "sample_size": null,
+    "method": "CAPI",
+    "client": "Český rozhlas",
+    "parties": {
+      "Piráti": 8.5,
+      "SPD": 9.5
+    },
+    "coalition_notes": {},
+    "source_url": "https://www.median.eu/cs/?p=1350",
+    "scraped_at": "2026-03-28T11:20:33.638464Z"
+  },
+  {
+    "id": "median-2017-09-28",
+    "agency": "Median",
+    "date_published": "2026-03-28",
+    "date_fieldwork_from": "2017-09-01",
+    "date_fieldwork_to": "2017-09-28",
+    "type": "model",
+    "view": "parties",
+    "sample_size": null,
+    "method": "CAPI",
+    "client": "Český rozhlas",
+    "parties": {
+      "Piráti": 6.0
+    },
+    "coalition_notes": {},
+    "source_url": "https://www.median.eu/cs/?p=1303",
+    "scraped_at": "2026-03-28T11:20:42.502398Z"
+  },
+  {
+    "id": "median-2017-01-28",
+    "agency": "Median",
+    "date_published": "2026-03-28",
+    "date_fieldwork_from": "2017-01-01",
+    "date_fieldwork_to": "2017-01-28",
+    "type": "model",
+    "view": "parties",
+    "sample_size": null,
+    "method": "CAPI",
+    "client": "Český rozhlas",
+    "parties": {
+      "TOP09": 6.5
+    },
+    "coalition_notes": {},
+    "source_url": "https://www.median.eu/cs/?p=901",
+    "scraped_at": "2026-03-28T11:21:17.608944Z"
+  },
+  {
+    "id": "median-2016-06-28",
+    "agency": "Median",
+    "date_published": "2026-03-28",
+    "date_fieldwork_from": "2016-06-01",
+    "date_fieldwork_to": "2016-06-28",
+    "type": "model",
+    "view": "parties",
+    "sample_size": null,
+    "method": "CAPI",
+    "client": "Český rozhlas",
+    "parties": {
+      "KSČM": 16.0
+    },
+    "coalition_notes": {},
+    "source_url": "https://www.median.eu/cs/?p=601",
+    "scraped_at": "2026-03-28T11:21:35.578893Z"
   }
 ]

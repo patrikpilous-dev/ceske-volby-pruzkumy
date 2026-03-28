@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Volební průzkumy — České volby</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root {
+  --navy:   #3D4263;
+  --navy2:  #2A2E4A;
+  --red:    #C0272D;
+  --bg:     #F7F8FB;
+  --white:  #FFFFFF;
+  --border: #D8DAEA;
+  --muted:  #8890B0;
+  --text:   #1E2240;
+  --text2:  #4A5070;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Source Sans 3', sans-serif; background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.5; }
+
+/* ── Header ── */
+.hdr { background: var(--white); border-bottom: 2px solid var(--navy); padding: 16px 24px; }
+.hdr h1 { font-family: 'Merriweather', serif; font-size: 22px; font-weight: 400; color: var(--navy); letter-spacing: -.01em; }
+.hdr h1 .r { color: var(--red); }
+
+/* ── Layout ── */
+.main { max-width: 1100px; margin: 0 auto; padding: 28px 24px 56px; display: flex; flex-direction: column; gap: 28px; }
+
+/* ── Karta ── */
+.card { background: var(--white); border: 1px solid var(--border); }
+.card-head { padding: 20px 24px 0; }
+
+/* ── Červený box ── */
+.lbox { display:none; align-items:center; gap:14px; background:var(--red); color:#fff; padding:11px 20px; margin-bottom:16px; }
+.lbox.on { display:flex; }
+.lbox .lbl { font-size:10px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; opacity:.82; flex-shrink:0; }
+.lbox .agt { font-family:'Merriweather',serif; font-size:14px; font-weight:400; }
+.lbox .dt  { margin-left:auto; font-size:12px; opacity:.8; flex-shrink:0; }
+
+.ctitle { font-family:'Merriweather',serif; font-size:16px; font-weight:400; color:var(--navy2); margin-bottom:2px; }
+.csub   { font-size:12px; color:var(--muted); margin-bottom:16px; }
+
+/* ── Toolbar ── */
+.tb { display:flex; flex-wrap:wrap; gap:12px 20px; align-items:flex-end; padding:14px 24px; border-top:1px solid var(--border); border-bottom:1px solid var(--border); background:#FAFBFD; }
+.cg { display:flex; flex-direction:column; gap:4px; }
+.cl { font-size:10px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); }
+.bg { display:flex; }
+.bg .b { padding:6px 13px; font-family:'Source Sans 3',sans-serif; font-size:12.5px; font-weight:400; border:1px solid var(--border); background:var(--white); color:var(--text2); cursor:pointer; border-radius:0; margin-right:-1px; position:relative; white-space:nowrap; transition:background .1s,color .1s; }
+.bg .b:hover { background:var(--bg); color:var(--navy); }
+.bg .b.on { background:var(--navy); border-color:var(--navy); color:#fff; font-weight:500; z-index:1; }
+
+/* ── Filtry agentur ── */
+.af { display:flex; flex-wrap:wrap; gap:5px; }
+.ac { display:inline-flex; align-items:center; gap:5px; padding:5px 10px; font-size:12px; font-weight:500; border:1px solid var(--border); background:var(--white); color:var(--text2); cursor:pointer; user-select:none; border-radius:0; transition:all .1s; }
+.ac .dot { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+.ac.on { background:var(--navy); border-color:var(--navy); color:#fff; }
+.ac.on .dot { background:#fff !important; }
+
+/* ── Graf ── */
+.cw { padding:20px 24px 10px; }
+
+/* ── Legenda ── */
+.leg { display:flex; flex-wrap:wrap; gap:4px 12px; padding:12px 24px 16px; border-top:1px solid var(--border); }
+.li  { display:inline-flex; align-items:center; gap:5px; font-size:12px; color:var(--text2); cursor:pointer; padding:2px 5px; user-select:none; transition:opacity .1s; }
+.li.off { opacity:.28; }
+.ld  { width:10px; height:10px; border-radius:0; flex-shrink:0; }
+
+/* ── Meta ── */
+.meta { display:flex; flex-wrap:wrap; gap:6px 18px; padding:8px 24px 14px; font-size:11px; color:var(--muted); border-top:1px solid var(--border); }
+.meta b { color:var(--text2); font-weight:600; }
+
+/* ── Line hint ── */
+.lhint { padding:0 24px 12px; font-size:11px; color:var(--muted); display:flex; flex-wrap:wrap; gap:4px 16px; }
+.lhint span { display:inline-flex; align-items:center; gap:5px; }
+.ls { display:inline-block; width:20px; height:2.5px; background:var(--navy); }
+.ld2 { display:inline-block; width:20px; height:2px; background:repeating-linear-gradient(90deg,var(--muted) 0,var(--muted) 5px,transparent 5px,transparent 8px); }
+
+@media(max-width:640px){
+  .main{padding:14px 12px 36px}
+  .card-head,.tb,.cw,.leg,.meta,.lhint{padding-left:14px;padding-right:14px}
+}
+</style>
+</head>
+<body>
+
+<header class="hdr">
+  <h1><span class="r">Č</span>eské volby — Volební průzkumy</h1>
+</header>
+
+<main class="main">
+
+  <!-- ══ GRAF 1 — Aktuální preference (sloupcový) ══ -->
+  <div class="card">
+    <div class="card-head">
+      <div class="lbox" id="lbox">
+        <span class="lbl">Aktuální průzkum preferencí</span>
+        <span class="agt" id="lbAgt"></span>
+        <span class="dt"  id="lbDt"></span>
+      </div>
+      <div class="ctitle">Aktuální volební preference</div>
+      <div class="csub">Nejnovější průzkum od každé agentury — bez časové osy</div>
+    </div>
+    <div class="tb">
+      <div class="cg">
+        <span class="cl">Typ dat</span>
+        <div class="bg">
+          <button class="b on" id="g1tPref"  onclick="g1setType('preference')">Preference</button>
+          <button class="b"    id="g1tModel" onclick="g1setType('model')">Volební model</button>
+          <button class="b"    id="g1tPot"   onclick="g1setType('potential')">Potenciál</button>
+        </div>
+      </div>
+      <div class="cg">
+        <span class="cl">Zobrazit jako</span>
+        <div class="bg">
+          <button class="b on" id="g1vP" onclick="g1setView('parties')">Strany</button>
+          <button class="b"    id="g1vC" onclick="g1setView('coalitions')">Koalice</button>
+        </div>
+      </div>
+      <div class="cg" style="flex-basis:100%">
+        <span class="cl">Agentury</span>
+        <div class="af" id="af1"></div>
+      </div>
+    </div>
+    <div class="cw"><canvas id="c1" height="340"></canvas></div>
+    <div class="leg"  id="leg1"></div>
+    <div class="meta" id="meta1"></div>
+  </div>
+
+  <!-- ══ GRAF 2 — Vývoj v čase (spojnicový) ══ -->
+  <div class="card">
+    <div class="card-head">
+      <div class="ctitle" style="margin-top:20px">Vývoj preferencí v čase</div>
+      <div class="csub">Každá čára = jedna strana u jedné agentury</div>
+    </div>
+    <div class="tb">
+      <div class="cg">
+        <span class="cl">Typ dat</span>
+        <div class="bg">
+          <button class="b on" id="g2tModel" onclick="g2setType('model')">Volební model</button>
+          <button class="b"    id="g2tPref"  onclick="g2setType('preference')">Preference</button>
+          <button class="b"    id="g2tPot"   onclick="g2setType('potential')">Potenciál</button>
+        </div>
+      </div>
+      <div class="cg">
+        <span class="cl">Zobrazit jako</span>
+        <div class="bg">
+          <button class="b on" id="g2vP" onclick="g2setView('parties')">Strany</button>
+          <button class="b"    id="g2vC" onclick="g2setView('coalitions')">Koalice</button>
+        </div>
+      </div>
+      <div class="cg">
+        <span class="cl">Období</span>
+        <div class="bg">
+          <button class="b on" id="g2p6"   onclick="g2setPeriod(6)">6 měsíců</button>
+          <button class="b"    id="g2p12"  onclick="g2setPeriod(12)">1 rok</button>
+          <button class="b"    id="g2pAll" onclick="g2setPeriod(0)">Vše</button>
+        </div>
+      </div>
+      <div class="cg" style="flex-basis:100%">
+        <span class="cl">Agentury</span>
+        <div class="af" id="af2"></div>
+      </div>
+    </div>
+    <div class="cw"><canvas id="c2" height="400"></canvas></div>
+    <div class="lhint" id="lhint"></div>
+    <div class="leg"   id="leg2"></div>
+    <div class="meta"  id="meta2"></div>
+  </div>
+
+</main>
+
+<script>
+// ══ Konfigurace ══════════════════════════════════════════
+const COAL_IDS = new Set(["SPOLU","SPD4K","StačiloKoalice","PirátéZelení"]);
+
+const PC = {  // party config
+  ANO:             {d:"ANO",           c:"#7B2D8B"},
+  ODS:             {d:"ODS",           c:"#034FA0"},
+  STAN:            {d:"STAN",          c:"#1A9CD8"},
+  "Piráti":        {d:"Piráti",        c:"#1A1A2E"},
+  SPD:             {d:"SPD",           c:"#E07000"},
+  "Motoristé":     {d:"Motoristé",     c:"#C8102E"},
+  TOP09:           {d:"TOP 09",        c:"#CF0080"},
+  KDUČSL:          {d:"KDU-ČSL",       c:"#D4A000"},
+  KSČM:            {d:"KSČM",          c:"#BE0000"},
+  "Stačilo":       {d:"Stačilo!",      c:"#8B0000"},
+  SOCDEM:          {d:"SOCDEM",        c:"#E05A00"},
+  "Přísaha":       {d:"Přísaha",       c:"#555555"},
+  "Zelení":        {d:"Zelení",        c:"#2E8B2E"},
+  PRO:             {d:"PRO",           c:"#003399"},
+  SPOLU:           {d:"SPOLU",         c:"#034FA0"},
+  SPD4K:           {d:"SPD 4K",        c:"#E07000"},
+  StačiloKoalice:  {d:"Stačilo! (koa.)",c:"#BE0000"},
+  "PirátéZelení":  {d:"Piráti+Zelení", c:"#1A1A2E"},
+  "NašeČesko":     {d:"Naše Česko",    c:"#0050A0"},
+};
+
+const AC = {  // agency colors
+  STEM:"#3D4263", Median:"#C0272D", Kantar:"#003087",
+  Ipsos:"#1D7A3A", CVVM:"#7B5EA7", NMS:"#E07000",
+  "STEM/MARK":"#555", SANEP:"#999",
+};
+
+// ══ Data ══════════════════════════════════════════════════
+// Načtení z polls.json (při nasazení na server), fallback na embedded
+let POLLS = [];
+
+async function loadPolls() {
+  try {
+    const r = await fetch("../data/polls.json");
+    if (!r.ok) throw new Error();
+    POLLS = await r.json();
+  } catch {
+    POLLS = EMBEDDED;
+  }
+  init();
+}
+
+// ══ Stav ══════════════════════════════════════════════════
+const S1 = { type:"preference", view:"parties",  ag: new Set(), hide: new Set(), chart:null };
+const S2 = { type:"model",      view:"parties",  ag: new Set(), hide: new Set(), chart:null, period:6 };
+
+// ══ Init ══════════════════════════════════════════════════
+function init() {
+  const agencies = [...new Set(POLLS.map(p => p.agency))];
+  agencies.forEach(a => { S1.ag.add(a); S2.ag.add(a); });
+
+  buildChips("af1", S1, render1);
+  buildChips("af2", S2, render2);
+
+  // Červený box — vždy nejnovější průzkum
+  const newest = [...POLLS].sort((a,b) => b.date_fieldwork_to.localeCompare(a.date_fieldwork_to))[0];
+  if (newest) {
+    document.getElementById("lbAgt").textContent = newest.agency;
+    document.getElementById("lbDt").textContent  = fmt(newest.date_published);
+    document.getElementById("lbox").classList.add("on");
+  }
+
+  render1();
+  render2();
+}
+
+function buildChips(id, state, renderFn) {
+  const agencies = [...new Set(POLLS.map(p => p.agency))];
+  document.getElementById(id).innerHTML = agencies.map(a =>
+    `<div class="ac on" id="${id}-${a}" onclick="toggleAg('${id}','${a}')">
+       <span class="dot" style="background:${AC[a]||'#888'}"></span>${a}
+     </div>`
+  ).join("");
+}
+
+function toggleAg(cid, agency) {
+  const state  = cid.includes("af1") ? S1 : S2;
+  const render = cid.includes("af1") ? render1 : render2;
+  const chip   = document.getElementById(`${cid}-${agency}`);
+  if (state.ag.has(agency)) {
+    if (state.ag.size <= 1) return;
+    state.ag.delete(agency);
+    chip.classList.remove("on");
+  } else {
+    state.ag.add(agency);
+    chip.classList.add("on");
+  }
+  render();
+}
+
+// ══ Filtrování ════════════════════════════════════════════
+function filterPolls(state) {
+  let polls = POLLS.filter(p => state.ag.has(p.agency));
+
+  // Pokud zvolený typ neexistuje, padni zpět na model pak cokoliv
+  let typed = polls.filter(p => p.type === state.type);
+  if (!typed.length) typed = polls.filter(p => p.type === "model");
+  if (!typed.length) typed = polls;
+  polls = typed;
+
+  if (state.period) {
+    const cut = new Date();
+    cut.setMonth(cut.getMonth() - state.period);
+    polls = polls.filter(p => new Date(p.date_fieldwork_to) >= cut);
+  }
+  return polls.sort((a,b) => a.date_fieldwork_to.localeCompare(b.date_fieldwork_to));
+}
+
+function getParties(polls, view) {
+  const all = new Set();
+  polls.forEach(p => Object.keys(p.parties).forEach(pid => {
+    if (!PC[pid]) return;
+    const coal = COAL_IDS.has(pid);
+    if (view === "parties"    && !coal) all.add(pid);
+    if (view === "coalitions")          all.add(pid);
+  }));
+  return [...all].sort((a,b) => {
+    const avg = id => polls.reduce((s,p) => s+(p.parties[id]||0),0)/polls.length;
+    return avg(b)-avg(a);
+  });
+}
+
+// ══ GRAF 1 — grouped bar, strany na X, skupiny = agentury ════════
+function render1() {
+  const polls = filterPolls(S1);
+  if (!polls.length) return;
+
+  // Nejnovější průzkum od každé agentury
+  const latestMap = {};
+  polls.forEach(p => {
+    if (!latestMap[p.agency] || p.date_fieldwork_to > latestMap[p.agency].date_fieldwork_to)
+      latestMap[p.agency] = p;
+  });
+  const latestPolls = Object.values(latestMap).sort((a,b) => a.agency.localeCompare(b.agency));
+  const parties = getParties(latestPolls, S1.view).filter(p => !S1.hide.has(p));
+
+  // Každá agentura = jeden dataset (sloupec pro každou stranu)
+  const datasets = latestPolls.map(poll => {
+    const col = AC[poll.agency] || "#888";
+    return {
+      label: `${poll.agency} (${fmt(poll.date_fieldwork_to)})`,
+      data: parties.map(pid => poll.parties[pid] ?? null),
+      backgroundColor: col + "CC",
+      borderColor: col,
+      borderWidth: 1.5,
+    };
+  });
+
+  const ctx = document.getElementById("c1").getContext("2d");
+  if (S1.chart) S1.chart.destroy();
+  S1.chart = new Chart(ctx, {
+    type: "bar",
+    data: { labels: parties.map(pid => PC[pid]?.d || pid), datasets },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      interaction: { mode:"index", intersect:false },
+      plugins: {
+        legend: { display:false },
+        tooltip: tooltipOpts(),
+      },
+      scales: {
+        x: { grid:{display:false}, ticks: ticksOpts() },
+        y: { min:0, max:45, grid:{color:"#E8EAF0"}, ticks: { ...ticksOpts(), callback:v=>v+" %" } },
+      },
+    },
+  });
+
+  // Legenda = agentury (ne strany, barva agentury)
+  document.getElementById("leg1").innerHTML = latestPolls.map(poll => `
+    <div class="li">
+      <div class="ld" style="background:${AC[poll.agency]||'#888'}"></div>
+      <span>${poll.agency} — ${fmt(poll.date_fieldwork_to)}</span>
+    </div>`).join("");
+
+  document.getElementById("meta1").innerHTML = `
+    <span>Agentury: <b>${latestPolls.map(p=>p.agency).join(", ")}</b></span>
+    <span>Typ: <b>${{preference:"Stranické preference",model:"Volební model",potential:"Volební potenciál"}[S1.type]}</b></span>`;
+}
+
+// ══ GRAF 2 — spojnicový, strana×agentura = čára ═══════════════════
+function render2() {
+  const polls = filterPolls(S2);
+  if (!polls.length) return;
+
+  const parties  = getParties(polls, S2.view).filter(p => !S2.hide.has(p));
+  const agencies = [...new Set(polls.map(p => p.agency))].sort();
+
+  const datasets = [];
+  parties.forEach(pid => {
+    const cfg = PC[pid] || { d:pid, c:"#888" };
+    agencies.forEach((ag, ai) => {
+      const ap = polls.filter(p => p.agency === ag && p.parties[pid] != null);
+      if (!ap.length) return;
+      datasets.push({
+        label: `${cfg.d} · ${ag}`,
+        data: ap.map(p => ({ x: fmt(p.date_fieldwork_to), y: p.parties[pid] })),
+        borderColor: cfg.c,
+        backgroundColor: "transparent",
+        borderWidth: ai === 0 ? 2.4 : 1.6,
+        borderDash: ai === 0 ? [] : [5,3],
+        pointRadius: 3.5, pointHoverRadius: 6,
+        pointBackgroundColor: cfg.c, pointBorderColor:"#fff", pointBorderWidth:1.5,
+        tension: 0.25, spanGaps:false, parsing:false,
+      });
+    });
+  });
+
+  const ctx = document.getElementById("c2").getContext("2d");
+  if (S2.chart) S2.chart.destroy();
+  S2.chart = new Chart(ctx, {
+    type: "line",
+    data: { datasets },
+    options: {
+      responsive:true, maintainAspectRatio:false,
+      interaction:{ mode:"nearest", axis:"x", intersect:false },
+      plugins: { legend:{display:false}, tooltip:tooltipOpts() },
+      scales: {
+        x: { type:"category", grid:{color:"#E8EAF0"}, ticks:{ ...ticksOpts(), maxRotation:0, font:{...ticksOpts().font,size:10} } },
+        y: { min:0, max:45, grid:{color:"#E8EAF0"}, ticks:{ ...ticksOpts(), callback:v=>v+" %" } },
+      },
+    },
+  });
+
+  // Nápověda čar
+  document.getElementById("lhint").innerHTML =
+    `<span><span class="ls"></span> ${agencies[0]||""}</span>` +
+    (agencies.length > 1 ? `<span><span class="ld2"></span> ${agencies.slice(1).join(", ")}</span>` : "");
+
+  // Legenda stran (klikatelná)
+  document.getElementById("leg2").innerHTML = parties.map(pid => {
+    const cfg = PC[pid]; if(!cfg) return "";
+    return `<div class="li ${S2.hide.has(pid)?"off":""}" onclick="toggleParty2('${pid}')">
+      <div class="ld" style="background:${cfg.c}"></div><span>${cfg.d}</span></div>`;
+  }).join("");
+
+  const dates = polls.map(p=>p.date_fieldwork_to).sort();
+  document.getElementById("meta2").innerHTML = `
+    <span>Agentury: <b>${agencies.join(", ")}</b></span>
+    <span>Průzkumů: <b>${polls.length}</b></span>
+    <span>Období: <b>${fmt(dates[0])} – ${fmt(dates[dates.length-1])}</b></span>`;
+}
+
+function toggleParty2(pid) {
+  S2.hide.has(pid) ? S2.hide.delete(pid) : S2.hide.add(pid);
+  render2();
+}
+
+// ══ Přepínače ═════════════════════════════════════════════
+function g1setType(t) {
+  S1.type=t;
+  ["Pref","Model","Pot"].forEach(x=>document.getElementById("g1t"+x).classList.remove("on"));
+  document.getElementById("g1t"+{preference:"Pref",model:"Model",potential:"Pot"}[t]).classList.add("on");
+  render1();
+}
+function g1setView(v) {
+  S1.view=v;
+  document.getElementById("g1vP").classList.toggle("on",v==="parties");
+  document.getElementById("g1vC").classList.toggle("on",v==="coalitions");
+  render1();
+}
+function g2setType(t) {
+  S2.type=t;
+  ["Model","Pref","Pot"].forEach(x=>document.getElementById("g2t"+x).classList.remove("on"));
+  document.getElementById("g2t"+{model:"Model",preference:"Pref",potential:"Pot"}[t]).classList.add("on");
+  render2();
+}
+function g2setView(v) {
+  S2.view=v;
+  document.getElementById("g2vP").classList.toggle("on",v==="parties");
+  document.getElementById("g2vC").classList.toggle("on",v==="coalitions");
+  render2();
+}
+function g2setPeriod(m) {
+  S2.period=m;
+  ["6","12","All"].forEach(x=>document.getElementById("g2p"+x).classList.remove("on"));
+  document.getElementById("g2p"+{6:"6",12:"12",0:"All"}[m]).classList.add("on");
+  render2();
+}
+
+// ══ Helpers ═══════════════════════════════════════════════
+function fmt(iso) {
+  if(!iso) return "";
+  return new Date(iso+"T00:00:00").toLocaleDateString("cs-CZ",{day:"numeric",month:"short",year:"numeric"});
+}
+function ticksOpts() {
+  return { font:{family:"'Source Sans 3',sans-serif",size:11}, color:"#8890B0" };
+}
+function tooltipOpts() {
+  return {
+    backgroundColor:"#2A2E4A",
+    titleFont:{family:"'Source Sans 3',sans-serif",size:11,weight:"600"},
+    bodyFont:{family:"'Source Sans 3',sans-serif",size:12},
+    padding:9,
+    callbacks:{ label: c => ` ${c.dataset.label}: ${c.parsed.y!=null?c.parsed.y+" %":"—"}` },
+  };
+}
+
+// ══ Embedded fallback data ═════════════════════════════════
+const EMBEDDED = [
+  {id:"stem-2026-01-07",agency:"STEM",date_published:"2026-01-15",date_fieldwork_from:"2026-01-02",date_fieldwork_to:"2026-01-07",type:"model",view:"parties",sample_size:1089,method:"CAWI",client:"CNN Prima News",parties:{ANO:35.0,ODS:14.0,STAN:12.6,"Piráti":8.4,SPD:6.8,"Motoristé":4.9,TOP09:4.1,KDUČSL:3.2},coalition_notes:{}},
+  {id:"stem-2025-11-28",agency:"STEM",date_published:"2025-12-03",date_fieldwork_from:"2025-11-17",date_fieldwork_to:"2025-11-28",type:"model",view:"parties",sample_size:1095,method:"CAWI",client:"CNN Prima News",parties:{ANO:35.0,ODS:14.0,STAN:12.0,"Piráti":9.0,SPD:7.5,"Motoristé":5.5,TOP09:3.8},coalition_notes:{}},
+  {id:"stem-2025-09-28",agency:"STEM",date_published:"2025-10-02",date_fieldwork_from:"2025-09-22",date_fieldwork_to:"2025-09-28",type:"model",view:"coalitions",sample_size:1102,method:"CAWI",client:"CNN Prima News",parties:{ANO:28.0,SPOLU:21.0,SPD4K:13.8,STAN:12.2,"Piráti":9.8,"Motoristé":5.6,"Stačilo":5.5},coalition_notes:{}},
+  {id:"stem-2025-08-31",agency:"STEM",date_published:"2025-09-08",date_fieldwork_from:"2025-08-20",date_fieldwork_to:"2025-08-31",type:"model",view:"coalitions",sample_size:1088,method:"CAWI",client:"CNN Prima News",parties:{ANO:29.8,SPOLU:18.7,SPD4K:13.5,STAN:11.0,"Piráti":10.0,"Motoristé":6.0,"Stačilo":5.0},coalition_notes:{}},
+  {id:"median-2026-02-28",agency:"Median",date_published:"2026-03-07",date_fieldwork_from:"2026-02-01",date_fieldwork_to:"2026-02-28",type:"model",view:"parties",sample_size:1010,method:"CAPI",client:"Český rozhlas",parties:{ANO:32.0,ODS:14.0,"Piráti":10.5,SPD:7.0,STAN:6.0,TOP09:5.5,"Motoristé":5.0,KDUČSL:2.5},coalition_notes:{}},
+  {id:"median-2026-01-31",agency:"Median",date_published:"2026-02-06",date_fieldwork_from:"2026-01-01",date_fieldwork_to:"2026-01-31",type:"model",view:"parties",sample_size:1008,method:"CAPI",client:"Český rozhlas",parties:{ANO:31.0,ODS:12.5,"Piráti":11.0,SPD:9.5,STAN:9.0,TOP09:5.5,"Motoristé":4.5},coalition_notes:{}},
+  {id:"median-2025-12-31",agency:"Median",date_published:"2026-01-17",date_fieldwork_from:"2025-11-21",date_fieldwork_to:"2025-12-31",type:"model",view:"parties",sample_size:1015,method:"CAPI",client:"Český rozhlas",parties:{ANO:33.5,STAN:13.0,ODS:11.5,"Motoristé":7.0,"Piráti":6.0,KSČM:5.0,SPD:4.5},coalition_notes:{}},
+  {id:"median-2025-11-30",agency:"Median",date_published:"2025-12-05",date_fieldwork_from:"2025-11-01",date_fieldwork_to:"2025-11-30",type:"model",view:"parties",sample_size:1005,method:"CAPI",client:"Český rozhlas",parties:{ANO:33.5,ODS:11.5,STAN:10.0,"Piráti":6.5,SPD:6.5,KSČM:6.5,"Motoristé":6.5},coalition_notes:{}},
+  {id:"median-2025-09-30",agency:"Median",date_published:"2025-10-03",date_fieldwork_from:"2025-09-01",date_fieldwork_to:"2025-09-30",type:"model",view:"coalitions",sample_size:1009,method:"CAPI",client:"Český rozhlas",parties:{ANO:30.5,SPOLU:19.5,SPD4K:14.0,STAN:11.0,"Stačilo":6.5,"Motoristé":5.0,"Piráti":4.5},coalition_notes:{}},
+  {id:"median-2025-08-31",agency:"Median",date_published:"2025-09-05",date_fieldwork_from:"2025-08-01",date_fieldwork_to:"2025-08-31",type:"model",view:"coalitions",sample_size:1008,method:"CAPI",client:"Český rozhlas",parties:{ANO:30.5,SPOLU:19.0,SPD4K:13.0,STAN:11.0,"Motoristé":6.5,"Stačilo":6.0,"Piráti":4.0},coalition_notes:{}},
+  {id:"kantar-2026-02-15",agency:"Kantar",date_published:"2026-02-23",date_fieldwork_from:"2026-01-20",date_fieldwork_to:"2026-02-15",type:"model",view:"parties",sample_size:1120,method:"mixed",client:"Česká televize",parties:{ANO:34.0,ODS:13.5,STAN:11.0,"Piráti":8.0,SPD:6.5,"Motoristé":5.0,TOP09:4.5,KDUČSL:3.0},coalition_notes:{}},
+  {id:"kantar-2025-12-20",agency:"Kantar",date_published:"2026-01-12",date_fieldwork_from:"2025-11-25",date_fieldwork_to:"2025-12-20",type:"model",view:"parties",sample_size:1108,method:"mixed",client:"Česká televize",parties:{ANO:34.5,ODS:12.0,STAN:12.5,"Piráti":7.5,SPD:6.0,"Motoristé":5.5,TOP09:4.0},coalition_notes:{}},
+  {id:"kantar-2025-10-18",agency:"Kantar",date_published:"2025-11-02",date_fieldwork_from:"2025-09-22",date_fieldwork_to:"2025-10-18",type:"model",view:"coalitions",sample_size:1095,method:"mixed",client:"Česká televize",parties:{ANO:33.0,SPOLU:20.5,STAN:11.5,SPD4K:12.0,"Piráti":8.5,"Motoristé":6.0},coalition_notes:{}},
+  {id:"kantar-2025-08-17",agency:"Kantar",date_published:"2025-08-24",date_fieldwork_from:"2025-07-21",date_fieldwork_to:"2025-08-17",type:"model",view:"coalitions",sample_size:1080,method:"mixed",client:"Česká televize",parties:{ANO:33.0,SPOLU:21.0,STAN:12.0,SPD4K:11.0,"Piráti":8.0,"Motoristé":5.0,"Stačilo":5.5},coalition_notes:{}},
+  {id:"ipsos-2026-01-25",agency:"Ipsos",date_published:"2026-02-03",date_fieldwork_from:"2026-01-13",date_fieldwork_to:"2026-01-25",type:"model",view:"parties",sample_size:1005,method:"CAWI",client:"—",parties:{ANO:36.0,ODS:13.0,STAN:11.5,"Piráti":8.5,SPD:7.0,"Motoristé":4.5,TOP09:4.0,KDUČSL:2.5},coalition_notes:{}},
+  {id:"ipsos-2025-12-10",agency:"Ipsos",date_published:"2025-12-18",date_fieldwork_from:"2025-11-28",date_fieldwork_to:"2025-12-10",type:"model",view:"parties",sample_size:1001,method:"CAWI",client:"—",parties:{ANO:35.5,ODS:12.0,STAN:11.0,"Piráti":7.5,SPD:6.5,"Motoristé":5.5,TOP09:3.5},coalition_notes:{}},
+  {id:"ipsos-2025-09-10",agency:"Ipsos",date_published:"2025-09-19",date_fieldwork_from:"2025-08-29",date_fieldwork_to:"2025-09-10",type:"model",view:"coalitions",sample_size:1003,method:"CAWI",client:"—",parties:{ANO:32.2,SPOLU:21.5,STAN:11.8,SPD4K:12.5,"Piráti":9.5,"Motoristé":5.5,"Stačilo":5.0},coalition_notes:{}},
+  {id:"cvvm-2025-12-06",agency:"CVVM",date_published:"2025-12-19",date_fieldwork_from:"2025-11-17",date_fieldwork_to:"2025-12-06",type:"preference",view:"parties",sample_size:1021,method:"CAPI",client:"Sociologický ústav AV ČR",parties:{ANO:30.5,ODS:13.0,STAN:10.5,"Piráti":9.0,SPD:8.0,"Motoristé":6.5,TOP09:5.0,KDUČSL:4.5,SOCDEM:3.5},coalition_notes:{}},
+  {id:"cvvm-2025-10-10",agency:"CVVM",date_published:"2025-10-23",date_fieldwork_from:"2025-09-15",date_fieldwork_to:"2025-10-10",type:"preference",view:"parties",sample_size:1018,method:"CAPI",client:"Sociologický ústav AV ČR",parties:{ANO:31.0,ODS:12.5,STAN:11.5,"Piráti":8.5,SPD:7.5,"Motoristé":5.5,TOP09:5.0,KDUČSL:4.0},coalition_notes:{}},
+  {id:"cvvm-2025-08-08",agency:"CVVM",date_published:"2025-08-21",date_fieldwork_from:"2025-07-14",date_fieldwork_to:"2025-08-08",type:"preference",view:"parties",sample_size:1011,method:"CAPI",client:"Sociologický ústav AV ČR",parties:{ANO:32.0,ODS:13.5,STAN:10.0,"Piráti":9.5,SPD:8.0,"Motoristé":5.0,TOP09:4.5,KDUČSL:4.0},coalition_notes:{}},
+  {id:"nms-2026-01-20",agency:"NMS",date_published:"2026-01-28",date_fieldwork_from:"2026-01-08",date_fieldwork_to:"2026-01-20",type:"model",view:"parties",sample_size:1003,method:"CAWI",client:"Novinky.cz",parties:{ANO:34.5,ODS:13.5,STAN:12.0,"Piráti":8.0,SPD:7.5,"Motoristé":5.0,TOP09:4.0},coalition_notes:{}},
+  {id:"nms-2025-11-22",agency:"NMS",date_published:"2025-11-28",date_fieldwork_from:"2025-11-10",date_fieldwork_to:"2025-11-22",type:"model",view:"parties",sample_size:1002,method:"CAWI",client:"Novinky.cz",parties:{ANO:33.0,ODS:12.5,STAN:11.5,"Piráti":8.0,SPD:7.0,"Motoristé":6.0,TOP09:4.5},coalition_notes:{}},
+  {id:"nms-2025-09-15",agency:"NMS",date_published:"2025-09-22",date_fieldwork_from:"2025-09-03",date_fieldwork_to:"2025-09-15",type:"model",view:"coalitions",sample_size:1001,method:"CAWI",client:"Novinky.cz",parties:{ANO:31.0,SPOLU:20.0,STAN:12.0,SPD4K:13.0,"Piráti":9.0,"Motoristé":5.5,"Stačilo":5.0},coalition_notes:{}},
+];
+
+loadPolls();
+</script>
+</body>
+</html>

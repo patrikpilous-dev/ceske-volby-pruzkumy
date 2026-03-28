@@ -36,14 +36,16 @@
     "method": "CAWI",
     "client": "CNN Prima News",
     "parties": {
-      "STAN": 12.2,
-      "Piráti": 8.0,
+      "ANO": 34.0,
+      "STAN": 13.3,
+      "ODS": 12.2,
+      "Piráti": 8.1,
       "SPD": 7.0,
+      "NašeČesko": 3.7,
       "Motoristé": 4.8,
       "TOP09": 3.0,
       "KDUČSL": 2.0,
-      "Zelení": 2.5,
-      "NašeČesko": 3.7
+      "Zelení": 2.5
     },
     "coalition_notes": {},
     "source_url": "https://www.stem.cz/volebni-tendence-ceske-verejnosti-brezen-2026/",

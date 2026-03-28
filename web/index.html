@@ -378,16 +378,11 @@ function render1() {
       plugins: { legend:{display:false}, tooltip:tooltipOpts() },
       scales: {
         x: { grid:{display:false}, ticks:ticksOpts() },
-        y: { min:0, max:45, grid:{
-               color: ctx => ctx.tick.value === 5 ? "#C0272D44" : "#E8EAF0",
-               lineWidth: ctx => ctx.tick.value === 5 ? 1.5 : 1,
-             },
+        y: { min:0, max:45,
+             grid:{ color:"#E8EAF0" },
              ticks:{ ...ticksOpts(),
                callback: v => v+" %",
-               color: ctx => ctx.tick.value === 5 ? "#C0272D" : "#8890B0",
-               font: ctx => ctx.tick.value === 5
-                 ? { family:"'Source Sans 3',sans-serif", size:11, weight:"600" }
-                 : { family:"'Source Sans 3',sans-serif", size:11 },
+               color: (c) => c.tick.value === 5 ? "#C0272D" : "#8890B0",
              } },
       },
     },

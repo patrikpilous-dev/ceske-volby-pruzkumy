@@ -119,7 +119,7 @@ def scrape_article(url, title=""):
         for val in re.findall(pattern, text):
             try:
                 v = float(val.replace(",", "."))
-                if 0 < v < 60 and pid not in parties:
+                if 0.5 <= v <= 45.0 and pid not in parties:
                     parties[pid] = v
                     break
             except ValueError:
@@ -159,7 +159,7 @@ def scrape_article(url, title=""):
 
 def run_scraper(historical=False):
     print(f"[Median] start (historical={historical})")
-    articles = get_article_list(max_pages=5 if historical else 1)
+    articles = get_article_list(max_pages=20 if historical else 1)  # 20 stránek pokryje 4+ roky
     limit = len(articles) if historical else 3
     new = 0
     for a in articles[:limit]:

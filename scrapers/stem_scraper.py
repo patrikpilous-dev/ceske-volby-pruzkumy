@@ -79,7 +79,7 @@ def extract_parties(text):
         for val in re.findall(pattern, text):
             try:
                 v = float(val.replace(",", "."))
-                if 0 < v < 60 and pid not in parties:
+                if 0.5 <= v <= 45.0 and pid not in parties:
                     parties[pid] = v
                     break
             except ValueError:
@@ -144,7 +144,7 @@ def scrape_article(url):
 
 def run_scraper(historical=False):
     print(f"[STEM] start (historical={historical})")
-    urls = get_urls_last_n_months(24 if historical else 2)
+    urls = get_urls_last_n_months(52 if historical else 2)  # 52 měsíců = ~4.5 roku zpět (od 2022)
     new = 0
     for url in urls:
         rec = scrape_article(url)

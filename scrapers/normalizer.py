@@ -46,10 +46,18 @@ def normalize_party_name(raw_name: str) -> str | None:
 
 # ---------- Validace ----------
 
+# Realistické meze: žádná strana/koalice nemá méně než 0,5 % ani více než 45 %
+POLL_MIN = 0.5
+POLL_MAX = 45.0
+
 def validate_percentage(value) -> float | None:
     try:
         v = float(str(value).replace(",", ".").replace("%", "").strip())
-        return round(v, 1) if 0 <= v <= 100 else None
+        if POLL_MIN <= v <= POLL_MAX:
+            return round(v, 1)
+        if v > POLL_MAX:
+            print(f"[WARN] Hodnota {v} % překračuje maximum {POLL_MAX} % — přeskočeno")
+        return None
     except (ValueError, TypeError):
         return None
 
@@ -96,11 +104,22 @@ def build_poll_record(
         value = validate_percentage(raw_value)
         if canon_id and value is not None:
             parties_normalized[canon_id] = value
-        elif not canon_id:
-            unknown.append(raw_name)
+        elif not canon_id and value is not None:
+            # Nová/neznámá strana — ulož s původním názvem, aby se neztratila
+            # Přidej ji ručně do party_aliases.json až se stabilizuje
+            clean = raw_name.strip()
+            if 2 <= len(clean) <= 40:
+                parties_normalized[clean] = value
+                unknown.append(clean)
 
     if not parties_normalized:
         print(f"[WARN] Žádné strany normalizovány pro {agency} {date_published}")
+        return None
+
+    # Sanity check: součet všech stran by neměl přesáhnout 130 % (průzkumy nepočítají 100 %)
+    total = sum(parties_normalized.values())
+    if total > 130:
+        print(f"[WARN] Odmítnut {agency} {date_fieldwork_to}: součet preferencí {total:.1f} % (podezřelé)")
         return None
 
     if unknown:

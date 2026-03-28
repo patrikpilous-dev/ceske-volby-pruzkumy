@@ -33,11 +33,29 @@ def run_all(historical=False):
     except Exception as e:
         print(f"[ERROR] Median: {e}")
 
-    # Sem přidej další scrapers podle README:
-    # from kantar_scraper import run_scraper as kantar_run
-    # from ipsos_scraper  import run_scraper as ipsos_run
-    # from cvvm_scraper   import run_scraper as cvvm_run
-    # from nms_scraper    import run_scraper as nms_run
+    try:
+        from kantar_scraper import run_scraper as kantar_run
+        total += kantar_run(historical=historical)
+    except Exception as e:
+        print(f"[ERROR] Kantar: {e}")
+
+    try:
+        from ipsos_scraper import run_scraper as ipsos_run
+        total += ipsos_run(historical=historical)
+    except Exception as e:
+        print(f"[ERROR] Ipsos: {e}")
+
+    try:
+        from cvvm_scraper import run_scraper as cvvm_run
+        total += cvvm_run(historical=historical)
+    except Exception as e:
+        print(f"[ERROR] CVVM: {e}")
+
+    try:
+        from nms_scraper import run_scraper as nms_run
+        total += nms_run(historical=historical)
+    except Exception as e:
+        print(f"[ERROR] NMS: {e}")
 
     print(f"\n{'='*55}")
     print(f"Celkem přidáno: {total} nových průzkumů")

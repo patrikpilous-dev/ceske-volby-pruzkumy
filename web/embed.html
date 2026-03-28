@@ -48,24 +48,21 @@ body { font-family: 'Source Sans 3', sans-serif; background: transparent; color:
 .lbox-item a:hover { text-decoration: underline; }
 .lbox-item .dt { font-size: 11px; opacity: .75; }
 
-/* ── Nadpis ── */
-.ctitle { font-family: 'Merriweather', serif; font-size: 16px; font-weight: 400; color: var(--navy2); margin-bottom: 16px; }
-
-/* ── Toolbar ── */
-.tb { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: flex-end; padding: 14px 24px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: #FAFBFD; }
-.cg { display: flex; flex-direction: column; gap: 4px; }
-.cl { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+/* ── Card head row — nadpis + přepínače vedle sebe ── */
+.card-head-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; padding: 18px 24px 14px; gap: 10px; }
+.card-head-row .lbox { width: 100%; margin-bottom: 10px; }
+.ctitle { font-family: 'Merriweather', serif; font-size: 16px; font-weight: 400; color: var(--navy2); margin: 0; }
 .bg { display: flex; }
-.bg .b { padding: 6px 13px; font-family: 'Source Sans 3', sans-serif; font-size: 12.5px; font-weight: 400; border: 1px solid var(--border); background: var(--white); color: var(--text2); cursor: pointer; border-radius: 0; margin-right: -1px; position: relative; white-space: nowrap; transition: background .1s, color .1s; }
+.bg .b { padding: 5px 13px; font-family: 'Source Sans 3', sans-serif; font-size: 12.5px; font-weight: 400; border: 1px solid var(--border); background: var(--white); color: var(--text2); cursor: pointer; border-radius: 0; margin-right: -1px; position: relative; white-space: nowrap; transition: background .1s, color .1s; }
 .bg .b:hover { background: var(--bg); color: var(--navy); }
 .bg .b.on { background: var(--navy); border-color: var(--navy); color: #fff; font-weight: 500; z-index: 1; }
+/* ── Řádek agentur (graf 2) ── */
+.af-row { padding: 0 24px 14px; }
 
 /* ── Filtry agentur (graf 2) ── */
 .af { display: flex; flex-wrap: wrap; gap: 5px; }
-.ac { display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px; font-size: 12px; font-weight: 500; border: 1px solid var(--border); background: var(--white); color: var(--text2); cursor: pointer; user-select: none; transition: all .1s; }
-.ac .dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
-.ac.on { background: var(--navy); border-color: var(--navy); color: #fff; }
-.ac.on .dot { background: #fff !important; }
+.ac { display: inline-flex; align-items: center; padding: 5px 12px; font-size: 12px; font-weight: 500; border: 1.5px solid var(--border); background: var(--white); color: var(--text2); cursor: pointer; user-select: none; transition: all .15s; }
+.ac.on { color: #fff; }
 
 /* ── Graf ── */
 .cw { padding: 20px 24px 10px; }
@@ -96,7 +93,7 @@ body { font-family: 'Source Sans 3', sans-serif; background: transparent; color:
 
 @media(max-width:640px) {
   .main { padding: 14px 12px 36px; }
-  .card-head, .tb, .cw, .avg-row, .leg, .meta { padding-left: 14px; padding-right: 14px; }
+  .card-head, .card-head-row, .af-row, .cw, .avg-row, .leg, .meta { padding-left: 14px; padding-right: 14px; }
 }
 </style>
 </head>
@@ -106,20 +103,15 @@ body { font-family: 'Source Sans 3', sans-serif; background: transparent; color:
 
   <!-- ══ GRAF 1 — Aktuální preference ══ -->
   <div class="card">
-    <div class="card-head">
-      <div class="lbox" id="lbox">
+    <div class="card-head-row">
+      <div class="lbox" id="lbox" style="width:100%;margin-bottom:10px">
         <div class="lbox-label">Aktuální průzkumy preferencí</div>
         <div class="lbox-items" id="lboxItems"></div>
       </div>
       <div class="ctitle">Aktuální volební preference</div>
-    </div>
-    <div class="tb">
-      <div class="cg">
-        <span class="cl">Zobrazit jako</span>
-        <div class="bg">
-          <button class="b on" id="g1vP" onclick="g1setView('parties')">Strany</button>
-          <button class="b"    id="g1vC" onclick="g1setView('coalitions')">Koalice</button>
-        </div>
+      <div class="bg">
+        <button class="b on" id="g1vP" onclick="g1setView('parties')">Strany</button>
+        <button class="b"    id="g1vC" onclick="g1setView('coalitions')">Koalice</button>
       </div>
     </div>
     <div class="cw"><canvas id="c1" height="360"></canvas></div>
@@ -130,21 +122,15 @@ body { font-family: 'Source Sans 3', sans-serif; background: transparent; color:
 
   <!-- ══ GRAF 2 — Vývoj v čase ══ -->
   <div class="card">
-    <div class="card-head">
-      <div class="ctitle" style="margin-top:20px">Vývoj preferencí v čase</div>
+    <div class="card-head-row">
+      <div class="ctitle">Vývoj preferencí v čase</div>
+      <div class="bg">
+        <button class="b on" id="g2vP" onclick="g2setView('parties')">Strany</button>
+        <button class="b"    id="g2vC" onclick="g2setView('coalitions')">Koalice</button>
+      </div>
     </div>
-    <div class="tb">
-      <div class="cg">
-        <span class="cl">Zobrazit jako</span>
-        <div class="bg">
-          <button class="b on" id="g2vP" onclick="g2setView('parties')">Strany</button>
-          <button class="b"    id="g2vC" onclick="g2setView('coalitions')">Koalice</button>
-        </div>
-      </div>
-      <div class="cg" style="flex-basis:100%">
-        <span class="cl">Agentury</span>
-        <div class="af" id="af2"></div>
-      </div>
+    <div class="af-row">
+      <div class="af" id="af2"></div>
     </div>
     <div class="cw"><canvas id="c2" height="420"></canvas></div>
     <div class="leg" id="leg2"></div>
@@ -559,22 +545,31 @@ function toggleParty2(pid) {
 // ══ Agency chips (graf 2) ══════════════════════════════════
 function buildChips2() {
   const agencies = [...new Set(POLLS.map(p => p.agency))];
-  document.getElementById("af2").innerHTML = agencies.map(a =>
-    `<div class="ac on" id="af2-${a}" onclick="toggleAg2('${a}')">
-       <span class="dot" style="background:${AC[a]||'#888'}"></span>${a}
-     </div>`
-  ).join("");
+  document.getElementById("af2").innerHTML = agencies.map(a => {
+    const col = AC[a] || '#888';
+    return `<div class="ac on" id="af2-${a}"
+      data-color="${col}"
+      style="background:${col};border-color:${col};color:#fff"
+      onclick="toggleAg2('${a}')">${a}</div>`;
+  }).join("");
 }
 
 function toggleAg2(agency) {
   const chip = document.getElementById(`af2-${agency}`);
+  const col = chip.dataset.color;
   if (S2.ag.has(agency)) {
     if (S2.ag.size <= 1) return;
     S2.ag.delete(agency);
     chip.classList.remove("on");
+    chip.style.background = '';
+    chip.style.borderColor = col;
+    chip.style.color = col;
   } else {
     S2.ag.add(agency);
     chip.classList.add("on");
+    chip.style.background = col;
+    chip.style.borderColor = col;
+    chip.style.color = '#fff';
   }
   render2();
 }

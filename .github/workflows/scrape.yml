@@ -1,0 +1,52 @@
+name: Aktualizace volebních průzkumů
+
+on:
+  schedule:
+    - cron: '0 8 * * *'
+    - cron: '0 10 * * *'
+    - cron: '0 12 * * *'
+    - cron: '0 15 * * *'
+  workflow_dispatch:
+    inputs:
+      historical:
+        description: 'Bootstrap historických dat (6 měsíců)'
+        required: false
+        default: 'false'
+        type: boolean
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Závislosti
+        run: pip install requests beautifulsoup4 lxml
+
+      - name: Spusť scrapers
+        id: scrape
+        run: |
+          cd scrapers
+          if [ "${{ github.event.inputs.historical }}" = "true" ]; then
+            python run_all.py --historical
+          else
+            python run_all.py
+          fi
+
+      - name: Commit (jen při nových datech)
+        if: steps.scrape.outputs.has_new_polls == 'true'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add data/polls.json data/last_update.json
+          git diff --staged --quiet || git commit -m "🗳️ Aktualizace průzkumů $(date -u +'%Y-%m-%d %H:%M UTC')"
+          git push

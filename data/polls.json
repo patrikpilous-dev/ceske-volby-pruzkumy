@@ -1860,6 +1860,32 @@
     "scraped_at": "2026-03-29T10:21:02.835457Z"
   },
   {
+    "id": "kantar-2024-11-30",
+    "agency": "Kantar",
+    "date_published": "2024-11-30",
+    "date_fieldwork_from": "2024-11-01",
+    "date_fieldwork_to": "2024-11-30",
+    "type": "model",
+    "view": "parties",
+    "sample_size": 1000,
+    "method": "mixed",
+    "client": "Česká televize",
+    "parties": {
+      "ANO": 37.0,
+      "KSČM": 3.5,
+      "TOP09": 3.0,
+      "ODS": 15.0,
+      "KDUČSL": 4.0,
+      "Piráti": 7.0,
+      "SPD": 7.0,
+      "STAN": 11.5,
+      "Motoristé": 2.5
+    },
+    "coalition_notes": {},
+    "source_url": "https://e.infogram.com/81040855-01fa-4085-9f57-b024ff49e9d3",
+    "scraped_at": "2026-03-29T14:14:34.529391Z"
+  },
+  {
     "id": "median-2024-11-28",
     "agency": "Median",
     "date_published": "2026-03-28",

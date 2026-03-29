@@ -251,9 +251,9 @@ function sortedParties(poll) {
     .map(([pid]) => pid);
 }
 
-// ══ Plugin: hodnoty na konci horizontálních sloupců ════════
-const barLabelsHPlugin = {
-  id: "barLabelsH",
+// ══ Plugin: hodnoty nad svislými sloupci ══════════════════
+const barLabelsPlugin = {
+  id: "barLabels",
   afterDatasetsDraw(chart) {
     const ctx = chart.ctx;
     chart.data.datasets.forEach((ds, i) => {
@@ -261,43 +261,16 @@ const barLabelsHPlugin = {
       if (meta.type !== "bar") return;
       meta.data.forEach((bar, j) => {
         const val = ds.data[j];
-        if (val == null || val < 1) return;
+        if (val == null || val < 3) return;
         ctx.save();
-        ctx.fillStyle = "#4A5070";
-        ctx.font = "600 11px 'Source Sans 3', sans-serif";
-        ctx.textAlign  = "left";
-        ctx.textBaseline = "middle";
-        ctx.fillText(val.toFixed(1) + " %", bar.x + 5, bar.y);
+        ctx.fillStyle    = "#4A5070";
+        ctx.font         = "500 8.5px 'Source Sans 3', sans-serif";
+        ctx.textAlign    = "center";
+        ctx.textBaseline = "bottom";
+        ctx.fillText(val.toFixed(1), bar.x, bar.y - 2);
         ctx.restore();
       });
     });
-  }
-};
-
-// ══ Plugin: svislá čára volebního cenzu — pro horiz. graf ══
-const censusLineVPlugin = {
-  id: "censusLineV",
-  afterDraw(chart) {
-    const { ctx, scales: { x } } = chart;
-    if (!x) return;
-    const xPos   = x.getPixelForValue(5);
-    const top    = chart.chartArea.top;
-    const bottom = chart.chartArea.bottom;
-    ctx.save();
-    ctx.strokeStyle = "#C0272D";
-    ctx.lineWidth   = 1.5;
-    ctx.setLineDash([5, 4]);
-    ctx.beginPath();
-    ctx.moveTo(xPos, top);
-    ctx.lineTo(xPos, bottom);
-    ctx.stroke();
-    ctx.setLineDash([]);
-    ctx.fillStyle = "#C0272D";
-    ctx.font = "600 9.5px 'Source Sans 3', sans-serif";
-    ctx.textAlign    = "center";
-    ctx.textBaseline = "top";
-    ctx.fillText("5 % — cenzus", xPos, bottom + 4);
-    ctx.restore();
   }
 };
 
@@ -328,7 +301,7 @@ const censusLineHPlugin = {
   }
 };
 
-// ══ GRAF 1 — Nejnovější průzkum (horizontální sloupce) ═════
+// ══ GRAF 1 — Nejnovější průzkum (svislé sloupce) ══════════
 function render1() {
   const poll = latestPoll();
 
@@ -349,7 +322,6 @@ function render1() {
     document.getElementById("sub1").innerHTML = "";
   }
 
-  const canvas = document.getElementById("c1");
   if (chart1) { chart1.destroy(); chart1 = null; }
 
   if (!poll) {
@@ -365,12 +337,7 @@ function render1() {
   const colors  = parties.map(pid => (PC[pid]?.c || "#888") + "CC");
   const borders = parties.map(pid => PC[pid]?.c || "#888");
 
-  // Výška plátna: dynamicky podle počtu stran
-  const barH  = 36;
-  const padV  = 60;
-  canvas.height = Math.max(220, parties.length * barH + padV);
-
-  chart1 = new Chart(canvas.getContext("2d"), {
+  chart1 = new Chart(document.getElementById("c1").getContext("2d"), {
     type: "bar",
     data: {
       labels,
@@ -381,14 +348,12 @@ function render1() {
         borderColor:     borders,
         borderWidth:     1.5,
         borderRadius:    0,
-        barThickness:    24,
+        maxBarThickness: 52,
       }],
     },
     options: {
-      indexAxis: "y",
       responsive: true,
       maintainAspectRatio: false,
-      layout: { padding: { right: 55 } },  // místo pro popisky hodnot
       plugins: {
         legend: { display: false },
         tooltip: {
@@ -398,23 +363,23 @@ function render1() {
           padding: 9,
           callbacks: {
             title: items => items[0]?.label || "",
-            label: c => ` ${c.parsed.x != null ? c.parsed.x.toFixed(1) + " %" : "—"}`,
+            label: c => ` ${c.parsed.y != null ? c.parsed.y.toFixed(1) + " %" : "—"}`,
           },
         },
       },
       scales: {
         x: {
+          grid:  { display: false },
+          ticks: { ...ticksOpts(), font:{ family:"'Source Sans 3',sans-serif", size:12 } },
+        },
+        y: {
           min: 0, max: 45,
           grid:  { color: "#E8EAF0" },
           ticks: { ...ticksOpts(), callback: v => v + " %" },
         },
-        y: {
-          grid:  { display: false },
-          ticks: { ...ticksOpts(), font:{ family:"'Source Sans 3',sans-serif", size:12 } },
-        },
       },
     },
-    plugins: [barLabelsHPlugin, censusLineVPlugin],
+    plugins: [barLabelsPlugin, censusLineHPlugin],
   });
 
   // ── Statistický řádek ──

@@ -576,6 +576,25 @@
     "scraped_at": "2026-03-29T14:41:51.360418Z"
   },
   {
+    "id": "ipsos-2025-09-28",
+    "agency": "Ipsos",
+    "date_published": "2025-11-10",
+    "date_fieldwork_from": "2025-09-01",
+    "date_fieldwork_to": "2025-09-28",
+    "type": "model",
+    "view": "parties",
+    "sample_size": null,
+    "method": "CAWI",
+    "client": "—",
+    "parties": {
+      "ANO": 32.6,
+      "SPD": 10.0
+    },
+    "coalition_notes": {},
+    "source_url": "https://www.ipsos.com/cs-cz/topic/volby",
+    "scraped_at": "2026-03-29T15:41:00.224955Z"
+  },
+  {
     "id": "kantar-2025-09-19",
     "agency": "Kantar",
     "date_published": "2025-09-19",
@@ -959,6 +978,31 @@
     "scraped_at": "2026-03-28T20:13:30.393115Z"
   },
   {
+    "id": "nms-2025-07-07",
+    "agency": "NMS",
+    "date_published": "2025-07-07",
+    "date_fieldwork_from": "2025-07-02",
+    "date_fieldwork_to": "2025-07-07",
+    "type": "model",
+    "view": "coalitions",
+    "sample_size": null,
+    "method": null,
+    "client": null,
+    "parties": {
+      "ANO": 28.7,
+      "SPOLU": 21.5,
+      "STAN": 12.0,
+      "Piráti": 7.9,
+      "SPD": 13.3,
+      "Motoristé": 3.2,
+      "Stačilo": 5.8,
+      "Přísaha": 2.2
+    },
+    "coalition_notes": {},
+    "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
+    "scraped_at": "2026-03-29T15:41:19.251143Z"
+  },
+  {
     "id": "median-2025-06-30",
     "agency": "Median",
     "date_published": "2025-06-30",
@@ -1217,13 +1261,11 @@
     "client": null,
     "parties": {
       "ANO": 30.3,
-      "SPOLU": 21.7,
+      "SPOLU": 20.0,
+      "SPD4K": 13.7,
       "STAN": 9.9,
       "Piráti": 6.1,
-      "SPD": 1.8,
-      "Motoristé": 13.7,
-      "Stačilo": 4.9,
-      "Přísaha": 4.6
+      "Motoristé": 4.9
     },
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
@@ -1366,12 +1408,11 @@
     "parties": {
       "ANO": 28.1,
       "SPOLU": 20.9,
+      "SPD4K": 12.5,
       "STAN": 12.2,
       "Piráti": 5.9,
-      "SPD": 2.0,
-      "Motoristé": 12.5,
-      "Stačilo": 6.0,
-      "Přísaha": 5.2
+      "Motoristé": 6.0,
+      "Stačilo": 6.0
     },
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
@@ -1398,53 +1439,5 @@
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
     "scraped_at": "2026-03-28T20:13:30.394206Z"
-  },
-  {
-    "id": "kantar-2025-03-31",
-    "agency": "Kantar",
-    "date_published": "2025-03-31",
-    "date_fieldwork_from": "2025-03-01",
-    "date_fieldwork_to": "2025-03-31",
-    "type": "model",
-    "view": "parties",
-    "sample_size": 1000,
-    "method": "mixed",
-    "client": "Česká televize",
-    "parties": {
-      "ANO": 35.5,
-      "KSČM": 4.5,
-      "TOP09": 3.0,
-      "ODS": 13.5,
-      "KDUČSL": 3.0,
-      "Piráti": 5.5,
-      "SPD": 7.0,
-      "STAN": 12.0,
-      "Motoristé": 6.5
-    },
-    "coalition_notes": {},
-    "source_url": "https://e.infogram.com/81040855-01fa-4085-9f57-b024ff49e9d3",
-    "scraped_at": "2026-03-29T10:14:20.971962Z"
-  },
-  {
-    "id": "median-2025-03-28",
-    "agency": "Median",
-    "date_published": "2026-03-28",
-    "date_fieldwork_from": "2025-03-01",
-    "date_fieldwork_to": "2025-03-28",
-    "type": "model",
-    "view": "coalitions",
-    "sample_size": null,
-    "method": "CAPI",
-    "client": "Český rozhlas",
-    "parties": {
-      "ANO": 32.5,
-      "STAN": 13.0,
-      "Piráti": 8.0,
-      "Motoristé": 6.0,
-      "SPOLU": 18.5
-    },
-    "coalition_notes": {},
-    "source_url": "https://www.median.eu/cs/?p=3541",
-    "scraped_at": "2026-03-28T16:45:05.977775Z"
   }
 ]

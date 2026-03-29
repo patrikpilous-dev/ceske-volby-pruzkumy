@@ -718,6 +718,30 @@
     "scraped_at": "2026-03-28T16:44:49.793297Z"
   },
   {
+    "id": "ipsos-2025-08-28",
+    "agency": "Ipsos",
+    "date_published": "2026-03-09",
+    "date_fieldwork_from": "2025-08-01",
+    "date_fieldwork_to": "2025-08-28",
+    "type": "model",
+    "view": "coalitions",
+    "sample_size": 1095,
+    "method": "CAWI",
+    "client": "—",
+    "parties": {
+      "ANO": 32.2,
+      "STAN": 10.9,
+      "Motoristé": 5.6,
+      "Stačilo": 7.1,
+      "SPOLU": 21.5,
+      "SPD4K": 11.5,
+      "Piráti": 8.6
+    },
+    "coalition_notes": {},
+    "source_url": "https://www.ipsos.com/cs-cz/volebni-model-v-srpnu-vyhrava-ano-posiluji-mensi-strany",
+    "scraped_at": "2026-03-29T10:33:16.954843Z"
+  },
+  {
     "id": "kantar-2025-08-17",
     "agency": "Kantar",
     "date_published": "2025-08-24",
@@ -834,6 +858,30 @@
     "coalition_notes": {},
     "source_url": "https://www.median.eu/cs/?p=3599",
     "scraped_at": "2026-03-28T16:44:53.266554Z"
+  },
+  {
+    "id": "ipsos-2025-07-28",
+    "agency": "Ipsos",
+    "date_published": "2026-03-09",
+    "date_fieldwork_from": "2025-07-01",
+    "date_fieldwork_to": "2025-07-28",
+    "type": "model",
+    "view": "coalitions",
+    "sample_size": 1021,
+    "method": "CAWI",
+    "client": "—",
+    "parties": {
+      "ANO": 34.9,
+      "STAN": 10.0,
+      "Stačilo": 6.3,
+      "SPOLU": 21.9,
+      "SPD4K": 11.4,
+      "Piráti": 7.0,
+      "Motoristé": 5.0
+    },
+    "coalition_notes": {},
+    "source_url": "https://www.ipsos.com/cs-cz/ipsos-volebni-model-na-konci-cervence-volby-vyhralo-ano-rust-zaznamenali-pirati",
+    "scraped_at": "2026-03-29T10:33:19.274768Z"
   },
   {
     "id": "stem-2025-07-22",

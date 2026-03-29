@@ -19,6 +19,7 @@ from scraper_utils import (
 from normalizer import build_poll_record, save_poll
 
 IPSOS_BASE    = "https://www.ipsos.com"
+IPSOS_TOPIC   = f"{IPSOS_BASE}/cs-cz/topic/volebni-model"
 IPSOS_ARCHIVE = f"{IPSOS_BASE}/cs-cz/zjisteni/politika"
 
 
@@ -26,24 +27,28 @@ def get_ipsos_links(max_pages=8):
     links = []
     seen  = set()
     kw    = ["volební", "model", "preference", "stranick", "volby", "politick"]
-    for page in range(1, max_pages + 1):
-        url  = IPSOS_ARCHIVE if page == 1 else f"{IPSOS_ARCHIVE}?page={page}"
-        soup = fetch_with_retry(url)
-        if not soup:
-            break
-        found = 0
-        for a in soup.find_all("a", href=True):
-            href = a["href"]
-            txt  = a.get_text().lower()
-            if any(k in txt for k in kw):
-                full = href if href.startswith("http") else IPSOS_BASE + href
-                if full not in seen:
-                    seen.add(full)
-                    links.append({"url": full, "title": a.get_text().strip()})
-                    found += 1
-        if found == 0:
-            break
-        time.sleep(0.8)
+
+    # Primary: topic page (most complete list)
+    for source_url in [IPSOS_TOPIC, IPSOS_ARCHIVE]:
+        for page in range(1, max_pages + 1):
+            url  = source_url if page == 1 else f"{source_url}?page={page}"
+            soup = fetch_with_retry(url)
+            if not soup:
+                break
+            found = 0
+            for a in soup.find_all("a", href=True):
+                href = a["href"]
+                txt  = a.get_text().lower()
+                if any(k in txt for k in kw) and "prezidentsky" not in href:
+                    full = href if href.startswith("http") else IPSOS_BASE + href
+                    if full not in seen:
+                        seen.add(full)
+                        links.append({"url": full, "title": a.get_text().strip()})
+                        found += 1
+            if found == 0:
+                break
+            time.sleep(0.8)
+
     return links
 
 
@@ -65,9 +70,17 @@ def scrape_article(url, title=""):
         return None
 
     # Strany: tabulka jako první volba, pak text
+    # Pro Ipsos odřízneme "potenciál" sekci (jinak scraper zachytí potenciálové hodnoty)
+    text_for_parties = text
+    for sentinel in ["dosahuje potenciálu", "Hnutí ANO dosahuje", "potenciál "]:
+        idx = text.find(sentinel)
+        if idx > 200:
+            text_for_parties = text[:idx]
+            break
+
     parties = extract_parties_from_table(soup)
     if not parties:
-        parties = extract_parties_from_text(text)
+        parties = extract_parties_from_text(text_for_parties)
     if not parties:
         return None
 

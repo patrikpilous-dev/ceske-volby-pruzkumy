@@ -52,7 +52,7 @@ body { font-family: 'Source Sans 3', sans-serif; background: transparent; color:
 /* ── Card head row — nadpis + přepínače vedle sebe ── */
 .card-head-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; padding: 18px 24px 14px; gap: 10px; }
 .card-head-row .lbox { width: 100%; margin-bottom: 10px; }
-.ctitle { font-family: 'Merriweather', serif; font-size: 16px; font-weight: 400; color: var(--navy2); margin: 0; }
+.ctitle { font-family: 'Merriweather', serif; font-size: 16px; font-weight: 400; color: var(--navy2); margin: 0; line-height: 1.3; }
 .bg { display: flex; }
 .bg .b { padding: 5px 13px; font-family: 'Source Sans 3', sans-serif; font-size: 12.5px; font-weight: 400; border: 1px solid var(--border); background: var(--white); color: var(--text2); cursor: pointer; border-radius: 0; margin-right: -1px; position: relative; white-space: nowrap; transition: background .1s, color .1s; }
 .bg .b:hover { background: var(--bg); color: var(--navy); }
@@ -109,7 +109,7 @@ body { font-family: 'Source Sans 3', sans-serif; background: transparent; color:
         <div class="lbox-label">Aktuální průzkumy preferencí</div>
         <div class="lbox-items" id="lboxItems"></div>
       </div>
-      <div class="ctitle">Aktuální volební preference</div>
+      <h2 class="ctitle" id="title1">Aktuální volební preference</h2>
       <div class="bg">
         <button class="b on" id="g1vP" onclick="g1setView('parties')">Strany</button>
         <button class="b"    id="g1vC" onclick="g1setView('coalitions')">Koalice</button>
@@ -124,7 +124,7 @@ body { font-family: 'Source Sans 3', sans-serif; background: transparent; color:
   <!-- ══ GRAF 1b — Průměr preferencí ══ -->
   <div class="card">
     <div class="card-head-row">
-      <div class="ctitle">Průměr volebních preferencí všech agentur</div>
+      <h2 class="ctitle" id="title1b">Průměr volebních preferencí všech agentur</h2>
     </div>
     <div class="cw"><canvas id="c1b" height="280"></canvas></div>
   </div>

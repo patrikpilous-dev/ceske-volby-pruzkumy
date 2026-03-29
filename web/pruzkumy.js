@@ -95,6 +95,11 @@ function init() {
     p.agency !== 'Evropsk\xe9 volby 2024' &&
     Object.values(p.parties).every(v => v <= 45)
   );
+  // Dnešní datum do nadpisů
+  const _d = new Date();
+  const _ds = `${_d.getDate()}.\u00a0${_d.getMonth()+1}.\u00a0${_d.getFullYear()}`;
+  document.getElementById('title1').textContent  = `Aktu\xe1ln\xed volebn\xed preference \u2013 ${_ds}`;
+  document.getElementById('title1b').textContent = `Pr\u016fm\u011br volebn\xed preferencí v\u0161ech agentur \u2013 ${_ds}`;
   // S2.ag starts empty — výchozí je jen Průměr
   buildChips2();
   showBanner();
@@ -535,13 +540,15 @@ function render2() {
   legHtml += `</div>`;
   document.getElementById("leg2").innerHTML = legHtml;
 
-  const allDates = viewPolls.map(p => p.date_fieldwork_to).sort();
-  const agLinks  = [...new Set(viewPolls.map(p => p.agency))].sort().map(ag =>
+  // Průměr používá všechny průzkumy; pokud jen agentury, počítáme jen ty vybrané
+  const metaPolls = S2.showAvg ? viewPolls : agPolls;
+  const allDates  = metaPolls.map(p => p.date_fieldwork_to).sort();
+  const agLinks   = [...new Set(metaPolls.map(p => p.agency))].sort().map(ag =>
     `<a href="${AGENCY_URLS[ag]||'#'}" target="_blank">${ag}</a>`
   ).join(", ");
   document.getElementById("meta2").innerHTML = `
     <span>Agentury: <b>${agLinks}</b></span>
-    <span>Pr\u016fzkum\u016f: <b>${viewPolls.length}</b></span>
+    <span>Pr\u016fzkum\u016f: <b>${metaPolls.length}</b></span>
     <span>Obdob\xed: <b>${fmt(allDates[0])} &ndash; ${fmt(allDates[allDates.length-1])}</b></span>`;
 }
 

@@ -98,8 +98,10 @@ function init() {
   // Dnešní datum do nadpisů
   const _d = new Date();
   const _ds = `${_d.getDate()}.\u00a0${_d.getMonth()+1}.\u00a0${_d.getFullYear()}`;
-  document.getElementById('title1').textContent  = `Aktu\xe1ln\xed volebn\xed preference \u2013 ${_ds}`;
-  document.getElementById('title1b').textContent = `Pr\u016fm\u011br volebn\xed preferencí v\u0161ech agentur \u2013 ${_ds}`;
+  const _t1  = document.getElementById('title1');
+  const _t1b = document.getElementById('title1b');
+  if (_t1)  _t1.textContent  = `Aktu\xe1ln\xed volebn\xed preference \u2013 ${_ds}`;
+  if (_t1b) _t1b.textContent = `Pr\u016fm\u011br volebn\xedch preferenc\xed v\u0161ech agentur \u2013 ${_ds}`;
   // S2.ag starts empty — výchozí je jen Průměr
   buildChips2();
   showBanner();
@@ -270,7 +272,7 @@ function render1() {
     plugins: [barLabelsPlugin, censusLinePlugin],
   });
 
-  let avgHtml = `<div class="avg-row-label">Aktu\u00e1ln\u00ed pr\u016fm\u011br volebn\u00edch preferenc\u00ed v\u0161ech agentur</div>`;
+  let avgHtml = ``;
   parties.forEach(pid => {
     const vals = latestPolls.map(p => p.parties[pid]).filter(v => v != null);
     if (!vals.length) return;

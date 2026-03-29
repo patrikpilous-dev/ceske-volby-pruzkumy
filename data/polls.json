@@ -711,6 +711,31 @@
     "scraped_at": "2026-03-28T20:13:30.392939Z"
   },
   {
+    "id": "stem-2025-07-29",
+    "agency": "STEM",
+    "date_published": "2025-07-29",
+    "date_fieldwork_from": "2025-07-10",
+    "date_fieldwork_to": "2025-07-29",
+    "type": "model",
+    "view": "coalitions",
+    "sample_size": null,
+    "method": null,
+    "client": null,
+    "parties": {
+      "ANO": 31.5,
+      "SPOLU": 20.8,
+      "STAN": 10.3,
+      "Piráti": 8.3,
+      "SPD": 13.8,
+      "Motoristé": 4.2,
+      "Stačilo": 7.5,
+      "Přísaha": 2.8
+    },
+    "coalition_notes": {},
+    "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
+    "scraped_at": "2026-03-29T10:21:02.829731Z"
+  },
+  {
     "id": "median-2025-07-28",
     "agency": "Median",
     "date_published": "2026-03-28",
@@ -1384,6 +1409,30 @@
     "scraped_at": "2026-03-28T16:45:12.335523Z"
   },
   {
+    "id": "stem-2025-01-28",
+    "agency": "STEM",
+    "date_published": "2025-01-28",
+    "date_fieldwork_from": "2025-01-10",
+    "date_fieldwork_to": "2025-01-28",
+    "type": "model",
+    "view": "coalitions",
+    "sample_size": null,
+    "method": null,
+    "client": null,
+    "parties": {
+      "ANO": 35.1,
+      "SPOLU": 18.8,
+      "STAN": 10.6,
+      "Piráti": 6.4,
+      "SPD": 2.1,
+      "Motoristé": 8.7,
+      "Přísaha": 1.6
+    },
+    "coalition_notes": {},
+    "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
+    "scraped_at": "2026-03-29T10:21:02.834480Z"
+  },
+  {
     "id": "stem-2025-01-21",
     "agency": "STEM",
     "date_published": "2025-01-21",
@@ -1527,6 +1576,31 @@
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
     "scraped_at": "2026-03-28T20:13:30.395706Z"
+  },
+  {
+    "id": "median-2024-11-30",
+    "agency": "Median",
+    "date_published": "2024-11-30",
+    "date_fieldwork_from": "2024-11-01",
+    "date_fieldwork_to": "2024-11-30",
+    "type": "model",
+    "view": "coalitions",
+    "sample_size": null,
+    "method": null,
+    "client": null,
+    "parties": {
+      "ANO": 33.5,
+      "SPOLU": 11.5,
+      "STAN": 4.5,
+      "Piráti": 2.5,
+      "SPD": 10.0,
+      "Motoristé": 6.5,
+      "Stačilo": 2.5,
+      "Přísaha": 6.5
+    },
+    "coalition_notes": {},
+    "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
+    "scraped_at": "2026-03-29T10:21:02.835457Z"
   },
   {
     "id": "median-2024-11-28",

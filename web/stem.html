@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STEM — Volební průzkumy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root {
+  --navy:   #3D4263;
+  --navy2:  #2A2E4A;
+  --red:    #C0272D;
+  --bg:     #F7F8FB;
+  --white:  #FFFFFF;
+  --border: #D8DAEA;
+  --muted:  #8890B0;
+  --text:   #1E2240;
+  --text2:  #4A5070;
+  --ag:     #3D4263; /* barva STEM */
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Source Sans 3', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+/* ── Header ── */
+.hdr { background: var(--white); border-bottom: 2px solid var(--navy); padding: 14px 24px; display: flex; align-items: center; gap: 16px; }
+.hdr-badge { background: var(--ag); color: #fff; font-family: 'Source Sans 3', sans-serif; font-size: 13px; font-weight: 600; padding: 4px 10px; letter-spacing: .03em; }
+.hdr-title { font-family: 'Merriweather', serif; font-size: 18px; font-weight: 400; color: var(--navy); }
+.hdr-title .r { color: var(--red); }
+
+/* ── Layout ── */
+.main { max-width: 1100px; margin: 0 auto; padding: 24px 24px 56px; display: flex; flex-direction: column; gap: 24px; }
+
+/* ── Karta ── */
+.card { background: var(--white); border: 1px solid var(--border); }
+
+/* ── Card head row ── */
+.card-head-row {
+  display: flex; flex-wrap: wrap; align-items: flex-start;
+  justify-content: space-between; padding: 18px 24px 14px; gap: 10px;
+}
+.ctitle { font-family: 'Merriweather', serif; font-size: 16px; font-weight: 400; color: var(--navy2); }
+.csub {
+  font-size: 12px; color: var(--muted); margin-top: 5px;
+  display: flex; flex-wrap: wrap; gap: 4px 18px;
+}
+.csub strong { color: var(--text2); font-weight: 600; }
+
+/* ── Přepínač Strany/Koalice ── */
+.bg { display: flex; }
+.bg .b {
+  padding: 5px 13px; font-family: 'Source Sans 3', sans-serif; font-size: 12.5px;
+  font-weight: 400; border: 1px solid var(--border); background: var(--white);
+  color: var(--text2); cursor: pointer; border-radius: 0; margin-right: -1px;
+  position: relative; white-space: nowrap; transition: background .1s, color .1s;
+}
+.bg .b:hover  { background: var(--bg); color: var(--navy); }
+.bg .b.on     { background: var(--navy); border-color: var(--navy); color: #fff; font-weight: 500; z-index: 1; }
+
+/* ── Graf wrapper ── */
+.cw { padding: 16px 24px 12px; }
+
+/* ── Legenda ── */
+.leg { display: flex; flex-wrap: wrap; gap: 4px 12px; padding: 10px 24px 14px; border-top: 1px solid var(--border); }
+.li {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 12px; color: var(--text2); cursor: pointer;
+  padding: 2px 5px; user-select: none; transition: opacity .1s;
+}
+.li.off { opacity: .28; }
+.ld { width: 10px; height: 10px; border-radius: 0; flex-shrink: 0; }
+.leg-div { width: 100%; height: 1px; background: var(--border); margin: 4px 0; }
+
+/* ── Meta ── */
+.meta {
+  display: flex; flex-wrap: wrap; gap: 5px 18px;
+  padding: 8px 24px 14px; font-size: 11px; color: var(--muted);
+  border-top: 1px solid var(--border);
+}
+.meta b  { color: var(--text2); font-weight: 600; }
+.meta a  { color: var(--navy); text-decoration: none; font-weight: 600; }
+.meta a:hover { text-decoration: underline; }
+
+/* ── Divider ve statistickém řádku ── */
+.stat-row {
+  display: flex; flex-wrap: wrap; gap: 0;
+  border-top: 2px solid var(--border);
+}
+.stat-cell {
+  flex: 1 1 120px; padding: 14px 20px;
+  border-right: 1px solid var(--border);
+}
+.stat-cell:last-child { border-right: none; }
+.stat-label { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: 3px; }
+.stat-value { font-size: 16px; font-weight: 600; color: var(--text); font-family: 'Merriweather', serif; }
+
+/* ── Prázdný stav ── */
+.empty { padding: 36px 24px; text-align: center; color: var(--muted); font-style: italic; }
+
+@media(max-width:640px) {
+  .main { padding: 14px 12px 36px; }
+  .card-head-row, .cw, .leg, .meta, .stat-cell { padding-left: 14px; padding-right: 14px; }
+  .hdr { padding: 12px 14px; }
+}
+</style>
+</head>
+<body>
+
+<header class="hdr">
+  <div class="hdr-badge">STEM</div>
+  <div class="hdr-title"><span class="r">V</span>olební průzkumy</div>
+</header>
+
+<main class="main">
+
+  <!-- ══ GRAF 1 — Nejnovější průzkum ══ -->
+  <div class="card">
+    <div class="card-head-row">
+      <div>
+        <div class="ctitle" id="title1">Nejnovější průzkum STEM</div>
+        <div class="csub" id="sub1"></div>
+      </div>
+      <div class="bg">
+        <button class="b on" id="gvP" onclick="setView('parties')">Strany</button>
+        <button class="b"    id="gvC" onclick="setView('coalitions')">Koalice</button>
+      </div>
+    </div>
+    <div class="cw"><canvas id="c1" height="300"></canvas></div>
+    <div class="stat-row" id="statRow1"></div>
+    <div class="meta"     id="meta1"></div>
+  </div>
+
+  <!-- ══ GRAF 2 — Vývoj preferencí v čase ══ -->
+  <div class="card">
+    <div class="card-head-row">
+      <div class="ctitle">Vývoj preferencí STEM v čase</div>
+    </div>
+    <div class="cw"><canvas id="c2" height="380"></canvas></div>
+    <div class="leg"  id="leg2"></div>
+    <div class="meta" id="meta2"></div>
+  </div>
+
+</main>
+
+<script>
+// ══ Konfigurace ════════════════════════════════════════════
+const AGENCY   = "STEM";
+const AGENCY_C = "#3D4263"; // barva STEM
+
+const COAL_IDS = new Set(["SPOLU","SPD4K","StačiloKoalice","PirátéZelení"]);
+
+const PC = {
+  ANO:            { d:"ANO",             c:"#7B2D8B" },
+  ODS:            { d:"ODS",             c:"#034FA0" },
+  STAN:           { d:"STAN",            c:"#1A9CD8" },
+  "Piráti":       { d:"Piráti",          c:"#1A1A2E" },
+  SPD:            { d:"SPD",             c:"#E07000" },
+  "Motoristé":    { d:"Motoristé",       c:"#C8102E" },
+  TOP09:          { d:"TOP 09",          c:"#CF0080" },
+  KDUČSL:         { d:"KDU-ČSL",         c:"#D4A000" },
+  KSČM:           { d:"KSČM",            c:"#BE0000" },
+  "Stačilo":      { d:"Stačilo!",        c:"#8B0000" },
+  SOCDEM:         { d:"SOCDEM",          c:"#E05A00" },
+  "Přísaha":      { d:"Přísaha",         c:"#555555" },
+  "Zelení":       { d:"Zelení",          c:"#2E8B2E" },
+  PRO:            { d:"PRO",             c:"#003399" },
+  SPOLU:          { d:"SPOLU",           c:"#034FA0" },
+  SPD4K:          { d:"SPD 4K",          c:"#E07000" },
+  StačiloKoalice: { d:"Stačilo! (koa.)", c:"#BE0000" },
+  "PirátéZelení": { d:"Piráti+Zelení",   c:"#1A1A2E" },
+  "NašeČesko":    { d:"Naše Česko",      c:"#0050A0" },
+};
+
+// ══ Stav ══════════════════════════════════════════════════
+let POLLS   = [];
+let VIEW    = "parties";
+let chart1  = null;
+let chart2  = null;
+let hidden2 = new Set();  // skrytý strany v grafu 2
+
+// ══ Data ══════════════════════════════════════════════════
+async function loadPolls() {
+  try {
+    const r = await fetch("../data/polls.json");
+    if (!r.ok) throw new Error();
+    POLLS = await r.json();
+  } catch {
+    POLLS = [];
+  }
+  init();
+}
+
+function init() {
+  POLLS = POLLS.filter(p =>
+    p.agency === AGENCY &&
+    Object.values(p.parties).every(v => v <= 45)
+  );
+  render1();
+  render2();
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    reportHeight();
+    setTimeout(reportHeight, 800);
+  }));
+}
+
+// ══ Pomocné ════════════════════════════════════════════════
+function fmt(iso) {
+  if (!iso) return "—";
+  return new Date(iso + "T00:00:00").toLocaleDateString("cs-CZ",
+    { day:"numeric", month:"long", year:"numeric" });
+}
+function fmtShort(iso) {
+  if (!iso) return "—";
+  return new Date(iso + "T00:00:00").toLocaleDateString("cs-CZ",
+    { day:"numeric", month:"short", year:"numeric" });
+}
+function fmtMonth(ym) {
+  const cs = ["led","úno","bře","dub","kvě","čvn","čvc","srp","zář","říj","lis","pro"];
+  const [y, m] = ym.split("-");
+  return `${cs[parseInt(m)-1]} ${y.slice(2)}`;
+}
+function ticksOpts() {
+  return { font:{ family:"'Source Sans 3',sans-serif", size:11 }, color:"#8890B0" };
+}
+
+// ══ Průzkumy pro aktuální pohled ═══════════════════════════
+function viewPolls() {
+  return POLLS
+    .filter(p => p.view === VIEW)
+    .sort((a,b) => a.date_fieldwork_to.localeCompare(b.date_fieldwork_to));
+}
+
+function latestPoll() {
+  const vp = viewPolls();
+  return vp.length ? vp[vp.length - 1] : null;
+}
+
+// ══ Seřazené strany z průzkumu ═════════════════════════════
+function sortedParties(poll) {
+  return Object.entries(poll.parties)
+    .filter(([pid]) => PC[pid])
+    .sort(([,a],[,b]) => b - a)
+    .map(([pid]) => pid);
+}
+
+// ══ Plugin: hodnoty na konci horizontálních sloupců ════════
+const barLabelsHPlugin = {
+  id: "barLabelsH",
+  afterDatasetsDraw(chart) {
+    const ctx = chart.ctx;
+    chart.data.datasets.forEach((ds, i) => {
+      const meta = chart.getDatasetMeta(i);
+      if (meta.type !== "bar") return;
+      meta.data.forEach((bar, j) => {
+        const val = ds.data[j];
+        if (val == null || val < 1) return;
+        ctx.save();
+        ctx.fillStyle = "#4A5070";
+        ctx.font = "600 11px 'Source Sans 3', sans-serif";
+        ctx.textAlign  = "left";
+        ctx.textBaseline = "middle";
+        ctx.fillText(val.toFixed(1) + " %", bar.x + 5, bar.y);
+        ctx.restore();
+      });
+    });
+  }
+};
+
+// ══ Plugin: svislá čára volebního cenzu — pro horiz. graf ══
+const censusLineVPlugin = {
+  id: "censusLineV",
+  afterDraw(chart) {
+    const { ctx, scales: { x } } = chart;
+    if (!x) return;
+    const xPos   = x.getPixelForValue(5);
+    const top    = chart.chartArea.top;
+    const bottom = chart.chartArea.bottom;
+    ctx.save();
+    ctx.strokeStyle = "#C0272D";
+    ctx.lineWidth   = 1.5;
+    ctx.setLineDash([5, 4]);
+    ctx.beginPath();
+    ctx.moveTo(xPos, top);
+    ctx.lineTo(xPos, bottom);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = "#C0272D";
+    ctx.font = "600 9.5px 'Source Sans 3', sans-serif";
+    ctx.textAlign    = "center";
+    ctx.textBaseline = "top";
+    ctx.fillText("5 % — cenzus", xPos, bottom + 4);
+    ctx.restore();
+  }
+};
+
+// ══ Plugin: vodorovná čára cenzu — pro liniový graf ════════
+const censusLineHPlugin = {
+  id: "censusLineH",
+  afterDraw(chart) {
+    const { ctx, scales: { y } } = chart;
+    if (!y) return;
+    const yPos  = y.getPixelForValue(5);
+    const left  = chart.chartArea.left;
+    const right = chart.chartArea.right;
+    ctx.save();
+    ctx.strokeStyle = "#C0272D";
+    ctx.lineWidth   = 1.5;
+    ctx.setLineDash([5, 4]);
+    ctx.beginPath();
+    ctx.moveTo(left,  yPos);
+    ctx.lineTo(right, yPos);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = "#C0272D";
+    ctx.font = "600 10px 'Source Sans 3', sans-serif";
+    ctx.textAlign    = "right";
+    ctx.textBaseline = "bottom";
+    ctx.fillText("5 % — volební cenzus", right - 4, yPos - 3);
+    ctx.restore();
+  }
+};
+
+// ══ GRAF 1 — Nejnovější průzkum (horizontální sloupce) ═════
+function render1() {
+  const poll = latestPoll();
+
+  // ── Titulek + podtitulek ──
+  if (poll) {
+    document.getElementById("title1").textContent =
+      `Nejnovější průzkum STEM — vydáno ${fmt(poll.date_published)}`;
+    const sber = (poll.date_fieldwork_from && poll.date_fieldwork_from !== poll.date_fieldwork_to)
+      ? `${fmtShort(poll.date_fieldwork_from)} – ${fmtShort(poll.date_fieldwork_to)}`
+      : fmtShort(poll.date_fieldwork_to);
+    document.getElementById("sub1").innerHTML =
+      `<span>Sběr dat: <strong>${sber}</strong></span>` +
+      (poll.sample_size ? `<span>Vzorek: <strong>${poll.sample_size.toLocaleString("cs-CZ")} respondentů</strong></span>` : "") +
+      `<span>Metoda: <strong>${poll.method || "—"}</strong></span>` +
+      `<span>Klient: <strong>${poll.client || "—"}</strong></span>`;
+  } else {
+    document.getElementById("title1").textContent = "Nejnovější průzkum STEM";
+    document.getElementById("sub1").innerHTML = "";
+  }
+
+  const canvas = document.getElementById("c1");
+  if (chart1) { chart1.destroy(); chart1 = null; }
+
+  if (!poll) {
+    document.getElementById("statRow1").innerHTML =
+      `<div class="empty">Žádná data pro pohled „${VIEW === "parties" ? "Strany" : "Koalice"}".</div>`;
+    document.getElementById("meta1").innerHTML = "";
+    return;
+  }
+
+  const parties = sortedParties(poll);
+  const labels  = parties.map(pid => PC[pid]?.d || pid);
+  const data    = parties.map(pid => poll.parties[pid] ?? null);
+  const colors  = parties.map(pid => (PC[pid]?.c || "#888") + "CC");
+  const borders = parties.map(pid => PC[pid]?.c || "#888");
+
+  // Výška plátna: dynamicky podle počtu stran
+  const barH  = 36;
+  const padV  = 60;
+  canvas.height = Math.max(220, parties.length * barH + padV);
+
+  chart1 = new Chart(canvas.getContext("2d"), {
+    type: "bar",
+    data: {
+      labels,
+      datasets: [{
+        label: AGENCY,
+        data,
+        backgroundColor: colors,
+        borderColor:     borders,
+        borderWidth:     1.5,
+        borderRadius:    0,
+        barThickness:    24,
+      }],
+    },
+    options: {
+      indexAxis: "y",
+      responsive: true,
+      maintainAspectRatio: false,
+      layout: { padding: { right: 55 } },  // místo pro popisky hodnot
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: "#2A2E4A",
+          titleFont: { family:"'Source Sans 3',sans-serif", size:11, weight:"600" },
+          bodyFont:  { family:"'Source Sans 3',sans-serif", size:12 },
+          padding: 9,
+          callbacks: {
+            title: items => items[0]?.label || "",
+            label: c => ` ${c.parsed.x != null ? c.parsed.x.toFixed(1) + " %" : "—"}`,
+          },
+        },
+      },
+      scales: {
+        x: {
+          min: 0, max: 45,
+          grid:  { color: "#E8EAF0" },
+          ticks: { ...ticksOpts(), callback: v => v + " %" },
+        },
+        y: {
+          grid:  { display: false },
+          ticks: { ...ticksOpts(), font:{ family:"'Source Sans 3',sans-serif", size:12 } },
+        },
+      },
+    },
+    plugins: [barLabelsHPlugin, censusLineVPlugin],
+  });
+
+  // ── Statistický řádek ──
+  const vals   = data.filter(v => v != null);
+  const top3   = parties.slice(0, 3)
+    .map(pid => `${PC[pid]?.d || pid} ${(poll.parties[pid]||0).toFixed(1)} %`)
+    .join(" · ");
+  const above5 = parties.filter(pid => (poll.parties[pid]||0) >= 5).length;
+
+  document.getElementById("statRow1").innerHTML = `
+    <div class="stat-cell">
+      <div class="stat-label">Top 3 strany</div>
+      <div class="stat-value" style="font-size:13px;font-family:'Source Sans 3',sans-serif;font-weight:500;color:var(--text2)">${top3}</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-label">Nad 5% cenzem</div>
+      <div class="stat-value">${above5} <span style="font-size:13px;font-weight:400;color:var(--muted)">stran</span></div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-label">Celkem měřeno</div>
+      <div class="stat-value">${parties.length} <span style="font-size:13px;font-weight:400;color:var(--muted)">stran</span></div>
+    </div>`;
+
+  // ── Meta ──
+  document.getElementById("meta1").innerHTML =
+    `<span>Zdroj: <a href="${poll.source_url || "#"}" target="_blank">${poll.source_url ? "Tisková zpráva STEM" : "—"}</a></span>` +
+    `<span>Zobrazeno: <b>${VIEW === "parties" ? "Strany" : "Koalice"}</b></span>`;
+}
+
+// ══ Lineární interpolace ════════════════════════════════════
+function interpolate(arr) {
+  const r = arr.slice();
+  for (let i = 1; i < r.length - 1; i++) {
+    if (r[i] !== null) continue;
+    let prev = -1, next = -1;
+    for (let j = i-1; j >= 0; j--)     { if (r[j] !== null) { prev = j; break; } }
+    for (let j = i+1; j < r.length; j++) { if (r[j] !== null) { next = j; break; } }
+    if (prev >= 0 && next >= 0)
+      r[i] = +(r[prev] + (r[next]-r[prev]) * (i-prev)/(next-prev)).toFixed(1);
+  }
+  return r;
+}
+
+// ══ Všechny měsíce od prvního STEM průzkumu do dnes ════════
+function getMonths(polls) {
+  if (!polls.length) return [];
+  const first = polls[0].date_fieldwork_to.substring(0,7);
+  const months = [];
+  let d = new Date(first + "-01");
+  const now = new Date();
+  while (d <= now) {
+    months.push(`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}`);
+    d.setMonth(d.getMonth()+1);
+  }
+  return months;
+}
+
+// ══ GRAF 2 — Vývoj v čase ══════════════════════════════════
+function render2() {
+  const vp = viewPolls();
+
+  if (!vp.length) {
+    if (chart2) { chart2.destroy(); chart2 = null; }
+    document.getElementById("leg2").innerHTML  = `<div class="empty">Žádná data pro pohled „${VIEW === "parties" ? "Strany" : "Koalice"}".</div>`;
+    document.getElementById("meta2").innerHTML = "";
+    return;
+  }
+
+  // Mapa: měsíc → průzkum (nejnovější v daném měsíci)
+  const mpm = {};
+  vp.forEach(p => {
+    const mo = p.date_fieldwork_to.substring(0,7);
+    if (!mpm[mo] || p.date_fieldwork_to > mpm[mo].date_fieldwork_to)
+      mpm[mo] = p;
+  });
+
+  const allMonths   = getMonths(vp);
+  const monthLabels = allMonths.map(fmtMonth);
+
+  // Všechny strany které se alespoň jednou objevily
+  const pScore = {}, pCount = {};
+  vp.forEach(p => Object.entries(p.parties).forEach(([pid, val]) => {
+    if (!PC[pid]) return;
+    pScore[pid] = (pScore[pid]||0) + val;
+    pCount[pid] = (pCount[pid]||0) + 1;
+  }));
+  const allParties = Object.keys(pScore)
+    .sort((a,b) => (pScore[b]/pCount[b]) - (pScore[a]/pCount[a]));
+
+  const parties  = allParties.filter(p => !hidden2.has(p));
+  const datasets = [];
+
+  parties.forEach(pid => {
+    const cfg = PC[pid];
+    const rawData = allMonths.map(mo => {
+      const p = mpm[mo];
+      return (p && p.parties[pid] != null) ? p.parties[pid] : null;
+    });
+    if (!rawData.some(v => v !== null)) return;
+    datasets.push({
+      label:              cfg.d,
+      pid,
+      data:               interpolate(rawData),
+      borderColor:        cfg.c,
+      backgroundColor:    "transparent",
+      borderWidth:        2.5,
+      borderDash:         [],
+      pointRadius:        3.5,
+      pointHoverRadius:   5.5,
+      pointBackgroundColor: cfg.c,
+      pointBorderColor:   "#fff",
+      pointBorderWidth:   1.5,
+      tension:            0.25,
+      spanGaps:           false,
+    });
+  });
+
+  const ctx = document.getElementById("c2").getContext("2d");
+  if (chart2) chart2.destroy();
+  chart2 = new Chart(ctx, {
+    type: "line",
+    data: { labels: monthLabels, datasets },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode:"index", axis:"x", intersect:false },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: "#2A2E4A",
+          titleFont: { family:"'Source Sans 3',sans-serif", size:11, weight:"600" },
+          bodyFont:  { family:"'Source Sans 3',sans-serif", size:12 },
+          padding: 9,
+          filter: item => item.parsed.y !== null,
+          callbacks: {
+            label: c => c.parsed.y != null ? ` ${c.dataset.label}: ${c.parsed.y.toFixed(1)} %` : null,
+          },
+        },
+      },
+      scales: {
+        x: {
+          grid:  { color:"#E8EAF0" },
+          ticks: { ...ticksOpts(), maxRotation:0, maxTicksLimit:18,
+                   font:{ family:"'Source Sans 3',sans-serif", size:10 } },
+        },
+        y: {
+          min: 0, max: 45,
+          grid:  { color:"#E8EAF0" },
+          ticks: { ...ticksOpts(), callback: v => v+" %" },
+        },
+      },
+    },
+    plugins: [censusLineHPlugin],
+  });
+
+  // ── Legenda (klikatelná) ──
+  let legHtml = "";
+  allParties.forEach(pid => {
+    const cfg = PC[pid]; if (!cfg) return;
+    const off = hidden2.has(pid);
+    legHtml += `<div class="li ${off?"off":""}" onclick="toggleParty('${pid}')">
+      <div style="width:14px;height:14px;flex-shrink:0;background:${off?"#D8DAEA":cfg.c};display:flex;align-items:center;justify-content:center;border:1px solid ${cfg.c}">
+        ${off?"":"<span style=\"color:#fff;font-size:9px;line-height:1;font-weight:700\">✓</span>"}
+      </div>
+      <span>${cfg.d}</span>
+    </div>`;
+  });
+  document.getElementById("leg2").innerHTML = legHtml;
+
+  // ── Meta ──
+  const first = vp[0].date_fieldwork_to;
+  const last  = vp[vp.length-1].date_fieldwork_to;
+  document.getElementById("meta2").innerHTML =
+    `<span>Průzkumy: <b>${vp.length}</b></span>` +
+    `<span>Období: <b>${fmtShort(first)} – ${fmtShort(last)}</b></span>` +
+    `<span>Zobrazeno: <b>${VIEW === "parties" ? "Strany" : "Koalice"}</b></span>`;
+}
+
+// ══ Interakce ══════════════════════════════════════════════
+function setView(v) {
+  VIEW = v;
+  document.getElementById("gvP").classList.toggle("on", v === "parties");
+  document.getElementById("gvC").classList.toggle("on", v === "coalitions");
+  render1();
+  render2();
+}
+
+function toggleParty(pid) {
+  if (hidden2.has(pid)) hidden2.delete(pid);
+  else hidden2.add(pid);
+  render2();
+}
+
+// ══ Výška pro iframe ═══════════════════════════════════════
+function reportHeight() {
+  const h = document.body.offsetHeight;
+  if (h > 200) window.parent.postMessage({ type:"pruzkumyHeight", height:h }, "*");
+}
+window._reportHeight = reportHeight;
+window.addEventListener("resize", reportHeight);
+
+loadPolls();
+</script>
+</body>
+</html>

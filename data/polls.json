@@ -101,28 +101,30 @@
     "scraped_at": "2026-03-28T16:51:01.572650Z"
   },
   {
-    "id": "kantar-2026-02-15",
+    "id": "kantar-2026-02-28",
     "agency": "Kantar",
-    "date_published": "2026-02-23",
-    "date_fieldwork_from": "2026-01-20",
-    "date_fieldwork_to": "2026-02-15",
+    "date_published": "2026-02-28",
+    "date_fieldwork_from": "2026-02-01",
+    "date_fieldwork_to": "2026-02-28",
     "type": "model",
     "view": "parties",
-    "sample_size": 1120,
+    "sample_size": 1000,
     "method": "mixed",
     "client": "Česká televize",
     "parties": {
-      "ANO": 34.0,
-      "ODS": 13.5,
-      "STAN": 11.0,
-      "Piráti": 8.0,
+      "ANO": 34.5,
+      "TOP09": 2.0,
+      "ODS": 14.5,
+      "KDUČSL": 3.0,
+      "Piráti": 9.0,
       "SPD": 6.5,
+      "STAN": 15.5,
       "Motoristé": 5.0,
-      "TOP09": 4.5,
-      "KDUČSL": 3.0
+      "NašeČesko": 3.5
     },
     "coalition_notes": {},
-    "source_url": "https://cz.kantar.com/trendyceska/"
+    "source_url": "https://e.infogram.com/81040855-01fa-4085-9f57-b024ff49e9d3",
+    "scraped_at": "2026-03-29T10:14:44.345938Z"
   },
   {
     "id": "median-2026-01-31",
@@ -146,6 +148,31 @@
     },
     "coalition_notes": {},
     "source_url": "https://www.median.eu/cs/?cat=6"
+  },
+  {
+    "id": "kantar-2026-01-31",
+    "agency": "Kantar",
+    "date_published": "2026-01-31",
+    "date_fieldwork_from": "2026-01-01",
+    "date_fieldwork_to": "2026-01-31",
+    "type": "model",
+    "view": "parties",
+    "sample_size": 1000,
+    "method": "mixed",
+    "client": "Česká televize",
+    "parties": {
+      "ANO": 34.5,
+      "TOP09": 4.5,
+      "ODS": 16.0,
+      "KDUČSL": 3.0,
+      "Piráti": 9.5,
+      "SPD": 6.5,
+      "STAN": 14.0,
+      "Motoristé": 5.0
+    },
+    "coalition_notes": {},
+    "source_url": "https://e.infogram.com/81040855-01fa-4085-9f57-b024ff49e9d3",
+    "scraped_at": "2026-03-29T10:14:21.221276Z"
   },
   {
     "id": "ipsos-2026-01-25",
@@ -451,6 +478,32 @@
     "source_url": "https://www.median.eu/cs/?cat=6"
   },
   {
+    "id": "kantar-2025-09-30",
+    "agency": "Kantar",
+    "date_published": "2025-09-30",
+    "date_fieldwork_from": "2025-09-01",
+    "date_fieldwork_to": "2025-09-30",
+    "type": "model",
+    "view": "parties",
+    "sample_size": 1000,
+    "method": "mixed",
+    "client": "Česká televize",
+    "parties": {
+      "ANO": 32.0,
+      "KSČM": 4.0,
+      "TOP09": 4.0,
+      "ODS": 12.5,
+      "KDUČSL": 2.5,
+      "Piráti": 9.0,
+      "SPD": 10.0,
+      "STAN": 12.5,
+      "Motoristé": 6.0
+    },
+    "coalition_notes": {},
+    "source_url": "https://e.infogram.com/81040855-01fa-4085-9f57-b024ff49e9d3",
+    "scraped_at": "2026-03-29T10:14:21.176132Z"
+  },
+  {
     "id": "stem-2025-09-28",
     "agency": "STEM",
     "date_published": "2025-10-02",
@@ -616,6 +669,32 @@
     "source_url": "https://www.median.eu/cs/?cat=6"
   },
   {
+    "id": "kantar-2025-08-31",
+    "agency": "Kantar",
+    "date_published": "2025-08-31",
+    "date_fieldwork_from": "2025-08-01",
+    "date_fieldwork_to": "2025-08-31",
+    "type": "model",
+    "view": "parties",
+    "sample_size": 1000,
+    "method": "mixed",
+    "client": "Česká televize",
+    "parties": {
+      "ANO": 32.5,
+      "KSČM": 4.0,
+      "TOP09": 4.5,
+      "ODS": 12.0,
+      "KDUČSL": 3.5,
+      "Piráti": 8.5,
+      "SPD": 9.5,
+      "STAN": 11.5,
+      "Motoristé": 5.5
+    },
+    "coalition_notes": {},
+    "source_url": "https://e.infogram.com/81040855-01fa-4085-9f57-b024ff49e9d3",
+    "scraped_at": "2026-03-29T10:14:21.127318Z"
+  },
+  {
     "id": "median-2025-08-28",
     "agency": "Median",
     "date_published": "2026-03-28",
@@ -709,6 +788,31 @@
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
     "scraped_at": "2026-03-28T20:13:30.392939Z"
+  },
+  {
+    "id": "stem-2025-07-29",
+    "agency": "STEM",
+    "date_published": "2025-07-29",
+    "date_fieldwork_from": "2025-07-10",
+    "date_fieldwork_to": "2025-07-29",
+    "type": "model",
+    "view": "coalitions",
+    "sample_size": null,
+    "method": null,
+    "client": null,
+    "parties": {
+      "ANO": 31.5,
+      "SPOLU": 20.8,
+      "STAN": 10.3,
+      "Piráti": 8.3,
+      "SPD": 13.8,
+      "Motoristé": 4.2,
+      "Stačilo": 7.5,
+      "Přísaha": 2.8
+    },
+    "coalition_notes": {},
+    "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
+    "scraped_at": "2026-03-29T09:15:59.484441Z"
   },
   {
     "id": "median-2025-07-28",
@@ -807,6 +911,32 @@
     "scraped_at": "2026-03-28T20:13:30.393408Z"
   },
   {
+    "id": "kantar-2025-06-30",
+    "agency": "Kantar",
+    "date_published": "2025-06-30",
+    "date_fieldwork_from": "2025-06-01",
+    "date_fieldwork_to": "2025-06-30",
+    "type": "model",
+    "view": "parties",
+    "sample_size": 1000,
+    "method": "mixed",
+    "client": "Česká televize",
+    "parties": {
+      "ANO": 33.5,
+      "KSČM": 3.5,
+      "TOP09": 4.5,
+      "ODS": 14.5,
+      "KDUČSL": 3.0,
+      "Piráti": 7.0,
+      "SPD": 10.0,
+      "STAN": 11.5,
+      "Motoristé": 4.5
+    },
+    "coalition_notes": {},
+    "source_url": "https://e.infogram.com/81040855-01fa-4085-9f57-b024ff49e9d3",
+    "scraped_at": "2026-03-29T10:14:21.080216Z"
+  },
+  {
     "id": "ipsos-2025-06-29",
     "agency": "Ipsos",
     "date_published": "2025-06-29",
@@ -878,6 +1008,32 @@
     "coalition_notes": {},
     "source_url": "https://www.stem.cz/volebni-tendence-ceske-verejnosti-cerven-2025/",
     "scraped_at": "2026-03-28T20:57:08.905118Z"
+  },
+  {
+    "id": "kantar-2025-05-31",
+    "agency": "Kantar",
+    "date_published": "2025-05-31",
+    "date_fieldwork_from": "2025-05-01",
+    "date_fieldwork_to": "2025-05-31",
+    "type": "model",
+    "view": "parties",
+    "sample_size": 1000,
+    "method": "mixed",
+    "client": "Česká televize",
+    "parties": {
+      "ANO": 34.5,
+      "KSČM": 3.5,
+      "TOP09": 3.5,
+      "ODS": 15.0,
+      "KDUČSL": 3.0,
+      "Piráti": 6.5,
+      "SPD": 9.0,
+      "STAN": 12.0,
+      "Motoristé": 4.5
+    },
+    "coalition_notes": {},
+    "source_url": "https://e.infogram.com/81040855-01fa-4085-9f57-b024ff49e9d3",
+    "scraped_at": "2026-03-29T10:14:21.036468Z"
   },
   {
     "id": "median-2025-05-28",
@@ -1001,6 +1157,32 @@
     "scraped_at": "2026-03-28T20:13:30.394030Z"
   },
   {
+    "id": "kantar-2025-04-30",
+    "agency": "Kantar",
+    "date_published": "2025-04-30",
+    "date_fieldwork_from": "2025-04-01",
+    "date_fieldwork_to": "2025-04-30",
+    "type": "model",
+    "view": "parties",
+    "sample_size": 1000,
+    "method": "mixed",
+    "client": "Česká televize",
+    "parties": {
+      "ANO": 35.0,
+      "KSČM": 4.0,
+      "TOP09": 3.0,
+      "ODS": 14.0,
+      "KDUČSL": 3.0,
+      "Piráti": 6.0,
+      "SPD": 8.0,
+      "STAN": 12.5,
+      "Motoristé": 6.0
+    },
+    "coalition_notes": {},
+    "source_url": "https://e.infogram.com/81040855-01fa-4085-9f57-b024ff49e9d3",
+    "scraped_at": "2026-03-29T10:14:20.988645Z"
+  },
+  {
     "id": "stem-2025-04-29",
     "agency": "STEM",
     "date_published": "2025-04-29",
@@ -1119,6 +1301,32 @@
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
     "scraped_at": "2026-03-28T20:13:30.394206Z"
+  },
+  {
+    "id": "kantar-2025-03-31",
+    "agency": "Kantar",
+    "date_published": "2025-03-31",
+    "date_fieldwork_from": "2025-03-01",
+    "date_fieldwork_to": "2025-03-31",
+    "type": "model",
+    "view": "parties",
+    "sample_size": 1000,
+    "method": "mixed",
+    "client": "Česká televize",
+    "parties": {
+      "ANO": 35.5,
+      "KSČM": 4.5,
+      "TOP09": 3.0,
+      "ODS": 13.5,
+      "KDUČSL": 3.0,
+      "Piráti": 5.5,
+      "SPD": 7.0,
+      "STAN": 12.0,
+      "Motoristé": 6.5
+    },
+    "coalition_notes": {},
+    "source_url": "https://e.infogram.com/81040855-01fa-4085-9f57-b024ff49e9d3",
+    "scraped_at": "2026-03-29T10:14:20.971962Z"
   },
   {
     "id": "median-2025-03-28",
@@ -1335,6 +1543,32 @@
     "scraped_at": "2026-03-28T20:13:30.395360Z"
   },
   {
+    "id": "kantar-2025-01-31",
+    "agency": "Kantar",
+    "date_published": "2025-01-31",
+    "date_fieldwork_from": "2025-01-01",
+    "date_fieldwork_to": "2025-01-31",
+    "type": "model",
+    "view": "parties",
+    "sample_size": 1000,
+    "method": "mixed",
+    "client": "Česká televize",
+    "parties": {
+      "ANO": 33.5,
+      "KSČM": 3.0,
+      "TOP09": 4.0,
+      "ODS": 13.0,
+      "KDUČSL": 3.0,
+      "Piráti": 7.5,
+      "SPD": 6.5,
+      "STAN": 12.5,
+      "Motoristé": 7.5
+    },
+    "coalition_notes": {},
+    "source_url": "https://e.infogram.com/81040855-01fa-4085-9f57-b024ff49e9d3",
+    "scraped_at": "2026-03-29T10:14:20.893509Z"
+  },
+  {
     "id": "ipsos-2025-01-29",
     "agency": "Ipsos",
     "date_published": "2025-01-29",
@@ -1382,6 +1616,30 @@
     "coalition_notes": {},
     "source_url": "https://www.median.eu/cs/?p=3502",
     "scraped_at": "2026-03-28T16:45:12.335523Z"
+  },
+  {
+    "id": "stem-2025-01-28",
+    "agency": "STEM",
+    "date_published": "2025-01-28",
+    "date_fieldwork_from": "2025-01-10",
+    "date_fieldwork_to": "2025-01-28",
+    "type": "model",
+    "view": "coalitions",
+    "sample_size": null,
+    "method": null,
+    "client": null,
+    "parties": {
+      "ANO": 35.1,
+      "SPOLU": 18.8,
+      "STAN": 10.6,
+      "Piráti": 6.4,
+      "SPD": 2.1,
+      "Motoristé": 8.7,
+      "Přísaha": 1.6
+    },
+    "coalition_notes": {},
+    "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
+    "scraped_at": "2026-03-29T09:15:59.497306Z"
   },
   {
     "id": "stem-2025-01-21",
@@ -1529,6 +1787,57 @@
     "scraped_at": "2026-03-28T20:13:30.395706Z"
   },
   {
+    "id": "median-2024-11-30",
+    "agency": "Median",
+    "date_published": "2024-11-30",
+    "date_fieldwork_from": "2024-11-01",
+    "date_fieldwork_to": "2024-11-30",
+    "type": "model",
+    "view": "coalitions",
+    "sample_size": null,
+    "method": null,
+    "client": null,
+    "parties": {
+      "ANO": 33.5,
+      "SPOLU": 11.5,
+      "STAN": 4.5,
+      "Piráti": 2.5,
+      "SPD": 10.0,
+      "Motoristé": 6.5,
+      "Stačilo": 2.5,
+      "Přísaha": 6.5
+    },
+    "coalition_notes": {},
+    "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
+    "scraped_at": "2026-03-29T09:15:59.498569Z"
+  },
+  {
+    "id": "kantar-2024-11-30",
+    "agency": "Kantar",
+    "date_published": "2024-11-30",
+    "date_fieldwork_from": "2024-11-01",
+    "date_fieldwork_to": "2024-11-30",
+    "type": "model",
+    "view": "parties",
+    "sample_size": 1000,
+    "method": "mixed",
+    "client": "Česká televize",
+    "parties": {
+      "ANO": 37.0,
+      "KSČM": 3.5,
+      "TOP09": 3.0,
+      "ODS": 15.0,
+      "KDUČSL": 4.0,
+      "Piráti": 7.0,
+      "SPD": 7.0,
+      "STAN": 11.5,
+      "Motoristé": 2.5
+    },
+    "coalition_notes": {},
+    "source_url": "https://e.infogram.com/81040855-01fa-4085-9f57-b024ff49e9d3",
+    "scraped_at": "2026-03-29T10:14:20.847543Z"
+  },
+  {
     "id": "median-2024-11-28",
     "agency": "Median",
     "date_published": "2026-03-28",
@@ -1623,6 +1932,32 @@
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
     "scraped_at": "2026-03-28T20:13:30.395989Z"
+  },
+  {
+    "id": "kantar-2024-10-31",
+    "agency": "Kantar",
+    "date_published": "2024-10-31",
+    "date_fieldwork_from": "2024-10-01",
+    "date_fieldwork_to": "2024-10-31",
+    "type": "model",
+    "view": "parties",
+    "sample_size": 1000,
+    "method": "mixed",
+    "client": "Česká televize",
+    "parties": {
+      "ANO": 35.5,
+      "KSČM": 3.0,
+      "TOP09": 4.5,
+      "ODS": 14.5,
+      "KDUČSL": 3.5,
+      "Piráti": 5.0,
+      "SPD": 6.5,
+      "STAN": 13.0,
+      "Motoristé": 2.5
+    },
+    "coalition_notes": {},
+    "source_url": "https://e.infogram.com/81040855-01fa-4085-9f57-b024ff49e9d3",
+    "scraped_at": "2026-03-29T10:14:20.803175Z"
   },
   {
     "id": "median-2024-10-28",
@@ -1965,6 +2300,31 @@
     "scraped_at": "2026-03-28T20:13:30.396738Z"
   },
   {
+    "id": "kantar-2024-06-30",
+    "agency": "Kantar",
+    "date_published": "2024-06-30",
+    "date_fieldwork_from": "2024-06-01",
+    "date_fieldwork_to": "2024-06-30",
+    "type": "model",
+    "view": "parties",
+    "sample_size": 1000,
+    "method": "mixed",
+    "client": "Česká televize",
+    "parties": {
+      "ANO": 34.0,
+      "KSČM": 3.0,
+      "TOP09": 4.0,
+      "ODS": 16.0,
+      "KDUČSL": 3.0,
+      "Piráti": 9.0,
+      "SPD": 6.0,
+      "STAN": 8.5
+    },
+    "coalition_notes": {},
+    "source_url": "https://e.infogram.com/81040855-01fa-4085-9f57-b024ff49e9d3",
+    "scraped_at": "2026-03-29T10:14:20.747260Z"
+  },
+  {
     "id": "median-2024-06-28",
     "agency": "Median",
     "date_published": "2026-03-28",
@@ -2161,6 +2521,31 @@
     "scraped_at": "2026-03-28T20:13:30.397079Z"
   },
   {
+    "id": "kantar-2024-04-30",
+    "agency": "Kantar",
+    "date_published": "2024-04-30",
+    "date_fieldwork_from": "2024-04-01",
+    "date_fieldwork_to": "2024-04-30",
+    "type": "model",
+    "view": "parties",
+    "sample_size": 1000,
+    "method": "mixed",
+    "client": "Česká televize",
+    "parties": {
+      "ANO": 32.0,
+      "KSČM": 2.5,
+      "TOP09": 5.0,
+      "ODS": 15.5,
+      "KDUČSL": 3.5,
+      "Piráti": 11.0,
+      "SPD": 9.0,
+      "STAN": 7.5
+    },
+    "coalition_notes": {},
+    "source_url": "https://e.infogram.com/81040855-01fa-4085-9f57-b024ff49e9d3",
+    "scraped_at": "2026-03-29T10:14:20.704940Z"
+  },
+  {
     "id": "median-2024-04-28",
     "agency": "Median",
     "date_published": "2026-03-28",
@@ -2230,6 +2615,31 @@
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
     "scraped_at": "2026-03-28T20:13:30.397373Z"
+  },
+  {
+    "id": "kantar-2024-03-31",
+    "agency": "Kantar",
+    "date_published": "2024-03-31",
+    "date_fieldwork_from": "2024-03-01",
+    "date_fieldwork_to": "2024-03-31",
+    "type": "model",
+    "view": "parties",
+    "sample_size": 1000,
+    "method": "mixed",
+    "client": "Česká televize",
+    "parties": {
+      "ANO": 34.5,
+      "KSČM": 3.0,
+      "TOP09": 4.5,
+      "ODS": 16.0,
+      "KDUČSL": 3.0,
+      "Piráti": 10.5,
+      "SPD": 8.0,
+      "STAN": 6.5
+    },
+    "coalition_notes": {},
+    "source_url": "https://e.infogram.com/81040855-01fa-4085-9f57-b024ff49e9d3",
+    "scraped_at": "2026-03-29T10:14:20.680762Z"
   },
   {
     "id": "median-2024-03-28",

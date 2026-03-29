@@ -542,8 +542,8 @@ function render2() {
   legHtml += `</div>`;
   document.getElementById("leg2").innerHTML = legHtml;
 
-  // Průměr používá všechny průzkumy; pokud jen agentury, počítáme jen ty vybrané
-  const metaPolls = S2.showAvg ? viewPolls : agPolls;
+  // Jsou-li zaškrtnuty konkrétní agentury, počet odpovídá jim; jinak všem (Průměr)
+  const metaPolls = S2.ag.size > 0 ? agPolls : viewPolls;
   const allDates  = metaPolls.map(p => p.date_fieldwork_to).sort();
   const agLinks   = [...new Set(metaPolls.map(p => p.agency))].sort().map(ag =>
     `<a href="${AGENCY_URLS[ag]||'#'}" target="_blank">${ag}</a>`

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>STEM — Volební průzkumy</title>
+<title>Ipsos — Volební průzkumy</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -19,7 +19,7 @@
   --muted:  #8890B0;
   --text:   #1E2240;
   --text2:  #4A5070;
-  --ag:     #3D4263; /* barva STEM */
+  --ag:     #004B8D; /* barva Ipsos */
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 body {
@@ -115,7 +115,7 @@ body {
 <body>
 
 <header class="hdr">
-  <div class="hdr-badge">STEM</div>
+  <div class="hdr-badge">Ipsos</div>
   <div class="hdr-title"><span class="r">V</span>olební průzkumy</div>
 </header>
 
@@ -125,7 +125,7 @@ body {
   <div class="card">
     <div class="card-head-row">
       <div>
-        <div class="ctitle" id="title1">Nejnovější průzkum STEM</div>
+        <div class="ctitle" id="title1">Nejnovější průzkum Ipsos</div>
         <div class="csub" id="sub1"></div>
       </div>
       <div class="bg">
@@ -141,7 +141,7 @@ body {
   <!-- ══ GRAF 2 — Vývoj preferencí v čase ══ -->
   <div class="card">
     <div class="card-head-row">
-      <div class="ctitle">Vývoj preferencí STEM v čase</div>
+      <div class="ctitle">Vývoj preferencí Ipsos v čase</div>
     </div>
     <div class="cw"><canvas id="c2" height="380"></canvas></div>
     <div class="leg"  id="leg2"></div>
@@ -152,8 +152,8 @@ body {
 
 <script>
 // ══ Konfigurace ════════════════════════════════════════════
-const AGENCY   = "STEM";
-const AGENCY_C = "#3D4263"; // barva STEM
+const AGENCY   = "Ipsos";
+const AGENCY_C = "#004B8D"; // barva Ipsos
 
 const COAL_IDS = new Set(["SPOLU","SPD4K","StačiloKoalice","PirátéZelení"]);
 
@@ -423,7 +423,7 @@ function interpolate(arr) {
   return r;
 }
 
-// ══ Všechny měsíce od prvního STEM průzkumu do dnes ════════
+// ══ Všechny měsíce od prvního průzkumu do dnes ════════
 function getMonths(polls) {
   if (!polls.length) return [];
   const first = polls[0].date_fieldwork_to.substring(0,7);

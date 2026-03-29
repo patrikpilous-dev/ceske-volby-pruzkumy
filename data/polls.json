@@ -639,25 +639,6 @@
     "scraped_at": "2026-03-28T16:44:49.793297Z"
   },
   {
-    "id": "stem-2025-08-26",
-    "agency": "STEM",
-    "date_published": "2025-09-01",
-    "date_fieldwork_from": "2025-08-07",
-    "date_fieldwork_to": "2025-08-26",
-    "type": "model",
-    "view": "parties",
-    "sample_size": 1548,
-    "method": "CAWI",
-    "client": "CNN Prima News",
-    "parties": {
-      "STAN": 10.0,
-      "SOCDEM": 6.5
-    },
-    "coalition_notes": {},
-    "source_url": "https://www.stem.cz/volebni-tendence-ceske-verejnosti-srpen-2025/",
-    "scraped_at": "2026-03-28T16:41:42.678400Z"
-  },
-  {
     "id": "kantar-2025-08-17",
     "agency": "Kantar",
     "date_published": "2025-08-24",
@@ -728,24 +709,6 @@
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
     "scraped_at": "2026-03-28T20:13:30.392939Z"
-  },
-  {
-    "id": "stem-2025-07-29",
-    "agency": "STEM",
-    "date_published": "2025-08-04",
-    "date_fieldwork_from": "2025-07-10",
-    "date_fieldwork_to": "2025-07-29",
-    "type": "model",
-    "view": "parties",
-    "sample_size": 1556,
-    "method": "CAWI",
-    "client": "CNN Prima News",
-    "parties": {
-      "STAN": 10.3
-    },
-    "coalition_notes": {},
-    "source_url": "https://www.stem.cz/volebni-tendence-ceske-verejnosti-cervenec-2025/",
-    "scraped_at": "2026-03-28T20:03:29.511748Z"
   },
   {
     "id": "median-2025-07-28",
@@ -898,16 +861,23 @@
     "date_fieldwork_from": "2025-06-05",
     "date_fieldwork_to": "2025-06-24",
     "type": "model",
-    "view": "parties",
+    "view": "coalitions",
     "sample_size": 1555,
     "method": "CAWI",
     "client": "CNN Prima News",
     "parties": {
-      "STAN": 10.6
+      "ANO": 31.9,
+      "SPOLU": 20.8,
+      "SPD4K": 13.0,
+      "STAN": 10.6,
+      "PirátéZelení": 7.8,
+      "Motoristé": 4.8,
+      "Stačilo": 4.6,
+      "SOCDEM": 2.9
     },
     "coalition_notes": {},
     "source_url": "https://www.stem.cz/volebni-tendence-ceske-verejnosti-cerven-2025/",
-    "scraped_at": "2026-03-28T20:03:32.316241Z"
+    "scraped_at": "2026-03-28T20:57:08.905118Z"
   },
   {
     "id": "median-2025-05-28",
@@ -1390,24 +1360,6 @@
     "scraped_at": "2026-03-28T20:13:30.395173Z"
   },
   {
-    "id": "stem-2025-01-28",
-    "agency": "STEM",
-    "date_published": "2025-01-13",
-    "date_fieldwork_from": "2025-01-01",
-    "date_fieldwork_to": "2025-01-28",
-    "type": "model",
-    "view": "coalitions",
-    "sample_size": 533,
-    "method": "CAWI",
-    "client": "CNN Prima News",
-    "parties": {
-      "SPOLU": 18.0
-    },
-    "coalition_notes": {},
-    "source_url": "https://www.stem.cz/volebni-tendence-ceske-verejnosti-leden-2025/",
-    "scraped_at": "2026-03-28T16:42:08.906511Z"
-  },
-  {
     "id": "median-2025-01-28",
     "agency": "Median",
     "date_published": "2026-03-28",
@@ -1531,7 +1483,7 @@
   {
     "id": "median-2024-12-28",
     "agency": "Median",
-    "date_published": "2026-03-28",
+    "date_published": "2026-03-29",
     "date_fieldwork_from": "2024-12-01",
     "date_fieldwork_to": "2024-12-28",
     "type": "model",
@@ -1541,15 +1493,15 @@
     "client": "Český rozhlas",
     "parties": {
       "ANO": 33.5,
-      "ODS": 1.5,
-      "STAN": 1.5,
+      "ODS": 11.5,
+      "STAN": 13.0,
       "Piráti": 6.0,
       "Motoristé": 7.0,
       "KSČM": 5.0
     },
     "coalition_notes": {},
     "source_url": "https://www.median.eu/cs/?p=3460",
-    "scraped_at": "2026-03-28T16:45:15.416269Z"
+    "scraped_at": "2026-03-29T08:31:41.465741Z"
   },
   {
     "id": "nms-2024-12-09",
@@ -1602,24 +1554,6 @@
     "scraped_at": "2026-03-28T20:13:30.395766Z"
   },
   {
-    "id": "stem-2024-11-28",
-    "agency": "STEM",
-    "date_published": "2024-11-18",
-    "date_fieldwork_from": "2024-11-01",
-    "date_fieldwork_to": "2024-11-28",
-    "type": "model",
-    "view": "coalitions",
-    "sample_size": 1081,
-    "method": "CAWI",
-    "client": "CNN Prima News",
-    "parties": {
-      "SPOLU": 21.0
-    },
-    "coalition_notes": {},
-    "source_url": "https://www.stem.cz/volebni-tendence-ceske-verejnosti-listopad-2024/",
-    "scraped_at": "2026-03-28T16:42:14.933699Z"
-  },
-  {
     "id": "median-2024-11-28",
     "agency": "Median",
     "date_published": "2026-03-28",
@@ -1642,6 +1576,29 @@
     "coalition_notes": {},
     "source_url": "https://www.median.eu/cs/?p=3447",
     "scraped_at": "2026-03-28T16:45:18.523745Z"
+  },
+  {
+    "id": "stem-2024-11-28",
+    "agency": "STEM",
+    "date_published": "2024-11-18",
+    "date_fieldwork_from": "2024-11-01",
+    "date_fieldwork_to": "2024-11-28",
+    "type": "model",
+    "view": "coalitions",
+    "sample_size": 1081,
+    "method": "CAWI",
+    "client": "CNN Prima News",
+    "parties": {
+      "ANO": 33.0,
+      "SPOLU": 21.0,
+      "SPD": 9.0,
+      "STAN": 8.0,
+      "Piráti": 6.0,
+      "KSČM": 5.0
+    },
+    "coalition_notes": {},
+    "source_url": "https://www.stem.cz/volebni-tendence-ceske-verejnosti-listopad-2024/",
+    "scraped_at": "2026-03-28T20:57:32.567882Z"
   },
   {
     "id": "nms-2024-11-12",
@@ -1825,12 +1782,13 @@
     "method": "CAWI",
     "client": "CNN Prima News",
     "parties": {
+      "ANO": 33.0,
+      "ODS": 14.9,
       "Piráti": 7.8,
       "SPD": 7.4,
-      "SOCDEM": 2.8,
-      "Zelení": 2.7,
-      "Trikolora": 2.0,
-      "PRO": 2.0
+      "STAN": 7.0,
+      "TOP09": 5.6,
+      "KSČM": 4.6
     },
     "coalition_notes": {},
     "source_url": "https://www.stem.cz/volebni-tendence-ceske-verejnosti-zari-2024/",
@@ -2054,30 +2012,6 @@
     "coalition_notes": {},
     "source_url": "https://www.median.eu/cs/?p=3374",
     "scraped_at": "2026-03-28T16:45:34.265619Z"
-  },
-  {
-    "id": "stem-2024-06-28",
-    "agency": "STEM",
-    "date_published": "2024-06-24",
-    "date_fieldwork_from": "2024-06-01",
-    "date_fieldwork_to": "2024-06-28",
-    "type": "model",
-    "view": "parties",
-    "sample_size": 1609,
-    "method": "CAWI",
-    "client": "CNN Prima News",
-    "parties": {
-      "Piráti": 8.7,
-      "SPD": 7.3,
-      "Motoristé": 2.7,
-      "Přísaha": 3.7,
-      "Zelení": 2.0,
-      "Trikolora": 2.0,
-      "PRO": 2.0
-    },
-    "coalition_notes": {},
-    "source_url": "https://www.stem.cz/volebni-tendence-ceske-verejnosti-cerven-2024/",
-    "scraped_at": "2026-03-28T20:04:11.831622Z"
   },
   {
     "id": "nms-2024-06-28",
@@ -2368,26 +2302,6 @@
     "scraped_at": "2026-03-28T16:45:47.160406Z"
   },
   {
-    "id": "stem-2024-01-28",
-    "agency": "STEM",
-    "date_published": "2024-02-05",
-    "date_fieldwork_from": "2024-01-01",
-    "date_fieldwork_to": "2024-01-28",
-    "type": "model",
-    "view": "parties",
-    "sample_size": 1092,
-    "method": "CAWI",
-    "client": "CNN Prima News",
-    "parties": {
-      "ODS": 13.2,
-      "Piráti": 11.3,
-      "SPD": 21.0
-    },
-    "coalition_notes": {},
-    "source_url": "https://www.stem.cz/volebni-tendence-ceske-verejnosti-leden-2024/",
-    "scraped_at": "2026-03-28T16:42:49.607707Z"
-  },
-  {
     "id": "median-2024-01-28",
     "agency": "Median",
     "date_published": "2026-03-28",
@@ -2482,26 +2396,6 @@
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
     "scraped_at": "2026-03-28T20:13:30.397877Z"
-  },
-  {
-    "id": "stem-2023-11-28",
-    "agency": "STEM",
-    "date_published": "2023-11-27",
-    "date_fieldwork_from": "2023-11-01",
-    "date_fieldwork_to": "2023-11-28",
-    "type": "model",
-    "view": "parties",
-    "sample_size": 1097,
-    "method": "CAWI",
-    "client": "CNN Prima News",
-    "parties": {
-      "ODS": 11.6,
-      "Piráti": 10.2,
-      "SPD": 23.0
-    },
-    "coalition_notes": {},
-    "source_url": "https://www.stem.cz/volebni-tendence-ceske-verejnosti-listopad-2023/",
-    "scraped_at": "2026-03-28T16:42:56.638271Z"
   },
   {
     "id": "median-2023-11-28",
@@ -2672,26 +2566,6 @@
     "scraped_at": "2026-03-28T16:46:02.825453Z"
   },
   {
-    "id": "stem-2023-09-28",
-    "agency": "STEM",
-    "date_published": "2023-10-02",
-    "date_fieldwork_from": "2023-09-01",
-    "date_fieldwork_to": "2023-09-28",
-    "type": "model",
-    "view": "parties",
-    "sample_size": 1123,
-    "method": "CAWI",
-    "client": "CNN Prima News",
-    "parties": {
-      "ODS": 13.1,
-      "Piráti": 9.6,
-      "SPD": 23.0
-    },
-    "coalition_notes": {},
-    "source_url": "https://www.stem.cz/volebni-tendence-ceske-verejnosti-zari-2023/",
-    "scraped_at": "2026-03-28T20:04:38.114962Z"
-  },
-  {
     "id": "stem-2023-09-17",
     "agency": "STEM",
     "date_published": "2023-09-17",
@@ -2795,13 +2669,14 @@
     "method": "CAWI",
     "client": "CNN Prima News",
     "parties": {
+      "ANO": 33.5,
       "ODS": 14.6,
       "Piráti": 10.8,
-      "SPD": 22.0
+      "STAN": 6.0
     },
     "coalition_notes": {},
     "source_url": "https://www.stem.cz/volebni-tendence-ceske-verejnosti-kveten-2023/",
-    "scraped_at": "2026-03-28T20:04:51.744451Z"
+    "scraped_at": "2026-03-28T20:58:29.117593Z"
   },
   {
     "id": "median-2023-04-28",

@@ -225,12 +225,20 @@ def extract_fieldwork_dates(text):
 # ---------- Extrakce stran z textu ----------
 
 def extract_parties_from_text(text, patterns=None):
-    """Extrahuje stranické výsledky z textu pomocí regex vzorů."""
+    """
+    Extrahuje stranické výsledky z textu pomocí regex vzorů.
+    Předzpracování odstraní fráze 'o X %' (změny preferencí) aby nebyla
+    zachycena změna místo skutečné preference (např. 'STAN předstihlo ODS o 1,5 %').
+    """
     if patterns is None:
         patterns = PARTY_PATTERNS
+    # Odstraň fráze "o X,X %" a "ze X,X %" (změny preferencí, nikoli samotné preference)
+    # Např. "STAN předstihlo ODS o 1,5 %" → "STAN předstihlo ODS "
+    cleaned = re.sub(r'\bo\s+\d+[,.]?\d*\s*%', '', text)
+    cleaned = re.sub(r'\bze?\s+\d+[,.]?\d*\s*%', '', cleaned)
     parties = {}
     for pattern, pid in patterns:
-        for val in re.findall(pattern, text):
+        for val in re.findall(pattern, cleaned):
             try:
                 v = float(str(val).replace(",", "."))
                 if 0.5 <= v <= 45.0 and pid not in parties:

@@ -33,29 +33,32 @@ MONTHS_NUM_TO_NAME = {
 # Kompletní vzory stran — seřazeno od specifičtějších k obecnějším
 # SPD4K musí být před SPD!
 PARTY_PATTERNS = [
-    (r"(?:hnutí\s+)?ANO\b[^\d(]{0,20}\(?(\d+[,.]?\d*)\s*%",    "ANO"),
-    (r"ODS[^\d(]{0,20}\(?(\d+[,.]?\d*)\s*%",                    "ODS"),
-    (r"STAN[^\d(]{0,20}\(?(\d+[,.]?\d*)\s*%",                   "STAN"),
-    (r"[Ss]tarostov[éěů][^\d(]{0,20}\(?(\d+[,.]?\d*)\s*%",      "STAN"),
-    (r"[Pp]irát[iůé][^\d(]{0,20}\(?(\d+[,.]?\d*)\s*%",          "Piráti"),
-    # SPD4K PŘED SPD
-    (r"SPD\s*(?:a\s+spol\.|4K|4k)[^\d(]{0,20}\(?(\d+[,.]?\d*)\s*%", "SPD4K"),
-    (r"SPD[^\d(]{0,20}\(?(\d+[,.]?\d*)\s*%",                    "SPD"),
-    (r"[Mm]otorist[éěů][^\d(]{0,20}\(?(\d+[,.]?\d*)\s*%",       "Motoristé"),
-    (r"TOP\s*09[^\d(]{0,20}\(?(\d+[,.]?\d*)\s*%",               "TOP09"),
-    (r"KDU[^\d(]{0,20}\(?(\d+[,.]?\d*)\s*%",                    "KDUČSL"),
-    (r"KSČM[^\d(]{0,20}\(?(\d+[,.]?\d*)\s*%",                   "KSČM"),
-    (r"[Ss]tačilo[^\d(]{0,20}\(?(\d+[,.]?\d*)\s*%",             "Stačilo"),
-    (r"SOCDEM[^\d(]{0,20}\(?(\d+[,.]?\d*)\s*%",                 "SOCDEM"),
-    (r"ČSSD[^\d(]{0,20}\(?(\d+[,.]?\d*)\s*%",                   "SOCDEM"),
-    (r"[Pp]řísah[ay][^\d(]{0,20}\(?(\d+[,.]?\d*)\s*%",          "Přísaha"),
-    (r"[Zz]elen[íi][^\d(]{0,20}\(?(\d+[,.]?\d*)\s*%",           "Zelení"),
-    (r"SPOLU[^\d(]{0,20}\(?(\d+[,.]?\d*)\s*%",                  "SPOLU"),
-    (r"Svobodn[íi][^\d(]{0,20}\(?(\d+[,.]?\d*)\s*%",            "Svobodní"),
-    (r"Trikolora[^\d(]{0,20}\(?(\d+[,.]?\d*)\s*%",              "Trikolora"),
-    (r"PRO\b[^\d(]{0,20}\(?(\d+[,.]?\d*)\s*%",                  "PRO"),
-    (r"Naš[ei]\s*[Čč]esko[^\d(]{0,20}\(?(\d+[,.]?\d*)\s*%",    "NašeČesko"),
-    (r"[Pp]řísaha[^\d(]{0,20}\(?(\d+[,.]?\d*)\s*%",             "Přísaha"),
+    (r"(?:hnutí\s+)?ANO\b[^\d(]{0,40}\(?(\d+[,.]?\d*)\s*%",    "ANO"),
+    (r"ODS[^\d(]{0,40}\(?(\d+[,.]?\d*)\s*%",                    "ODS"),
+    (r"STAN[^\d(]{0,40}\(?(\d+[,.]?\d*)\s*%",                   "STAN"),
+    (r"[Ss]tarostov[éěů][^\d(]{0,40}\(?(\d+[,.]?\d*)\s*%",      "STAN"),
+    (r"[Pp]irát[iůé][^\d(]{0,40}\(?(\d+[,.]?\d*)\s*%",          "Piráti"),
+    # SPD4K PŘED SPD — zachytí koaliční kandidátky SPD+Svobodní+Trikolora+PRO
+    (r"SPD\s*(?:a\s+spol\.|4K|4k)[^\d(]{0,40}\(?(\d+[,.]?\d*)\s*%", "SPD4K"),
+    # "Společná kandidátka" = NMS označení pro SPD koaliční ticket
+    (r"[Ss]polečná kandidátka[^\d(]{0,40}\(?(\d+[,.]?\d*)\s*%",      "SPD4K"),
+    (r"SPD\s+(?:s\s+podporou|s\s+koalicí|s\s+Trikolorou|s\s+přidruž)[^\d(]{0,40}\(?(\d+[,.]?\d*)\s*%", "SPD4K"),
+    (r"SPD[^\d(]{0,40}\(?(\d+[,.]?\d*)\s*%",                    "SPD"),
+    (r"[Mm]otorist[éěů][^\d(]{0,40}\(?(\d+[,.]?\d*)\s*%",       "Motoristé"),
+    (r"TOP\s*09[^\d(]{0,40}\(?(\d+[,.]?\d*)\s*%",               "TOP09"),
+    (r"KDU[^\d(]{0,40}\(?(\d+[,.]?\d*)\s*%",                    "KDUČSL"),
+    (r"KSČM[^\d(]{0,40}\(?(\d+[,.]?\d*)\s*%",                   "KSČM"),
+    (r"[Ss]tačilo[^\d(]{0,40}\(?(\d+[,.]?\d*)\s*%",             "Stačilo"),
+    (r"SOCDEM[^\d(]{0,40}\(?(\d+[,.]?\d*)\s*%",                 "SOCDEM"),
+    (r"ČSSD[^\d(]{0,40}\(?(\d+[,.]?\d*)\s*%",                   "SOCDEM"),
+    (r"[Pp]řísah[ay][^\d(]{0,40}\(?(\d+[,.]?\d*)\s*%",          "Přísaha"),
+    (r"[Zz]elen[íi][^\d(]{0,40}\(?(\d+[,.]?\d*)\s*%",           "Zelení"),
+    (r"SPOLU[^\d(]{0,40}\(?(\d+[,.]?\d*)\s*%",                  "SPOLU"),
+    (r"Svobodn[íi][^\d(]{0,40}\(?(\d+[,.]?\d*)\s*%",            "Svobodní"),
+    (r"Trikolora[^\d(]{0,40}\(?(\d+[,.]?\d*)\s*%",              "Trikolora"),
+    (r"PRO\b[^\d(]{0,40}\(?(\d+[,.]?\d*)\s*%",                  "PRO"),
+    (r"Naš[ei]\s*[Čč]esko[^\d(]{0,40}\(?(\d+[,.]?\d*)\s*%",    "NašeČesko"),
+    (r"[Pp]řísaha[^\d(]{0,40}\(?(\d+[,.]?\d*)\s*%",             "Přísaha"),
 ]
 
 
@@ -232,6 +235,8 @@ def extract_parties_from_text(text, patterns=None):
     """
     if patterns is None:
         patterns = PARTY_PATTERNS
+    # Normalizuj nezalomitelné mezery na normální (jinak regex \s nemusí fungovat)
+    text = text.replace('\xa0', ' ')
     # Odstraň fráze "o X,X %" a "ze X,X %" (změny preferencí, nikoli samotné preference)
     # Např. "STAN předstihlo ODS o 1,5 %" → "STAN předstihlo ODS "
     cleaned = re.sub(r'\bo\s+\d+[,.]?\d*\s*%', '', text)

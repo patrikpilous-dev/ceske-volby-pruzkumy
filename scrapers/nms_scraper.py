@@ -1,7 +1,7 @@
 """
 nms_scraper.py — Scraper pro NMS Market Research
-Publikuje volební model pro Novinky.cz (Seznam.cz skupina), ~2x měsíčně.
-Primární: nms.cz/pruzkumy-verejneho-mineni/
+Publikuje volební model pro Novinky.cz (Seznam.cz skupina), ~měsíčně.
+Primární: nms.global/cz/category/volebni-vyzkumy/ (stránkování)
 Záložní:  novinky.cz sekce průzkumy
 """
 
@@ -19,10 +19,23 @@ from scraper_utils import (
 )
 from normalizer import build_poll_record, save_poll
 
-NMS_BASE    = "https://nms.cz"
-NMS_ARCHIVE = f"{NMS_BASE}/pruzkumy-verejneho-mineni/"
+NMS_BASE     = "https://nms.global"
+NMS_CATEGORY = f"{NMS_BASE}/cz/category/volebni-vyzkumy/"
 
 NOVINKY_SEARCH = "https://www.novinky.cz/tag/pruzkum-nms"
+
+# Klíčová slova označující krajský/regionální průzkum — tyto přeskočit
+REGIONAL_KW = [
+    "jihomoravský", "středočeský", "jihočeský", "plzeňský", "karlovarský",
+    "ústecký", "liberecký", "královéhradecký", "pardubický", "vysočina",
+    "olomoucký", "moravskoslezský", "zlínský", "kraj", "krajský",
+    "volebni-model-praha", "volebni model praha", "hlavní město",
+]
+
+
+def _is_regional(title: str, url: str) -> bool:
+    text = (title + " " + url).lower()
+    return any(kw in text for kw in REGIONAL_KW)
 
 
 def get_nms_links(max_pages=8):
@@ -30,19 +43,27 @@ def get_nms_links(max_pages=8):
     seen  = set()
     kw    = ["volební", "model", "preference", "strany", "politick"]
     for page in range(1, max_pages + 1):
-        url  = NMS_ARCHIVE if page == 1 else f"{NMS_ARCHIVE}page/{page}/"
+        url  = NMS_CATEGORY if page == 1 else f"{NMS_CATEGORY}page/{page}/"
         soup = fetch_with_retry(url)
         if not soup:
             break
         found = 0
         for a in soup.find_all("a", href=True):
             href = a["href"]
-            txt  = a.get_text().lower()
-            if any(k in txt for k in kw):
+            txt  = a.get_text().strip()
+            txt_lower = txt.lower()
+            # Přeskočit regionální průzkumy
+            if _is_regional(txt, href):
+                continue
+            # Akceptovat pokud název obsahuje klíčové slovo NEBO jde o nms.global článek
+            if any(k in txt_lower for k in kw) or (NMS_BASE in href and "/cz/" in href):
                 full = href if href.startswith("http") else NMS_BASE + href
+                # Přeskočit samotné kategorie / stránky s výpisem
+                if "/category/" in full or "/page/" in full:
+                    continue
                 if full not in seen:
                     seen.add(full)
-                    links.append({"url": full, "title": a.get_text().strip()})
+                    links.append({"url": full, "title": txt})
                     found += 1
         if found == 0:
             break
@@ -122,9 +143,9 @@ def scrape_article(url, title=""):
 def run_scraper(historical=False):
     print(f"[NMS] start (historical={historical})")
     max_p = 8 if historical else 2
-    links = get_nms_links(max_pages=max_p)
+    links = get_nms_links(max_pages=max_p if historical else 1)
     if not links:
-        print("[NMS] nms.cz bez výsledků, zkouším Novinky.cz...")
+        print("[NMS] nms.global bez výsledků, zkouším Novinky.cz...")
         links = get_novinky_links(max_pages=max_p)
     limit = len(links) if historical else 3
     new   = 0

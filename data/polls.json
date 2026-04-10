@@ -1,5 +1,34 @@
 [
   {
+    "id": "nms-2026-04-28",
+    "agency": "NMS",
+    "date_published": "2026-04-09",
+    "date_fieldwork_from": "2026-04-01",
+    "date_fieldwork_to": "2026-04-28",
+    "type": "model",
+    "view": "parties",
+    "sample_size": 1031,
+    "method": "CAWI",
+    "client": "Novinky.cz",
+    "parties": {
+      "ANO": 32.7,
+      "ODS": 13.9,
+      "STAN": 13.7,
+      "Piráti": 8.0,
+      "SPD": 7.4,
+      "Motoristé": 4.4,
+      "TOP09": 3.1,
+      "KDUČSL": 2.5,
+      "KSČM": 2.8,
+      "Přísaha": 1.4,
+      "Zelení": 1.4,
+      "NašeČesko": 4.1
+    },
+    "coalition_notes": {},
+    "source_url": "https://nms.global/cz/volebni-model-duben-2026-ano-stale-jasnym-hegemonem-z-rozpadu-spolu-zatim-misto-ods-tezi-stan/",
+    "scraped_at": "2026-04-10T18:30:02.218440Z"
+  },
+  {
     "id": "nms-2026-03-28",
     "agency": "NMS",
     "date_published": "2026-03-28",
@@ -13,12 +42,12 @@
     "parties": {
       "ANO": 30.0,
       "STAN": 15.7,
-      "Piráti": 15.4,
+      "PirĂˇti": 15.4,
       "SPD": 8.0,
-      "Motoristé": 5.8,
-      "Stačilo": 4.9,
+      "MotoristĂ©": 5.8,
+      "StaÄŤilo": 4.9,
       "SPOLU": 20.4,
-      "NašeČesko": 4.7
+      "NaĹˇeÄŚesko": 4.7
     },
     "coalition_notes": {},
     "source_url": "https://nms.global/cz/media-blog?id=posts-cz&ucat=869",
@@ -39,13 +68,13 @@
       "ANO": 34.0,
       "STAN": 13.3,
       "ODS": 12.2,
-      "Piráti": 8.1,
+      "PirĂˇti": 8.1,
       "SPD": 7.0,
-      "NašeČesko": 3.7,
-      "Motoristé": 4.8,
+      "NaĹˇeÄŚesko": 3.7,
+      "MotoristĂ©": 4.8,
       "TOP09": 3.0,
-      "KDUČSL": 2.0,
-      "Zelení": 2.5
+      "KDUÄŚSL": 2.0,
+      "ZelenĂ­": 2.5
     },
     "coalition_notes": {},
     "source_url": "https://www.stem.cz/volebni-tendence-ceske-verejnosti-brezen-2026/",
@@ -61,16 +90,16 @@
     "view": "parties",
     "sample_size": 1010,
     "method": "CAPI",
-    "client": "Český rozhlas",
+    "client": "ÄŚeskĂ˝ rozhlas",
     "parties": {
       "ANO": 32.0,
       "ODS": 14.0,
-      "Piráti": 10.5,
+      "PirĂˇti": 10.5,
       "SPD": 7.0,
       "STAN": 6.0,
       "TOP09": 5.5,
-      "Motoristé": 5.0,
-      "KDUČSL": 2.5
+      "MotoristĂ©": 5.0,
+      "KDUÄŚSL": 2.5
     },
     "coalition_notes": {},
     "source_url": "https://www.median.eu/cs/?cat=6"
@@ -89,12 +118,12 @@
     "parties": {
       "ANO": 32.6,
       "STAN": 14.6,
-      "Piráti": 7.2,
-      "Motoristé": 4.7,
+      "PirĂˇti": 7.2,
+      "MotoristĂ©": 4.7,
       "TOP09": 2.4,
-      "KSČM": 1.7,
+      "KSÄŚM": 1.7,
       "PRO": 1.6,
-      "NašeČesko": 4.7,
+      "NaĹˇeÄŚesko": 4.7,
       "SPD": 6.5
     },
     "coalition_notes": {},
@@ -111,17 +140,17 @@
     "view": "parties",
     "sample_size": 1000,
     "method": "mixed",
-    "client": "Česká televize",
+    "client": "ÄŚeskĂˇ televize",
     "parties": {
       "ANO": 34.5,
       "TOP09": 2.0,
       "ODS": 14.5,
-      "KDUČSL": 3.0,
-      "Piráti": 9.0,
+      "KDUÄŚSL": 3.0,
+      "PirĂˇti": 9.0,
       "SPD": 6.5,
       "STAN": 15.5,
-      "Motoristé": 5.0,
-      "NašeČesko": 3.5
+      "MotoristĂ©": 5.0,
+      "NaĹˇeÄŚesko": 3.5
     },
     "coalition_notes": {},
     "source_url": "https://e.infogram.com/81040855-01fa-4085-9f57-b024ff49e9d3",
@@ -137,15 +166,15 @@
     "view": "parties",
     "sample_size": 1008,
     "method": "CAPI",
-    "client": "Český rozhlas",
+    "client": "ÄŚeskĂ˝ rozhlas",
     "parties": {
       "ANO": 31.0,
       "ODS": 12.5,
-      "Piráti": 11.0,
+      "PirĂˇti": 11.0,
       "SPD": 9.5,
       "STAN": 9.0,
       "TOP09": 5.5,
-      "Motoristé": 4.5
+      "MotoristĂ©": 4.5
     },
     "coalition_notes": {},
     "source_url": "https://www.median.eu/cs/?cat=6"
@@ -160,16 +189,16 @@
     "view": "parties",
     "sample_size": 1000,
     "method": "mixed",
-    "client": "Česká televize",
+    "client": "ÄŚeskĂˇ televize",
     "parties": {
       "ANO": 34.5,
       "TOP09": 4.5,
       "ODS": 16.0,
-      "KDUČSL": 3.0,
-      "Piráti": 9.5,
+      "KDUÄŚSL": 3.0,
+      "PirĂˇti": 9.5,
       "SPD": 6.5,
       "STAN": 14.0,
-      "Motoristé": 5.0
+      "MotoristĂ©": 5.0
     },
     "coalition_notes": {},
     "source_url": "https://e.infogram.com/81040855-01fa-4085-9f57-b024ff49e9d3",
@@ -185,16 +214,16 @@
     "view": "parties",
     "sample_size": 1005,
     "method": "CAWI",
-    "client": "—",
+    "client": "â€”",
     "parties": {
       "ANO": 36.0,
       "ODS": 13.0,
       "STAN": 11.5,
-      "Piráti": 8.5,
+      "PirĂˇti": 8.5,
       "SPD": 7.0,
-      "Motoristé": 4.5,
+      "MotoristĂ©": 4.5,
       "TOP09": 4.0,
-      "KDUČSL": 2.5
+      "KDUÄŚSL": 2.5
     },
     "coalition_notes": {},
     "source_url": "https://www.ipsos.com/cs-cz"
@@ -214,9 +243,9 @@
       "ANO": 34.5,
       "ODS": 13.5,
       "STAN": 12.0,
-      "Piráti": 8.0,
+      "PirĂˇti": 8.0,
       "SPD": 7.5,
-      "Motoristé": 5.0,
+      "MotoristĂ©": 5.0,
       "TOP09": 4.0
     },
     "coalition_notes": {},
@@ -237,11 +266,11 @@
       "ANO": 35.0,
       "ODS": 14.0,
       "STAN": 12.6,
-      "Piráti": 8.4,
+      "PirĂˇti": 8.4,
       "SPD": 6.8,
-      "Motoristé": 4.9,
+      "MotoristĂ©": 4.9,
       "TOP09": 4.1,
-      "KDUČSL": 3.2
+      "KDUÄŚSL": 3.2
     },
     "coalition_notes": {},
     "source_url": "https://www.stem.cz/volebni-tendence-ceske-verejnosti-leden-2026/"
@@ -256,14 +285,14 @@
     "view": "parties",
     "sample_size": 1015,
     "method": "CAPI",
-    "client": "Český rozhlas",
+    "client": "ÄŚeskĂ˝ rozhlas",
     "parties": {
       "ANO": 33.5,
       "STAN": 13.0,
       "ODS": 11.5,
-      "Motoristé": 7.0,
-      "Piráti": 6.0,
-      "KSČM": 5.0,
+      "MotoristĂ©": 7.0,
+      "PirĂˇti": 6.0,
+      "KSÄŚM": 5.0,
       "SPD": 4.5
     },
     "coalition_notes": {},
@@ -279,14 +308,14 @@
     "view": "parties",
     "sample_size": 1108,
     "method": "mixed",
-    "client": "Česká televize",
+    "client": "ÄŚeskĂˇ televize",
     "parties": {
       "ANO": 34.5,
       "ODS": 12.0,
       "STAN": 12.5,
-      "Piráti": 7.5,
+      "PirĂˇti": 7.5,
       "SPD": 6.0,
-      "Motoristé": 5.5,
+      "MotoristĂ©": 5.5,
       "TOP09": 4.0
     },
     "coalition_notes": {},
@@ -302,14 +331,14 @@
     "view": "parties",
     "sample_size": 1001,
     "method": "CAWI",
-    "client": "—",
+    "client": "â€”",
     "parties": {
       "ANO": 35.5,
       "ODS": 12.0,
       "STAN": 11.0,
-      "Piráti": 7.5,
+      "PirĂˇti": 7.5,
       "SPD": 6.5,
-      "Motoristé": 5.5,
+      "MotoristĂ©": 5.5,
       "TOP09": 3.5
     },
     "coalition_notes": {},
@@ -325,16 +354,16 @@
     "view": "parties",
     "sample_size": 1021,
     "method": "CAPI",
-    "client": "Sociologický ústav AV ČR",
+    "client": "SociologickĂ˝ Ăşstav AV ÄŚR",
     "parties": {
       "ANO": 30.5,
       "ODS": 13.0,
       "STAN": 10.5,
-      "Piráti": 9.0,
+      "PirĂˇti": 9.0,
       "SPD": 8.0,
-      "Motoristé": 6.5,
+      "MotoristĂ©": 6.5,
       "TOP09": 5.0,
-      "KDUČSL": 4.5,
+      "KDUÄŚSL": 4.5,
       "SOCDEM": 3.5
     },
     "coalition_notes": {},
@@ -350,15 +379,15 @@
     "view": "parties",
     "sample_size": 1005,
     "method": "CAPI",
-    "client": "Český rozhlas",
+    "client": "ÄŚeskĂ˝ rozhlas",
     "parties": {
       "ANO": 33.5,
       "ODS": 11.5,
       "STAN": 10.0,
-      "Piráti": 6.5,
+      "PirĂˇti": 6.5,
       "SPD": 6.5,
-      "KSČM": 6.5,
-      "Motoristé": 6.5
+      "KSÄŚM": 6.5,
+      "MotoristĂ©": 6.5
     },
     "coalition_notes": {},
     "source_url": "https://www.median.eu/cs/?cat=6"
@@ -378,9 +407,9 @@
       "ANO": 35.0,
       "ODS": 14.0,
       "STAN": 12.0,
-      "Piráti": 9.0,
+      "PirĂˇti": 9.0,
       "SPD": 7.5,
-      "Motoristé": 5.5,
+      "MotoristĂ©": 5.5,
       "TOP09": 3.8
     },
     "coalition_notes": {},
@@ -401,9 +430,9 @@
       "ANO": 33.0,
       "ODS": 12.5,
       "STAN": 11.5,
-      "Piráti": 8.0,
+      "PirĂˇti": 8.0,
       "SPD": 7.0,
-      "Motoristé": 6.0,
+      "MotoristĂ©": 6.0,
       "TOP09": 4.5
     },
     "coalition_notes": {},
@@ -419,14 +448,14 @@
     "view": "coalitions",
     "sample_size": 1095,
     "method": "mixed",
-    "client": "Česká televize",
+    "client": "ÄŚeskĂˇ televize",
     "parties": {
       "ANO": 33.0,
       "SPOLU": 20.5,
       "STAN": 11.5,
       "SPD4K": 12.0,
-      "Piráti": 8.5,
-      "Motoristé": 6.0
+      "PirĂˇti": 8.5,
+      "MotoristĂ©": 6.0
     },
     "coalition_notes": {},
     "source_url": "https://cz.kantar.com/trendyceska/"
@@ -441,16 +470,16 @@
     "view": "parties",
     "sample_size": 1018,
     "method": "CAPI",
-    "client": "Sociologický ústav AV ČR",
+    "client": "SociologickĂ˝ Ăşstav AV ÄŚR",
     "parties": {
       "ANO": 31.0,
       "ODS": 12.5,
       "STAN": 11.5,
-      "Piráti": 8.5,
+      "PirĂˇti": 8.5,
       "SPD": 7.5,
-      "Motoristé": 5.5,
+      "MotoristĂ©": 5.5,
       "TOP09": 5.0,
-      "KDUČSL": 4.0
+      "KDUÄŚSL": 4.0
     },
     "coalition_notes": {},
     "source_url": "https://cvvm.soc.cas.cz/cz/"
@@ -465,15 +494,15 @@
     "view": "coalitions",
     "sample_size": 1009,
     "method": "CAPI",
-    "client": "Český rozhlas",
+    "client": "ÄŚeskĂ˝ rozhlas",
     "parties": {
       "ANO": 30.5,
       "SPOLU": 19.5,
       "SPD4K": 14.0,
       "STAN": 11.0,
-      "Stačilo": 6.5,
-      "Motoristé": 5.0,
-      "Piráti": 4.5
+      "StaÄŤilo": 6.5,
+      "MotoristĂ©": 5.0,
+      "PirĂˇti": 4.5
     },
     "coalition_notes": {},
     "source_url": "https://www.median.eu/cs/?cat=6"
@@ -488,17 +517,17 @@
     "view": "parties",
     "sample_size": 1000,
     "method": "mixed",
-    "client": "Česká televize",
+    "client": "ÄŚeskĂˇ televize",
     "parties": {
       "ANO": 32.0,
-      "KSČM": 4.0,
+      "KSÄŚM": 4.0,
       "TOP09": 4.0,
       "ODS": 12.5,
-      "KDUČSL": 2.5,
-      "Piráti": 9.0,
+      "KDUÄŚSL": 2.5,
+      "PirĂˇti": 9.0,
       "SPD": 10.0,
       "STAN": 12.5,
-      "Motoristé": 6.0
+      "MotoristĂ©": 6.0
     },
     "coalition_notes": {},
     "source_url": "https://e.infogram.com/81040855-01fa-4085-9f57-b024ff49e9d3",
@@ -520,13 +549,13 @@
       "SPOLU": 21.0,
       "SPD4K": 13.8,
       "STAN": 12.2,
-      "Piráti": 9.8,
-      "Motoristé": 5.6,
-      "Stačilo": 5.5
+      "PirĂˇti": 9.8,
+      "MotoristĂ©": 5.6,
+      "StaÄŤilo": 5.5
     },
     "coalition_notes": {
-      "SPOLU": "ODS+TOP09+KDU-ČSL",
-      "SPD4K": "SPD+Trikolora+PRO+Svobodní"
+      "SPOLU": "ODS+TOP09+KDU-ÄŚSL",
+      "SPD4K": "SPD+Trikolora+PRO+SvobodnĂ­"
     },
     "source_url": "https://www.stem.cz/volebni-tendence-ceske-verejnosti-zari-2025/"
   },
@@ -540,11 +569,11 @@
     "view": "coalitions",
     "sample_size": null,
     "method": "CAPI",
-    "client": "Český rozhlas",
+    "client": "ÄŚeskĂ˝ rozhlas",
     "parties": {
       "ANO": 30.5,
       "STAN": 10.0,
-      "Stačilo": 7.0,
+      "StaÄŤilo": 7.0,
       "SOCDEM": 7.0,
       "SPOLU": 21.0
     },
@@ -566,9 +595,9 @@
     "parties": {
       "ANO": 31.0,
       "STAN": 12.6,
-      "Piráti": 9.0,
+      "PirĂˇti": 9.0,
       "SPD": 12.3,
-      "Motoristé": 5.0,
+      "MotoristĂ©": 5.0,
       "SPOLU": 19.9
     },
     "coalition_notes": {},
@@ -585,7 +614,7 @@
     "view": "parties",
     "sample_size": null,
     "method": "CAWI",
-    "client": "—",
+    "client": "â€”",
     "parties": {
       "ANO": 32.6,
       "SPD": 10.0
@@ -609,11 +638,11 @@
       "ANO": 33.0,
       "SPOLU": 19.5,
       "STAN": 13.0,
-      "Piráti": 9.5,
+      "PirĂˇti": 9.5,
       "SPD": 9.5,
-      "Motoristé": 6.0,
-      "Stačilo": 6.0,
-      "Přísaha": 2.0
+      "MotoristĂ©": 6.0,
+      "StaÄŤilo": 6.0,
+      "PĹ™Ă­saha": 2.0
     },
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
@@ -629,15 +658,15 @@
     "view": "coalitions",
     "sample_size": 1003,
     "method": "CAWI",
-    "client": "—",
+    "client": "â€”",
     "parties": {
       "ANO": 32.2,
       "SPOLU": 21.5,
       "STAN": 11.8,
       "SPD4K": 12.5,
-      "Piráti": 9.5,
-      "Motoristé": 5.5,
-      "Stačilo": 5.0
+      "PirĂˇti": 9.5,
+      "MotoristĂ©": 5.5,
+      "StaÄŤilo": 5.0
     },
     "coalition_notes": {},
     "source_url": "https://www.ipsos.com/cs-cz"
@@ -658,9 +687,9 @@
       "SPOLU": 18.7,
       "SPD4K": 13.5,
       "STAN": 11.0,
-      "Piráti": 10.0,
-      "Motoristé": 6.0,
-      "Stačilo": 5.0
+      "PirĂˇti": 10.0,
+      "MotoristĂ©": 6.0,
+      "StaÄŤilo": 5.0
     },
     "coalition_notes": {},
     "source_url": "https://www.stem.cz/volebni-tendence-ceske-verejnosti-srpen-2025/"
@@ -675,15 +704,15 @@
     "view": "coalitions",
     "sample_size": 1008,
     "method": "CAPI",
-    "client": "Český rozhlas",
+    "client": "ÄŚeskĂ˝ rozhlas",
     "parties": {
       "ANO": 30.5,
       "SPOLU": 19.0,
       "SPD4K": 13.0,
       "STAN": 11.0,
-      "Motoristé": 6.5,
-      "Stačilo": 6.0,
-      "Piráti": 4.0
+      "MotoristĂ©": 6.5,
+      "StaÄŤilo": 6.0,
+      "PirĂˇti": 4.0
     },
     "coalition_notes": {},
     "source_url": "https://www.median.eu/cs/?cat=6"
@@ -698,17 +727,17 @@
     "view": "parties",
     "sample_size": 1000,
     "method": "mixed",
-    "client": "Česká televize",
+    "client": "ÄŚeskĂˇ televize",
     "parties": {
       "ANO": 32.5,
-      "KSČM": 4.0,
+      "KSÄŚM": 4.0,
       "TOP09": 4.5,
       "ODS": 12.0,
-      "KDUČSL": 3.5,
-      "Piráti": 8.5,
+      "KDUÄŚSL": 3.5,
+      "PirĂˇti": 8.5,
       "SPD": 9.5,
       "STAN": 11.5,
-      "Motoristé": 5.5
+      "MotoristĂ©": 5.5
     },
     "coalition_notes": {},
     "source_url": "https://e.infogram.com/81040855-01fa-4085-9f57-b024ff49e9d3",
@@ -724,12 +753,12 @@
     "view": "coalitions",
     "sample_size": null,
     "method": "CAPI",
-    "client": "Český rozhlas",
+    "client": "ÄŚeskĂ˝ rozhlas",
     "parties": {
       "ANO": 30.5,
       "STAN": 11.0,
-      "Motoristé": 5.0,
-      "Stačilo": 9.0,
+      "MotoristĂ©": 5.0,
+      "StaÄŤilo": 9.0,
       "SOCDEM": 9.0,
       "SPOLU": 19.5
     },
@@ -747,15 +776,15 @@
     "view": "coalitions",
     "sample_size": 1095,
     "method": "CAWI",
-    "client": "—",
+    "client": "â€”",
     "parties": {
       "ANO": 32.2,
       "STAN": 10.9,
-      "Motoristé": 5.6,
-      "Stačilo": 7.1,
+      "MotoristĂ©": 5.6,
+      "StaÄŤilo": 7.1,
       "SPOLU": 21.5,
       "SPD4K": 11.5,
-      "Piráti": 8.6
+      "PirĂˇti": 8.6
     },
     "coalition_notes": {},
     "source_url": "https://www.ipsos.com/cs-cz/volebni-model-v-srpnu-vyhrava-ano-posiluji-mensi-strany",
@@ -777,9 +806,9 @@
       "SPOLU": 18.7,
       "SPD4K": 14.6,
       "STAN": 10.7,
-      "Piráti": 8.8,
-      "Stačilo": 8.2,
-      "Motoristé": 5.7
+      "PirĂˇti": 8.8,
+      "StaÄŤilo": 8.2,
+      "MotoristĂ©": 5.7
     },
     "coalition_notes": {},
     "source_url": "https://nms.global/cz/volebni-model-srpen-2025-opozicni-blok-mobilizuje-spolu-nove-volice-nepritahuje/",
@@ -795,15 +824,15 @@
     "view": "coalitions",
     "sample_size": 1080,
     "method": "mixed",
-    "client": "Česká televize",
+    "client": "ÄŚeskĂˇ televize",
     "parties": {
       "ANO": 33.0,
       "SPOLU": 21.0,
       "STAN": 12.0,
       "SPD4K": 11.0,
-      "Piráti": 8.0,
-      "Motoristé": 5.0,
-      "Stačilo": 5.5
+      "PirĂˇti": 8.0,
+      "MotoristĂ©": 5.0,
+      "StaÄŤilo": 5.5
     },
     "coalition_notes": {},
     "source_url": "https://cz.kantar.com/trendyceska/"
@@ -818,16 +847,16 @@
     "view": "parties",
     "sample_size": 1011,
     "method": "CAPI",
-    "client": "Sociologický ústav AV ČR",
+    "client": "SociologickĂ˝ Ăşstav AV ÄŚR",
     "parties": {
       "ANO": 32.0,
       "ODS": 13.5,
       "STAN": 10.0,
-      "Piráti": 9.5,
+      "PirĂˇti": 9.5,
       "SPD": 8.0,
-      "Motoristé": 5.0,
+      "MotoristĂ©": 5.0,
       "TOP09": 4.5,
-      "KDUČSL": 4.0
+      "KDUÄŚSL": 4.0
     },
     "coalition_notes": {},
     "source_url": "https://cvvm.soc.cas.cz/cz/"
@@ -847,11 +876,11 @@
       "ANO": 33.0,
       "SPOLU": 19.5,
       "STAN": 11.0,
-      "Piráti": 7.5,
+      "PirĂˇti": 7.5,
       "SPD": 14.0,
-      "Motoristé": 4.5,
-      "Stačilo": 5.0,
-      "Přísaha": 3.0
+      "MotoristĂ©": 4.5,
+      "StaÄŤilo": 5.0,
+      "PĹ™Ă­saha": 3.0
     },
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
@@ -872,11 +901,11 @@
       "ANO": 31.5,
       "SPOLU": 20.8,
       "STAN": 10.3,
-      "Piráti": 8.3,
+      "PirĂˇti": 8.3,
       "SPD": 13.8,
-      "Motoristé": 4.2,
-      "Stačilo": 7.5,
-      "Přísaha": 2.8
+      "MotoristĂ©": 4.2,
+      "StaÄŤilo": 7.5,
+      "PĹ™Ă­saha": 2.8
     },
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
@@ -892,11 +921,11 @@
     "view": "coalitions",
     "sample_size": null,
     "method": "CAPI",
-    "client": "Český rozhlas",
+    "client": "ÄŚeskĂ˝ rozhlas",
     "parties": {
       "ANO": 37.0,
       "STAN": 36.0,
-      "Stačilo": 4.0,
+      "StaÄŤilo": 4.0,
       "SPOLU": 42.0
     },
     "coalition_notes": {},
@@ -913,15 +942,15 @@
     "view": "coalitions",
     "sample_size": 1021,
     "method": "CAWI",
-    "client": "—",
+    "client": "â€”",
     "parties": {
       "ANO": 34.9,
       "STAN": 10.0,
-      "Stačilo": 6.3,
+      "StaÄŤilo": 6.3,
       "SPOLU": 21.9,
       "SPD4K": 11.4,
-      "Piráti": 7.0,
-      "Motoristé": 5.0
+      "PirĂˇti": 7.0,
+      "MotoristĂ©": 5.0
     },
     "coalition_notes": {},
     "source_url": "https://www.ipsos.com/cs-cz/ipsos-volebni-model-na-konci-cervence-volby-vyhralo-ano-rust-zaznamenali-pirati",
@@ -941,11 +970,11 @@
     "parties": {
       "ANO": 28.7,
       "STAN": 12.0,
-      "Piráti": 8.0,
+      "PirĂˇti": 8.0,
       "SPD": 13.3,
-      "Motoristé": 3.2,
+      "MotoristĂ©": 3.2,
       "SOCDEM": 2.2,
-      "Přísaha": 3.2,
+      "PĹ™Ă­saha": 3.2,
       "SPOLU": 21.5
     },
     "coalition_notes": {},
@@ -967,11 +996,11 @@
       "ANO": 32.9,
       "SPOLU": 21.2,
       "STAN": 12.0,
-      "Piráti": 7.6,
+      "PirĂˇti": 7.6,
       "SPD": 12.5,
-      "Motoristé": 4.1,
-      "Stačilo": 7.2,
-      "Přísaha": 1.9
+      "MotoristĂ©": 4.1,
+      "StaÄŤilo": 7.2,
+      "PĹ™Ă­saha": 1.9
     },
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
@@ -992,11 +1021,11 @@
       "ANO": 28.7,
       "SPOLU": 21.5,
       "STAN": 12.0,
-      "Piráti": 7.9,
+      "PirĂˇti": 7.9,
       "SPD": 13.3,
-      "Motoristé": 3.2,
-      "Stačilo": 5.8,
-      "Přísaha": 2.2
+      "MotoristĂ©": 3.2,
+      "StaÄŤilo": 5.8,
+      "PĹ™Ă­saha": 2.2
     },
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
@@ -1017,11 +1046,11 @@
       "ANO": 32.0,
       "SPOLU": 19.0,
       "STAN": 9.0,
-      "Piráti": 8.0,
+      "PirĂˇti": 8.0,
       "SPD": 14.0,
-      "Motoristé": 5.5,
-      "Stačilo": 5.5,
-      "Přísaha": 1.5
+      "MotoristĂ©": 5.5,
+      "StaÄŤilo": 5.5,
+      "PĹ™Ă­saha": 1.5
     },
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
@@ -1037,17 +1066,17 @@
     "view": "parties",
     "sample_size": 1000,
     "method": "mixed",
-    "client": "Česká televize",
+    "client": "ÄŚeskĂˇ televize",
     "parties": {
       "ANO": 33.5,
-      "KSČM": 3.5,
+      "KSÄŚM": 3.5,
       "TOP09": 4.5,
       "ODS": 14.5,
-      "KDUČSL": 3.0,
-      "Piráti": 7.0,
+      "KDUÄŚSL": 3.0,
+      "PirĂˇti": 7.0,
       "SPD": 10.0,
       "STAN": 11.5,
-      "Motoristé": 4.5
+      "MotoristĂ©": 4.5
     },
     "coalition_notes": {},
     "source_url": "https://e.infogram.com/81040855-01fa-4085-9f57-b024ff49e9d3",
@@ -1068,11 +1097,11 @@
       "ANO": 35.1,
       "SPOLU": 21.4,
       "STAN": 10.8,
-      "Piráti": 6.7,
+      "PirĂˇti": 6.7,
       "SPD": 10.5,
-      "Motoristé": 4.5,
-      "Stačilo": 5.7,
-      "Přísaha": 2.3
+      "MotoristĂ©": 4.5,
+      "StaÄŤilo": 5.7,
+      "PĹ™Ă­saha": 2.3
     },
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
@@ -1088,13 +1117,13 @@
     "view": "coalitions",
     "sample_size": null,
     "method": "CAPI",
-    "client": "Český rozhlas",
+    "client": "ÄŚeskĂ˝ rozhlas",
     "parties": {
       "ANO": 32.0,
       "STAN": 9.0,
-      "Piráti": 8.0,
-      "Motoristé": 5.5,
-      "Stačilo": 5.5,
+      "PirĂˇti": 8.0,
+      "MotoristĂ©": 5.5,
+      "StaÄŤilo": 5.5,
       "SPOLU": 19.0
     },
     "coalition_notes": {},
@@ -1117,9 +1146,9 @@
       "SPOLU": 19.7,
       "SPD4K": 16.7,
       "STAN": 11.9,
-      "Piráti": 6.2,
-      "Stačilo": 5.2,
-      "Motoristé": 3.6
+      "PirĂˇti": 6.2,
+      "StaÄŤilo": 5.2,
+      "MotoristĂ©": 3.6
     },
     "coalition_notes": {},
     "source_url": "https://nms.global/cz/volebni-model-cerven-2025-ano-stale-ve-vedeni-soupereni-mezi-opozicnimi-stranami-roste-vliv-bitcoinove-kauzy-na-podporu-vladni-koalice-se-teprve-ukaze/",
@@ -1141,9 +1170,9 @@
       "SPOLU": 20.8,
       "SPD4K": 13.0,
       "STAN": 10.6,
-      "PirátéZelení": 7.8,
-      "Motoristé": 4.8,
-      "Stačilo": 4.6,
+      "PirĂˇtĂ©ZelenĂ­": 7.8,
+      "MotoristĂ©": 4.8,
+      "StaÄŤilo": 4.6,
       "SOCDEM": 2.9
     },
     "coalition_notes": {},
@@ -1160,17 +1189,17 @@
     "view": "parties",
     "sample_size": 1000,
     "method": "mixed",
-    "client": "Česká televize",
+    "client": "ÄŚeskĂˇ televize",
     "parties": {
       "ANO": 34.5,
-      "KSČM": 3.5,
+      "KSÄŚM": 3.5,
       "TOP09": 3.5,
       "ODS": 15.0,
-      "KDUČSL": 3.0,
-      "Piráti": 6.5,
+      "KDUÄŚSL": 3.0,
+      "PirĂˇti": 6.5,
       "SPD": 9.0,
       "STAN": 12.0,
-      "Motoristé": 4.5
+      "MotoristĂ©": 4.5
     },
     "coalition_notes": {},
     "source_url": "https://e.infogram.com/81040855-01fa-4085-9f57-b024ff49e9d3",
@@ -1186,12 +1215,12 @@
     "view": "coalitions",
     "sample_size": null,
     "method": "CAPI",
-    "client": "Český rozhlas",
+    "client": "ÄŚeskĂ˝ rozhlas",
     "parties": {
       "ANO": 32.0,
       "STAN": 10.5,
-      "Piráti": 5.5,
-      "Stačilo": 6.5,
+      "PirĂˇti": 5.5,
+      "StaÄŤilo": 6.5,
       "SPOLU": 21.0
     },
     "coalition_notes": {},
@@ -1213,11 +1242,11 @@
       "ANO": 31.6,
       "SPOLU": 21.8,
       "STAN": 11.4,
-      "Piráti": 6.1,
+      "PirĂˇti": 6.1,
       "SPD": 1.4,
-      "Motoristé": 12.8,
-      "Stačilo": 3.6,
-      "Přísaha": 5.4
+      "MotoristĂ©": 12.8,
+      "StaÄŤilo": 3.6,
+      "PĹ™Ă­saha": 5.4
     },
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
@@ -1238,11 +1267,11 @@
       "ANO": 32.3,
       "SPOLU": 20.7,
       "STAN": 11.2,
-      "Piráti": 7.3,
+      "PirĂˇti": 7.3,
       "SPD": 2.1,
-      "Motoristé": 12.6,
-      "Stačilo": 2.8,
-      "Přísaha": 6.7
+      "MotoristĂ©": 12.6,
+      "StaÄŤilo": 2.8,
+      "PĹ™Ă­saha": 6.7
     },
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
@@ -1264,8 +1293,8 @@
       "SPOLU": 20.0,
       "SPD4K": 13.7,
       "STAN": 9.9,
-      "Piráti": 6.1,
-      "Motoristé": 4.9
+      "PirĂˇti": 6.1,
+      "MotoristĂ©": 4.9
     },
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
@@ -1286,10 +1315,10 @@
       "ANO": 33.0,
       "SPOLU": 20.5,
       "STAN": 10.0,
-      "Piráti": 5.5,
-      "Motoristé": 11.0,
-      "Stačilo": 7.0,
-      "Přísaha": 5.0
+      "PirĂˇti": 5.5,
+      "MotoristĂ©": 11.0,
+      "StaÄŤilo": 7.0,
+      "PĹ™Ă­saha": 5.0
     },
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
@@ -1305,17 +1334,17 @@
     "view": "parties",
     "sample_size": 1000,
     "method": "mixed",
-    "client": "Česká televize",
+    "client": "ÄŚeskĂˇ televize",
     "parties": {
       "ANO": 35.0,
-      "KSČM": 4.0,
+      "KSÄŚM": 4.0,
       "TOP09": 3.0,
       "ODS": 14.0,
-      "KDUČSL": 3.0,
-      "Piráti": 6.0,
+      "KDUÄŚSL": 3.0,
+      "PirĂˇti": 6.0,
       "SPD": 8.0,
       "STAN": 12.5,
-      "Motoristé": 6.0
+      "MotoristĂ©": 6.0
     },
     "coalition_notes": {},
     "source_url": "https://e.infogram.com/81040855-01fa-4085-9f57-b024ff49e9d3",
@@ -1336,11 +1365,11 @@
       "ANO": 31.5,
       "SPOLU": 19.8,
       "STAN": 9.7,
-      "Piráti": 6.3,
+      "PirĂˇti": 6.3,
       "SPD": 2.0,
-      "Motoristé": 12.6,
-      "Stačilo": 4.8,
-      "Přísaha": 6.3
+      "MotoristĂ©": 12.6,
+      "StaÄŤilo": 4.8,
+      "PĹ™Ă­saha": 6.3
     },
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
@@ -1356,13 +1385,13 @@
     "view": "coalitions",
     "sample_size": null,
     "method": "CAPI",
-    "client": "Český rozhlas",
+    "client": "ÄŚeskĂ˝ rozhlas",
     "parties": {
       "ANO": 33.0,
       "STAN": 10.0,
-      "Piráti": 5.5,
-      "Motoristé": 7.0,
-      "Stačilo": 5.0,
+      "PirĂˇti": 5.5,
+      "MotoristĂ©": 7.0,
+      "StaÄŤilo": 5.0,
       "SPOLU": 20.5
     },
     "coalition_notes": {},
@@ -1384,11 +1413,11 @@
       "ANO": 32.2,
       "SPOLU": 19.5,
       "STAN": 10.1,
-      "Piráti": 5.9,
+      "PirĂˇti": 5.9,
       "SPD": 2.4,
-      "Motoristé": 11.6,
-      "Stačilo": 5.4,
-      "Přísaha": 5.8
+      "MotoristĂ©": 11.6,
+      "StaÄŤilo": 5.4,
+      "PĹ™Ă­saha": 5.8
     },
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
@@ -1410,9 +1439,9 @@
       "SPOLU": 20.9,
       "SPD4K": 12.5,
       "STAN": 12.2,
-      "Piráti": 5.9,
-      "Motoristé": 6.0,
-      "Stačilo": 6.0
+      "PirĂˇti": 5.9,
+      "MotoristĂ©": 6.0,
+      "StaÄŤilo": 6.0
     },
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
@@ -1433,8 +1462,8 @@
       "ANO": 32.5,
       "SPOLU": 18.5,
       "STAN": 13.0,
-      "Piráti": 8.0,
-      "Motoristé": 7.5
+      "PirĂˇti": 8.0,
+      "MotoristĂ©": 7.5
     },
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
@@ -1450,17 +1479,17 @@
     "view": "parties",
     "sample_size": 1000,
     "method": "mixed",
-    "client": "Česká televize",
+    "client": "ÄŚeskĂˇ televize",
     "parties": {
       "ANO": 35.5,
-      "KSČM": 4.5,
+      "KSÄŚM": 4.5,
       "TOP09": 3.0,
       "ODS": 13.5,
-      "KDUČSL": 3.0,
-      "Piráti": 5.5,
+      "KDUÄŚSL": 3.0,
+      "PirĂˇti": 5.5,
       "SPD": 7.0,
       "STAN": 12.0,
-      "Motoristé": 6.5
+      "MotoristĂ©": 6.5
     },
     "coalition_notes": {},
     "source_url": "https://e.infogram.com/81040855-01fa-4085-9f57-b024ff49e9d3",
@@ -1476,12 +1505,12 @@
     "view": "coalitions",
     "sample_size": null,
     "method": "CAPI",
-    "client": "Český rozhlas",
+    "client": "ÄŚeskĂ˝ rozhlas",
     "parties": {
       "ANO": 32.5,
       "STAN": 13.0,
-      "Piráti": 8.0,
-      "Motoristé": 6.0,
+      "PirĂˇti": 8.0,
+      "MotoristĂ©": 6.0,
       "SPOLU": 18.5
     },
     "coalition_notes": {},
@@ -1503,11 +1532,11 @@
       "ANO": 35.8,
       "SPOLU": 20.9,
       "STAN": 10.3,
-      "Piráti": 5.8,
+      "PirĂˇti": 5.8,
       "SPD": 1.0,
-      "Motoristé": 9.8,
-      "Stačilo": 5.0,
-      "Přísaha": 5.1
+      "MotoristĂ©": 9.8,
+      "StaÄŤilo": 5.0,
+      "PĹ™Ă­saha": 5.1
     },
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
@@ -1529,9 +1558,9 @@
       "SPOLU": 19.0,
       "STAN": 13.8,
       "SPD": 7.2,
-      "Motoristé": 6.9,
-      "Stačilo": 5.5,
-      "Piráti": 5.4
+      "MotoristĂ©": 6.9,
+      "StaÄŤilo": 5.5,
+      "PirĂˇti": 5.4
     },
     "coalition_notes": {},
     "source_url": "https://nms.global/cz/volebni-model-brezen-2025-ano-mirne-ztratilo-stan-a-motoriste-posiluji-do-snemovny-by-se-dostalo-7-stran/",
@@ -1552,10 +1581,10 @@
       "ANO": 31.1,
       "SPOLU": 20.0,
       "STAN": 11.8,
-      "Piráti": 5.8,
+      "PirĂˇti": 5.8,
       "SPD": 1.8,
-      "Motoristé": 8.9,
-      "Přísaha": 1.6
+      "MotoristĂ©": 8.9,
+      "PĹ™Ă­saha": 1.6
     },
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
@@ -1571,12 +1600,12 @@
     "view": "coalitions",
     "sample_size": null,
     "method": "CAPI",
-    "client": "Český rozhlas",
+    "client": "ÄŚeskĂ˝ rozhlas",
     "parties": {
       "ANO": 33.5,
       "STAN": 10.0,
-      "Piráti": 6.0,
-      "Motoristé": 8.0,
+      "PirĂˇti": 6.0,
+      "MotoristĂ©": 8.0,
       "SPOLU": 18.5
     },
     "coalition_notes": {},
@@ -1598,11 +1627,11 @@
       "ANO": 36.4,
       "SPOLU": 20.6,
       "STAN": 10.6,
-      "Piráti": 5.1,
+      "PirĂˇti": 5.1,
       "SPD": 1.3,
-      "Motoristé": 7.5,
-      "Stačilo": 0.6,
-      "Přísaha": 2.1
+      "MotoristĂ©": 7.5,
+      "StaÄŤilo": 0.6,
+      "PĹ™Ă­saha": 2.1
     },
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
@@ -1623,9 +1652,9 @@
       "ANO": 37.5,
       "SPOLU": 17.5,
       "STAN": 12.5,
-      "Piráti": 6.5,
+      "PirĂˇti": 6.5,
       "SPD": 2.0,
-      "Motoristé": 6.5
+      "MotoristĂ©": 6.5
     },
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
@@ -1646,10 +1675,10 @@
       "ANO": 33.6,
       "SPOLU": 16.2,
       "STAN": 12.9,
-      "Piráti": 6.8,
+      "PirĂˇti": 6.8,
       "SPD": 2.1,
-      "Motoristé": 8.1,
-      "Přísaha": 2.9
+      "MotoristĂ©": 8.1,
+      "PĹ™Ă­saha": 2.9
     },
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
@@ -1670,11 +1699,11 @@
       "ANO": 34.5,
       "SPOLU": 18.7,
       "STAN": 12.2,
-      "Piráti": 4.8,
+      "PirĂˇti": 4.8,
       "SPD": 1.9,
-      "Motoristé": 7.8,
-      "Stačilo": 0.5,
-      "Přísaha": 1.9
+      "MotoristĂ©": 7.8,
+      "StaÄŤilo": 0.5,
+      "PĹ™Ă­saha": 1.9
     },
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
@@ -1695,10 +1724,10 @@
       "ANO": 33.0,
       "SPOLU": 17.0,
       "STAN": 11.0,
-      "Piráti": 4.0,
+      "PirĂˇti": 4.0,
       "SPD": 2.0,
-      "Motoristé": 8.0,
-      "Stačilo": 2.5
+      "MotoristĂ©": 8.0,
+      "StaÄŤilo": 2.5
     },
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
@@ -1714,17 +1743,17 @@
     "view": "parties",
     "sample_size": 1000,
     "method": "mixed",
-    "client": "Česká televize",
+    "client": "ÄŚeskĂˇ televize",
     "parties": {
       "ANO": 33.5,
-      "KSČM": 3.0,
+      "KSÄŚM": 3.0,
       "TOP09": 4.0,
       "ODS": 13.0,
-      "KDUČSL": 3.0,
-      "Piráti": 7.5,
+      "KDUÄŚSL": 3.0,
+      "PirĂˇti": 7.5,
       "SPD": 6.5,
       "STAN": 12.5,
-      "Motoristé": 7.5
+      "MotoristĂ©": 7.5
     },
     "coalition_notes": {},
     "source_url": "https://e.infogram.com/81040855-01fa-4085-9f57-b024ff49e9d3",
@@ -1745,11 +1774,11 @@
       "ANO": 36.7,
       "SPOLU": 20.5,
       "STAN": 12.0,
-      "Piráti": 5.0,
+      "PirĂˇti": 5.0,
       "SPD": 1.5,
-      "Motoristé": 5.7,
-      "Stačilo": 0.7,
-      "Přísaha": 0.9
+      "MotoristĂ©": 5.7,
+      "StaÄŤilo": 0.7,
+      "PĹ™Ă­saha": 0.9
     },
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
@@ -1765,14 +1794,14 @@
     "view": "coalitions",
     "sample_size": null,
     "method": "CAPI",
-    "client": "Český rozhlas",
+    "client": "ÄŚeskĂ˝ rozhlas",
     "parties": {
       "ANO": 33.0,
       "STAN": 11.0,
-      "Piráti": 4.0,
+      "PirĂˇti": 4.0,
       "SPD": 8.0,
-      "Motoristé": 8.0,
-      "KDUČSL": 30.0,
+      "MotoristĂ©": 8.0,
+      "KDUÄŚSL": 30.0,
       "SPOLU": 17.0
     },
     "coalition_notes": {},
@@ -1794,10 +1823,10 @@
       "ANO": 35.1,
       "SPOLU": 18.8,
       "STAN": 10.6,
-      "Piráti": 6.4,
+      "PirĂˇti": 6.4,
       "SPD": 2.1,
-      "Motoristé": 8.7,
-      "Přísaha": 1.6
+      "MotoristĂ©": 8.7,
+      "PĹ™Ă­saha": 1.6
     },
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
@@ -1818,10 +1847,10 @@
       "ANO": 34.9,
       "SPOLU": 18.2,
       "STAN": 11.1,
-      "Piráti": 6.7,
+      "PirĂˇti": 6.7,
       "SPD": 1.8,
-      "Motoristé": 8.5,
-      "Přísaha": 1.8
+      "MotoristĂ©": 8.5,
+      "PĹ™Ă­saha": 1.8
     },
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
@@ -1842,10 +1871,10 @@
       "ANO": 34.4,
       "SPOLU": 18.1,
       "STAN": 9.9,
-      "Piráti": 7.3,
+      "PirĂˇti": 7.3,
       "SPD": 1.9,
-      "Motoristé": 8.2,
-      "Přísaha": 1.5
+      "MotoristĂ©": 8.2,
+      "PĹ™Ă­saha": 1.5
     },
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
@@ -1866,11 +1895,11 @@
       "ANO": 32.3,
       "SPOLU": 17.1,
       "STAN": 12.4,
-      "Piráti": 6.1,
+      "PirĂˇti": 6.1,
       "SPD": 2.2,
-      "Motoristé": 6.9,
-      "Stačilo": 1.1,
-      "Přísaha": 1.7
+      "MotoristĂ©": 6.9,
+      "StaÄŤilo": 1.1,
+      "PĹ™Ă­saha": 1.7
     },
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
@@ -1891,10 +1920,10 @@
       "ANO": 33.8,
       "SPOLU": 18.4,
       "STAN": 9.4,
-      "Piráti": 6.8,
+      "PirĂˇti": 6.8,
       "SPD": 1.9,
-      "Motoristé": 8.1,
-      "Přísaha": 1.5
+      "MotoristĂ©": 8.1,
+      "PĹ™Ă­saha": 1.5
     },
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
@@ -1910,14 +1939,14 @@
     "view": "parties",
     "sample_size": null,
     "method": "CAPI",
-    "client": "Český rozhlas",
+    "client": "ÄŚeskĂ˝ rozhlas",
     "parties": {
       "ANO": 33.5,
       "ODS": 11.5,
       "STAN": 13.0,
-      "Piráti": 6.0,
-      "Motoristé": 7.0,
-      "KSČM": 5.0
+      "PirĂˇti": 6.0,
+      "MotoristĂ©": 7.0,
+      "KSÄŚM": 5.0
     },
     "coalition_notes": {},
     "source_url": "https://www.median.eu/cs/?p=3460",
@@ -1938,11 +1967,11 @@
       "ANO": 33.6,
       "SPOLU": 18.3,
       "STAN": 11.2,
-      "Piráti": 5.9,
+      "PirĂˇti": 5.9,
       "SPD": 1.7,
-      "Motoristé": 7.9,
-      "Stačilo": 1.6,
-      "Přísaha": 0.9
+      "MotoristĂ©": 7.9,
+      "StaÄŤilo": 1.6,
+      "PĹ™Ă­saha": 0.9
     },
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
@@ -1963,11 +1992,11 @@
       "ANO": 33.5,
       "SPOLU": 11.5,
       "STAN": 4.5,
-      "Piráti": 2.5,
+      "PirĂˇti": 2.5,
       "SPD": 10.0,
-      "Motoristé": 6.5,
-      "Stačilo": 2.5,
-      "Přísaha": 6.5
+      "MotoristĂ©": 6.5,
+      "StaÄŤilo": 2.5,
+      "PĹ™Ă­saha": 6.5
     },
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
@@ -1983,17 +2012,17 @@
     "view": "parties",
     "sample_size": 1000,
     "method": "mixed",
-    "client": "Česká televize",
+    "client": "ÄŚeskĂˇ televize",
     "parties": {
       "ANO": 37.0,
-      "KSČM": 3.5,
+      "KSÄŚM": 3.5,
       "TOP09": 3.0,
       "ODS": 15.0,
-      "KDUČSL": 4.0,
-      "Piráti": 7.0,
+      "KDUÄŚSL": 4.0,
+      "PirĂˇti": 7.0,
       "SPD": 7.0,
       "STAN": 11.5,
-      "Motoristé": 2.5
+      "MotoristĂ©": 2.5
     },
     "coalition_notes": {},
     "source_url": "https://e.infogram.com/81040855-01fa-4085-9f57-b024ff49e9d3",
@@ -2009,15 +2038,15 @@
     "view": "parties",
     "sample_size": null,
     "method": "CAPI",
-    "client": "Český rozhlas",
+    "client": "ÄŚeskĂ˝ rozhlas",
     "parties": {
       "ANO": 33.5,
       "ODS": 11.5,
       "STAN": 10.0,
-      "Piráti": 6.5,
+      "PirĂˇti": 6.5,
       "SPD": 6.5,
-      "Motoristé": 6.5,
-      "KSČM": 6.5
+      "MotoristĂ©": 6.5,
+      "KSÄŚM": 6.5
     },
     "coalition_notes": {},
     "source_url": "https://www.median.eu/cs/?p=3447",
@@ -2039,8 +2068,8 @@
       "SPOLU": 21.0,
       "SPD": 9.0,
       "STAN": 8.0,
-      "Piráti": 6.0,
-      "KSČM": 5.0
+      "PirĂˇti": 6.0,
+      "KSÄŚM": 5.0
     },
     "coalition_notes": {},
     "source_url": "https://www.stem.cz/volebni-tendence-ceske-verejnosti-listopad-2024/",
@@ -2061,11 +2090,11 @@
       "ANO": 35.3,
       "SPOLU": 10.0,
       "STAN": 3.8,
-      "Piráti": 2.8,
+      "PirĂˇti": 2.8,
       "SPD": 11.1,
-      "Motoristé": 5.7,
-      "Stačilo": 1.8,
-      "Přísaha": 7.0
+      "MotoristĂ©": 5.7,
+      "StaÄŤilo": 1.8,
+      "PĹ™Ă­saha": 7.0
     },
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
@@ -2086,10 +2115,10 @@
       "ANO": 33.5,
       "SPOLU": 12.0,
       "STAN": 4.0,
-      "Piráti": 3.5,
+      "PirĂˇti": 3.5,
       "SPD": 11.0,
-      "Motoristé": 6.5,
-      "Přísaha": 5.0
+      "MotoristĂ©": 6.5,
+      "PĹ™Ă­saha": 5.0
     },
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
@@ -2105,17 +2134,17 @@
     "view": "parties",
     "sample_size": 1000,
     "method": "mixed",
-    "client": "Česká televize",
+    "client": "ÄŚeskĂˇ televize",
     "parties": {
       "ANO": 35.5,
-      "KSČM": 3.0,
+      "KSÄŚM": 3.0,
       "TOP09": 4.5,
       "ODS": 14.5,
-      "KDUČSL": 3.5,
-      "Piráti": 5.0,
+      "KDUÄŚSL": 3.5,
+      "PirĂˇti": 5.0,
       "SPD": 6.5,
       "STAN": 13.0,
-      "Motoristé": 2.5
+      "MotoristĂ©": 2.5
     },
     "coalition_notes": {},
     "source_url": "https://e.infogram.com/81040855-01fa-4085-9f57-b024ff49e9d3",
@@ -2131,15 +2160,15 @@
     "view": "parties",
     "sample_size": null,
     "method": "CAPI",
-    "client": "Český rozhlas",
+    "client": "ÄŚeskĂ˝ rozhlas",
     "parties": {
       "ANO": 33.5,
       "ODS": 12.0,
       "STAN": 11.0,
-      "Piráti": 6.5,
+      "PirĂˇti": 6.5,
       "SPD": 5.0,
-      "Motoristé": 6.0,
-      "KSČM": 5.0
+      "MotoristĂ©": 6.0,
+      "KSÄŚM": 5.0
     },
     "coalition_notes": {},
     "source_url": "https://www.median.eu/cs/?p=3426",
@@ -2160,10 +2189,10 @@
       "ANO": 32.1,
       "SPOLU": 14.2,
       "STAN": 3.7,
-      "Piráti": 2.7,
+      "PirĂˇti": 2.7,
       "SPD": 10.6,
-      "Motoristé": 5.9,
-      "Přísaha": 9.4
+      "MotoristĂ©": 5.9,
+      "PĹ™Ă­saha": 9.4
     },
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
@@ -2184,11 +2213,11 @@
       "ANO": 32.9,
       "SPOLU": 12.2,
       "STAN": 3.8,
-      "Piráti": 2.7,
+      "PirĂˇti": 2.7,
       "SPD": 12.0,
-      "Motoristé": 6.8,
-      "Stačilo": 2.0,
-      "Přísaha": 7.5
+      "MotoristĂ©": 6.8,
+      "StaÄŤilo": 2.0,
+      "PĹ™Ă­saha": 7.5
     },
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
@@ -2209,11 +2238,11 @@
       "ANO": 33.0,
       "SPOLU": 11.5,
       "STAN": 4.5,
-      "Piráti": 2.0,
+      "PirĂˇti": 2.0,
       "SPD": 11.0,
-      "Motoristé": 8.5,
-      "Stačilo": 2.0,
-      "Přísaha": 7.0
+      "MotoristĂ©": 8.5,
+      "StaÄŤilo": 2.0,
+      "PĹ™Ă­saha": 7.0
     },
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
@@ -2229,14 +2258,14 @@
     "view": "parties",
     "sample_size": null,
     "method": "CAPI",
-    "client": "Český rozhlas",
+    "client": "ÄŚeskĂ˝ rozhlas",
     "parties": {
       "ANO": 33.0,
       "ODS": 11.5,
       "STAN": 11.0,
-      "Piráti": 8.5,
+      "PirĂˇti": 8.5,
       "SPD": 7.0,
-      "Přísaha": 4.5
+      "PĹ™Ă­saha": 4.5
     },
     "coalition_notes": {},
     "source_url": "https://www.median.eu/cs/?p=3403",
@@ -2256,11 +2285,11 @@
     "parties": {
       "ANO": 33.0,
       "ODS": 14.9,
-      "Piráti": 7.8,
+      "PirĂˇti": 7.8,
       "SPD": 7.4,
       "STAN": 7.0,
       "TOP09": 5.6,
-      "KSČM": 4.6
+      "KSÄŚM": 4.6
     },
     "coalition_notes": {},
     "source_url": "https://www.stem.cz/volebni-tendence-ceske-verejnosti-zari-2024/",
@@ -2281,11 +2310,11 @@
       "ANO": 32.1,
       "SPOLU": 11.3,
       "STAN": 4.5,
-      "Piráti": 1.9,
+      "PirĂˇti": 1.9,
       "SPD": 9.2,
-      "Motoristé": 7.8,
-      "Stačilo": 2.2,
-      "Přísaha": 7.7
+      "MotoristĂ©": 7.8,
+      "StaÄŤilo": 2.2,
+      "PĹ™Ă­saha": 7.7
     },
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
@@ -2306,11 +2335,11 @@
       "ANO": 32.5,
       "SPOLU": 13.0,
       "STAN": 4.5,
-      "Piráti": 3.5,
+      "PirĂˇti": 3.5,
       "SPD": 9.5,
-      "Motoristé": 9.5,
-      "Stačilo": 2.0,
-      "Přísaha": 11.0
+      "MotoristĂ©": 9.5,
+      "StaÄŤilo": 2.0,
+      "PĹ™Ă­saha": 11.0
     },
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
@@ -2326,12 +2355,12 @@
     "view": "parties",
     "sample_size": null,
     "method": "CAPI",
-    "client": "Český rozhlas",
+    "client": "ÄŚeskĂ˝ rozhlas",
     "parties": {
       "ANO": 32.5,
       "ODS": 13.0,
       "STAN": 9.5,
-      "Piráti": 9.5,
+      "PirĂˇti": 9.5,
       "SPD": 11.0
     },
     "coalition_notes": {},
@@ -2353,11 +2382,11 @@
       "ANO": 29.3,
       "SPOLU": 14.3,
       "STAN": 4.7,
-      "Piráti": 2.4,
+      "PirĂˇti": 2.4,
       "SPD": 9.6,
-      "Motoristé": 8.0,
-      "Stačilo": 2.3,
-      "Přísaha": 6.0
+      "MotoristĂ©": 8.0,
+      "StaÄŤilo": 2.3,
+      "PĹ™Ă­saha": 6.0
     },
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
@@ -2378,11 +2407,11 @@
       "ANO": 33.0,
       "SPOLU": 14.0,
       "STAN": 4.0,
-      "Piráti": 2.5,
+      "PirĂˇti": 2.5,
       "SPD": 9.0,
-      "Motoristé": 8.0,
-      "Stačilo": 2.5,
-      "Přísaha": 8.0
+      "MotoristĂ©": 8.0,
+      "StaÄŤilo": 2.5,
+      "PĹ™Ă­saha": 8.0
     },
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
@@ -2398,14 +2427,14 @@
     "view": "parties",
     "sample_size": null,
     "method": "CAPI",
-    "client": "Český rozhlas",
+    "client": "ÄŚeskĂ˝ rozhlas",
     "parties": {
       "ANO": 33.0,
       "ODS": 14.0,
       "STAN": 9.0,
-      "Piráti": 8.0,
+      "PirĂˇti": 8.0,
       "SPD": 8.0,
-      "Přísaha": 5.0
+      "PĹ™Ă­saha": 5.0
     },
     "coalition_notes": {},
     "source_url": "https://www.median.eu/cs/?p=3390",
@@ -2426,11 +2455,11 @@
       "ANO": 28.2,
       "SPOLU": 11.3,
       "STAN": 5.2,
-      "Piráti": 3.2,
+      "PirĂˇti": 3.2,
       "SPD": 10.1,
-      "Motoristé": 9.1,
-      "Stačilo": 1.6,
-      "Přísaha": 6.8
+      "MotoristĂ©": 9.1,
+      "StaÄŤilo": 1.6,
+      "PĹ™Ă­saha": 6.8
     },
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
@@ -2451,11 +2480,11 @@
       "ANO": 30.5,
       "SPOLU": 12.0,
       "STAN": 5.0,
-      "Piráti": 4.5,
+      "PirĂˇti": 4.5,
       "SPD": 9.0,
-      "Motoristé": 10.5,
-      "Stačilo": 2.0,
-      "Přísaha": 8.5
+      "MotoristĂ©": 10.5,
+      "StaÄŤilo": 2.0,
+      "PĹ™Ă­saha": 8.5
     },
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
@@ -2471,14 +2500,14 @@
     "view": "parties",
     "sample_size": 1000,
     "method": "mixed",
-    "client": "Česká televize",
+    "client": "ÄŚeskĂˇ televize",
     "parties": {
       "ANO": 34.0,
-      "KSČM": 3.0,
+      "KSÄŚM": 3.0,
       "TOP09": 4.0,
       "ODS": 16.0,
-      "KDUČSL": 3.0,
-      "Piráti": 9.0,
+      "KDUÄŚSL": 3.0,
+      "PirĂˇti": 9.0,
       "SPD": 6.0,
       "STAN": 8.5
     },
@@ -2496,15 +2525,15 @@
     "view": "parties",
     "sample_size": null,
     "method": "CAPI",
-    "client": "Český rozhlas",
+    "client": "ÄŚeskĂ˝ rozhlas",
     "parties": {
       "ANO": 30.5,
       "ODS": 12.0,
       "STAN": 9.0,
-      "Piráti": 10.5,
+      "PirĂˇti": 10.5,
       "SPD": 8.5,
       "TOP09": 5.0,
-      "Přísaha": 5.0
+      "PĹ™Ă­saha": 5.0
     },
     "coalition_notes": {},
     "source_url": "https://www.median.eu/cs/?p=3374",
@@ -2525,11 +2554,11 @@
       "ANO": 30.2,
       "SPOLU": 10.9,
       "STAN": 3.4,
-      "Piráti": 2.1,
+      "PirĂˇti": 2.1,
       "SPD": 7.9,
-      "Motoristé": 12.5,
-      "Stačilo": 1.4,
-      "Přísaha": 7.6
+      "MotoristĂ©": 12.5,
+      "StaÄŤilo": 1.4,
+      "PĹ™Ă­saha": 7.6
     },
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
@@ -2550,10 +2579,10 @@
       "ANO": 34.5,
       "SPOLU": 22.5,
       "STAN": 8.5,
-      "Piráti": 9.0,
+      "PirĂˇti": 9.0,
       "SPD": 2.5,
-      "Motoristé": 6.0,
-      "Přísaha": 2.5
+      "MotoristĂ©": 6.0,
+      "PĹ™Ă­saha": 2.5
     },
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
@@ -2574,19 +2603,19 @@
       "ANO": 32.9,
       "SPOLU": 14.8,
       "STAN": 4.5,
-      "Piráti": 2.5,
+      "PirĂˇti": 2.5,
       "SPD": 6.8,
-      "Motoristé": 8.7,
-      "Stačilo": 2.0,
-      "Přísaha": 7.3
+      "MotoristĂ©": 8.7,
+      "StaÄŤilo": 2.0,
+      "PĹ™Ă­saha": 7.3
     },
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
     "scraped_at": "2026-03-28T20:13:30.396800Z"
   },
   {
-    "id": "evropské_volby_2024-2024-06-08",
-    "agency": "Evropské volby 2024",
+    "id": "evropskĂ©_volby_2024-2024-06-08",
+    "agency": "EvropskĂ© volby 2024",
     "date_published": "2024-06-08",
     "date_fieldwork_from": "2024-06-07",
     "date_fieldwork_to": "2024-06-08",
@@ -2599,11 +2628,11 @@
       "ANO": 26.1,
       "SPOLU": 22.3,
       "STAN": 8.7,
-      "Piráti": 6.2,
+      "PirĂˇti": 6.2,
       "SPD": 1.6,
-      "Motoristé": 5.7,
-      "Stačilo": 1.8,
-      "Přísaha": 2.1
+      "MotoristĂ©": 5.7,
+      "StaÄŤilo": 1.8,
+      "PĹ™Ă­saha": 2.1
     },
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
@@ -2624,11 +2653,11 @@
       "ANO": 33.0,
       "SPOLU": 14.5,
       "STAN": 5.5,
-      "Piráti": 2.0,
+      "PirĂˇti": 2.0,
       "SPD": 8.5,
-      "Motoristé": 10.0,
-      "Stačilo": 1.5,
-      "Přísaha": 7.5
+      "MotoristĂ©": 10.0,
+      "StaÄŤilo": 1.5,
+      "PĹ™Ă­saha": 7.5
     },
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
@@ -2644,12 +2673,12 @@
     "view": "parties",
     "sample_size": null,
     "method": "CAPI",
-    "client": "Český rozhlas",
+    "client": "ÄŚeskĂ˝ rozhlas",
     "parties": {
       "ANO": 33.0,
       "ODS": 14.5,
       "STAN": 8.5,
-      "Piráti": 10.0,
+      "PirĂˇti": 10.0,
       "SPD": 7.5,
       "TOP09": 5.5
     },
@@ -2672,11 +2701,11 @@
       "ANO": 29.7,
       "SPOLU": 12.3,
       "STAN": 4.6,
-      "Piráti": 2.3,
+      "PirĂˇti": 2.3,
       "SPD": 10.1,
-      "Motoristé": 10.8,
-      "Stačilo": 2.0,
-      "Přísaha": 7.0
+      "MotoristĂ©": 10.8,
+      "StaÄŤilo": 2.0,
+      "PĹ™Ă­saha": 7.0
     },
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
@@ -2692,14 +2721,14 @@
     "view": "parties",
     "sample_size": 1000,
     "method": "mixed",
-    "client": "Česká televize",
+    "client": "ÄŚeskĂˇ televize",
     "parties": {
       "ANO": 32.0,
-      "KSČM": 2.5,
+      "KSÄŚM": 2.5,
       "TOP09": 5.0,
       "ODS": 15.5,
-      "KDUČSL": 3.5,
-      "Piráti": 11.0,
+      "KDUÄŚSL": 3.5,
+      "PirĂˇti": 11.0,
       "SPD": 9.0,
       "STAN": 7.5
     },
@@ -2717,12 +2746,12 @@
     "view": "parties",
     "sample_size": null,
     "method": "CAPI",
-    "client": "Český rozhlas",
+    "client": "ÄŚeskĂ˝ rozhlas",
     "parties": {
       "ANO": 32.5,
       "ODS": 13.0,
       "STAN": 8.0,
-      "Piráti": 10.0,
+      "PirĂˇti": 10.0,
       "SPD": 10.0
     },
     "coalition_notes": {},
@@ -2744,10 +2773,10 @@
       "ANO": 30.3,
       "SPOLU": 13.9,
       "STAN": 4.3,
-      "Piráti": 2.6,
+      "PirĂˇti": 2.6,
       "SPD": 8.9,
-      "Motoristé": 9.1,
-      "Přísaha": 9.1
+      "MotoristĂ©": 9.1,
+      "PĹ™Ă­saha": 9.1
     },
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
@@ -2768,11 +2797,11 @@
       "ANO": 32.9,
       "SPOLU": 14.5,
       "STAN": 5.2,
-      "Piráti": 3.1,
+      "PirĂˇti": 3.1,
       "SPD": 6.6,
-      "Motoristé": 10.5,
-      "Stačilo": 2.1,
-      "Přísaha": 9.3
+      "MotoristĂ©": 10.5,
+      "StaÄŤilo": 2.1,
+      "PĹ™Ă­saha": 9.3
     },
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
@@ -2788,14 +2817,14 @@
     "view": "parties",
     "sample_size": 1000,
     "method": "mixed",
-    "client": "Česká televize",
+    "client": "ÄŚeskĂˇ televize",
     "parties": {
       "ANO": 34.5,
-      "KSČM": 3.0,
+      "KSÄŚM": 3.0,
       "TOP09": 4.5,
       "ODS": 16.0,
-      "KDUČSL": 3.0,
-      "Piráti": 10.5,
+      "KDUÄŚSL": 3.0,
+      "PirĂˇti": 10.5,
       "SPD": 8.0,
       "STAN": 6.5
     },
@@ -2813,12 +2842,12 @@
     "view": "parties",
     "sample_size": null,
     "method": "CAPI",
-    "client": "Český rozhlas",
+    "client": "ÄŚeskĂ˝ rozhlas",
     "parties": {
       "ANO": 32.0,
       "ODS": 14.0,
       "STAN": 6.0,
-      "Piráti": 10.5,
+      "PirĂˇti": 10.5,
       "SPD": 7.0
     },
     "coalition_notes": {},
@@ -2835,12 +2864,12 @@
     "view": "parties",
     "sample_size": null,
     "method": "CAPI",
-    "client": "Český rozhlas",
+    "client": "ÄŚeskĂ˝ rozhlas",
     "parties": {
       "ANO": 31.0,
       "ODS": 12.5,
       "STAN": 9.0,
-      "Piráti": 11.0,
+      "PirĂˇti": 11.0,
       "SPD": 9.5,
       "TOP09": 5.5
     },
@@ -2858,12 +2887,12 @@
     "view": "parties",
     "sample_size": null,
     "method": "CAPI",
-    "client": "Český rozhlas",
+    "client": "ÄŚeskĂ˝ rozhlas",
     "parties": {
       "ANO": 31.5,
       "ODS": 12.0,
       "STAN": 7.0,
-      "Piráti": 13.0,
+      "PirĂˇti": 13.0,
       "SPD": 10.5,
       "TOP09": 5.5
     },
@@ -2886,11 +2915,11 @@
       "ANO": 33.4,
       "SPOLU": 13.2,
       "STAN": 5.0,
-      "Piráti": 2.7,
+      "PirĂˇti": 2.7,
       "SPD": 7.0,
-      "Motoristé": 11.3,
-      "Stačilo": 2.5,
-      "Přísaha": 10.0
+      "MotoristĂ©": 11.3,
+      "StaÄŤilo": 2.5,
+      "PĹ™Ă­saha": 10.0
     },
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
@@ -2906,12 +2935,12 @@
     "view": "parties",
     "sample_size": null,
     "method": "CAPI",
-    "client": "Český rozhlas",
+    "client": "ÄŚeskĂ˝ rozhlas",
     "parties": {
       "ANO": 35.0,
       "ODS": 13.0,
       "STAN": 6.5,
-      "Piráti": 10.5,
+      "PirĂˇti": 10.5,
       "SPD": 9.0,
       "TOP09": 6.0
     },
@@ -2934,11 +2963,11 @@
       "ANO": 34.5,
       "SPOLU": 15.5,
       "STAN": 5.5,
-      "Piráti": 4.0,
+      "PirĂˇti": 4.0,
       "SPD": 6.0,
-      "Motoristé": 11.0,
-      "Stačilo": 1.5,
-      "Přísaha": 8.5
+      "MotoristĂ©": 11.0,
+      "StaÄŤilo": 1.5,
+      "PĹ™Ă­saha": 8.5
     },
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
@@ -2954,12 +2983,12 @@
     "view": "parties",
     "sample_size": null,
     "method": "CAPI",
-    "client": "Český rozhlas",
+    "client": "ÄŚeskĂ˝ rozhlas",
     "parties": {
       "ANO": 34.5,
       "ODS": 15.5,
       "STAN": 16.5,
-      "Piráti": 11.0,
+      "PirĂˇti": 11.0,
       "SPD": 8.5,
       "TOP09": 14.0
     },
@@ -2982,11 +3011,11 @@
       "ANO": 34.3,
       "SPOLU": 13.3,
       "STAN": 5.1,
-      "Piráti": 4.3,
+      "PirĂˇti": 4.3,
       "SPD": 6.6,
-      "Motoristé": 10.5,
-      "Stačilo": 1.0,
-      "Přísaha": 9.2
+      "MotoristĂ©": 10.5,
+      "StaÄŤilo": 1.0,
+      "PĹ™Ă­saha": 9.2
     },
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
@@ -3007,11 +3036,11 @@
       "ANO": 33.2,
       "SPOLU": 11.6,
       "STAN": 5.2,
-      "Piráti": 3.5,
+      "PirĂˇti": 3.5,
       "SPD": 6.4,
-      "Motoristé": 10.2,
-      "Stačilo": 1.6,
-      "Přísaha": 12.0
+      "MotoristĂ©": 10.2,
+      "StaÄŤilo": 1.6,
+      "PĹ™Ă­saha": 12.0
     },
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
@@ -3032,11 +3061,11 @@
       "ANO": 35.0,
       "SPOLU": 13.5,
       "STAN": 6.0,
-      "Piráti": 3.5,
+      "PirĂˇti": 3.5,
       "SPD": 6.0,
-      "Motoristé": 9.0,
-      "Stačilo": 1.5,
-      "Přísaha": 10.5
+      "MotoristĂ©": 9.0,
+      "StaÄŤilo": 1.5,
+      "PĹ™Ă­saha": 10.5
     },
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
@@ -3052,12 +3081,12 @@
     "view": "parties",
     "sample_size": null,
     "method": "CAPI",
-    "client": "Český rozhlas",
+    "client": "ÄŚeskĂ˝ rozhlas",
     "parties": {
       "ANO": 35.0,
       "ODS": 13.5,
       "STAN": 14.5,
-      "Piráti": 17.5,
+      "PirĂˇti": 17.5,
       "SPD": 10.5,
       "TOP09": 15.0
     },
@@ -3080,10 +3109,10 @@
       "ANO": 33.5,
       "SPOLU": 19.5,
       "STAN": 7.5,
-      "Piráti": 8.5,
+      "PirĂˇti": 8.5,
       "SPD": 2.0,
-      "Motoristé": 9.5,
-      "Přísaha": 3.0
+      "MotoristĂ©": 9.5,
+      "PĹ™Ă­saha": 3.0
     },
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
@@ -3099,12 +3128,12 @@
     "view": "parties",
     "sample_size": null,
     "method": "CAPI",
-    "client": "Český rozhlas",
+    "client": "ÄŚeskĂ˝ rozhlas",
     "parties": {
       "ANO": 34.0,
       "ODS": 13.0,
       "STAN": 18.5,
-      "Piráti": 11.5,
+      "PirĂˇti": 11.5,
       "SPD": 9.5,
       "TOP09": 14.0
     },
@@ -3127,11 +3156,11 @@
       "ANO": 30.8,
       "SPOLU": 13.1,
       "STAN": 5.4,
-      "Piráti": 5.0,
+      "PirĂˇti": 5.0,
       "SPD": 5.3,
-      "Motoristé": 9.6,
-      "Stačilo": 2.7,
-      "Přísaha": 10.9
+      "MotoristĂ©": 9.6,
+      "StaÄŤilo": 2.7,
+      "PĹ™Ă­saha": 10.9
     },
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
@@ -3147,12 +3176,12 @@
     "view": "parties",
     "sample_size": null,
     "method": "CAPI",
-    "client": "Český rozhlas",
+    "client": "ÄŚeskĂ˝ rozhlas",
     "parties": {
       "ANO": 33.0,
       "ODS": 15.0,
       "STAN": 14.5,
-      "Piráti": 12.0,
+      "PirĂˇti": 12.0,
       "SPD": 8.0,
       "TOP09": 13.0
     },
@@ -3170,12 +3199,12 @@
     "view": "parties",
     "sample_size": null,
     "method": "CAPI",
-    "client": "Český rozhlas",
+    "client": "ÄŚeskĂ˝ rozhlas",
     "parties": {
       "ANO": 35.5,
       "ODS": 14.0,
       "STAN": 16.0,
-      "Piráti": 11.0,
+      "PirĂˇti": 11.0,
       "SPD": 10.5
     },
     "coalition_notes": {},
@@ -3192,12 +3221,12 @@
     "view": "parties",
     "sample_size": null,
     "method": "CAPI",
-    "client": "Český rozhlas",
+    "client": "ÄŚeskĂ˝ rozhlas",
     "parties": {
       "ANO": 34.5,
       "ODS": 15.0,
       "STAN": 13.5,
-      "Piráti": 10.5,
+      "PirĂˇti": 10.5,
       "SPD": 8.5
     },
     "coalition_notes": {},
@@ -3218,7 +3247,7 @@
     "parties": {
       "ANO": 33.5,
       "ODS": 14.6,
-      "Piráti": 10.8,
+      "PirĂˇti": 10.8,
       "STAN": 6.0
     },
     "coalition_notes": {},
@@ -3235,12 +3264,12 @@
     "view": "parties",
     "sample_size": null,
     "method": "CAPI",
-    "client": "Český rozhlas",
+    "client": "ÄŚeskĂ˝ rozhlas",
     "parties": {
       "ANO": 31.0,
       "ODS": 15.0,
       "STAN": 14.5,
-      "Piráti": 10.5,
+      "PirĂˇti": 10.5,
       "SPD": 8.5
     },
     "coalition_notes": {},
@@ -3257,12 +3286,12 @@
     "view": "parties",
     "sample_size": null,
     "method": "CAPI",
-    "client": "Český rozhlas",
+    "client": "ÄŚeskĂ˝ rozhlas",
     "parties": {
       "ANO": 34.5,
       "ODS": 15.5,
       "STAN": 15.5,
-      "Piráti": 8.5,
+      "PirĂˇti": 8.5,
       "SPD": 10.0
     },
     "coalition_notes": {},
@@ -3279,12 +3308,12 @@
     "view": "parties",
     "sample_size": null,
     "method": "CAPI",
-    "client": "Český rozhlas",
+    "client": "ÄŚeskĂ˝ rozhlas",
     "parties": {
       "ANO": 32.0,
       "ODS": 14.5,
       "STAN": 16.5,
-      "Piráti": 11.5,
+      "PirĂˇti": 11.5,
       "SPD": 9.5
     },
     "coalition_notes": {},
@@ -3306,11 +3335,11 @@
       "ANO": 31.5,
       "SPOLU": 13.5,
       "STAN": 5.0,
-      "Piráti": 6.0,
+      "PirĂˇti": 6.0,
       "SPD": 5.5,
-      "Motoristé": 11.0,
-      "Stačilo": 2.0,
-      "Přísaha": 12.0
+      "MotoristĂ©": 11.0,
+      "StaÄŤilo": 2.0,
+      "PĹ™Ă­saha": 12.0
     },
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
@@ -3326,10 +3355,10 @@
     "view": "parties",
     "sample_size": null,
     "method": "CAPI",
-    "client": "Český rozhlas",
+    "client": "ÄŚeskĂ˝ rozhlas",
     "parties": {
       "ANO": 31.5,
-      "Piráti": 11.0,
+      "PirĂˇti": 11.0,
       "SPD": 12.0
     },
     "coalition_notes": {},
@@ -3351,11 +3380,11 @@
       "ANO": 30.5,
       "SPOLU": 16.0,
       "STAN": 6.0,
-      "Piráti": 2.5,
+      "PirĂˇti": 2.5,
       "SPD": 5.5,
-      "Motoristé": 11.0,
-      "Stačilo": 2.0,
-      "Přísaha": 11.5
+      "MotoristĂ©": 11.0,
+      "StaÄŤilo": 2.0,
+      "PĹ™Ă­saha": 11.5
     },
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
@@ -3376,7 +3405,7 @@
       "ANO": 31.5,
       "SPOLU": 28.5,
       "STAN": 12.0,
-      "Piráti": 2.0,
+      "PirĂˇti": 2.0,
       "SPD": 12.0
     },
     "coalition_notes": {},
@@ -3393,12 +3422,12 @@
     "view": "parties",
     "sample_size": null,
     "method": "CAPI",
-    "client": "Český rozhlas",
+    "client": "ÄŚeskĂ˝ rozhlas",
     "parties": {
       "ANO": 30.5,
       "ODS": 16.0,
       "STAN": 16.5,
-      "Piráti": 11.0,
+      "PirĂˇti": 11.0,
       "SPD": 11.5
     },
     "coalition_notes": {},
@@ -3420,10 +3449,10 @@
       "ANO": 30.0,
       "SPOLU": 14.2,
       "STAN": 5.0,
-      "Piráti": 4.5,
+      "PirĂˇti": 4.5,
       "SPD": 5.0,
-      "Motoristé": 9.4,
-      "Přísaha": 14.3
+      "MotoristĂ©": 9.4,
+      "PĹ™Ă­saha": 14.3
     },
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
@@ -3444,11 +3473,11 @@
       "ANO": 29.0,
       "SPOLU": 16.0,
       "STAN": 3.5,
-      "Piráti": 3.5,
+      "PirĂˇti": 3.5,
       "SPD": 4.0,
-      "Motoristé": 11.5,
-      "Stačilo": 2.0,
-      "Přísaha": 14.0
+      "MotoristĂ©": 11.5,
+      "StaÄŤilo": 2.0,
+      "PĹ™Ă­saha": 14.0
     },
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
@@ -3464,12 +3493,12 @@
     "view": "parties",
     "sample_size": null,
     "method": "CAPI",
-    "client": "Český rozhlas",
+    "client": "ÄŚeskĂ˝ rozhlas",
     "parties": {
       "ANO": 29.0,
       "ODS": 16.0,
       "STAN": 4.0,
-      "Piráti": 11.5,
+      "PirĂˇti": 11.5,
       "SPD": 14.0
     },
     "coalition_notes": {},
@@ -3486,7 +3515,7 @@
     "view": "parties",
     "sample_size": null,
     "method": "CAPI",
-    "client": "Český rozhlas",
+    "client": "ÄŚeskĂ˝ rozhlas",
     "parties": {
       "ANO": 30.0,
       "ODS": 15.5,
@@ -3507,7 +3536,7 @@
     "view": "parties",
     "sample_size": null,
     "method": "CAPI",
-    "client": "Český rozhlas",
+    "client": "ÄŚeskĂ˝ rozhlas",
     "parties": {
       "ANO": 29.5,
       "ODS": 16.1,
@@ -3528,12 +3557,12 @@
     "view": "coalitions",
     "sample_size": null,
     "method": "CAPI",
-    "client": "Český rozhlas",
+    "client": "ÄŚeskĂ˝ rozhlas",
     "parties": {
       "ANO": 28.5,
       "ODS": 16.5,
       "STAN": 17.5,
-      "Piráti": 17.5,
+      "PirĂˇti": 17.5,
       "SPD": 11.5,
       "SPOLU": 25.5
     },
@@ -3551,7 +3580,7 @@
     "view": "coalitions",
     "sample_size": null,
     "method": "CAPI",
-    "client": "Český rozhlas",
+    "client": "ÄŚeskĂ˝ rozhlas",
     "parties": {
       "ANO": 27.5,
       "SPOLU": 26.5
@@ -3570,13 +3599,13 @@
     "view": "parties",
     "sample_size": null,
     "method": "CAPI",
-    "client": "Český rozhlas",
+    "client": "ÄŚeskĂ˝ rozhlas",
     "parties": {
       "ANO": 30.0,
       "ODS": 14.0,
-      "Piráti": 11.5,
+      "PirĂˇti": 11.5,
       "SPD": 7.5,
-      "KSČM": 8.0,
+      "KSÄŚM": 8.0,
       "SOCDEM": 7.0
     },
     "coalition_notes": {},
@@ -3593,10 +3622,10 @@
     "view": "parties",
     "sample_size": null,
     "method": "CAPI",
-    "client": "Český rozhlas",
+    "client": "ÄŚeskĂ˝ rozhlas",
     "parties": {
       "ODS": 12.5,
-      "KDUČSL": 4.5
+      "KDUÄŚSL": 4.5
     },
     "coalition_notes": {},
     "source_url": "https://www.median.eu/cs/?p=2062",
@@ -3612,7 +3641,7 @@
     "view": "parties",
     "sample_size": null,
     "method": "CAPI",
-    "client": "Český rozhlas",
+    "client": "ÄŚeskĂ˝ rozhlas",
     "parties": {
       "ODS": 13.5
     },
@@ -3630,7 +3659,7 @@
     "view": "parties",
     "sample_size": null,
     "method": "CAPI",
-    "client": "Český rozhlas",
+    "client": "ÄŚeskĂ˝ rozhlas",
     "parties": {
       "TOP09": 5.5
     },
@@ -3648,10 +3677,10 @@
     "view": "parties",
     "sample_size": null,
     "method": "CAPI",
-    "client": "Český rozhlas",
+    "client": "ÄŚeskĂ˝ rozhlas",
     "parties": {
       "STAN": 6.0,
-      "Piráti": 22.0
+      "PirĂˇti": 22.0
     },
     "coalition_notes": {},
     "source_url": "https://www.median.eu/cs/?p=1962",
@@ -3667,9 +3696,9 @@
     "view": "parties",
     "sample_size": null,
     "method": "CAPI",
-    "client": "Český rozhlas",
+    "client": "ÄŚeskĂ˝ rozhlas",
     "parties": {
-      "Piráti": 13.0,
+      "PirĂˇti": 13.0,
       "TOP09": 5.0
     },
     "coalition_notes": {},
@@ -3686,10 +3715,10 @@
     "view": "parties",
     "sample_size": null,
     "method": "CAPI",
-    "client": "Český rozhlas",
+    "client": "ÄŚeskĂ˝ rozhlas",
     "parties": {
       "ODS": 18.0,
-      "Piráti": 12.0,
+      "PirĂˇti": 12.0,
       "TOP09": 5.0
     },
     "coalition_notes": {},
@@ -3706,11 +3735,11 @@
     "view": "parties",
     "sample_size": null,
     "method": "CAPI",
-    "client": "Český rozhlas",
+    "client": "ÄŚeskĂ˝ rozhlas",
     "parties": {
       "ANO": 30.0,
       "ODS": 18.0,
-      "Piráti": 14.0,
+      "PirĂˇti": 14.0,
       "TOP09": 5.0
     },
     "coalition_notes": {},
@@ -3727,11 +3756,11 @@
     "view": "parties",
     "sample_size": null,
     "method": "CAPI",
-    "client": "Český rozhlas",
+    "client": "ÄŚeskĂ˝ rozhlas",
     "parties": {
       "ANO": 30.0,
       "ODS": 14.0,
-      "Piráti": 14.0,
+      "PirĂˇti": 14.0,
       "TOP09": 5.0
     },
     "coalition_notes": {},
@@ -3748,7 +3777,7 @@
     "view": "parties",
     "sample_size": null,
     "method": "CAPI",
-    "client": "Český rozhlas",
+    "client": "ÄŚeskĂ˝ rozhlas",
     "parties": {
       "ANO": 33.0,
       "ODS": 15.0,
@@ -3768,7 +3797,7 @@
     "view": "parties",
     "sample_size": null,
     "method": "CAPI",
-    "client": "Český rozhlas",
+    "client": "ÄŚeskĂ˝ rozhlas",
     "parties": {
       "ANO": 30.0,
       "TOP09": 5.0
@@ -3787,7 +3816,7 @@
     "view": "parties",
     "sample_size": null,
     "method": "CAPI",
-    "client": "Český rozhlas",
+    "client": "ÄŚeskĂ˝ rozhlas",
     "parties": {
       "ODS": 14.0
     },
@@ -3805,9 +3834,9 @@
     "view": "parties",
     "sample_size": null,
     "method": "CAPI",
-    "client": "Český rozhlas",
+    "client": "ÄŚeskĂ˝ rozhlas",
     "parties": {
-      "Piráti": 16.0
+      "PirĂˇti": 16.0
     },
     "coalition_notes": {},
     "source_url": "https://www.median.eu/cs/?p=1691",
@@ -3823,9 +3852,9 @@
     "view": "parties",
     "sample_size": null,
     "method": "CAPI",
-    "client": "Český rozhlas",
+    "client": "ÄŚeskĂ˝ rozhlas",
     "parties": {
-      "Piráti": 8.5,
+      "PirĂˇti": 8.5,
       "SPD": 9.5
     },
     "coalition_notes": {},
@@ -3842,9 +3871,9 @@
     "view": "parties",
     "sample_size": null,
     "method": "CAPI",
-    "client": "Český rozhlas",
+    "client": "ÄŚeskĂ˝ rozhlas",
     "parties": {
-      "Piráti": 6.0
+      "PirĂˇti": 6.0
     },
     "coalition_notes": {},
     "source_url": "https://www.median.eu/cs/?p=1303",
@@ -3860,10 +3889,10 @@
     "view": "parties",
     "sample_size": null,
     "method": "CAPI",
-    "client": "Český rozhlas",
+    "client": "ÄŚeskĂ˝ rozhlas",
     "parties": {
       "TOP09": 6.5,
-      "Stačilo": 19.0
+      "StaÄŤilo": 19.0
     },
     "coalition_notes": {},
     "source_url": "https://www.median.eu/cs/?p=901",
@@ -3879,7 +3908,7 @@
     "view": "parties",
     "sample_size": null,
     "method": "CAPI",
-    "client": "Český rozhlas",
+    "client": "ÄŚeskĂ˝ rozhlas",
     "parties": {
       "SOCDEM": 18.0
     },
@@ -3897,9 +3926,9 @@
     "view": "parties",
     "sample_size": null,
     "method": "CAPI",
-    "client": "Český rozhlas",
+    "client": "ÄŚeskĂ˝ rozhlas",
     "parties": {
-      "KSČM": 16.0
+      "KSÄŚM": 16.0
     },
     "coalition_notes": {},
     "source_url": "https://www.median.eu/cs/?p=601",

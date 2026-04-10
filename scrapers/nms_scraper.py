@@ -32,16 +32,34 @@ REGIONAL_KW = [
     "volebni-model-praha", "volebni model praha", "hlavní město",
 ]
 
+# Sekce webu které nejsou články — tyto přeskočit i když jsou na nms.global/cz/
+SECTION_PATHS = [
+    "/sluzby/", "/platformy/", "/reference/", "/o-nas/",
+    "/media-blog", "/kariera/", "/kontakty/", "/metodologie/",
+    "/category/", "/page/",
+]
+
 
 def _is_regional(title: str, url: str) -> bool:
     text = (title + " " + url).lower()
     return any(kw in text for kw in REGIONAL_KW)
 
 
+def _is_article_url(full: str) -> bool:
+    """Vrátí True jen pro skutečné NMS články (ne navigaci/sekce)."""
+    prefix = NMS_BASE + "/cz/"
+    if not full.startswith(prefix):
+        return False
+    if full == prefix:
+        return False
+    return not any(sec in full for sec in SECTION_PATHS)
+
+
 def get_nms_links(max_pages=8):
     links = []
     seen  = set()
-    kw    = ["volební", "model", "preference", "strany", "politick"]
+    kw_txt = ["volební", "model", "preference", "strany", "politick"]
+    kw_url = ["volebni", "preference", "volby"]
     for page in range(1, max_pages + 1):
         url  = NMS_CATEGORY if page == 1 else f"{NMS_CATEGORY}page/{page}/"
         soup = fetch_with_retry(url)
@@ -52,15 +70,15 @@ def get_nms_links(max_pages=8):
             href = a["href"]
             txt  = a.get_text().strip()
             txt_lower = txt.lower()
+            full = href if href.startswith("http") else NMS_BASE + href
             # Přeskočit regionální průzkumy
             if _is_regional(txt, href):
                 continue
-            # Akceptovat pokud název obsahuje klíčové slovo NEBO jde o nms.global článek
-            if any(k in txt_lower for k in kw) or (NMS_BASE in href and "/cz/" in href):
-                full = href if href.startswith("http") else NMS_BASE + href
-                # Přeskočit samotné kategorie / stránky s výpisem
-                if "/category/" in full or "/page/" in full:
-                    continue
+            # Akceptovat pokud jde o NMS článek (ne sekci) s volebním klíčovým slovem
+            if _is_article_url(full) and (
+                any(k in txt_lower for k in kw_txt) or
+                any(k in full.lower() for k in kw_url)
+            ):
                 if full not in seen:
                     seen.add(full)
                     links.append({"url": full, "title": txt})

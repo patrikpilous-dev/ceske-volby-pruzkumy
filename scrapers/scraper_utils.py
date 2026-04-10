@@ -235,8 +235,8 @@ def extract_parties_from_text(text, patterns=None):
     """
     if patterns is None:
         patterns = PARTY_PATTERNS
-    # Normalizuj nezalomitelné mezery na normální (jinak regex \s nemusí fungovat)
-    text = text.replace('\xa0', ' ')
+    # Normalizuj speciální znaky (nezalomitelné mezery, měkké pomlčky)
+    text = text.replace('\xa0', ' ').replace('\xad', '')
     # Odstraň fráze "o X,X %" a "ze X,X %" (změny preferencí, nikoli samotné preference)
     # Např. "STAN předstihlo ODS o 1,5 %" → "STAN předstihlo ODS "
     cleaned = re.sub(r'\bo\s+\d+[,.]?\d*\s*%', '', text)
@@ -312,7 +312,7 @@ def _parse_table(table):
         cells = row.find_all(["td", "th"])
         if len(cells) <= pct_col:
             continue
-        name = cells[0].get_text(strip=True)
+        name = cells[0].get_text(strip=True).replace('\xad', '').replace('\xa0', ' ')
         if not name or len(name) > 60:
             continue
         val_text = cells[pct_col].get_text(strip=True).replace(",", ".").replace("%", "").strip()

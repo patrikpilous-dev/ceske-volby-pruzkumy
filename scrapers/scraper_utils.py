@@ -220,7 +220,12 @@ def extract_fieldwork_dates(text):
         mon = MONTHS_CS.get(m.group(1).lower())
         if mon:
             y = int(m.group(2))
-            return f"{y}-{mon}-01", f"{y}-{mon}-28"
+            today = date.today().isoformat()
+            d_to = f"{y}-{mon}-28"
+            # Pokud je datum konce v budoucnosti, použijeme dnešní datum
+            if d_to > today:
+                d_to = today
+            return f"{y}-{mon}-01", d_to
 
     return None, None
 
@@ -361,5 +366,9 @@ def month_url_to_date(url):
             yr = re.search(r"(\d{4})", url)
             if yr:
                 y = int(yr.group(1))
-                return f"{y}-{num}-01", f"{y}-{num}-28"
+                today = date.today().isoformat()
+                d_to = f"{y}-{num}-28"
+                if d_to > today:
+                    d_to = today
+                return f"{y}-{num}-01", d_to
     return None, None

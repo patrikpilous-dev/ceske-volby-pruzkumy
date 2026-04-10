@@ -1,10 +1,10 @@
 [
   {
-    "id": "nms-2026-04-28",
+    "id": "nms-2026-04-10",
     "agency": "NMS",
     "date_published": "2026-04-09",
     "date_fieldwork_from": "2026-04-01",
-    "date_fieldwork_to": "2026-04-28",
+    "date_fieldwork_to": "2026-04-10",
     "type": "model",
     "view": "parties",
     "sample_size": 1031,
@@ -26,7 +26,7 @@
     },
     "coalition_notes": {},
     "source_url": "https://nms.global/cz/volebni-model-duben-2026-ano-stale-jasnym-hegemonem-z-rozpadu-spolu-zatim-misto-ods-tezi-stan/",
-    "scraped_at": "2026-04-10T18:30:02.218440Z"
+    "scraped_at": "2026-04-10T19:03:18.555934Z"
   },
   {
     "id": "nms-2026-03-28",

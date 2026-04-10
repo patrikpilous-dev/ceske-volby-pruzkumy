@@ -220,8 +220,11 @@ const S2 = { view:"parties", ag:new Set(), hide:new Set(), chart:null };
 
 // ══ Init ══════════════════════════════════════════════════
 function init() {
-  // Odfiltruj záznamy s nereálnými hodnotami (>45 %)
-  POLLS = POLLS.filter(p => Object.values(p.parties).every(v => v <= 45));
+  // Odfiltruj záznamy s nereálnými hodnotami (>45 %) a speciální volby
+  POLLS = POLLS.filter(p =>
+    Object.values(p.parties).every(v => v <= 45) &&
+    p.agency !== "Evropské volby 2024"
+  );
   [...new Set(POLLS.map(p => p.agency))].forEach(a => S2.ag.add(a));
   buildChips2();
   showBanner();

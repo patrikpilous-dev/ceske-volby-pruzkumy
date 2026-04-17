@@ -1,5 +1,34 @@
 [
   {
+    "id": "nms-2026-04-17",
+    "agency": "NMS",
+    "date_published": "2026-04-09",
+    "date_fieldwork_from": "2026-04-01",
+    "date_fieldwork_to": "2026-04-17",
+    "type": "model",
+    "view": "parties",
+    "sample_size": 1031,
+    "method": "CAWI",
+    "client": "Novinky.cz",
+    "parties": {
+      "ANO": 32.7,
+      "ODS": 13.9,
+      "STAN": 13.7,
+      "Piráti": 8.0,
+      "SPD": 7.4,
+      "Motoristé": 4.4,
+      "TOP09": 3.1,
+      "KDUČSL": 2.5,
+      "KSČM": 2.8,
+      "Přísaha": 1.4,
+      "Zelení": 1.4,
+      "NašeČesko": 4.1
+    },
+    "coalition_notes": {},
+    "source_url": "https://nms.global/cz/volebni-model-duben-2026-ano-stale-jasnym-hegemonem-z-rozpadu-spolu-zatim-misto-ods-tezi-stan/",
+    "scraped_at": "2026-04-17T09:07:25.489898Z"
+  },
+  {
     "id": "nms-2026-04-16",
     "agency": "NMS",
     "date_published": "2026-04-09",

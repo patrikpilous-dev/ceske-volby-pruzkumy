@@ -1,5 +1,34 @@
 [
   {
+    "id": "nms-2026-04-18",
+    "agency": "NMS",
+    "date_published": "2026-04-09",
+    "date_fieldwork_from": "2026-04-01",
+    "date_fieldwork_to": "2026-04-18",
+    "type": "model",
+    "view": "parties",
+    "sample_size": 1031,
+    "method": "CAWI",
+    "client": "Novinky.cz",
+    "parties": {
+      "ANO": 32.7,
+      "ODS": 13.9,
+      "STAN": 13.7,
+      "Piráti": 8.0,
+      "SPD": 7.4,
+      "Motoristé": 4.4,
+      "TOP09": 3.1,
+      "KDUČSL": 2.5,
+      "KSČM": 2.8,
+      "Přísaha": 1.4,
+      "Zelení": 1.4,
+      "NašeČesko": 4.1
+    },
+    "coalition_notes": {},
+    "source_url": "https://nms.global/cz/volebni-model-duben-2026-ano-stale-jasnym-hegemonem-z-rozpadu-spolu-zatim-misto-ods-tezi-stan/",
+    "scraped_at": "2026-04-18T08:36:00.133863Z"
+  },
+  {
     "id": "nms-2026-04-17",
     "agency": "NMS",
     "date_published": "2026-04-09",
@@ -1454,30 +1483,5 @@
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
     "scraped_at": "2026-03-28T20:13:30.393730Z"
-  },
-  {
-    "id": "stem-2025-05-20",
-    "agency": "STEM",
-    "date_published": "2025-05-20",
-    "date_fieldwork_from": "2025-05-03",
-    "date_fieldwork_to": "2025-05-20",
-    "type": "model",
-    "view": "coalitions",
-    "sample_size": null,
-    "method": null,
-    "client": null,
-    "parties": {
-      "ANO": 32.3,
-      "SPOLU": 20.7,
-      "STAN": 11.2,
-      "PirĂˇti": 7.3,
-      "SPD": 2.1,
-      "MotoristĂ©": 12.6,
-      "StaÄŤilo": 2.8,
-      "PĹ™Ă­saha": 6.7
-    },
-    "coalition_notes": {},
-    "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
-    "scraped_at": "2026-03-28T20:13:30.393787Z"
   }
 ]

@@ -1,5 +1,34 @@
 [
   {
+    "id": "nms-2026-05-09",
+    "agency": "NMS",
+    "date_published": "2026-05-08",
+    "date_fieldwork_from": "2026-05-01",
+    "date_fieldwork_to": "2026-05-09",
+    "type": "model",
+    "view": "parties",
+    "sample_size": 1022,
+    "method": "CAWI",
+    "client": "Novinky.cz",
+    "parties": {
+      "ANO": 32.5,
+      "ODS": 14.8,
+      "STAN": 14.5,
+      "Piráti": 6.7,
+      "SPD": 8.7,
+      "Motoristé": 4.8,
+      "TOP09": 2.5,
+      "KDUČSL": 2.7,
+      "KSČM": 2.3,
+      "SOCDEM": 1.1,
+      "Zelení": 1.6,
+      "NašeČesko": 2.8
+    },
+    "coalition_notes": {},
+    "source_url": "https://nms.global/cz/volebni-model-kveten-2026-vladni-a-opozicni-blok-si-drzi-sve-volice-motoriste-jsou-stale-nejslabsim-clankem-vlady/",
+    "scraped_at": "2026-05-09T09:05:56.230620Z"
+  },
+  {
     "id": "nms-2026-05-08",
     "agency": "NMS",
     "date_published": "2026-05-08",
@@ -1506,30 +1535,5 @@
     "coalition_notes": {},
     "source_url": "https://www.ipsos.com/cs-cz/ipsos-volebni-model-na-konci-cervence-volby-vyhralo-ano-rust-zaznamenali-pirati",
     "scraped_at": "2026-03-29T10:33:19.274768Z"
-  },
-  {
-    "id": "nms-2025-07-28",
-    "agency": "NMS",
-    "date_published": "2025-07-10",
-    "date_fieldwork_from": "2025-07-01",
-    "date_fieldwork_to": "2025-07-28",
-    "type": "model",
-    "view": "coalitions",
-    "sample_size": 2,
-    "method": "CAWI",
-    "client": "Novinky.cz",
-    "parties": {
-      "ANO": 28.7,
-      "STAN": 12.0,
-      "PirĂˇti": 8.0,
-      "SPD": 13.3,
-      "MotoristĂ©": 3.2,
-      "SOCDEM": 2.2,
-      "PĹ™Ă­saha": 3.2,
-      "SPOLU": 21.5
-    },
-    "coalition_notes": {},
-    "source_url": "https://nms.global/cz/volebni-model-cervenec-2025-spolu-ustalo-blazka-pirati-s-podporou-zelenych-rostou-motoriste-v-problemech/",
-    "scraped_at": "2026-03-29T15:05:08.468689Z"
   }
 ]

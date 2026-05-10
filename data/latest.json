@@ -1,5 +1,34 @@
 [
   {
+    "id": "nms-2026-05-10",
+    "agency": "NMS",
+    "date_published": "2026-05-08",
+    "date_fieldwork_from": "2026-05-01",
+    "date_fieldwork_to": "2026-05-10",
+    "type": "model",
+    "view": "parties",
+    "sample_size": 1022,
+    "method": "CAWI",
+    "client": "Novinky.cz",
+    "parties": {
+      "ANO": 32.5,
+      "ODS": 14.8,
+      "STAN": 14.5,
+      "Piráti": 6.7,
+      "SPD": 8.7,
+      "Motoristé": 4.8,
+      "TOP09": 2.5,
+      "KDUČSL": 2.7,
+      "KSČM": 2.3,
+      "SOCDEM": 1.1,
+      "Zelení": 1.6,
+      "NašeČesko": 2.8
+    },
+    "coalition_notes": {},
+    "source_url": "https://nms.global/cz/volebni-model-kveten-2026-vladni-a-opozicni-blok-si-drzi-sve-volice-motoriste-jsou-stale-nejslabsim-clankem-vlady/",
+    "scraped_at": "2026-05-10T09:20:07.454422Z"
+  },
+  {
     "id": "nms-2026-05-09",
     "agency": "NMS",
     "date_published": "2026-05-08",
@@ -1511,29 +1540,5 @@
     "coalition_notes": {},
     "source_url": "https://www.median.eu/cs/?p=3599",
     "scraped_at": "2026-03-28T16:44:53.266554Z"
-  },
-  {
-    "id": "ipsos-2025-07-28",
-    "agency": "Ipsos",
-    "date_published": "2026-03-09",
-    "date_fieldwork_from": "2025-07-01",
-    "date_fieldwork_to": "2025-07-28",
-    "type": "model",
-    "view": "coalitions",
-    "sample_size": 1021,
-    "method": "CAWI",
-    "client": "â€”",
-    "parties": {
-      "ANO": 34.9,
-      "STAN": 10.0,
-      "StaÄŤilo": 6.3,
-      "SPOLU": 21.9,
-      "SPD4K": 11.4,
-      "PirĂˇti": 7.0,
-      "MotoristĂ©": 5.0
-    },
-    "coalition_notes": {},
-    "source_url": "https://www.ipsos.com/cs-cz/ipsos-volebni-model-na-konci-cervence-volby-vyhralo-ano-rust-zaznamenali-pirati",
-    "scraped_at": "2026-03-29T10:33:19.274768Z"
   }
 ]

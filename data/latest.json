@@ -1,5 +1,34 @@
 [
   {
+    "id": "nms-2026-05-13",
+    "agency": "NMS",
+    "date_published": "2026-05-08",
+    "date_fieldwork_from": "2026-05-01",
+    "date_fieldwork_to": "2026-05-13",
+    "type": "model",
+    "view": "parties",
+    "sample_size": 1022,
+    "method": "CAWI",
+    "client": "Novinky.cz",
+    "parties": {
+      "ANO": 32.5,
+      "ODS": 14.8,
+      "STAN": 14.5,
+      "Piráti": 6.7,
+      "SPD": 8.7,
+      "Motoristé": 4.8,
+      "TOP09": 2.5,
+      "KDUČSL": 2.7,
+      "KSČM": 2.3,
+      "SOCDEM": 1.1,
+      "Zelení": 1.6,
+      "NašeČesko": 2.8
+    },
+    "coalition_notes": {},
+    "source_url": "https://nms.global/cz/volebni-model-kveten-2026-vladni-a-opozicni-blok-si-drzi-sve-volice-motoriste-jsou-stale-nejslabsim-clankem-vlady/",
+    "scraped_at": "2026-05-13T10:12:13.263142Z"
+  },
+  {
     "id": "nms-2026-05-12",
     "agency": "NMS",
     "date_published": "2026-05-08",
@@ -1527,30 +1556,5 @@
     },
     "coalition_notes": {},
     "source_url": "https://cvvm.soc.cas.cz/cz/"
-  },
-  {
-    "id": "median-2025-07-31",
-    "agency": "Median",
-    "date_published": "2025-07-31",
-    "date_fieldwork_from": "2025-07-01",
-    "date_fieldwork_to": "2025-07-31",
-    "type": "model",
-    "view": "coalitions",
-    "sample_size": null,
-    "method": null,
-    "client": null,
-    "parties": {
-      "ANO": 33.0,
-      "SPOLU": 19.5,
-      "STAN": 11.0,
-      "PirĂˇti": 7.5,
-      "SPD": 14.0,
-      "MotoristĂ©": 4.5,
-      "StaÄŤilo": 5.0,
-      "PĹ™Ă­saha": 3.0
-    },
-    "coalition_notes": {},
-    "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
-    "scraped_at": "2026-03-28T20:13:30.392939Z"
   }
 ]

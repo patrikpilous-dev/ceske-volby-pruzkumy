@@ -1,5 +1,34 @@
 [
   {
+    "id": "nms-2026-05-25",
+    "agency": "NMS",
+    "date_published": "2026-05-08",
+    "date_fieldwork_from": "2026-05-01",
+    "date_fieldwork_to": "2026-05-25",
+    "type": "model",
+    "view": "parties",
+    "sample_size": 1022,
+    "method": "CAWI",
+    "client": "Novinky.cz",
+    "parties": {
+      "ANO": 32.5,
+      "ODS": 14.8,
+      "STAN": 14.5,
+      "Piráti": 6.7,
+      "SPD": 8.7,
+      "Motoristé": 4.8,
+      "TOP09": 2.5,
+      "KDUČSL": 2.7,
+      "KSČM": 2.3,
+      "SOCDEM": 1.1,
+      "Zelení": 1.6,
+      "NašeČesko": 2.8
+    },
+    "coalition_notes": {},
+    "source_url": "https://nms.global/cz/volebni-model-kveten-2026-vladni-a-opozicni-blok-si-drzi-sve-volice-motoriste-jsou-stale-nejslabsim-clankem-vlady/",
+    "scraped_at": "2026-05-25T11:40:58.198184Z"
+  },
+  {
     "id": "nms-2026-05-24",
     "agency": "NMS",
     "date_published": "2026-05-08",
@@ -1595,28 +1624,5 @@
     "coalition_notes": {},
     "source_url": "https://www.median.eu/cs/?p=3644",
     "scraped_at": "2026-03-28T16:44:46.706513Z"
-  },
-  {
-    "id": "nms-2025-09-28",
-    "agency": "NMS",
-    "date_published": "2025-09-10",
-    "date_fieldwork_from": "2025-09-01",
-    "date_fieldwork_to": "2025-09-28",
-    "type": "model",
-    "view": "coalitions",
-    "sample_size": 2,
-    "method": "CAWI",
-    "client": "Novinky.cz",
-    "parties": {
-      "ANO": 31.0,
-      "STAN": 12.6,
-      "PirĂˇti": 9.0,
-      "SPD": 12.3,
-      "MotoristĂ©": 5.0,
-      "SPOLU": 19.9
-    },
-    "coalition_notes": {},
-    "source_url": "https://nms.global/cz/volebni-model-zari-2025-vladni-volici-se-zacinaji-rozhodovat-komu-daji-svuj-hlas-opozice-bude-muset-dobre-mobilizovat/",
-    "scraped_at": "2026-03-29T14:41:51.360418Z"
   }
 ]

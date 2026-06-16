@@ -1,5 +1,37 @@
 [
   {
+    "id": "nms-2026-06-16",
+    "agency": "NMS",
+    "date_published": "2026-06-11",
+    "date_fieldwork_from": "2026-06-01",
+    "date_fieldwork_to": "2026-06-16",
+    "type": "model",
+    "view": "parties",
+    "sample_size": 1035,
+    "method": "CAWI",
+    "client": "Novinky.cz",
+    "parties": {
+      "ANO": 31.6,
+      "ODS": 14.8,
+      "STAN": 14.8,
+      "Piráti": 7.4,
+      "SPD": 7.5,
+      "Motoristé": 5.8,
+      "TOP09": 3.0,
+      "KDUČSL": 2.0,
+      "KSČM": 2.0,
+      "SOCDEM": 0.8,
+      "Přísaha": 1.0,
+      "Zelení": 1.3,
+      "Svobodní": 0.7,
+      "PRO": 1.1,
+      "NašeČesko": 3.9
+    },
+    "coalition_notes": {},
+    "source_url": "https://nms.global/cz/volebni-model-cerven-2026-ano-si-drzi-vedeni-stan-poprve-pred-ods/",
+    "scraped_at": "2026-06-16T12:43:57.402394Z"
+  },
+  {
     "id": "nms-2026-06-15",
     "agency": "NMS",
     "date_published": "2026-06-11",
@@ -1659,28 +1691,5 @@
     },
     "coalition_notes": {},
     "source_url": "https://cvvm.soc.cas.cz/cz/"
-  },
-  {
-    "id": "median-2025-11-30",
-    "agency": "Median",
-    "date_published": "2025-12-05",
-    "date_fieldwork_from": "2025-11-01",
-    "date_fieldwork_to": "2025-11-30",
-    "type": "model",
-    "view": "parties",
-    "sample_size": 1005,
-    "method": "CAPI",
-    "client": "ÄŚeskĂ˝ rozhlas",
-    "parties": {
-      "ANO": 33.5,
-      "ODS": 11.5,
-      "STAN": 10.0,
-      "PirĂˇti": 6.5,
-      "SPD": 6.5,
-      "KSÄŚM": 6.5,
-      "MotoristĂ©": 6.5
-    },
-    "coalition_notes": {},
-    "source_url": "https://www.median.eu/cs/?cat=6"
   }
 ]

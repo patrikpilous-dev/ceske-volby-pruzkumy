@@ -1,9 +1,9 @@
 {
-  "last_run": "2026-06-29T15:23:37.842425Z",
+  "last_run": "2026-06-30T10:46:27.311953Z",
   "new_polls_found": 1,
   "latest_poll": {
-    "agency": "STEM",
-    "date_published": "2026-06-29",
-    "date_fieldwork_to": "2026-06-21"
+    "agency": "Median",
+    "date_published": "2026-06-30",
+    "date_fieldwork_to": "2026-05-28"
   }
 }

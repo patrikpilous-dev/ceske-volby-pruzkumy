@@ -505,6 +505,32 @@
     "scraped_at": "2026-05-28T11:27:29.728246Z"
   },
   {
+    "id": "median-2026-05-28",
+    "agency": "Median",
+    "date_published": "2026-06-30",
+    "date_fieldwork_from": "2026-05-01",
+    "date_fieldwork_to": "2026-05-28",
+    "type": "model",
+    "view": "parties",
+    "sample_size": null,
+    "method": "CAPI",
+    "client": "Český rozhlas",
+    "parties": {
+      "ANO": 35.5,
+      "ODS": 12.0,
+      "STAN": 14.5,
+      "Piráti": 8.5,
+      "SPD": 6.5,
+      "Motoristé": 3.5,
+      "TOP09": 3.0,
+      "KDUČSL": 2.5,
+      "NašeČesko": 4.5
+    },
+    "coalition_notes": {},
+    "source_url": "https://www.median.eu/cs/?p=3726",
+    "scraped_at": "2026-06-30T10:46:27.303358Z"
+  },
+  {
     "id": "nms-2026-05-27",
     "agency": "NMS",
     "date_published": "2026-05-08",

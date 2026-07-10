@@ -1,5 +1,30 @@
 [
   {
+    "id": "median-2026-06-28",
+    "agency": "Median",
+    "date_published": "2026-07-10",
+    "date_fieldwork_from": "2026-06-01",
+    "date_fieldwork_to": "2026-06-28",
+    "type": "model",
+    "view": "parties",
+    "sample_size": null,
+    "method": "CAPI",
+    "client": "Český rozhlas",
+    "parties": {
+      "ANO": 34.0,
+      "ODS": 13.0,
+      "STAN": 12.5,
+      "Piráti": 7.0,
+      "SPD": 6.5,
+      "Motoristé": 5.0,
+      "TOP09": 3.0,
+      "KDUČSL": 3.5
+    },
+    "coalition_notes": {},
+    "source_url": "https://www.median.eu/cs/?p=3733",
+    "scraped_at": "2026-07-10T10:41:47.829816Z"
+  },
+  {
     "id": "nms-2026-06-24",
     "agency": "NMS",
     "date_published": "2026-06-11",
@@ -1736,31 +1761,5 @@
     },
     "coalition_notes": {},
     "source_url": "https://www.median.eu/cs/?cat=6"
-  },
-  {
-    "id": "nms-2026-02-28",
-    "agency": "NMS",
-    "date_published": "2026-02-23",
-    "date_fieldwork_from": "2026-02-01",
-    "date_fieldwork_to": "2026-02-28",
-    "type": "model",
-    "view": "parties",
-    "sample_size": 1,
-    "method": "CAWI",
-    "client": "Novinky.cz",
-    "parties": {
-      "ANO": 32.6,
-      "STAN": 14.6,
-      "PirĂˇti": 7.2,
-      "MotoristĂ©": 4.7,
-      "TOP09": 2.4,
-      "KSÄŚM": 1.7,
-      "PRO": 1.6,
-      "NaĹˇeÄŚesko": 4.7,
-      "SPD": 6.5
-    },
-    "coalition_notes": {},
-    "source_url": "https://nms.global/cz/volebni-model-unor-2026-dari-se-ano-a-starostum-stranicky-system-se-ale-dale-droli-a-propadla-by-az-ctvrtina-hlasu/",
-    "scraped_at": "2026-03-28T16:51:01.572650Z"
   }
 ]

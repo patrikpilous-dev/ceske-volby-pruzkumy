@@ -1,5 +1,28 @@
 [
   {
+    "id": "median-2026-09-28",
+    "agency": "Median",
+    "date_published": "2026-10-14",
+    "date_fieldwork_from": "2026-09-01",
+    "date_fieldwork_to": "2026-09-28",
+    "type": "model",
+    "view": "parties",
+    "sample_size": null,
+    "method": "CAPI",
+    "client": "Český rozhlas",
+    "parties": {
+      "ANO": 29.5,
+      "ODS": 12.5,
+      "STAN": 17.0,
+      "Piráti": 7.5,
+      "SPD": 9.0,
+      "Motoristé": 5.0
+    },
+    "coalition_notes": {},
+    "source_url": "https://www.median.eu/cs/?p=3814",
+    "scraped_at": "2026-10-14T13:08:33.954171Z"
+  },
+  {
     "id": "median-2026-08-28",
     "agency": "Median",
     "date_published": "2026-09-22",

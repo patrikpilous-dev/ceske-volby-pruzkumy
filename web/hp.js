@@ -19,10 +19,13 @@ const AG = {
 };
 const VLADA = ["ANO","SPD","Motoristé"];
 const OKNO = 60, VOLBY = "2025-10-04";
+// Uzavírací klauzule: strana 5 %, koalice dvou stran 8 %, tří a více 11 %.
+const HRANICE = {SPOLU: 11, SPD4K: 11, "StačiloKoalice": 11, "PirátéZelení": 8, PirSTAN: 8};
+const hranice = k => HRANICE[k] || 5;
 const BASE = {ANO:"ANO",STAN:"STAN",ODS:"SPOLU",TOP09:"SPOLU","KDUČSL":"SPOLU",SPD:"SPD","Piráti":"Piráti","Motoristé":"Motoristé","KSČM":"Stačilo"};
 const MES = ["led","úno","bře","dub","kvě","čvn","čvc","srp","zář","říj","lis","pro"];
 
-let POLLS = [], KRAJE = null, CUR = [], AVG = {}, SEATS = {};
+let POLLS = [], KRAJE = null, CUR = [], AVG = {}, SEATS = {}, N = {};
 const S = {m1:"avg", v2:"parties", per:"volby", showAvg:true, ag:new Set(), hide:new Set(), sel:new Set(VLADA), c1:null, c2:null};
 
 const $ = id => document.getElementById(id);
@@ -62,13 +65,16 @@ function average(polls) {
   polls.forEach(p => Object.entries(p.parties).forEach(([k, v]) => {
     if (!STRANY[k]) return; s[k] = (s[k] || 0) + v; n[k] = (n[k] || 0) + 1;
   }));
-  return Object.fromEntries(Object.keys(s).map(k => [k, s[k] / n[k]]).sort((a, b) => b[1] - a[1]));
+  // Strana, kterou uvedla jen jedna agentura (ostatní ji schovaly pod 2 %), by vycházela nadsazeně.
+  const min = polls.length >= 2 ? 2 : 1;
+  N = n;
+  return Object.fromEntries(Object.keys(s).filter(k => n[k] >= min).map(k => [k, s[k] / n[k]]).sort((a, b) => b[1] - a[1]));
 }
 
 // Přepočet na mandáty: krajská Imperialiho kvóta, zbytky celostátně (Hagenbach-Bischoff, největší zbytek).
 function seats(poll) {
   if (!KRAJE) return {};
-  const passed = Object.keys(poll).filter(k => poll[k] >= 5);
+  const passed = Object.keys(poll).filter(k => poll[k] >= hranice(k));
   const seat = {}, rem = {}; passed.forEach(p => { seat[p] = 0; rem[p] = 0; });
   let used = 0;
   KRAJE.kraje.forEach(k => {
@@ -113,7 +119,12 @@ function header() {
   const vl = VLADA.reduce((a, k) => a + (SEATS[k] || 0), 0);
   const druha = Object.keys(AVG)[1];
   $("head").textContent = `Kdyby byly volby teď, ${nm(ks[0])} by získalo ${SEATS[ks[0]]} mandátů`;
-  $("lead").textContent = `Vládní koalice ANO, SPD a Motoristů by měla ${vl} křesel${vl >= 101 ? " a udržela by většinu" : " a o většinu by přišla"}. Druhé je ${nm(druha)} s ${cz(AVG[druha])} %.`;
+  const blizko = Object.keys(AVG).filter(k => Math.abs(AVG[k] - hranice(k)) < 0.5);
+  let pozn = "";
+  blizko.forEach(k => { const alt = {...AVG}; alt[k] = AVG[k] >= hranice(k) ? hranice(k) - 0.01 : hranice(k);
+    const s2 = seats(alt); const nad = AVG[k] >= hranice(k);
+    pozn += ` Těsně ${nad ? "nad" : "pod"} hranicí ${hranice(k)} % je strana ${nm(k)} s ${cz(AVG[k])} %. ${nad ? "Kdyby pod ni spadla" : "Kdyby ji překročila"}, ${nm(ks[0])} by mělo ${s2[ks[0]] || 0} mandátů.`; });
+  $("lead").textContent = `Vládní koalice ANO, SPD a Motoristů by měla ${vl} křesel${vl >= 101 ? " a udržela by většinu" : " a o většinu by přišla"}. Druhé je ${nm(druha)} s ${cz(AVG[druha])} %.${pozn}`;
 }
 
 // Nejnovější průzkum každé agentury, i starší než okno průměru (zešedlý).
@@ -140,9 +151,10 @@ function render1() {
     $("avg").innerHTML = Object.entries(AVG).filter(([, v]) => v >= 2).map(([k, v]) => {
       const r = STRANY[k].r; let dl = "";
       if (r != null) { const d = v - r; dl = ` <span class="dl" style="color:${d >= 0 ? "#1D7A3A" : "#C0272D"}">${d > 0 ? "+" : ""}${cz(d)}</span>`; }
-      return `<div class="r"><div>${esc(nm(k))}</div><div class="t"><div class="f" style="width:${v/mx*100}%;background:${col(k)}"></div><div class="c5" style="left:${5/mx*100}%"></div></div><div class="v">${cz(v)} %${dl}</div></div>`;
+      const nn = N[k] < CUR.length ? ` <span class="dl" title="Uvedlo ${N[k]} z ${CUR.length} agentur" style="color:#8890B0">${N[k]}/${CUR.length}</span>` : "";
+      return `<div class="r"><div>${esc(nm(k))}${nn}</div><div class="t"><div class="f" style="width:${v/mx*100}%;background:${col(k)}"></div><div class="c5" style="left:${5/mx*100}%"></div></div><div class="v">${cz(v)} %${dl}</div></div>`;
     }).join("");
-    $("n1").textContent = `Červená čárkovaná čára je hranice 5 %. Malé číslo je změna proti volbám 2025. Průměr ${CUR.length} agentur se sběrem za posledních ${OKNO} dní, preference CVVM nejsou v průměru.`;
+    $("n1").textContent = `Červená čárkovaná čára je hranice 5 %. Malé číslo je změna proti volbám 2025, zlomek u strany znamená, kolik agentur ji uvedlo. Průměr ${CUR.length} agentur se sběrem za posledních ${OKNO} dní, preference CVVM nejsou v průměru.`;
     return;
   }
   // Podle agentur: poslední průzkum každé agentury v okně + CVVM preference, pokud je v okně.
@@ -217,9 +229,17 @@ function render2() {
   const all = Object.keys(sc).filter(k => sc[k] / cn[k] >= 1.5).sort((a, b) => sc[b]/cn[b] - sc[a]/cn[a]);
   const parties = all.filter(k => !S.hide.has(k));
   const ds = [];
+  // Průměr ke konci každého měsíce stejně jako v nadpisu: poslední model každé agentury za 60 dní.
+  const okna = ms.map(mo => { const [y, m] = mo.split("-").map(Number); const konec = new Date(y, m, 0);
+    const kon = new Date(Math.min(konec, new Date())).toISOString().slice(0, 10);
+    const od = new Date(new Date(kon).getTime() - OKNO * 86400000).toISOString().slice(0, 10);
+    const mm = {}; vp.concat(POLLS.filter(p => p.view === S.v2 && p.date_fieldwork_to < from && p.date_fieldwork_to > od)).forEach(p => {
+      if (!isModel(p) || p.date_fieldwork_to > kon || p.date_fieldwork_to <= od) return;
+      if (!mm[p.agency] || p.date_fieldwork_to > mm[p.agency].date_fieldwork_to) mm[p.agency] = p; });
+    return Object.values(mm); });
   if (S.showAvg) parties.forEach(k => {
-    const data = ms.map(mo => { const v = Object.values(mpm[mo] || {}).filter(isModel).map(p => p.parties[k]).filter(x => x != null);
-      return v.length ? +(v.reduce((a, b) => a + b, 0) / v.length).toFixed(1) : null; });
+    const data = okna.map(ps => { const v = ps.map(p => p.parties[k]).filter(x => x != null);
+      return v.length >= Math.min(2, ps.length) && v.length ? +(v.reduce((a, b) => a + b, 0) / v.length).toFixed(1) : null; });
     if (data.some(x => x != null)) ds.push({label: `${nm(k)}, průměr`, data, borderColor: col(k), backgroundColor: col(k), borderWidth: 3,
       pointRadius: 3, pointHoverRadius: 5, tension: .25, spanGaps: true});
   });
@@ -242,7 +262,7 @@ function render2() {
   $("leg2").querySelectorAll("[data-k]").forEach(e => e.onclick = () => { const k = e.dataset.k; S.hide.has(k) ? S.hide.delete(k) : S.hide.add(k); render2(); });
   const n = vp.filter(p => S.ag.size ? S.ag.has(p.agency) || S.showAvg : true).length;
   $("n2").textContent = (S.v2 === "coalitions" ? "Koalice měřily agentury hlavně před volbami 2025. " : "")
-    + `Tlustá čára je měsíční průměr agentur podle konce sběru dat, preference CVVM nejsou v průměru. Kliknutím na stranu ji skryjete. Průzkumů v období: ${n}.`;
+    + `Tlustá čára je průměr ke konci měsíce, počítaný stejně jako nahoře z posledního průzkumu každé agentury za 60 dní. Preference CVVM nejsou v průměru. Kliknutím na stranu ji skryjete. Průzkumů v období: ${n}.`;
   report();
 }
 

@@ -1,0 +1,370 @@
+{
+  "ANO": [
+    {
+      "jmeno": "Andrej Babiš",
+      "slug": "andrej-babis",
+      "funkce": "předseda vlády, předseda ANO",
+      "soubor": "andrej-babis.jpg",
+      "autor": "Vox España",
+      "licence": "CC0",
+      "licence_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "zdroj": "https://commons.wikimedia.org/wiki/File:Andrej_Babi%C5%A1_2025_(cropped).jpg",
+      "psp": "https://www.psp.cz/sqw/detail.sqw?id=6150&o=10"
+    },
+    {
+      "jmeno": "Karel Havlíček",
+      "slug": "karel-havlicek",
+      "funkce": "místopředseda vlády a ministr průmyslu a obchodu",
+      "soubor": "karel-havlicek.jpg",
+      "autor": "Josef Landergott / Akademie věd ČR",
+      "licence": "CC BY-SA 4.0",
+      "licence_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "zdroj": "https://commons.wikimedia.org/wiki/File:Karel_Havl%C3%AD%C4%8Dek_akademicky-snem-duben-2026_03_(cropped).jpg",
+      "psp": "https://www.psp.cz/sqw/detail.sqw?id=6621&o=10"
+    },
+    {
+      "jmeno": "Alena Schillerová",
+      "slug": "alena-schillerova",
+      "funkce": "místopředsedkyně vlády a ministryně financí",
+      "soubor": "alena-schillerova.jpg",
+      "autor": "Evropská komise, audiovizuální služba, Milan Kammermayer",
+      "licence": "CC BY 4.0",
+      "licence_url": "https://creativecommons.org/licenses/by/4.0",
+      "zdroj": "https://commons.wikimedia.org/wiki/File:Alena_Schillerov%C3%A1_2026_portrait_crop_2.jpg",
+      "psp": "https://www.psp.cz/sqw/detail.sqw?id=6545&o=10"
+    },
+    {
+      "jmeno": "Adam Vojtěch",
+      "slug": "adam-vojtech",
+      "funkce": "ministr zdravotnictví",
+      "soubor": "adam-vojtech.jpg",
+      "autor": "Ministerstvo zdravotnictví České republiky",
+      "licence": "Public domain",
+      "licence_url": "",
+      "zdroj": "https://commons.wikimedia.org/wiki/File:Adam_Vojt%C4%9Bch.jpg",
+      "psp": "https://www.psp.cz/sqw/detail.sqw?id=6491&o=10"
+    }
+  ],
+  "ODS": [
+    {
+      "jmeno": "Martin Kupka",
+      "slug": "martin-kupka",
+      "funkce": "předseda ODS",
+      "soubor": "martin-kupka.jpg",
+      "autor": "NASA/Joel Kowsky",
+      "licence": "Public domain",
+      "licence_url": "",
+      "zdroj": "https://commons.wikimedia.org/wiki/File:Martin_Kupka_2024_portrait_crop2.jpg",
+      "psp": "https://www.psp.cz/sqw/detail.sqw?id=6538&o=10"
+    },
+    {
+      "jmeno": "Petr Fiala",
+      "slug": "petr-fiala",
+      "funkce": "bývalý předseda vlády",
+      "soubor": "petr-fiala.jpg",
+      "autor": "Kancelář prezidenta Ukrajiny (President Of Ukraine, Flickr)",
+      "licence": "Public domain",
+      "licence_url": "",
+      "zdroj": "https://commons.wikimedia.org/wiki/File:Petr_Fiala_(51940875566).jpg",
+      "psp": "https://www.psp.cz/sqw/detail.sqw?id=6074&o=10"
+    },
+    {
+      "jmeno": "Marek Benda",
+      "slug": "marek-benda",
+      "funkce": "předseda poslaneckého klubu ODS",
+      "soubor": "marek-benda.jpg",
+      "autor": "David Sedlecký",
+      "licence": "CC BY-SA 4.0",
+      "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "zdroj": "https://commons.wikimedia.org/wiki/File:Marek_Benda_2021.jpg",
+      "psp": "https://www.psp.cz/sqw/detail.sqw?id=4&o=10"
+    },
+    {
+      "jmeno": "Jan Skopeček",
+      "slug": "jan-skopecek",
+      "funkce": "místopředseda Poslanecké sněmovny",
+      "soubor": "jan-skopecek.jpg",
+      "autor": "David Sedlecký derivative work: Kacir",
+      "licence": "CC BY 4.0",
+      "licence_url": "https://creativecommons.org/licenses/by/4.0",
+      "zdroj": "https://commons.wikimedia.org/wiki/File:Jan_Skope%C4%8Dek_2023_(cropped).jpg",
+      "psp": "https://www.psp.cz/sqw/detail.sqw?id=6418&o=10"
+    }
+  ],
+  "STAN": [
+    {
+      "jmeno": "Vít Rakušan",
+      "slug": "vit-rakusan",
+      "funkce": "předseda STAN",
+      "soubor": "vit-rakusan.jpg",
+      "autor": "David Sedlecký",
+      "licence": "CC BY 4.0",
+      "licence_url": "https://creativecommons.org/licenses/by/4.0",
+      "zdroj": "https://commons.wikimedia.org/wiki/File:V%C3%ADt_Raku%C5%A1an_2023_Praha_(cropped)_2.jpg",
+      "psp": "https://www.psp.cz/sqw/detail.sqw?id=6524&o=10"
+    },
+    {
+      "jmeno": "Michaela Šebelová",
+      "slug": "michaela-sebelova",
+      "funkce": "předsedkyně poslaneckého klubu STAN",
+      "soubor": "michaela-sebelova.jpg",
+      "autor": "Ondřej Chalupa",
+      "licence": "CC BY-SA 4.0",
+      "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "zdroj": "https://commons.wikimedia.org/wiki/File:Michaela_%C5%A0ebelov%C3%A1.jpg",
+      "psp": "https://www.psp.cz/sqw/detail.sqw?id=6763&o=10"
+    },
+    {
+      "jmeno": "Barbora Urbanová",
+      "slug": "barbora-urbanova",
+      "funkce": "místopředsedkyně Poslanecké sněmovny",
+      "soubor": "barbora-urbanova.jpg",
+      "autor": "Barbora Urbanová",
+      "licence": "CC BY-SA 4.0",
+      "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "zdroj": "https://commons.wikimedia.org/wiki/File:Barbora_Urbanov%C3%A1_2.jpg",
+      "psp": "https://www.psp.cz/sqw/detail.sqw?id=6788&o=10"
+    },
+    {
+      "jmeno": "Věra Kovářová",
+      "slug": "vera-kovarova",
+      "funkce": "místopředsedkyně poslaneckého klubu STAN",
+      "soubor": "vera-kovarova.jpg",
+      "autor": "Zemanovav",
+      "licence": "CC BY-SA 4.0",
+      "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "zdroj": "https://commons.wikimedia.org/wiki/File:V%C4%9Bra_Kov%C3%A1%C5%99ov%C3%A1_(cropped).tif",
+      "psp": "https://www.psp.cz/sqw/detail.sqw?id=6214&o=10"
+    }
+  ],
+  "Piráti": [
+    {
+      "jmeno": "Zdeněk Hřib",
+      "slug": "zdenek-hrib",
+      "funkce": "předseda Pirátů",
+      "soubor": "zdenek-hrib.jpg",
+      "autor": "Piráti",
+      "licence": "CC BY 2.5",
+      "licence_url": "https://creativecommons.org/licenses/by/2.5",
+      "zdroj": "https://commons.wikimedia.org/wiki/File:Zden%C4%9Bk_H%C5%99ib_(cropped).jpg",
+      "psp": "https://www.psp.cz/sqw/detail.sqw?id=6552&o=10"
+    },
+    {
+      "jmeno": "Olga Richterová",
+      "slug": "olga-richterova",
+      "funkce": "předsedkyně poslaneckého klubu Pirátů",
+      "soubor": "olga-richterova.jpg",
+      "autor": "Piráti (Flickr)",
+      "licence": "CC BY-SA 2.0",
+      "licence_url": "https://creativecommons.org/licenses/by-sa/2.0",
+      "zdroj": "https://commons.wikimedia.org/wiki/File:Olga_Richterov%C3%A1_3_November_2021.jpg",
+      "psp": "https://www.psp.cz/sqw/detail.sqw?id=6473&o=10"
+    },
+    {
+      "jmeno": "Ivan Bartoš",
+      "slug": "ivan-bartos",
+      "funkce": "místopředseda poslaneckého klubu Pirátů, bývalý předseda strany",
+      "soubor": "ivan-bartos.jpg",
+      "autor": "Piráti (Flickr)",
+      "licence": "CC BY-SA 2.0",
+      "licence_url": "https://creativecommons.org/licenses/by-sa/2.0",
+      "zdroj": "https://commons.wikimedia.org/wiki/File:Ivan_Barto%C5%A1_16_December_2021.jpg",
+      "psp": "https://www.psp.cz/sqw/detail.sqw?id=6433&o=10"
+    },
+    {
+      "jmeno": "Kateřina Stojanová",
+      "slug": "katerina-stojanova",
+      "funkce": "místopředsedkyně poslaneckého klubu Pirátů",
+      "soubor": "katerina-stojanova.jpg",
+      "autor": "Petr Zewlakk Vrabec, Pirátská strana",
+      "licence": "CC BY-SA 4.0",
+      "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "zdroj": "https://commons.wikimedia.org/wiki/File:Kate%C5%99ina-Stojanov%C3%A12026.jpg",
+      "psp": "https://www.psp.cz/sqw/detail.sqw?id=7048&o=10"
+    }
+  ],
+  "KDUČSL": [
+    {
+      "jmeno": "Marian Jurečka",
+      "slug": "marian-jurecka",
+      "funkce": "předseda poslaneckého klubu KDU-ČSL",
+      "soubor": "marian-jurecka.jpg",
+      "autor": "European People's Party (EPP), Flickr",
+      "licence": "CC BY 4.0",
+      "licence_url": "https://creativecommons.org/licenses/by/4.0",
+      "zdroj": "https://commons.wikimedia.org/wiki/File:Marian_Jure%C4%8Dka_2025_portrait_crop_2.jpg",
+      "psp": "https://www.psp.cz/sqw/detail.sqw?id=6205&o=10"
+    },
+    {
+      "jmeno": "Marek Výborný",
+      "slug": "marek-vyborny",
+      "funkce": "bývalý ministr zemědělství",
+      "soubor": "marek-vyborny.jpg",
+      "autor": "David Sedlecký",
+      "licence": "CC BY 4.0",
+      "licence_url": "https://creativecommons.org/licenses/by/4.0",
+      "zdroj": "https://commons.wikimedia.org/wiki/File:Marek_V%C3%BDborn%C3%BD_2023_(cropped).jpg",
+      "psp": "https://www.psp.cz/sqw/detail.sqw?id=6513&o=10"
+    },
+    {
+      "jmeno": "Jan Bartošek",
+      "slug": "jan-bartosek",
+      "funkce": "bývalý místopředseda Poslanecké sněmovny",
+      "soubor": "jan-bartosek.jpg",
+      "autor": "Hrubesova",
+      "licence": "CC BY-SA 4.0",
+      "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "zdroj": "https://commons.wikimedia.org/wiki/File:Ing._Jan_Barto%C5%A1ek_(cropped).jpg",
+      "psp": "https://www.psp.cz/sqw/detail.sqw?id=6178&o=10"
+    },
+    {
+      "jmeno": "Tom Philipp",
+      "slug": "tom-philipp",
+      "funkce": "místopředseda poslaneckého klubu KDU-ČSL",
+      "soubor": "tom-philipp.jpg",
+      "autor": "Liexus",
+      "licence": "CC BY-SA 4.0",
+      "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "zdroj": "https://commons.wikimedia.org/wiki/File:Tom_Philipp.jpg",
+      "psp": "https://www.psp.cz/sqw/detail.sqw?id=6555&o=10"
+    }
+  ],
+  "SPD": [
+    {
+      "jmeno": "Tomio Okamura",
+      "slug": "tomio-okamura",
+      "funkce": "předseda Poslanecké sněmovny, předseda SPD",
+      "soubor": "tomio-okamura.jpg",
+      "autor": "Tomio Okamura",
+      "licence": "CC BY-SA 4.0",
+      "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "zdroj": "https://commons.wikimedia.org/wiki/File:Tomio_Okamura_portr%C3%A9t_(cropped).jpg",
+      "psp": "https://www.psp.cz/sqw/detail.sqw?id=6105&o=10"
+    },
+    {
+      "jmeno": "Radim Fiala",
+      "slug": "radim-fiala",
+      "funkce": "předseda poslaneckého klubu SPD",
+      "soubor": "radim-fiala.jpg",
+      "autor": "David Sedlecký",
+      "licence": "CC BY-SA 4.0",
+      "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "zdroj": "https://commons.wikimedia.org/wiki/File:Radim_Fiala_Praha_2017.jpg",
+      "psp": "https://www.psp.cz/sqw/detail.sqw?id=5459&o=10"
+    },
+    {
+      "jmeno": "Jan Hrnčíř",
+      "slug": "jan-hrncir",
+      "funkce": "poslanec SPD",
+      "soubor": "jan-hrncir.jpg",
+      "autor": "David Sedlecký",
+      "licence": "CC BY-SA 4.0",
+      "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "zdroj": "https://commons.wikimedia.org/wiki/File:Jan_Hrn%C4%8D%C3%AD%C5%99_2019.jpg",
+      "psp": "https://www.psp.cz/sqw/detail.sqw?id=6455&o=10"
+    },
+    {
+      "jmeno": "Jaroslav Foldyna",
+      "slug": "jaroslav-foldyna",
+      "funkce": "poslanec SPD, ověřovatel Sněmovny",
+      "soubor": "jaroslav-foldyna.jpg",
+      "autor": "Aktron",
+      "licence": "CC BY-SA 3.0",
+      "licence_url": "https://creativecommons.org/licenses/by-sa/3.0",
+      "zdroj": "https://commons.wikimedia.org/wiki/File:Praha,_Nov%C3%A9_M%C4%9Bsto,_V%C3%A1clavsk%C3%A9_n%C3%A1m%C4%9Bst%C3%AD,_Kosovo_je_Srbsko_2010,_Jaroslav_Foldyna_(cropped).JPG",
+      "psp": "https://www.psp.cz/sqw/detail.sqw?id=5911&o=10"
+    }
+  ],
+  "Motoristé": [
+    {
+      "jmeno": "Petr Macinka",
+      "slug": "petr-macinka",
+      "funkce": "místopředseda vlády a ministr zahraničních věcí, předseda Motoristů",
+      "soubor": "petr-macinka.jpg",
+      "autor": "Bundesministerium für europäische und internationale Angelegenheiten",
+      "licence": "CC BY 4.0",
+      "licence_url": "https://creativecommons.org/licenses/by/4.0",
+      "zdroj": "https://commons.wikimedia.org/wiki/File:Petr_Macinka_2026-02-14.jpg",
+      "psp": "https://www.psp.cz/sqw/detail.sqw?id=7022&o=10"
+    },
+    {
+      "jmeno": "Boris Šťastný",
+      "slug": "boris-stastny",
+      "funkce": "ministr pro sport, prevenci a zdraví, předseda poslaneckého klubu",
+      "soubor": "boris-stastny.jpg",
+      "autor": "Borisstastny",
+      "licence": "CC BY-SA 4.0",
+      "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "zdroj": "https://commons.wikimedia.org/wiki/File:Boris_Stastny.jpg",
+      "psp": "https://www.psp.cz/sqw/detail.sqw?id=5512&o=10"
+    },
+    {
+      "jmeno": "Oto Klempíř",
+      "slug": "oto-klempir",
+      "funkce": "ministr kultury",
+      "soubor": "oto-klempir.jpg",
+      "autor": "David Sedlecký derivative work: Kacir",
+      "licence": "CC BY-SA 4.0",
+      "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "zdroj": "https://commons.wikimedia.org/wiki/File:Oto_Klemp%C3%AD%C5%99_2022_(cropped).jpg",
+      "psp": "https://www.psp.cz/sqw/detail.sqw?id=7010&o=10"
+    },
+    {
+      "jmeno": "Matěj Gregor",
+      "slug": "matej-gregor",
+      "funkce": "místopředseda poslaneckého klubu Motoristů",
+      "soubor": "matej-gregor.jpg",
+      "autor": "Pepino99",
+      "licence": "CC0",
+      "licence_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "zdroj": "https://commons.wikimedia.org/wiki/File:Mat%C4%9Bj_Gregor.jpg",
+      "psp": "https://www.psp.cz/sqw/detail.sqw?id=7006&o=10"
+    }
+  ],
+  "TOP09": [
+    {
+      "jmeno": "Jan Jakob",
+      "slug": "jan-jakob",
+      "funkce": "předseda poslaneckého klubu TOP 09",
+      "soubor": "jan-jakob.jpg",
+      "autor": "TOP 09",
+      "licence": "CC BY-SA 4.0",
+      "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "zdroj": "https://commons.wikimedia.org/wiki/File:Jan_Jakob.jpg",
+      "psp": "https://www.psp.cz/sqw/detail.sqw?id=6687&o=10"
+    },
+    {
+      "jmeno": "Jiří Pospíšil",
+      "slug": "jiri-pospisil",
+      "funkce": "poslanec TOP 09, bývalý ministr spravedlnosti",
+      "soubor": "jiri-pospisil.jpg",
+      "autor": "David Sedlecký",
+      "licence": "CC BY 4.0",
+      "licence_url": "https://creativecommons.org/licenses/by/4.0",
+      "zdroj": "https://commons.wikimedia.org/wiki/File:Ji%C5%99%C3%AD_Posp%C3%AD%C5%A1il_2023_portrait_crop.jpg",
+      "psp": "https://www.psp.cz/sqw/detail.sqw?id=5273&o=10"
+    },
+    {
+      "jmeno": "Vlastimil Válek",
+      "slug": "vlastimil-valek",
+      "funkce": "bývalý ministr zdravotnictví",
+      "soubor": "vlastimil-valek.jpg",
+      "autor": "Ben Skála, Benfoto",
+      "licence": "CC BY-SA 4.0",
+      "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "zdroj": "https://commons.wikimedia.org/wiki/File:Vlastimil-V%C3%A1lek2019b.jpg",
+      "psp": "https://www.psp.cz/sqw/detail.sqw?id=6482&o=10"
+    },
+    {
+      "jmeno": "Marek Ženíšek",
+      "slug": "marek-zenisek",
+      "funkce": "místopředseda TOP 09",
+      "soubor": "marek-zenisek.jpg",
+      "autor": "Jindřich Nosek (NoJin)",
+      "licence": "CC BY 4.0",
+      "licence_url": "https://creativecommons.org/licenses/by/4.0",
+      "zdroj": "https://commons.wikimedia.org/wiki/File:Marek_%C5%BDen%C3%AD%C5%A1ek_(2024).jpg",
+      "psp": "https://www.psp.cz/sqw/detail.sqw?id=6154&o=10"
+    }
+  ]
+}

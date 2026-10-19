@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sněmovna podle průzkumů, České volby</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#3D4263;--navy2:#2A2E4A;--red:#C0272D;--line:#D8DAEA;--muted:#8890B0;--text:#1E2240;--text2:#4A5070;--bg:#F7F8FB}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{overflow-x:hidden}
+body{font-family:'Source Sans 3',Verdana,sans-serif;background:transparent;color:var(--text);line-height:1.45}
+.w{background:#fff;border:1px solid var(--line)}
+.tri{display:flex;height:6px}.tri div{flex:1}
+.ser{font-family:Merriweather,Georgia,serif;font-weight:400;color:var(--navy2)}
+.hd{padding:16px 20px 4px;text-align:center}
+.kick{font-size:11px;letter-spacing:.08em;color:var(--red);font-weight:600;text-transform:uppercase}
+.hd h2{font-size:21px;margin:6px 0 2px}
+.sub{font-size:14px;color:var(--text2)}
+svg text{font-family:'Source Sans 3',Verdana,sans-serif}
+.ag{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;padding:6px 20px 16px}
+.k{border:1px solid var(--line);padding:10px 12px;background:var(--bg)}
+.k a{color:var(--navy2);text-decoration:none;font-family:Merriweather,Georgia,serif;font-size:15px}
+.k .dt{font-size:11.5px;color:var(--muted);margin:2px 0 6px}
+.k .p{display:flex;justify-content:space-between;font-size:13px;padding:1px 0}
+.k .p b{font-weight:600}
+.k.old{opacity:.55}
+.ft{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 16px;padding:10px 20px 14px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}
+.ft a{color:var(--red);font-weight:600;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="w" id="app">
+  <div class="tri"><div style="background:#fff;border-bottom:1px solid var(--line)"></div><div style="background:var(--red)"></div><div style="background:#11457E"></div></div>
+  <div class="hd">
+    <div class="kick" id="kick">Sněmovna podle průměru průzkumů</div>
+    <h2 class="ser" id="head">Načítám průzkumy</h2>
+    <div class="sub" id="sub"></div>
+  </div>
+  <svg id="arc" viewBox="35 12 935 405" role="img" aria-label="Rozdělení 200 mandátů podle průměru průzkumů" style="display:block;width:100%;height:auto"></svg>
+  <div class="ag" id="ag"></div>
+  <div class="ft"><span id="pozn"></span><a target="_top" href="https://www.ceske-volby.cz/preference/">Průměr, koaliční kalkulačka a všechny průzkumy</a></div>
+</div>
+<script>
+window.PRUZKUMY_JINY_POHLED = function () {
+  const a = document.getElementById("app");
+  if (!POLLS.length || !Object.keys(SEATS).length) { a.innerHTML = '<div style="padding:24px;color:#C0272D">Data průzkumů se nepodařilo načíst.</div>'; report(); return; }
+  const ks = Object.keys(SEATS);
+  const doo = CUR.reduce((m, p) => p.date_fieldwork_to > m ? p.date_fieldwork_to : m, "");
+  document.getElementById("kick").textContent = `Sněmovna podle průměru průzkumů · ${CUR.map(p => p.agency).join(", ")}`;
+  document.getElementById("head").textContent = `Kdyby byly volby teď, ${nm(ks[0])} by mělo ${SEATS[ks[0]]} ze 200 mandátů`;
+  const vl = VLADA.reduce((s, k) => s + (SEATS[k] || 0), 0), v25 = VLADA.reduce((s, k) => s + (M2025[k] || 0), 0);
+  document.getElementById("sub").textContent = `Vládní koalice ANO, SPD a Motoristů ${vl} mandátů, ve volbách 2025 získala ${v25}. Sběr dat do ${fd(doo)}.`;
+
+  // Půlkruh: výseče podle mandátů, popisky venku s vodící čarou, logo Č uprostřed.
+  const cx = 450, cy = 400, R = 330, r = 190, svg = [];
+  let a0 = Math.PI;
+  const pt = (rad, ang) => [cx + rad * Math.cos(ang), cy - rad * Math.sin(ang)];
+  const labels = [];
+  ks.forEach(k => {
+    const a1 = a0 - Math.PI * SEATS[k] / 200;
+    const [x1, y1] = pt(R, a0), [x2, y2] = pt(R, a1), [x3, y3] = pt(r, a1), [x4, y4] = pt(r, a0);
+    const big = (a0 - a1) > Math.PI ? 1 : 0;
+    svg.push(`<path d="M${x1.toFixed(1)},${y1.toFixed(1)} A${R},${R} 0 ${big} 1 ${x2.toFixed(1)},${y2.toFixed(1)} L${x3.toFixed(1)},${y3.toFixed(1)} A${r},${r} 0 ${big} 0 ${x4.toFixed(1)},${y4.toFixed(1)} Z" fill="${col(k)}" stroke="#fff" stroke-width="2"><title>${esc(nm(k))} ${SEATS[k]} mandátů, ${cz(AVG[k])} %</title></path>`);
+    const am = (a0 + a1) / 2;
+    const [lx, ly] = pt(R + 8, am), [tx, ty] = pt(R + 34, am);
+    labels.push({k, am, lx, ly, tx, ty});
+    a0 = a1;
+  });
+  // rozestup popisků na pravé a levé straně
+  ["L", "R"].forEach(side => {
+    const ls = labels.filter(l => side === "L" ? l.tx < cx : l.tx >= cx).sort((p, q) => p.ty - q.ty);
+    for (let i = 1; i < ls.length; i++) if (ls[i].ty - ls[i - 1].ty < 26) ls[i].ty = ls[i - 1].ty + 26;
+  });
+  labels.forEach(l => {
+    const left = l.tx < cx, ex = left ? l.tx - 6 : l.tx + 6;
+    svg.push(`<polyline points="${l.lx.toFixed(1)},${l.ly.toFixed(1)} ${l.tx.toFixed(1)},${l.ty.toFixed(1)} ${ex.toFixed(1)},${l.ty.toFixed(1)}" fill="none" stroke="${col(l.k)}" stroke-width="1.5"/>`);
+    svg.push(`<text x="${(left ? ex - 4 : ex + 4).toFixed(1)}" y="${(l.ty + 6).toFixed(1)}" text-anchor="${left ? "end" : "start"}" font-size="19" fill="${col(l.k)}" font-weight="600">${esc(nm(l.k))} ${cz(AVG[l.k])} %</text>`);
+    svg.push(`<text x="${(left ? ex - 4 : ex + 4).toFixed(1)}" y="${(l.ty + 24).toFixed(1)}" text-anchor="${left ? "end" : "start"}" font-size="14" fill="#8890B0">${SEATS[l.k]} mandátů</text>`);
+  });
+  svg.push(`<image href="logo-c.png" x="${cx - 95}" y="${cy - 205}" width="190" height="209"/>`);
+  svg.push(`<line x1="${cx - R - 10}" x2="${cx + R + 10}" y1="${cy + 1}" y2="${cy + 1}" stroke="#D8DAEA"/>`);
+  document.getElementById("arc").innerHTML = svg.join("");
+
+  // Karty posledního průzkumu každé agentury, top 4 strany.
+  const m = {};
+  POLLS.filter(p => p.view === "parties" && AG[p.agency]).forEach(p => { if (!m[p.agency] || p.date_fieldwork_to > m[p.agency].date_fieldwork_to) m[p.agency] = p; });
+  document.getElementById("ag").innerHTML = Object.values(m).sort((p, q) => q.date_fieldwork_to.localeCompare(p.date_fieldwork_to)).map(p => {
+    const top = Object.entries(p.parties).filter(([k]) => STRANY[k]).sort((x, y) => y[1] - x[1]).slice(0, 4);
+    return `<div class="k${ago(p.date_fieldwork_to) > OKNO ? " old" : ""}"><a target="_top" href="https://www.ceske-volby.cz/tag/${AG[p.agency].u}/">${esc(p.agency)}</a>`
+      + `<div class="dt">sběr do ${fd(p.date_fieldwork_to)}${p.type === "preference" ? ", preference" : ""}</div>`
+      + top.map(([k, v]) => `<div class="p"><span><span style="display:inline-block;width:9px;height:9px;background:${col(k)};margin-right:5px"></span>${esc(nm(k))}</span><b>${cz(v)} %</b></div>`).join("") + `</div>`;
+  }).join("");
+  document.getElementById("pozn").textContent = "Zešedlé karty jsou starší než 60 dní a do průměru se nepočítají.";
+  report(); setTimeout(report, 800);
+};
+</script>
+<script src="hp.js"></script>
+</body>
+</html>

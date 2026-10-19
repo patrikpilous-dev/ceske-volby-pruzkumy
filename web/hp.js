@@ -18,6 +18,8 @@ const AG = {
   Kantar:{c:"#003087",u:"kantar-cz",dash:[2,3]}, Ipsos:{c:"#1D7A3A",u:"ipsos",dash:[8,3,2,3]}, CVVM:{c:"#7B5EA7",u:"cvvm",dash:[10,4]},
 };
 const VLADA = ["ANO","SPD","Motoristé"];
+// Mandáty ve volbách 2025 (ČSÚ, SPOLU rozdělené podle navrhující strany).
+const M2025 = {ANO:80, ODS:27, "KDUČSL":16, TOP09:9, STAN:22, "Piráti":18, SPD:15, "Motoristé":13};
 const OKNO = 60, VOLBY = "2025-10-04";
 // Uzavírací klauzule: strana 5 %, koalice dvou stran 8 %, tří a více 11 %.
 const HRANICE = {SPOLU: 11, SPD4K: 11, "StačiloKoalice": 11, "PirátéZelení": 8, PirSTAN: 8};
@@ -43,6 +45,10 @@ async function load() {
     try { const r = await fetch(u, {cache:"no-cache"}); if (r.ok) { POLLS = await r.json(); break; } } catch (e) {}
   }
   try { const r = await fetch("kraje-2025.json"); if (r.ok) KRAJE = await r.json(); } catch (e) {}
+  if (window.PRUZKUMY_JINY_POHLED) {  // oblouk.html: jen výpočet, vykreslení si dělá sám
+    if (POLLS.length) { CUR = current(); AVG = average(CUR); SEATS = seats(AVG); }
+    window.PRUZKUMY_JINY_POHLED(); return;
+  }
   if (!POLLS.length) { $("app").innerHTML = '<div class="err">Data průzkumů se nepodařilo načíst. Zkuste stránku obnovit.</div>'; report(); return; }
   init();
 }
@@ -186,7 +192,9 @@ function renderSeats() {
     $("chips").innerHTML = ks.map(k => { const on = S.sel.has(k); if (on) n += SEATS[k];
       return `<span class="ch${on ? " on" : ""}" data-k="${k}" style="${on ? `background:${col(k)};border-color:${col(k)}` : ""}">${esc(nm(k))} ${SEATS[k]}</span>`; }).join("");
     $("fl").style.width = n / 2 + "%";
-    $("res").innerHTML = `<b class="ser" style="font-size:18px">${n}</b> mandátů, ` + (n >= 101 ? '<b style="color:#1D7A3A">většina</b>' : `<b style="color:#C0272D">do většiny chybí ${101 - n}</b>`);
+    const v25 = [...S.sel].reduce((a, k) => a + (M2025[k] || 0), 0);
+    const stav = n >= 120 ? '<b style="color:#1D7A3A">ústavní většina</b>' : n >= 101 ? `<b style="color:#1D7A3A">většina</b>, do ústavní chybí ${120 - n}` : `<b style="color:#C0272D">do většiny chybí ${101 - n}</b>`;
+    $("res").innerHTML = `<b class="ser" style="font-size:18px">${n}</b> mandátů, ${stav}` + (S.sel.size ? `<div style="font-size:13px;color:#4A5070;margin-top:2px">Ve volbách 2025 měly tyto strany ${v25} mandátů (${n - v25 > 0 ? "+" : ""}${n - v25}).</div>` : "");
     $("chips").querySelectorAll(".ch").forEach(e => e.onclick = () => { const k = e.dataset.k; S.sel.has(k) ? S.sel.delete(k) : S.sel.add(k); draw(); });
   };
   draw();

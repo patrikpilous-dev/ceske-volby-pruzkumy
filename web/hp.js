@@ -27,7 +27,9 @@ const hranice = k => HRANICE[k] || 5;
 const BASE = {ANO:"ANO",STAN:"STAN",ODS:"SPOLU",TOP09:"SPOLU","KDUČSL":"SPOLU",SPD:"SPD","Piráti":"Piráti","Motoristé":"Motoristé","KSČM":"Stačilo"};
 const MES = ["led","úno","bře","dub","kvě","čvn","čvc","srp","zář","říj","lis","pro"];
 
-let POLLS = [], KRAJE = null, CUR = [], AVG = {}, SEATS = {}, N = {}, HLAVY = {};
+let POLLS = [], KRAJE = null, CUR = [], AVG = {}, SEATS = {}, N = {}, HLAVY = {}, POSLANCI = {};
+// Politici s vlastní stránkou na ceske-volby.cz/politici/<slug>/
+const PROFILY = new Set(["andrej-babis"]);
 const S = {m1:"avg", v2:"parties", per:"volby", showAvg:true, ag:new Set(), hide:new Set(), sel:new Set(VLADA), c1:null, c2:null};
 
 const $ = id => document.getElementById(id);
@@ -46,6 +48,7 @@ async function load() {
   }
   try { const r = await fetch("kraje-2025.json"); if (r.ok) KRAJE = await r.json(); } catch (e) {}
   try { const r = await fetch("hlavy/hlavy.json", {cache: "no-cache"}); if (r.ok) HLAVY = await r.json(); } catch (e) {}
+  try { const r = await fetch("poslanci/poslanci.json", {cache: "no-cache"}); if (r.ok) POSLANCI = await r.json(); } catch (e) {}
   if (window.PRUZKUMY_JINY_POHLED) {  // oblouk.html: jen výpočet, vykreslení si dělá sám
     if (POLLS.length) { CUR = current(); AVG = average(CUR); SEATS = seats(AVG); }
     window.PRUZKUMY_JINY_POHLED(); return;
@@ -113,6 +116,8 @@ function init() {
   $("m1b").onclick = () => { S.m1 = "ag"; render1(); };
   $("sn1").onclick = () => { S.snem = "model"; renderSeats(); };
   $("sn2").onclick = () => { S.snem = "2025"; renderSeats(); };
+  $("sl1").onclick = () => { S.lidi = false; renderSeats(); };
+  $("sl2").onclick = () => { S.lidi = true; renderSeats(); };
   $("v2p").onclick = () => { S.v2 = "parties"; S.hide.clear(); render2(); };
   $("v2c").onclick = () => { S.v2 = "coalitions"; S.hide.clear(); if (S.per !== "vse") S.per = "vse"; render2(); };
   document.querySelectorAll("#per button").forEach(b => b.onclick = () => { S.per = b.dataset.p; render2(); });
@@ -161,7 +166,7 @@ function render1() {
       const r = STRANY[k].r; let dl = "";
       if (r != null) { const d = Math.abs(v - r) < 0.05 ? 0 : v - r; dl = ` <span class="dl" style="color:${d >= 0 ? "#1D7A3A" : "#C0272D"}">${d > 0 ? "+" : ""}${cz(d)}</span>`; }
       const nn = N[k] < CUR.length ? ` <span class="dl" title="Uvedlo ${N[k]} z ${CUR.length} agentur" style="color:#8890B0">${N[k]}/${CUR.length}</span>` : "";
-      return `<div class="r"><div class="nm">${esc(nm(k))}${hlava(k)}${nn}</div><div class="t"><div class="f" style="width:${v/mx*100}%;background:${col(k)}"></div><div class="c5" style="left:${5/mx*100}%"></div></div><div class="v">${cz(v)} %${dl}</div></div>`;
+      return `<div class="r"><div class="nm">${hlava(k)}${esc(nm(k))}${nn}</div><div class="t"><div class="f" style="width:${v/mx*100}%;background:${col(k)}"></div><div class="c5" style="left:${5/mx*100}%"></div></div><div class="v">${cz(v)} %${dl}</div></div>`;
     }).join("");
     $("n1").textContent = `Červená čárkovaná čára je hranice 5 %. Malé číslo je změna proti volbám 2025, zlomek u strany znamená, kolik agentur ji uvedlo. Průměr ${CUR.length} agentur se sběrem za posledních ${OKNO} dní, preference CVVM nejsou v průměru.`;
     return;
@@ -188,8 +193,8 @@ function render1() {
 
 // Malý kulatý portrét předsedy strany za názvem (Wikimedia Commons, autor a licence v popisku).
 function hlava(k) {
-  const h = HLAVY[k]; if (!h) return "";
-  return `<img class="hl" src="hlavy/${h.soubor}" alt="${esc(h.jmeno)}" title="${esc(h.jmeno)}, předseda. Foto ${esc(h.autor)}, ${esc(h.licence)}" loading="lazy" width="22" height="22">`;
+  const h = HLAVY[k]; if (!h) return Object.keys(HLAVY).length ? `<span class="hl hl0"></span>` : "";
+  return `<img class="hl" src="hlavy/${h.soubor}" alt="${esc(h.jmeno)}" title="${esc(h.jmeno)}, předseda. Foto ${esc(h.autor)}, ${esc(h.licence)}" loading="lazy" width="34" height="34">`;
 }
 
 function renderSeats() {
@@ -199,7 +204,18 @@ function renderSeats() {
   const SV = model ? SEATS : Object.fromEntries(Object.entries(M2025).sort((a, b) => b[1] - a[1]));
   const SR = model ? M2025 : SEATS;  // s čím porovnat
   const ks = Object.keys(SV);
-  $("sn").innerHTML = ks.map(k => `<div title="${esc(nm(k))}" style="background:${col(k)}"></div>`.repeat(SV[k])).join("");
+  const lidi = S.lidi && Object.keys(POSLANCI).length;
+  $("sl1").classList.toggle("on", !lidi); $("sl2").classList.toggle("on", !!lidi);
+  $("sn").classList.toggle("lidi", !!lidi);
+  $("sn").innerHTML = ks.map(k => {
+    const os = lidi ? (POSLANCI[k] || []).slice(0, SV[k]) : [];
+    return os.map(p => {
+      const url = PROFILY.has(p.slug) ? `https://www.ceske-volby.cz/politici/${p.slug}/` : (p.psp || "");
+      const tit = `${p.jmeno}, ${nm(k)}${p.funkce ? ", " + p.funkce : ""}`;
+      const img = `<img src="poslanci/${p.soubor}" alt="${esc(p.jmeno)}" loading="lazy">`;
+      return url ? `<a class="os" target="_top" href="${esc(url)}" title="${esc(tit)}" style="border-color:${col(k)}">${img}</a>` : `<span class="os" title="${esc(tit)}" style="border-color:${col(k)}">${img}</span>`;
+    }).join("") + `<div title="${esc(nm(k))}" style="background:${col(k)}"></div>`.repeat(SV[k] - os.length);
+  }).join("");
   $("sl").innerHTML = ks.map(k => `<span><span class="sq" style="background:${col(k)}"></span>${esc(nm(k))} ${SV[k]}</span>`).join("");
   $("snp").textContent = model ? `Kdyby byly volby teď, podle průměru průzkumů.` : `Současná Sněmovna podle výsledku voleb 2025, SPOLU rozdělené podle navrhující strany.`;
   const draw = () => {
@@ -296,6 +312,8 @@ function meta() {
   $("meta").innerHTML = `<span>Průzkumů v databázi: <b>${n}</b> od ${fd(od)}</span><span>Statistická chyba zhruba ±1 až 3 p. b.</span>`
     + `<a target="_top" href="https://www.ceske-volby.cz/preference/">Metodika a tabulka všech průzkumů</a>`
     + (Object.keys(HLAVY).length ? `<details style="width:100%"><summary style="cursor:pointer">Fotografie předsedů stran</summary>` + Object.values(HLAVY).map(h =>
+      `${esc(h.jmeno)}, foto <a target="_blank" rel="noopener" href="${esc(h.zdroj)}" style="color:inherit;font-weight:400">${esc(h.autor)}</a>, <a target="_blank" rel="noopener" href="${esc(h.licence_url || h.zdroj)}" style="color:inherit;font-weight:400">${esc(h.licence)}</a>`).join("; ") + `, Wikimedia Commons, oříznuto.</details>` : "")
+    + (Object.keys(POSLANCI).length ? `<details style="width:100%"><summary style="cursor:pointer">Fotografie poslanců</summary>` + Object.values(POSLANCI).flat().map(h =>
       `${esc(h.jmeno)}, foto <a target="_blank" rel="noopener" href="${esc(h.zdroj)}" style="color:inherit;font-weight:400">${esc(h.autor)}</a>, <a target="_blank" rel="noopener" href="${esc(h.licence_url || h.zdroj)}" style="color:inherit;font-weight:400">${esc(h.licence)}</a>`).join("; ") + `, Wikimedia Commons, oříznuto.</details>` : "");
 }
 

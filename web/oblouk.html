@@ -114,7 +114,8 @@ window.PRUZKUMY_JINY_POHLED = function () {
 <script src="hp.js"></script>
 <script>
 // Hlásit výšku karty, ne těla stránky, jinak iframe s posluchačem roste donekonečna.
-report = function () { const h = document.getElementById("app").offsetHeight; if (h > 300) window.parent.postMessage({type: "pruzkumyHeight", height: h}, "*"); };
+let _posledni = 0;
+report = function () { const h = document.getElementById("app").offsetHeight; if (h > 300 && Math.abs(h - _posledni) > 8) { _posledni = h; window.parent.postMessage({type: "pruzkumyHeight", height: h}, "*"); } };
 </script>
 </body>
 </html>

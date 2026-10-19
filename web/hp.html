@@ -35,8 +35,10 @@ body{font-family:'Source Sans 3',Verdana,sans-serif;background:transparent;color
 .bg{display:inline-flex}
 .bg button{padding:5px 12px;font:inherit;font-size:12.5px;border:1px solid var(--line);background:#fff;color:var(--text2);cursor:pointer;margin-right:-1px}
 .bg button.on{background:var(--navy);border-color:var(--navy);color:#fff}
-.r{display:grid;grid-template-columns:86px 1fr 98px;align-items:center;gap:6px;margin:4px 0;font-size:14px}
+.r{display:grid;grid-template-columns:118px 1fr 98px;align-items:center;gap:6px;margin:4px 0;font-size:14px}
 .t{position:relative;height:17px;background:var(--bg)}
+.nm{display:flex;align-items:center;gap:6px;white-space:nowrap}
+.hl{width:22px;height:22px;border-radius:50%;object-fit:cover;border:1.5px solid #fff;box-shadow:0 0 0 1px var(--line);flex-shrink:0}
 .t .f{height:100%}
 .t .c5{position:absolute;top:-2px;bottom:-2px;border-left:1px dashed var(--red)}
 .v{font-weight:600}
@@ -73,7 +75,7 @@ body{font-family:'Source Sans 3',Verdana,sans-serif;background:transparent;color
 @media(max-width:560px){
   .hd,.ban,.g>div,.sec,.meta{padding-left:14px;padding-right:14px}
   .hd h2{font-size:20px}
-  .r{grid-template-columns:74px 1fr 92px;font-size:13px}
+  .r{grid-template-columns:104px 1fr 92px;font-size:13px}
   .cw{height:300px}.cw2{height:320px}
   .sn{grid-template-columns:repeat(20,1fr)}
 }
@@ -101,7 +103,8 @@ body{font-family:'Source Sans 3',Verdana,sans-serif;background:transparent;color
       <div class="note" id="n1"></div>
     </div>
     <div>
-      <h3 class="ser h3" style="margin-bottom:10px">Sněmovna, 200 křesel</h3>
+      <div class="row"><h3 class="ser h3">Sněmovna, 200 křesel</h3><div class="bg"><button class="on" id="sn1">Podle průzkumů</button><button id="sn2">Současná</button></div></div>
+      <div class="note" id="snp" style="margin:-4px 0 8px"></div>
       <div class="sn" id="sn" aria-label="Rozdělení 200 mandátů"></div>
       <div class="sl" id="sl"></div>
       <h3 class="ser h3" style="margin:16px 0 8px">Sestavte koalici</h3>

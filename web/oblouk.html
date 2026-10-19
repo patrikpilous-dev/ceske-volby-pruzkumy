@@ -22,7 +22,6 @@ body{font-family:'Source Sans 3',Verdana,sans-serif;background:transparent;color
 svg text{font-family:'Source Sans 3',Verdana,sans-serif}
 .ag{display:flex;gap:10px;padding:6px 20px 12px;overflow-x:auto}
 .ag .k{flex:1 0 150px}
-html,body{height:100%}
 #arc{margin:0 auto}
 @media(max-width:560px){.hd{padding:12px 12px 2px}.hd h2{font-size:16px}.sub{font-size:12.5px}.kick{font-size:10px}.ag{padding:6px 12px 10px;gap:8px}.ag .k{flex:1 0 128px;padding:8px 10px}.k .p{font-size:12px}.ft{padding:8px 12px 10px}#pozn{display:none}}
 .k{border:1px solid var(--line);padding:10px 12px;background:var(--bg)}
@@ -113,5 +112,9 @@ window.PRUZKUMY_JINY_POHLED = function () {
 };
 </script>
 <script src="hp.js"></script>
+<script>
+// Hlásit výšku karty, ne těla stránky, jinak iframe s posluchačem roste donekonečna.
+report = function () { const h = document.getElementById("app").offsetHeight; if (h > 300) window.parent.postMessage({type: "pruzkumyHeight", height: h}, "*"); };
+</script>
 </body>
 </html>

@@ -56,29 +56,13 @@ const AGENCY_DASH = {
 // ══ Data ══════════════════════════════════════════════════
 let POLLS = [];
 
-const EMBEDDED = [
-  {id:"stem-2026-01-07",agency:"STEM",date_published:"2026-01-15",date_fieldwork_from:"2026-01-02",date_fieldwork_to:"2026-01-07",type:"model",view:"parties",sample_size:1089,method:"CAWI",client:"CNN Prima News",parties:{ANO:35.0,ODS:14.0,STAN:12.6,"Piráti":8.4,SPD:6.8,"Motoristé":4.9,TOP09:4.1,KDUČSL:3.2},coalition_notes:{}},
-  {id:"stem-2025-11-28",agency:"STEM",date_published:"2025-12-03",date_fieldwork_from:"2025-11-17",date_fieldwork_to:"2025-11-28",type:"model",view:"parties",sample_size:1095,method:"CAWI",client:"CNN Prima News",parties:{ANO:35.0,ODS:14.0,STAN:12.0,"Piráti":9.0,SPD:7.5,"Motoristé":5.5,TOP09:3.8},coalition_notes:{}},
-  {id:"stem-2025-09-28",agency:"STEM",date_published:"2025-10-02",date_fieldwork_from:"2025-09-22",date_fieldwork_to:"2025-09-28",type:"model",view:"coalitions",sample_size:1102,method:"CAWI",client:"CNN Prima News",parties:{ANO:28.0,SPOLU:21.0,SPD4K:13.8,STAN:12.2,"Piráti":9.8,"Motoristé":5.6,"Stačilo":5.5},coalition_notes:{}},
-  {id:"median-2026-02-28",agency:"Median",date_published:"2026-03-07",date_fieldwork_from:"2026-02-01",date_fieldwork_to:"2026-02-28",type:"model",view:"parties",sample_size:1010,method:"CAPI",client:"Český rozhlas",parties:{ANO:32.0,ODS:14.0,"Piráti":10.5,SPD:7.0,STAN:6.0,TOP09:5.5,"Motoristé":5.0,KDUČSL:2.5},coalition_notes:{}},
-  {id:"median-2026-01-31",agency:"Median",date_published:"2026-02-06",date_fieldwork_from:"2026-01-01",date_fieldwork_to:"2026-01-31",type:"model",view:"parties",sample_size:1008,method:"CAPI",client:"Český rozhlas",parties:{ANO:31.0,ODS:12.5,"Piráti":11.0,SPD:9.5,STAN:9.0,TOP09:5.5,"Motoristé":4.5},coalition_notes:{}},
-  {id:"median-2025-12-31",agency:"Median",date_published:"2026-01-17",date_fieldwork_from:"2025-11-21",date_fieldwork_to:"2025-12-31",type:"model",view:"parties",sample_size:1015,method:"CAPI",client:"Český rozhlas",parties:{ANO:33.5,STAN:13.0,ODS:11.5,"Motoristé":7.0,"Piráti":6.0,KSČM:5.0,SPD:4.5},coalition_notes:{}},
-  {id:"kantar-2026-02-15",agency:"Kantar",date_published:"2026-02-23",date_fieldwork_from:"2026-01-20",date_fieldwork_to:"2026-02-15",type:"model",view:"parties",sample_size:1120,method:"mixed",client:"Česká televize",parties:{ANO:34.0,ODS:13.5,STAN:11.0,"Piráti":8.0,SPD:6.5,"Motoristé":5.0,TOP09:4.5,KDUČSL:3.0},coalition_notes:{}},
-  {id:"kantar-2025-12-20",agency:"Kantar",date_published:"2026-01-12",date_fieldwork_from:"2025-11-25",date_fieldwork_to:"2025-12-20",type:"model",view:"parties",sample_size:1108,method:"mixed",client:"Česká televize",parties:{ANO:34.5,ODS:12.0,STAN:12.5,"Piráti":7.5,SPD:6.0,"Motoristé":5.5,TOP09:4.0},coalition_notes:{}},
-  {id:"ipsos-2026-01-25",agency:"Ipsos",date_published:"2026-02-03",date_fieldwork_from:"2026-01-13",date_fieldwork_to:"2026-01-25",type:"model",view:"parties",sample_size:1005,method:"CAWI",client:"—",parties:{ANO:36.0,ODS:13.0,STAN:11.5,"Piráti":8.5,SPD:7.0,"Motoristé":4.5,TOP09:4.0,KDUČSL:2.5},coalition_notes:{}},
-  {id:"ipsos-2025-12-10",agency:"Ipsos",date_published:"2025-12-18",date_fieldwork_from:"2025-11-28",date_fieldwork_to:"2025-12-10",type:"model",view:"parties",sample_size:1001,method:"CAWI",client:"—",parties:{ANO:35.5,ODS:12.0,STAN:11.0,"Piráti":7.5,SPD:6.5,"Motoristé":5.5,TOP09:3.5},coalition_notes:{}},
-  {id:"cvvm-2025-12-06",agency:"CVVM",date_published:"2025-12-19",date_fieldwork_from:"2025-11-17",date_fieldwork_to:"2025-12-06",type:"preference",view:"parties",sample_size:1021,method:"CAPI",client:"Sociologický ústav AV ČR",parties:{ANO:30.5,ODS:13.0,STAN:10.5,"Piráti":9.0,SPD:8.0,"Motoristé":6.5,TOP09:5.0,KDUČSL:4.5,SOCDEM:3.5},coalition_notes:{}},
-  {id:"cvvm-2025-10-10",agency:"CVVM",date_published:"2025-10-23",date_fieldwork_from:"2025-09-15",date_fieldwork_to:"2025-10-10",type:"preference",view:"parties",sample_size:1018,method:"CAPI",client:"Sociologický ústav AV ČR",parties:{ANO:31.0,ODS:12.5,STAN:11.5,"Piráti":8.5,SPD:7.5,"Motoristé":5.5,TOP09:5.0,KDUČSL:4.0},coalition_notes:{}},
-  {id:"nms-2026-01-20",agency:"NMS",date_published:"2026-01-28",date_fieldwork_from:"2026-01-08",date_fieldwork_to:"2026-01-20",type:"model",view:"parties",sample_size:1003,method:"CAWI",client:"Novinky.cz",parties:{ANO:34.5,ODS:13.5,STAN:12.0,"Piráti":8.0,SPD:7.5,"Motoristé":5.0,TOP09:4.0},coalition_notes:{}},
-  {id:"nms-2025-11-22",agency:"NMS",date_published:"2025-11-28",date_fieldwork_from:"2025-11-10",date_fieldwork_to:"2025-11-22",type:"model",view:"parties",sample_size:1002,method:"CAWI",client:"Novinky.cz",parties:{ANO:33.0,ODS:12.5,STAN:11.5,"Piráti":8.0,SPD:7.0,"Motoristé":6.0,TOP09:4.5},coalition_notes:{}},
-];
-
 async function loadPolls() {
   const sources = [
     "../data/polls.json",
     "https://patrikpilous-dev.github.io/ceske-volby-pruzkumy/data/polls.json",
   ];
-  POLLS = EMBEDDED;
+  // Bez dat graf nic nekreslí, záložní čísla v kódu nejsou (dřív tu byla vymyšlená)
+  POLLS = [];
   for (const url of sources) {
     try {
       const r = await fetch(url, { cache: "no-cache" });

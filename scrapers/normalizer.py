@@ -28,23 +28,40 @@ def load_aliases():
     for canon_id, info in data["coalitions"].items():
         for alias in info["aliases"]:
             alias_map[alias.lower().strip()] = canon_id
+    # Kanonická ID samotná (KDUČSL, NašeČesko, TOP09 …) jsou taky platný název
+    for canon_id in list(data["parties"]) + list(data["coalitions"]):
+        alias_map.setdefault(canon_id.lower(), canon_id)
     return alias_map
 
 ALIAS_MAP = load_aliases()
 
+# Popisky sloupců a řádků, které nejsou strana (nehlásit jako neznámou stranu)
+NOT_PARTY = {
+    "ostatní", "ostatni", "jiné", "jiná", "jiní", "jine", "ostatní strany",
+    "nerozhodnutí", "nerozhodnuti", "neví", "nevím", "nevolil", "nevolí",
+    "náskok", "vzorek", "účast", "volební účast", "nevolič", "others", "lead",
+}
+
 # ---------- Normalizace názvů ----------
 
+def _alias_key(raw_name: str) -> str:
+    key = fix_mojibake(str(raw_name)).replace("\xa0", " ").lower()
+    key = re.sub(r"[*†‡~]+", "", key)
+    key = re.sub(r"\[\w*\]", "", key)          # poznámky Wikipedie [a]
+    return re.sub(r"\s+", " ", key).strip()
+
+
 def normalize_party_name(raw_name: str) -> str | None:
-    key = fix_mojibake(raw_name).lower().strip()
+    """
+    Jen přesná shoda s aliasem (po sjednocení mezer, velikosti písmen a
+    poznámkových znaků). Žádné hledání podřetězců: „Stačilo! – KSČM“ nesmí
+    padnout na KSČM ani „PRO“ na „Přísaha a PROgram“.
+    """
+    key = _alias_key(raw_name)
     if key in ALIAS_MAP:
         return ALIAS_MAP[key]
-    cleaned = re.sub(r"[()~]", "", key).strip()
-    if cleaned in ALIAS_MAP:
-        return ALIAS_MAP[cleaned]
-    for alias, canon in ALIAS_MAP.items():
-        if alias in key or key in alias:
-            return canon
-    return None
+    cleaned = re.sub(r"[()]", "", key).strip()
+    return ALIAS_MAP.get(cleaned)
 
 # ---------- Validace ----------
 
@@ -145,12 +162,18 @@ def validate_poll(rec: dict, polls: list, dup_pool: list = None) -> list:
         errors.append(f"jen {len(parties)} strany")
     if not SUM_MIN <= total <= SUM_MAX:
         errors.append(f"součet {total:.1f} % mimo {SUM_MIN:.0f} až {SUM_MAX:.0f} %")
+    if rec.get("nezname_strany"):
+        errors.append(f"neznámé strany: {', '.join(rec['nezname_strany'])} (doplnit alias)")
+    if rec.get("neovereno"):
+        errors.append(f"číslo ve zdroji nestojí u jména strany: {', '.join(rec['neovereno'])}")
     try:
         if rec["date_fieldwork_from"] > rec["date_fieldwork_to"]:
             errors.append("začátek sběru po konci sběru")
-        if rec["date_fieldwork_to"] > rec["date_published"]:
-            errors.append(f"konec sběru {rec['date_fieldwork_to']} po vydání {rec['date_published']}")
-        if rec["date_published"] > datetime.utcnow().strftime("%Y-%m-%d"):
+        # Datum vydání může chybět (Kantar ho v grafu neuvádí), pak se nekontroluje
+        pub = rec.get("date_published")
+        if pub and rec["date_fieldwork_to"] > pub:
+            errors.append(f"konec sběru {rec['date_fieldwork_to']} po vydání {pub}")
+        if pub and pub > datetime.utcnow().strftime("%Y-%m-%d"):
             errors.append("datum vydání v budoucnosti")
     except (KeyError, TypeError):
         errors.append("chybí datum")
@@ -163,7 +186,41 @@ def validate_poll(rec: dict, polls: list, dup_pool: list = None) -> list:
         for pid, v in parties.items():
             if pid in avg and abs(v - avg[pid]) > OUTLIER_PP:
                 errors.append(f"{pid} {v} % proti průměru {avg[pid]:.1f} % (odchylka nad {OUTLIER_PP:.0f} p. b.)")
+    if rec["id"] not in load_overeno():
+        errors += month_jumps(polls, rec)
     return errors
+
+
+# ---------- Meziměsíční skok ----------
+
+OVERENO_FILE = BASE_DIR / "data" / "overeno.json"
+JUMP_PP = 3.0          # skok strany mezi dvěma po sobě jdoucími průzkumy agentury
+JUMP_GAP_DAYS = 45     # „po sobě jdoucí“ = konec sběru nejvýš 45 dní před tímto
+
+
+def load_overeno() -> dict:
+    """Ručně ověřené záznamy {id: důvod}, které smí mít skok nad 3 p. b."""
+    if OVERENO_FILE.exists():
+        with open(OVERENO_FILE, encoding="utf-8") as f:
+            return json.load(f)
+    return {}
+
+
+def month_jumps(polls: list, rec: dict) -> list:
+    """Skok strany o víc než 3 p. b. proti předchozímu průzkumu téže agentury."""
+    t = _d(rec["date_fieldwork_to"])
+    prev = [p for p in polls
+            if p["agency"] == rec["agency"] and p["type"] == rec["type"] and p["id"] != rec["id"]
+            and 0 < (t - _d(p["date_fieldwork_to"])).days <= JUMP_GAP_DAYS]
+    if not prev:
+        return []
+    prev = max(prev, key=lambda p: p["date_fieldwork_to"])
+    out = []
+    for pid, v in rec["parties"].items():
+        old = prev["parties"].get(pid)
+        if old is not None and abs(v - old) > JUMP_PP:
+            out.append(f"skok {pid} {old} → {v} % proti {prev['id']} (nad {JUMP_PP:.0f} p. b., ruční kontrola)")
+    return out
 
 
 def load_karantena() -> list:
@@ -219,11 +276,10 @@ def build_poll_record(
         if canon_id and value is not None:
             parties_normalized[canon_id] = value
         elif not canon_id and value is not None:
-            # Nová/neznámá strana — ulož s původním názvem, aby se neztratila
-            # Přidej ji ručně do party_aliases.json až se stabilizuje
-            clean = fix_mojibake(raw_name).strip()
-            if 2 <= len(clean) <= 40:
-                parties_normalized[clean] = value
+            # Neznámý název do grafu nepustíme. Záznam s ním půjde do karantény,
+            # po doplnění aliasu do party_aliases.json projde při dalším běhu.
+            clean = fix_mojibake(str(raw_name)).replace("\xa0", " ").strip()
+            if clean and _alias_key(clean) not in NOT_PARTY:
                 unknown.append(clean)
 
     if not parties_normalized:
@@ -242,7 +298,7 @@ def build_poll_record(
     safe_agency = agency.lower().replace(" ", "_").replace("/", "_")
     poll_id = f"{safe_agency}-{date_fieldwork_to}"
 
-    return {
+    rec = {
         "id": poll_id,
         "agency": agency,
         "date_published": date_published,
@@ -258,6 +314,9 @@ def build_poll_record(
         "source_url": source_url,
         "scraped_at": datetime.utcnow().isoformat() + "Z",
     }
+    if unknown:
+        rec["nezname_strany"] = unknown
+    return rec
 
 # ---------- Uložení ----------
 

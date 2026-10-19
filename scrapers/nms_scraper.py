@@ -18,6 +18,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 from scraper_utils import (
     HEADERS, fetch_with_retry, extract_pub_date, extract_fieldwork_dates,
     extract_parties_nearest, extract_sample_size,
+    verify_in_source,
 )
 from normalizer import build_poll_record, save_poll
 
@@ -86,7 +87,7 @@ def scrape_article(url):
         print(f"[NMS] Chybí datum vydání v {url}")
         return None
 
-    return build_poll_record(
+    rec = build_poll_record(
         agency="NMS",
         date_published=date_pub,
         date_fieldwork_from=date_from or date_to,
@@ -99,6 +100,11 @@ def scrape_article(url):
         client="Novinky.cz",
         source_url=url,
     )
+    # Dvojí čtení: číslo musí ve zdroji stát u jména strany, jinak karanténa
+    bad = verify_in_source(body, parties)
+    if rec and bad:
+        rec["neovereno"] = bad
+    return rec
 
 
 def scrape_all(historical=False):

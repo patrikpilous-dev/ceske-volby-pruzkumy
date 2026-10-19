@@ -390,9 +390,9 @@ PARTY_MENTIONS = [
     (r"TOP\s*09",                              "TOP09"),
     (r"STAČILO!?|Stačilo!?",                   "Stačilo"),
     (r"KSČM",                                  "KSČM"),
-    (r"SOCDEM|ČSSD",                           "SOCDEM"),
+    (r"SOCDEM|SocDem|Socdem|ČSSD",             "SOCDEM"),
     (r"SPOLU",                                 "SPOLU"),
-    (r"Přísah[ay]?",                           "Přísaha"),
+    (r"Přísah[ay]?|PŘÍSAH[AY]?",               "Přísaha"),
     (r"Zelen[íi]",                             "Zelení"),
     (r"Svobodn[íéých]+",                       "Svobodní"),
     (r"Trikolor[auy]",                         "Trikolora"),
@@ -414,6 +414,8 @@ _NOISE_RES = [
     r"\d+(?:,\d+)?\s*[–\-]\s*\d+(?:,\d+)?\s*%",
     r"mezi\s+\d+(?:,\d+)?\s+a\s+\d+(?:,\d+)?\s*%",
     r"\b(?:o|ze?|od|nad|pod|kolem|zhruba|přibližně|až)\s+\d+(?:,\d+)?\s*%",
+    # „z březnových 7,1 % klesli na 4,4 %“: výchozí hodnota změny
+    r"\bze?\s+[^\W\d_]+\s+\d+(?:,\d+)?\s*%",
     r"[Jj]ádr\w*[^%.]{0,40}%",
     r"[Pp]otenciál\w*[^%.]{0,40}%",
     r"[+±−\-]\s*\d+(?:,\d+)?\s*%",
@@ -428,6 +430,8 @@ _AGGREGATE = re.compile(
     r"|jako\s+celek|dohromady|celkem|prostým\s+součtem",
     re.I,
 )
+
+_SUBJECT_REF = re.compile(r"\s*(?:Strana|Hnutí|Uskupení|Koalice|Ta|To|Ono)\b")
 
 _SENT_SPLIT = re.compile(r"(?<=[.!?])\s+(?=[A-ZÁČĎÉĚÍŇÓŘŠŤÚŮÝŽ„\"])")
 
@@ -451,9 +455,11 @@ def extract_parties_nearest(text, max_back=80, max_fwd=35):
         clean = _blank(clean, pat)
 
     result = {}
+    prev_subject = None
     for sent in _SENT_SPLIT.split(clean):
         # Součty bloků („Opoziční blok (STAN, ODS, …) by získal 43,8 %“) přeskočit
         if _AGGREGATE.search(sent):
+            prev_subject = None
             continue
         mentions = []
         for m in _MENTION_RE.finditer(sent):
@@ -464,6 +470,11 @@ def extract_parties_nearest(text, max_back=80, max_fwd=35):
             mentions.append((m.start(), m.end(), PARTY_MENTIONS[idx][1]))
         pcts = [(m.start(), m.end(), float(m.group(1).replace(",", ".")))
                 for m in _PCT_RE.finditer(sent)]
+        # „ODS je … měřena samostatně. Strana by obdržela 14,7 % hlasů.“
+        # Věta bez jména strany začínající „Strana/Hnutí …“ patří podmětu předchozí věty.
+        if not mentions and pcts and prev_subject and _SUBJECT_REF.match(sent):
+            mentions = [(0, 0, prev_subject)]
+        prev_subject = mentions[0][2] if mentions else None
         if not mentions or not pcts:
             continue
 
@@ -484,17 +495,47 @@ def extract_parties_nearest(text, max_back=80, max_fwd=35):
             used_pct.add(ps)
             got[pid] = val
 
-        # „KSČM a KDU-ČSL … obě na 2,4 %“, „PRO i KSČM by získaly shodně 1,8 %“
+        # „KSČM a KDU-ČSL … obě na 2,4 %“, „Zelení a Přísaha, obě shodně s 1,4 %“,
+        # „PRO i KSČM by získaly shodně 1,8 %“: hodnota patří všem stranám výčtu před ní
         for ps, pe, val in pcts:
             if re.search(r"(?:obě|oba|shodně)\W{0,3}(?:\w+\s+){0,2}$", sent[max(0, ps - 25):ps]):
                 for ms, me, pid in mentions:
-                    if me <= ps and pid not in got:
+                    if me <= ps and ps - me <= 60 and pid not in got:
                         got[pid] = val
 
         for pid, val in got.items():
             if pid not in result and 0.1 <= val <= 60:
                 result[pid] = val
     return result
+
+
+def verify_in_source(text, parties, back=130, fwd=60):
+    """
+    Kontrola dvojím čtením: každé číslo strany musí ve zdroji stát u jejího
+    jména (do 130 znaků před číslem nebo 60 za ním). Vrátí strany, u kterých
+    to neplatí. Takový záznam jde do karantény k ruční kontrole.
+    """
+    text = text.replace("\xa0", " ").replace("\xad", "").replace(" ", " ")
+    bad = []
+    for pid, val in parties.items():
+        pats = [pat for pat, canon in PARTY_MENTIONS if canon == pid]
+        if not pats:
+            continue
+        name_re = re.compile("|".join(f"(?<![\\w])(?:{p})(?![\\w])" for p in pats))
+        forms = {f"{val:.1f}".replace(".", ",")}
+        if val == int(val):
+            forms.add(str(int(val)))
+        found = False
+        for form in forms:
+            for m in re.finditer(rf"(?<![\d,]){re.escape(form)}\s*%", text):
+                if name_re.search(text[max(0, m.start() - back):m.end() + fwd]):
+                    found = True
+                    break
+            if found:
+                break
+        if not found:
+            bad.append(f"{pid} {val}")
+    return bad
 
 
 # ---------- Oprava mojibake ----------

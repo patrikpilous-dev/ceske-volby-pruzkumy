@@ -38,6 +38,12 @@ def run_all(historical=False):
         print(f"[ERROR] Kantar: {e}")
 
     try:
+        from kantar_infogram_scraper import run_scraper as kantar_ig_run
+        total += kantar_ig_run(historical=historical)
+    except Exception as e:
+        print(f"[ERROR] Kantar Infogram: {e}")
+
+    try:
         from ipsos_scraper import run_scraper as ipsos_run
         total += ipsos_run(historical=historical)
     except Exception as e:

@@ -87,7 +87,12 @@ def parse_value(v):
         return None
 
 
-def run_scraper():
+KANTAR_SAMPLE = 1200
+KANTAR_NOTE = "Vzorek 1 200 respondentů, do volebního modelu vstupuje 885."
+
+
+def scrape_all():
+    """Všechny měsíce z grafu jako záznamy, bez ukládání."""
     print("[KantarInfogram] Fetching Infogram chart...")
     rows = fetch_infogram_data()
 
@@ -96,22 +101,16 @@ def run_scraper():
             return c.get("value", "")
         return str(c) if c is not None else ""
 
-    # Row 0 = column headers
+    # Row 0 = column headers, header[0] je popisek řádku
     header = [cell_val(c).strip() for c in rows[0]]
-    # header[0] is empty (row label column), rest are party names
     party_cols = header[1:]
-
     print(f"[KantarInfogram] Parties: {party_cols}")
-    print(f"[KantarInfogram] Data rows: {len(rows) - 1}")
 
-    new_count = 0
+    records = []
     for row in rows[1:]:
         label = cell_val(row[0]).strip()
-        if not label:
-            continue
-
-        # Skip rows marked with * (no survey that month)
-        if label.endswith("*"):
+        # Řádek s * = ten měsíc průzkum nebyl
+        if not label or label.endswith("*"):
             continue
 
         year, month = parse_month_label(label)
@@ -119,7 +118,6 @@ def run_scraper():
             print(f"  [SKIP] Cannot parse date label: {repr(label)}")
             continue
 
-        # Build parties dict
         raw_parties = {}
         for i, party_name in enumerate(party_cols):
             if not party_name:
@@ -132,31 +130,32 @@ def run_scraper():
             print(f"  [SKIP] Too few parties for {label}: {raw_parties}")
             continue
 
-        # Date: use last day of fieldwork month
+        # Graf uvádí jen měsíc sběru. Datum vydání v něm není, nevymýšlíme ho.
         day = last_day(year, month)
-        date_to = f"{year}-{month}-{day:02d}"
-        date_from = f"{year}-{month}-01"
-
         rec = build_poll_record(
             agency="Kantar",
-            date_published=date_to,
-            date_fieldwork_from=date_from,
-            date_fieldwork_to=date_to,
+            date_published=None,
+            date_fieldwork_from=f"{year}-{month}-01",
+            date_fieldwork_to=f"{year}-{month}-{day:02d}",
             raw_parties=raw_parties,
             poll_type="model",
             view="parties",   # Infogram always shows individual parties
-            sample_size=1000,
+            sample_size=KANTAR_SAMPLE,
             method="mixed",
             client="Česká televize",
             source_url=INFOGRAM_URL,
         )
+        if rec:
+            rec["poznamka"] = KANTAR_NOTE
+            records.append(rec)
+    return records
 
-        if rec and save_poll(rec):
+
+def run_scraper(historical=False):
+    new_count = 0
+    for rec in scrape_all():
+        if save_poll(rec):
             new_count += 1
-            print(f"  [OK] {label} -> {date_to}: {rec['parties']}")
-        else:
-            print(f"  [SKIP] {label} -> {date_to} already exists or invalid")
-
     print(f"[KantarInfogram] Hotovo, přidáno {new_count} průzkumů")
     return new_count
 

@@ -103,7 +103,8 @@ def scrape_article(url, title=""):
         return None
 
     # Datum publikace
-    date_pub = extract_pub_date(soup) or date.today().isoformat()
+    # Bez data vydání ve zdroji necháme None, dnešní datum by bylo vymyšlené
+    date_pub = extract_pub_date(soup)
 
     sample    = extract_sample_size(text)
     poll_type = (

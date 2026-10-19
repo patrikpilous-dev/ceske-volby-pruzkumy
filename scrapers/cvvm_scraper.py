@@ -79,7 +79,7 @@ def scrape_article(url, title=""):
             mon = MONTHS_CS.get(m.group(2).lower())
             if mon:
                 date_pub = f"{int(m.group(3))}-{mon}-{int(m.group(1)):02d}"
-    date_pub = date_pub or date.today().isoformat()
+    # Bez data vydání ve zdroji necháme None, dnešní datum by bylo vymyšlené
 
     sample = extract_sample_size(text)
 

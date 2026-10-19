@@ -14,6 +14,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 from scraper_utils import (
     fetch_with_retry, extract_pub_date, extract_fieldwork_dates,
     extract_parties_nearest, extract_sample_size, month_url_to_date,
+    verify_in_source,
 )
 from normalizer import build_poll_record, save_poll
 
@@ -75,7 +76,7 @@ def scrape_article(url):
         else "model"
     )
 
-    return build_poll_record(
+    rec = build_poll_record(
         agency="STEM",
         date_published=date_pub,
         date_fieldwork_from=date_from or date_to,
@@ -88,6 +89,11 @@ def scrape_article(url):
         client="CNN Prima News",
         source_url=url,
     )
+    # Dvojí čtení: číslo musí ve zdroji stát u jména strany, jinak karanténa
+    bad = verify_in_source(body, parties)
+    if rec and bad:
+        rec["neovereno"] = bad
+    return rec
 
 
 def scrape_all(historical=False):

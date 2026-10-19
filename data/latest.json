@@ -58,7 +58,7 @@
     },
     "coalition_notes": {},
     "source_url": "https://nms.global/cz/volebni-model-rijen-2026-ano-oslabuje-stan-je-nejsilnejsi-opozicni-stranou/",
-    "scraped_at": "2026-10-19T07:05:52.650332Z"
+    "scraped_at": "2026-10-19T08:36:39.713345Z"
   },
   {
     "id": "median-2026-09-30",
@@ -145,7 +145,7 @@
     },
     "coalition_notes": {},
     "source_url": "https://nms.global/cz/volebni-model-zari-2026-stan-si-upevnuje-pozici-za-viteznym-ano/",
-    "scraped_at": "2026-10-19T07:05:54.850515Z"
+    "scraped_at": "2026-10-19T08:36:41.838744Z"
   },
   {
     "id": "median-2026-08-31",
@@ -173,6 +173,33 @@
     "coalition_notes": {},
     "source_url": "https://www.median.eu/cs/?p=3809",
     "scraped_at": "2026-10-19T07:16:07.385279Z"
+  },
+  {
+    "id": "kantar-2026-08-31",
+    "agency": "Kantar",
+    "date_published": null,
+    "date_fieldwork_from": "2026-08-01",
+    "date_fieldwork_to": "2026-08-31",
+    "type": "model",
+    "view": "parties",
+    "sample_size": 1200,
+    "method": "mixed",
+    "client": "Česká televize",
+    "parties": {
+      "ANO": 30.5,
+      "TOP09": 2.0,
+      "ODS": 15.5,
+      "KDUČSL": 3.5,
+      "Piráti": 8.5,
+      "SPD": 6.5,
+      "STAN": 17.0,
+      "Motoristé": 5.0,
+      "NašeČesko": 2.5
+    },
+    "coalition_notes": {},
+    "source_url": "https://e.infogram.com/81040855-01fa-4085-9f57-b024ff49e9d3",
+    "scraped_at": "2026-10-19T08:36:34.766488Z",
+    "poznamka": "Vzorek 1 200 respondentů, do volebního modelu vstupuje 885."
   },
   {
     "id": "median-2026-07-31",
@@ -286,7 +313,7 @@
     },
     "coalition_notes": {},
     "source_url": "https://nms.global/cz/volebni-model-cerven-2026-ano-si-drzi-vedeni-stan-poprve-pred-ods/",
-    "scraped_at": "2026-10-19T07:05:57.130785Z"
+    "scraped_at": "2026-10-19T08:36:43.936556Z"
   },
   {
     "id": "median-2026-05-31",
@@ -317,6 +344,33 @@
     "scraped_at": "2026-10-19T07:16:25.108286Z"
   },
   {
+    "id": "kantar-2026-05-31",
+    "agency": "Kantar",
+    "date_published": null,
+    "date_fieldwork_from": "2026-05-01",
+    "date_fieldwork_to": "2026-05-31",
+    "type": "model",
+    "view": "parties",
+    "sample_size": 1200,
+    "method": "mixed",
+    "client": "Česká televize",
+    "parties": {
+      "ANO": 31.5,
+      "TOP09": 2.5,
+      "ODS": 15.5,
+      "KDUČSL": 4.0,
+      "Piráti": 9.5,
+      "SPD": 6.5,
+      "STAN": 15.5,
+      "Motoristé": 5.0,
+      "NašeČesko": 2.5
+    },
+    "coalition_notes": {},
+    "source_url": "https://e.infogram.com/81040855-01fa-4085-9f57-b024ff49e9d3",
+    "scraped_at": "2026-10-19T08:36:34.766411Z",
+    "poznamka": "Vzorek 1 200 respondentů, do volebního modelu vstupuje 885."
+  },
+  {
     "id": "nms-2026-05-05",
     "agency": "NMS",
     "date_published": "2026-05-08",
@@ -339,11 +393,39 @@
       "TOP09": 2.5,
       "KSČM": 2.3,
       "Zelení": 1.6,
-      "SOCDEM": 1.3
+      "Přísaha": 1.3,
+      "SOCDEM": 1.1
     },
     "coalition_notes": {},
     "source_url": "https://nms.global/cz/volebni-model-kveten-2026-vladni-a-opozicni-blok-si-drzi-sve-volice-motoriste-jsou-stale-nejslabsim-clankem-vlady/",
-    "scraped_at": "2026-10-19T07:05:59.396676Z"
+    "scraped_at": "2026-10-19T08:36:45.983761Z"
+  },
+  {
+    "id": "kantar-2026-04-30",
+    "agency": "Kantar",
+    "date_published": null,
+    "date_fieldwork_from": "2026-04-01",
+    "date_fieldwork_to": "2026-04-30",
+    "type": "model",
+    "view": "parties",
+    "sample_size": 1200,
+    "method": "mixed",
+    "client": "Česká televize",
+    "parties": {
+      "ANO": 32.0,
+      "TOP09": 2.0,
+      "ODS": 15.5,
+      "KDUČSL": 3.5,
+      "Piráti": 9.5,
+      "SPD": 6.5,
+      "STAN": 16.0,
+      "Motoristé": 5.0,
+      "NašeČesko": 3.0
+    },
+    "coalition_notes": {},
+    "source_url": "https://e.infogram.com/81040855-01fa-4085-9f57-b024ff49e9d3",
+    "scraped_at": "2026-10-19T08:36:34.766333Z",
+    "poznamka": "Vzorek 1 200 respondentů, do volebního modelu vstupuje 885."
   },
   {
     "id": "nms-2026-04-07",
@@ -358,7 +440,7 @@
     "client": "Novinky.cz",
     "parties": {
       "ANO": 32.7,
-      "Motoristé": 7.1,
+      "Motoristé": 4.4,
       "NašeČesko": 4.1,
       "ODS": 13.9,
       "STAN": 13.7,
@@ -367,12 +449,40 @@
       "KDUČSL": 2.5,
       "TOP09": 3.1,
       "KSČM": 2.8,
+      "SOCDEM": 1.0,
       "Přísaha": 1.4,
-      "Zelení": 1.0
+      "Zelení": 1.4
     },
     "coalition_notes": {},
     "source_url": "https://nms.global/cz/volebni-model-duben-2026-ano-stale-jasnym-hegemonem-z-rozpadu-spolu-zatim-misto-ods-tezi-stan/",
-    "scraped_at": "2026-10-19T07:06:01.617770Z"
+    "scraped_at": "2026-10-19T08:36:48.003992Z"
+  },
+  {
+    "id": "kantar-2026-03-31",
+    "agency": "Kantar",
+    "date_published": null,
+    "date_fieldwork_from": "2026-03-01",
+    "date_fieldwork_to": "2026-03-31",
+    "type": "model",
+    "view": "parties",
+    "sample_size": 1200,
+    "method": "mixed",
+    "client": "Česká televize",
+    "parties": {
+      "ANO": 34.0,
+      "TOP09": 2.5,
+      "ODS": 15.0,
+      "KDUČSL": 3.0,
+      "Piráti": 9.5,
+      "SPD": 6.5,
+      "STAN": 15.5,
+      "Motoristé": 5.0,
+      "NašeČesko": 3.0
+    },
+    "coalition_notes": {},
+    "source_url": "https://e.infogram.com/81040855-01fa-4085-9f57-b024ff49e9d3",
+    "scraped_at": "2026-10-19T08:36:34.766256Z",
+    "poznamka": "Vzorek 1 200 respondentů, do volebního modelu vstupuje 885."
   },
   {
     "id": "stem-2026-03-16",
@@ -399,7 +509,9 @@
     },
     "coalition_notes": {},
     "source_url": "https://www.stem.cz/volebni-tendence-ceske-verejnosti-brezen-2026/",
-    "scraped_at": "2026-03-28T20:03:06.791780Z"
+    "scraped_at": "2026-03-28T20:03:06.791780Z",
+    "approx": true,
+    "poznamka": "Čísla jen z grafu v článku (obrázek), v textu nejsou. Přibližná hodnota."
   },
   {
     "id": "nms-2026-03-10",
@@ -414,55 +526,32 @@
     "client": "Novinky.cz",
     "parties": {
       "ANO": 31.5,
+      "Motoristé": 7.1,
       "ODS": 14.1,
       "STAN": 13.6,
       "Piráti": 8.3,
       "SPD": 7.8,
-      "Motoristé": 7.1,
       "NašeČesko": 2.6,
       "KDUČSL": 3.0,
       "TOP09": 2.6,
       "KSČM": 2.5,
       "Zelení": 1.4,
-      "Přísaha": 1.1
+      "Přísaha": 1.1,
+      "SOCDEM": 1.0
     },
     "coalition_notes": {},
     "source_url": "https://nms.global/cz/volebni-model-brezen-2026-ano-pevne-na-cele-opozice-hleda-lidra-zajem-o-nase-cesko-mirne-opadl/",
-    "scraped_at": "2026-10-19T07:06:03.923277Z"
-  },
-  {
-    "id": "median-2026-02-28",
-    "agency": "Median",
-    "date_published": "2026-03-07",
-    "date_fieldwork_from": "2026-02-01",
-    "date_fieldwork_to": "2026-02-28",
-    "type": "model",
-    "view": "parties",
-    "sample_size": 1010,
-    "method": "CAPI",
-    "client": "Český rozhlas",
-    "parties": {
-      "ANO": 32.0,
-      "ODS": 14.0,
-      "Piráti": 10.5,
-      "SPD": 7.0,
-      "STAN": 6.0,
-      "TOP09": 5.5,
-      "Motoristé": 5.0,
-      "KDUČSL": 2.5
-    },
-    "coalition_notes": {},
-    "source_url": "https://www.median.eu/cs/?cat=6"
+    "scraped_at": "2026-10-19T08:36:50.048859Z"
   },
   {
     "id": "kantar-2026-02-28",
     "agency": "Kantar",
-    "date_published": "2026-02-28",
+    "date_published": null,
     "date_fieldwork_from": "2026-02-01",
     "date_fieldwork_to": "2026-02-28",
     "type": "model",
     "view": "parties",
-    "sample_size": 1000,
+    "sample_size": 1200,
     "method": "mixed",
     "client": "Česká televize",
     "parties": {
@@ -478,7 +567,8 @@
     },
     "coalition_notes": {},
     "source_url": "https://e.infogram.com/81040855-01fa-4085-9f57-b024ff49e9d3",
-    "scraped_at": "2026-03-29T10:14:44.345938Z"
+    "scraped_at": "2026-10-19T08:36:34.766162Z",
+    "poznamka": "Vzorek 1 200 respondentů, do volebního modelu vstupuje 885."
   },
   {
     "id": "nms-2026-02-17",
@@ -495,6 +585,7 @@
       "NašeČesko": 4.7,
       "Motoristé": 4.7,
       "ANO": 32.6,
+      "ODS": 14.7,
       "STAN": 14.6,
       "Piráti": 7.2,
       "SPD": 6.5,
@@ -507,40 +598,17 @@
     },
     "coalition_notes": {},
     "source_url": "https://nms.global/cz/volebni-model-unor-2026-dari-se-ano-a-starostum-stranicky-system-se-ale-dale-droli-a-propadla-by-az-ctvrtina-hlasu/",
-    "scraped_at": "2026-10-19T07:06:06.202506Z"
-  },
-  {
-    "id": "median-2026-01-31",
-    "agency": "Median",
-    "date_published": "2026-02-06",
-    "date_fieldwork_from": "2026-01-01",
-    "date_fieldwork_to": "2026-01-31",
-    "type": "model",
-    "view": "parties",
-    "sample_size": 1008,
-    "method": "CAPI",
-    "client": "Český rozhlas",
-    "parties": {
-      "ANO": 31.0,
-      "ODS": 12.5,
-      "Piráti": 11.0,
-      "SPD": 9.5,
-      "STAN": 9.0,
-      "TOP09": 5.5,
-      "Motoristé": 4.5
-    },
-    "coalition_notes": {},
-    "source_url": "https://www.median.eu/cs/?cat=6"
+    "scraped_at": "2026-10-19T08:36:52.119895Z"
   },
   {
     "id": "kantar-2026-01-31",
     "agency": "Kantar",
-    "date_published": "2026-01-31",
+    "date_published": null,
     "date_fieldwork_from": "2026-01-01",
     "date_fieldwork_to": "2026-01-31",
     "type": "model",
     "view": "parties",
-    "sample_size": 1000,
+    "sample_size": 1200,
     "method": "mixed",
     "client": "Česká televize",
     "parties": {
@@ -555,59 +623,13 @@
     },
     "coalition_notes": {},
     "source_url": "https://e.infogram.com/81040855-01fa-4085-9f57-b024ff49e9d3",
-    "scraped_at": "2026-03-29T10:14:21.221276Z"
-  },
-  {
-    "id": "ipsos-2026-01-25",
-    "agency": "Ipsos",
-    "date_published": "2026-02-03",
-    "date_fieldwork_from": "2026-01-13",
-    "date_fieldwork_to": "2026-01-25",
-    "type": "model",
-    "view": "parties",
-    "sample_size": 1005,
-    "method": "CAWI",
-    "client": "—",
-    "parties": {
-      "ANO": 36.0,
-      "ODS": 13.0,
-      "STAN": 11.5,
-      "Piráti": 8.5,
-      "SPD": 7.0,
-      "Motoristé": 4.5,
-      "TOP09": 4.0,
-      "KDUČSL": 2.5
-    },
-    "coalition_notes": {},
-    "source_url": "https://www.ipsos.com/cs-cz"
-  },
-  {
-    "id": "nms-2026-01-20",
-    "agency": "NMS",
-    "date_published": "2026-01-28",
-    "date_fieldwork_from": "2026-01-08",
-    "date_fieldwork_to": "2026-01-20",
-    "type": "model",
-    "view": "parties",
-    "sample_size": 1003,
-    "method": "CAWI",
-    "client": "Novinky.cz",
-    "parties": {
-      "ANO": 34.5,
-      "ODS": 13.5,
-      "STAN": 12.0,
-      "Piráti": 8.0,
-      "SPD": 7.5,
-      "Motoristé": 5.0,
-      "TOP09": 4.0
-    },
-    "coalition_notes": {},
-    "source_url": "https://www.nms.cz"
+    "scraped_at": "2026-10-19T08:36:34.766071Z",
+    "poznamka": "Vzorek 1 200 respondentů, do volebního modelu vstupuje 885."
   },
   {
     "id": "stem-2026-01-07",
     "agency": "STEM",
-    "date_published": "2026-01-15",
+    "date_published": "2026-01-12",
     "date_fieldwork_from": "2026-01-02",
     "date_fieldwork_to": "2026-01-07",
     "type": "model",
@@ -626,203 +648,19 @@
       "KDUČSL": 3.2
     },
     "coalition_notes": {},
-    "source_url": "https://www.stem.cz/volebni-tendence-ceske-verejnosti-leden-2026/"
-  },
-  {
-    "id": "median-2025-12-31",
-    "agency": "Median",
-    "date_published": "2026-01-17",
-    "date_fieldwork_from": "2025-11-21",
-    "date_fieldwork_to": "2025-12-31",
-    "type": "model",
-    "view": "parties",
-    "sample_size": 1015,
-    "method": "CAPI",
-    "client": "Český rozhlas",
-    "parties": {
-      "ANO": 33.5,
-      "STAN": 13.0,
-      "ODS": 11.5,
-      "Motoristé": 7.0,
-      "Piráti": 6.0,
-      "KSČM": 5.0,
-      "SPD": 4.5
-    },
-    "coalition_notes": {},
-    "source_url": "https://www.median.eu/cs/?cat=6"
-  },
-  {
-    "id": "kantar-2025-12-20",
-    "agency": "Kantar",
-    "date_published": "2026-01-12",
-    "date_fieldwork_from": "2025-11-25",
-    "date_fieldwork_to": "2025-12-20",
-    "type": "model",
-    "view": "parties",
-    "sample_size": 1108,
-    "method": "mixed",
-    "client": "Česká televize",
-    "parties": {
-      "ANO": 34.5,
-      "ODS": 12.0,
-      "STAN": 12.5,
-      "Piráti": 7.5,
-      "SPD": 6.0,
-      "Motoristé": 5.5,
-      "TOP09": 4.0
-    },
-    "coalition_notes": {},
-    "source_url": "https://cz.kantar.com/trendyceska/"
-  },
-  {
-    "id": "ipsos-2025-12-10",
-    "agency": "Ipsos",
-    "date_published": "2025-12-18",
-    "date_fieldwork_from": "2025-11-28",
-    "date_fieldwork_to": "2025-12-10",
-    "type": "model",
-    "view": "parties",
-    "sample_size": 1001,
-    "method": "CAWI",
-    "client": "—",
-    "parties": {
-      "ANO": 35.5,
-      "ODS": 12.0,
-      "STAN": 11.0,
-      "Piráti": 7.5,
-      "SPD": 6.5,
-      "Motoristé": 5.5,
-      "TOP09": 3.5
-    },
-    "coalition_notes": {},
-    "source_url": "https://www.ipsos.com/cs-cz"
-  },
-  {
-    "id": "cvvm-2025-12-06",
-    "agency": "CVVM",
-    "date_published": "2025-12-19",
-    "date_fieldwork_from": "2025-11-17",
-    "date_fieldwork_to": "2025-12-06",
-    "type": "preference",
-    "view": "parties",
-    "sample_size": 1021,
-    "method": "CAPI",
-    "client": "Sociologický ústav AV ČR",
-    "parties": {
-      "ANO": 30.5,
-      "ODS": 13.0,
-      "STAN": 10.5,
-      "Piráti": 9.0,
-      "SPD": 8.0,
-      "Motoristé": 6.5,
-      "TOP09": 5.0,
-      "KDUČSL": 4.5,
-      "SOCDEM": 3.5
-    },
-    "coalition_notes": {},
-    "source_url": "https://cvvm.soc.cas.cz/cz/"
-  },
-  {
-    "id": "stem-2025-11-28",
-    "agency": "STEM",
-    "date_published": "2025-12-03",
-    "date_fieldwork_from": "2025-11-17",
-    "date_fieldwork_to": "2025-11-28",
-    "type": "model",
-    "view": "parties",
-    "sample_size": 1095,
-    "method": "CAWI",
-    "client": "CNN Prima News",
-    "parties": {
-      "ANO": 35.0,
-      "ODS": 14.0,
-      "STAN": 12.0,
-      "Piráti": 9.0,
-      "SPD": 7.5,
-      "Motoristé": 5.5,
-      "TOP09": 3.8
-    },
-    "coalition_notes": {},
-    "source_url": "https://www.stem.cz/volebni-tendence-ceske-verejnosti-listopad-2025/"
-  },
-  {
-    "id": "nms-2025-11-22",
-    "agency": "NMS",
-    "date_published": "2025-11-28",
-    "date_fieldwork_from": "2025-11-10",
-    "date_fieldwork_to": "2025-11-22",
-    "type": "model",
-    "view": "parties",
-    "sample_size": 1002,
-    "method": "CAWI",
-    "client": "Novinky.cz",
-    "parties": {
-      "ANO": 33.0,
-      "ODS": 12.5,
-      "STAN": 11.5,
-      "Piráti": 8.0,
-      "SPD": 7.0,
-      "Motoristé": 6.0,
-      "TOP09": 4.5
-    },
-    "coalition_notes": {},
-    "source_url": "https://www.nms.cz"
-  },
-  {
-    "id": "kantar-2025-10-18",
-    "agency": "Kantar",
-    "date_published": "2025-11-02",
-    "date_fieldwork_from": "2025-09-22",
-    "date_fieldwork_to": "2025-10-18",
-    "type": "model",
-    "view": "coalitions",
-    "sample_size": 1095,
-    "method": "mixed",
-    "client": "Česká televize",
-    "parties": {
-      "ANO": 33.0,
-      "SPOLU": 20.5,
-      "STAN": 11.5,
-      "SPD4K": 12.0,
-      "Piráti": 8.5,
-      "Motoristé": 6.0
-    },
-    "coalition_notes": {},
-    "source_url": "https://cz.kantar.com/trendyceska/"
-  },
-  {
-    "id": "cvvm-2025-10-10",
-    "agency": "CVVM",
-    "date_published": "2025-10-23",
-    "date_fieldwork_from": "2025-09-15",
-    "date_fieldwork_to": "2025-10-10",
-    "type": "preference",
-    "view": "parties",
-    "sample_size": 1018,
-    "method": "CAPI",
-    "client": "Sociologický ústav AV ČR",
-    "parties": {
-      "ANO": 31.0,
-      "ODS": 12.5,
-      "STAN": 11.5,
-      "Piráti": 8.5,
-      "SPD": 7.5,
-      "Motoristé": 5.5,
-      "TOP09": 5.0,
-      "KDUČSL": 4.0
-    },
-    "coalition_notes": {},
-    "source_url": "https://cvvm.soc.cas.cz/cz/"
+    "source_url": "https://www.stem.cz/volebni-tendence-ceske-verejnosti-leden-2026/",
+    "approx": true,
+    "poznamka": "Čísla jen z grafu v článku (obrázek), v textu nejsou. Přibližná hodnota."
   },
   {
     "id": "kantar-2025-09-30",
     "agency": "Kantar",
-    "date_published": "2025-09-30",
+    "date_published": null,
     "date_fieldwork_from": "2025-09-01",
     "date_fieldwork_to": "2025-09-30",
     "type": "model",
     "view": "parties",
-    "sample_size": 1000,
+    "sample_size": 1200,
     "method": "mixed",
     "client": "Česká televize",
     "parties": {
@@ -838,7 +676,8 @@
     },
     "coalition_notes": {},
     "source_url": "https://e.infogram.com/81040855-01fa-4085-9f57-b024ff49e9d3",
-    "scraped_at": "2026-03-29T10:14:21.176132Z"
+    "scraped_at": "2026-10-19T08:36:34.765998Z",
+    "poznamka": "Vzorek 1 200 respondentů, do volebního modelu vstupuje 885."
   },
   {
     "id": "stem-2025-09-28",
@@ -937,12 +776,12 @@
   {
     "id": "kantar-2025-08-31",
     "agency": "Kantar",
-    "date_published": "2025-08-31",
+    "date_published": null,
     "date_fieldwork_from": "2025-08-01",
     "date_fieldwork_to": "2025-08-31",
     "type": "model",
     "view": "parties",
-    "sample_size": 1000,
+    "sample_size": 1200,
     "method": "mixed",
     "client": "Česká televize",
     "parties": {
@@ -958,7 +797,8 @@
     },
     "coalition_notes": {},
     "source_url": "https://e.infogram.com/81040855-01fa-4085-9f57-b024ff49e9d3",
-    "scraped_at": "2026-03-29T10:14:21.127318Z"
+    "scraped_at": "2026-10-19T08:36:34.765919Z",
+    "poznamka": "Vzorek 1 200 respondentů, do volebního modelu vstupuje 885."
   },
   {
     "id": "median-2025-08-28",
@@ -1156,12 +996,12 @@
   {
     "id": "kantar-2025-06-30",
     "agency": "Kantar",
-    "date_published": "2025-06-30",
+    "date_published": null,
     "date_fieldwork_from": "2025-06-01",
     "date_fieldwork_to": "2025-06-30",
     "type": "model",
     "view": "parties",
-    "sample_size": 1000,
+    "sample_size": 1200,
     "method": "mixed",
     "client": "Česká televize",
     "parties": {
@@ -1177,7 +1017,8 @@
     },
     "coalition_notes": {},
     "source_url": "https://e.infogram.com/81040855-01fa-4085-9f57-b024ff49e9d3",
-    "scraped_at": "2026-03-29T10:14:21.080216Z"
+    "scraped_at": "2026-10-19T08:36:34.765838Z",
+    "poznamka": "Vzorek 1 200 respondentů, do volebního modelu vstupuje 885."
   },
   {
     "id": "ipsos-2025-06-29",
@@ -1255,12 +1096,12 @@
   {
     "id": "kantar-2025-05-31",
     "agency": "Kantar",
-    "date_published": "2025-05-31",
+    "date_published": null,
     "date_fieldwork_from": "2025-05-01",
     "date_fieldwork_to": "2025-05-31",
     "type": "model",
     "view": "parties",
-    "sample_size": 1000,
+    "sample_size": 1200,
     "method": "mixed",
     "client": "Česká televize",
     "parties": {
@@ -1276,7 +1117,8 @@
     },
     "coalition_notes": {},
     "source_url": "https://e.infogram.com/81040855-01fa-4085-9f57-b024ff49e9d3",
-    "scraped_at": "2026-03-29T10:14:21.036468Z"
+    "scraped_at": "2026-10-19T08:36:34.765751Z",
+    "poznamka": "Vzorek 1 200 respondentů, do volebního modelu vstupuje 885."
   },
   {
     "id": "median-2025-05-28",
@@ -1351,12 +1193,12 @@
   {
     "id": "kantar-2025-04-30",
     "agency": "Kantar",
-    "date_published": "2025-04-30",
+    "date_published": null,
     "date_fieldwork_from": "2025-04-01",
     "date_fieldwork_to": "2025-04-30",
     "type": "model",
     "view": "parties",
-    "sample_size": 1000,
+    "sample_size": 1200,
     "method": "mixed",
     "client": "Česká televize",
     "parties": {
@@ -1372,7 +1214,8 @@
     },
     "coalition_notes": {},
     "source_url": "https://e.infogram.com/81040855-01fa-4085-9f57-b024ff49e9d3",
-    "scraped_at": "2026-03-29T10:14:20.988645Z"
+    "scraped_at": "2026-10-19T08:36:34.765657Z",
+    "poznamka": "Vzorek 1 200 respondentů, do volebního modelu vstupuje 885."
   },
   {
     "id": "median-2025-04-28",
@@ -1449,12 +1292,12 @@
   {
     "id": "kantar-2025-03-31",
     "agency": "Kantar",
-    "date_published": "2025-03-31",
+    "date_published": null,
     "date_fieldwork_from": "2025-03-01",
     "date_fieldwork_to": "2025-03-31",
     "type": "model",
     "view": "parties",
-    "sample_size": 1000,
+    "sample_size": 1200,
     "method": "mixed",
     "client": "Česká televize",
     "parties": {
@@ -1470,7 +1313,8 @@
     },
     "coalition_notes": {},
     "source_url": "https://e.infogram.com/81040855-01fa-4085-9f57-b024ff49e9d3",
-    "scraped_at": "2026-03-29T10:14:20.971962Z"
+    "scraped_at": "2026-10-19T08:36:34.765569Z",
+    "poznamka": "Vzorek 1 200 respondentů, do volebního modelu vstupuje 885."
   },
   {
     "id": "median-2025-03-28",
@@ -1518,5 +1362,203 @@
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
     "scraped_at": "2026-03-28T20:13:30.394481Z"
+  },
+  {
+    "id": "stem-2025-03-25",
+    "agency": "STEM",
+    "date_published": "2025-03-25",
+    "date_fieldwork_from": "2025-03-07",
+    "date_fieldwork_to": "2025-03-25",
+    "type": "model",
+    "view": "coalitions",
+    "sample_size": null,
+    "method": null,
+    "client": null,
+    "parties": {
+      "ANO": 31.1,
+      "SPOLU": 20.0,
+      "STAN": 11.8,
+      "Piráti": 5.8,
+      "SPD": 1.8,
+      "Motoristé": 8.9,
+      "Přísaha": 1.6
+    },
+    "coalition_notes": {},
+    "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
+    "scraped_at": "2026-03-28T20:13:30.394542Z"
+  },
+  {
+    "id": "median-2025-02-28",
+    "agency": "Median",
+    "date_published": "2026-03-28",
+    "date_fieldwork_from": "2025-02-01",
+    "date_fieldwork_to": "2025-02-28",
+    "type": "model",
+    "view": "coalitions",
+    "sample_size": null,
+    "method": "CAPI",
+    "client": "Český rozhlas",
+    "parties": {
+      "ANO": 33.5,
+      "STAN": 10.0,
+      "Piráti": 6.0,
+      "Motoristé": 8.0,
+      "SPOLU": 18.5
+    },
+    "coalition_notes": {},
+    "source_url": "https://www.median.eu/cs/?p=3530",
+    "scraped_at": "2026-03-28T16:45:09.082344Z"
+  },
+  {
+    "id": "kantar-2025-02-28",
+    "agency": "Kantar",
+    "date_published": null,
+    "date_fieldwork_from": "2025-02-01",
+    "date_fieldwork_to": "2025-02-28",
+    "type": "model",
+    "view": "parties",
+    "sample_size": 1200,
+    "method": "mixed",
+    "client": "Česká televize",
+    "parties": {
+      "ANO": 37.0,
+      "KSČM": 3.5,
+      "TOP09": 3.0,
+      "ODS": 12.5,
+      "KDUČSL": 3.5,
+      "Piráti": 6.5,
+      "SPD": 6.5,
+      "STAN": 12.5,
+      "Motoristé": 6.0
+    },
+    "coalition_notes": {},
+    "source_url": "https://e.infogram.com/81040855-01fa-4085-9f57-b024ff49e9d3",
+    "scraped_at": "2026-10-19T08:36:34.765466Z",
+    "poznamka": "Vzorek 1 200 respondentů, do volebního modelu vstupuje 885."
+  },
+  {
+    "id": "ipsos-2025-02-28",
+    "agency": "Ipsos",
+    "date_published": "2025-02-28",
+    "date_fieldwork_from": "2025-02-24",
+    "date_fieldwork_to": "2025-02-28",
+    "type": "model",
+    "view": "coalitions",
+    "sample_size": null,
+    "method": null,
+    "client": null,
+    "parties": {
+      "ANO": 36.4,
+      "SPOLU": 20.6,
+      "STAN": 10.6,
+      "Piráti": 5.1,
+      "SPD": 1.3,
+      "Motoristé": 7.5,
+      "Stačilo": 0.6,
+      "Přísaha": 2.1
+    },
+    "coalition_notes": {},
+    "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
+    "scraped_at": "2026-03-28T20:13:30.394700Z"
+  },
+  {
+    "id": "stem-2025-02-25",
+    "agency": "STEM",
+    "date_published": "2025-02-25",
+    "date_fieldwork_from": "2025-02-07",
+    "date_fieldwork_to": "2025-02-25",
+    "type": "model",
+    "view": "coalitions",
+    "sample_size": null,
+    "method": null,
+    "client": null,
+    "parties": {
+      "ANO": 33.6,
+      "SPOLU": 16.2,
+      "STAN": 12.9,
+      "Piráti": 6.8,
+      "SPD": 2.1,
+      "Motoristé": 8.1,
+      "Přísaha": 2.9
+    },
+    "coalition_notes": {},
+    "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
+    "scraped_at": "2026-03-28T20:13:30.394896Z"
+  },
+  {
+    "id": "nms-2025-02-09",
+    "agency": "NMS",
+    "date_published": "2025-02-09",
+    "date_fieldwork_from": "2025-02-04",
+    "date_fieldwork_to": "2025-02-09",
+    "type": "model",
+    "view": "coalitions",
+    "sample_size": null,
+    "method": null,
+    "client": null,
+    "parties": {
+      "ANO": 34.5,
+      "SPOLU": 18.7,
+      "STAN": 12.2,
+      "Piráti": 4.8,
+      "SPD": 1.9,
+      "Motoristé": 7.8,
+      "Stačilo": 0.5,
+      "Přísaha": 1.9
+    },
+    "coalition_notes": {},
+    "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
+    "scraped_at": "2026-03-28T20:13:30.395050Z"
+  },
+  {
+    "id": "median-2025-01-31",
+    "agency": "Median",
+    "date_published": "2025-01-31",
+    "date_fieldwork_from": "2025-01-07",
+    "date_fieldwork_to": "2025-01-31",
+    "type": "model",
+    "view": "coalitions",
+    "sample_size": null,
+    "method": null,
+    "client": null,
+    "parties": {
+      "ANO": 33.0,
+      "SPOLU": 17.0,
+      "STAN": 11.0,
+      "Piráti": 4.0,
+      "SPD": 2.0,
+      "Motoristé": 8.0,
+      "Stačilo": 2.5
+    },
+    "coalition_notes": {},
+    "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
+    "scraped_at": "2026-03-28T20:13:30.395360Z"
+  },
+  {
+    "id": "kantar-2025-01-31",
+    "agency": "Kantar",
+    "date_published": null,
+    "date_fieldwork_from": "2025-01-01",
+    "date_fieldwork_to": "2025-01-31",
+    "type": "model",
+    "view": "parties",
+    "sample_size": 1200,
+    "method": "mixed",
+    "client": "Česká televize",
+    "parties": {
+      "ANO": 33.5,
+      "KSČM": 3.0,
+      "TOP09": 4.0,
+      "ODS": 13.0,
+      "KDUČSL": 3.0,
+      "Piráti": 7.5,
+      "SPD": 6.5,
+      "STAN": 12.5,
+      "Motoristé": 7.5
+    },
+    "coalition_notes": {},
+    "source_url": "https://e.infogram.com/81040855-01fa-4085-9f57-b024ff49e9d3",
+    "scraped_at": "2026-10-19T08:36:34.765344Z",
+    "poznamka": "Vzorek 1 200 respondentů, do volebního modelu vstupuje 885."
   }
 ]

@@ -1,0 +1,144 @@
+{
+  "ANO": {
+    "jmeno": "Andrej Babiš",
+    "funkce_od": "2012-08-01",
+    "soubor": "ano.jpg",
+    "autor": "Vox España",
+    "licence": "CC0",
+    "licence_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "zdroj": "https://commons.wikimedia.org/wiki/File:Andrej_Babi%C5%A1_2025_(cropped).jpg",
+    "overeni_predsedy": "https://cs.wikipedia.org/wiki/ANO_2011"
+  },
+  "STAN": {
+    "jmeno": "Vít Rakušan",
+    "funkce_od": "2019-04-13",
+    "soubor": "stan.jpg",
+    "autor": "David Sedlecký",
+    "licence": "CC BY 4.0",
+    "licence_url": "https://creativecommons.org/licenses/by/4.0",
+    "zdroj": "https://commons.wikimedia.org/wiki/File:V%C3%ADt_Raku%C5%A1an_2023_Praha_(cropped)_2.jpg",
+    "overeni_predsedy": "https://cs.wikipedia.org/wiki/Starostov%C3%A9_a_nez%C3%A1visl%C3%AD"
+  },
+  "ODS": {
+    "jmeno": "Martin Kupka",
+    "funkce_od": "2026-01-17",
+    "soubor": "ods.jpg",
+    "autor": "NASA/Joel Kowsky",
+    "licence": "Public domain",
+    "licence_url": "",
+    "zdroj": "https://commons.wikimedia.org/wiki/File:Martin_Kupka_2024_portrait_crop2.jpg",
+    "overeni_predsedy": "https://cs.wikipedia.org/wiki/Ob%C4%8Dansk%C3%A1_demokratick%C3%A1_strana"
+  },
+  "SPD": {
+    "jmeno": "Tomio Okamura",
+    "funkce_od": "2015-08-04",
+    "soubor": "spd.jpg",
+    "autor": "Tomio Okamura",
+    "licence": "CC BY-SA 4.0",
+    "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "zdroj": "https://commons.wikimedia.org/wiki/File:Tomio_Okamura_portr%C3%A9t_(cropped).jpg",
+    "overeni_predsedy": "https://cs.wikipedia.org/wiki/Svoboda_a_p%C5%99%C3%ADm%C3%A1_demokracie"
+  },
+  "Piráti": {
+    "jmeno": "Zdeněk Hřib",
+    "funkce_od": "2024-11-09",
+    "soubor": "pirati.jpg",
+    "autor": "Piráti",
+    "licence": "CC BY 2.5",
+    "licence_url": "https://creativecommons.org/licenses/by/2.5",
+    "zdroj": "https://commons.wikimedia.org/wiki/File:Zden%C4%9Bk_H%C5%99ib_(cropped).jpg",
+    "overeni_predsedy": "https://cs.wikipedia.org/wiki/%C4%8Cesk%C3%A1_pir%C3%A1tsk%C3%A1_strana"
+  },
+  "Motoristé": {
+    "jmeno": "Petr Macinka",
+    "funkce_od": "2022-05-20",
+    "soubor": "motoriste.jpg",
+    "autor": "Bundesministerium für europäische und internationale Angelegenheiten",
+    "licence": "CC BY 4.0",
+    "licence_url": "https://creativecommons.org/licenses/by/4.0",
+    "zdroj": "https://commons.wikimedia.org/wiki/File:Petr_Macinka_2026-02-14.jpg",
+    "overeni_predsedy": "https://cs.wikipedia.org/wiki/Motorist%C3%A9_sob%C4%9B"
+  },
+  "KDUČSL": {
+    "jmeno": "Jan Grolich",
+    "funkce_od": "2026-04-24",
+    "soubor": "kducsl.jpg",
+    "autor": "Lasy",
+    "licence": "CC BY-SA 4.0",
+    "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "zdroj": "https://commons.wikimedia.org/wiki/File:Jan_Grolich_2022_crop.jpg",
+    "overeni_predsedy": "https://cs.wikipedia.org/wiki/KDU-%C4%8CSL"
+  },
+  "KSČM": {
+    "jmeno": "Roman Roun",
+    "funkce_od": "2026-05-30",
+    "soubor": "kscm.jpg",
+    "autor": "Jiri Novotny",
+    "licence": "CC BY-SA 4.0",
+    "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "zdroj": "https://commons.wikimedia.org/wiki/File:Roman_Roun.jpeg",
+    "overeni_predsedy": "https://cs.wikipedia.org/wiki/Komunistick%C3%A1_strana_%C4%8Cech_a_Moravy",
+    "poznamka": "Jediná volná fotka na Commons je z roku 2013."
+  },
+  "NašeČesko": {
+    "jmeno": "Martin Kuba",
+    "funkce_od": "2026-03-12",
+    "soubor": "nasecesko.jpg",
+    "autor": "ZSsen",
+    "licence": "CC BY-SA 4.0",
+    "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "zdroj": "https://commons.wikimedia.org/wiki/File:Martin_Kuba_2018.jpg",
+    "overeni_predsedy": "https://cs.wikipedia.org/wiki/Na%C5%A1e_%C4%8Cesko"
+  },
+  "SOCDEM": {
+    "jmeno": "Jiří Nedvěd",
+    "funkce_od": "2025-12-13",
+    "soubor": "socdem.jpg",
+    "autor": "Jahnak",
+    "licence": "CC BY 4.0",
+    "licence_url": "https://creativecommons.org/licenses/by/4.0",
+    "zdroj": "https://commons.wikimedia.org/wiki/File:Ji%C5%99%C3%AD_Nedv%C4%9Bd.jpg",
+    "overeni_predsedy": "https://cs.wikipedia.org/wiki/Soci%C3%A1ln%C3%AD_demokracie_%28%C4%8Cesko%29"
+  },
+  "Zelení": {
+    "jmeno": "Gabriela Svárovská",
+    "funkce_od": "2024-11-02",
+    "soubor": "zeleni.jpg",
+    "autor": "Pirátská strana",
+    "licence": "CC BY-SA 4.0",
+    "licence_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "zdroj": "https://commons.wikimedia.org/wiki/File:Gabriela_Sv%C3%A1rovsk%C3%A1_2025.jpg",
+    "overeni_predsedy": "https://cs.wikipedia.org/wiki/Strana_zelen%C3%BDch",
+    "poznamka": "Strana má spolupředsednictví: Gabriela Svárovská a Matěj Pomahač (oba od 2. 11. 2024)."
+  },
+  "PRO": {
+    "jmeno": "Jindřich Rajchl",
+    "funkce_od": "2022-06-18",
+    "soubor": "pro.jpg",
+    "autor": "JANINA z Londýna",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0",
+    "zdroj": "https://commons.wikimedia.org/wiki/File:Jind%C5%99ich_Rajchl_JANINA_z_Lond%C3%BDna.jpg",
+    "overeni_predsedy": "https://cs.wikipedia.org/wiki/PRO_Pr%C3%A1vo_Respekt_Odbornost"
+  },
+  "Přísaha": {
+    "jmeno": "Robert Šlachta",
+    "funkce_od": "2021-06-26",
+    "soubor": "prisaha.jpg",
+    "autor": "Vox España",
+    "licence": "CC0",
+    "licence_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "zdroj": "https://commons.wikimedia.org/wiki/File:Robert_%C5%A0lachta_2025_(cropped).webp",
+    "overeni_predsedy": "https://cs.wikipedia.org/wiki/P%C5%99%C3%ADsaha_ob%C4%8Dansk%C3%A9_hnut%C3%AD"
+  },
+  "Svobodní": {
+    "jmeno": "Libor Vondráček",
+    "funkce_od": "2019-10-17",
+    "soubor": "svobodni.jpg",
+    "autor": "Programy do voleb (programydovoleb.cz), fotograf neuveden",
+    "licence": "CC BY 3.0",
+    "licence_url": "https://creativecommons.org/licenses/by/3.0",
+    "zdroj": "https://commons.wikimedia.org/wiki/File:Libor_Vondr%C3%A1%C4%8Dek.jpg",
+    "overeni_predsedy": "https://cs.wikipedia.org/wiki/Svobodn%C3%AD"
+  }
+}

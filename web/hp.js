@@ -159,7 +159,7 @@ function render1() {
     const mx = Math.max(32, ...Object.values(AVG)) + 2;
     $("avg").innerHTML = Object.entries(AVG).filter(([, v]) => v >= 2).map(([k, v]) => {
       const r = STRANY[k].r; let dl = "";
-      if (r != null) { const d = v - r; dl = ` <span class="dl" style="color:${d >= 0 ? "#1D7A3A" : "#C0272D"}">${d > 0 ? "+" : ""}${cz(d)}</span>`; }
+      if (r != null) { const d = Math.abs(v - r) < 0.05 ? 0 : v - r; dl = ` <span class="dl" style="color:${d >= 0 ? "#1D7A3A" : "#C0272D"}">${d > 0 ? "+" : ""}${cz(d)}</span>`; }
       const nn = N[k] < CUR.length ? ` <span class="dl" title="Uvedlo ${N[k]} z ${CUR.length} agentur" style="color:#8890B0">${N[k]}/${CUR.length}</span>` : "";
       return `<div class="r"><div class="nm">${esc(nm(k))}${hlava(k)}${nn}</div><div class="t"><div class="f" style="width:${v/mx*100}%;background:${col(k)}"></div><div class="c5" style="left:${5/mx*100}%"></div></div><div class="v">${cz(v)} %${dl}</div></div>`;
     }).join("");

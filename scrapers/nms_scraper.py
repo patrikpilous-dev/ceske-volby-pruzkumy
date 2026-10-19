@@ -1,147 +1,90 @@
 """
-nms_scraper.py — Scraper pro NMS Market Research
-Publikuje volební model pro Novinky.cz (Seznam.cz skupina), ~měsíčně.
-Primární: nms.global/cz/category/volebni-vyzkumy/ (stránkování)
-Záložní:  novinky.cz sekce průzkumy
+nms_scraper.py — Scraper pro NMS (nms.global)
+Volební model pro Novinky.cz, ~měsíčně.
+Výpis: nms.global/cz/media-blog?id=posts-cz&ucat=869, historie ze sitemapy.
+Termín sběru bere z metodiky článku („Sběr dat probíhal … od 3. 6. do 8. 6. 2026“),
+nikdy z data stažení. ID záznamu = konec sběru, takže opakované stažení
+téhož článku nevyrobí nový záznam.
 """
 
 import re
 import sys
 import time
-from datetime import date
 from pathlib import Path
+
+import requests
 
 sys.path.insert(0, str(Path(__file__).parent))
 from scraper_utils import (
-    MONTHS_CS, PARTY_PATTERNS,
-    fetch_with_retry, extract_pub_date, extract_fieldwork_dates,
-    extract_parties_from_text, extract_parties_from_table, extract_sample_size,
+    HEADERS, fetch_with_retry, extract_pub_date, extract_fieldwork_dates,
+    extract_parties_nearest, extract_sample_size,
 )
 from normalizer import build_poll_record, save_poll
 
-NMS_BASE     = "https://nms.global"
-NMS_CATEGORY = f"{NMS_BASE}/cz/category/volebni-vyzkumy/"
-
-NOVINKY_SEARCH = "https://www.novinky.cz/tag/pruzkum-nms"
-
-# Klíčová slova označující krajský/regionální průzkum — tyto přeskočit
-REGIONAL_KW = [
-    "jihomoravský", "středočeský", "jihočeský", "plzeňský", "karlovarský",
-    "ústecký", "liberecký", "královéhradecký", "pardubický", "vysočina",
-    "olomoucký", "moravskoslezský", "zlínský", "kraj", "krajský",
-    "volebni-model-praha", "volebni model praha", "hlavní město",
-]
-
-# Sekce webu které nejsou články — tyto přeskočit i když jsou na nms.global/cz/
-SECTION_PATHS = [
-    "/sluzby/", "/platformy/", "/reference/", "/o-nas/",
-    "/media-blog", "/kariera/", "/kontakty/", "/metodologie/",
-    "/category/", "/page/",
-]
+NMS_BASE = "https://nms.global"
+NMS_LIST = f"{NMS_BASE}/cz/media-blog?id=posts-cz&ucat=869"
+NMS_SITEMAP = f"{NMS_BASE}/post-sitemap.xml"
+# Jen celostátní měsíční modely: /cz/volebni-model-rijen-2026-…/
+# (krajské a pražské modely mají v URL název kraje místo měsíce)
+ARTICLE_RE = re.compile(
+    r"^https://nms\.global/cz/volebni-model-(?:leden|unor|brezen|duben|kveten|cerven|"
+    r"cervenec|srpen|zari|rijen|listopad|prosinec)-\d{4}[a-z0-9\-]*/$"
+)
 
 
-def _is_regional(title: str, url: str) -> bool:
-    text = (title + " " + url).lower()
-    return any(kw in text for kw in REGIONAL_KW)
-
-
-def _is_article_url(full: str) -> bool:
-    """Vrátí True jen pro skutečné NMS články (ne navigaci/sekce)."""
-    prefix = NMS_BASE + "/cz/"
-    if not full.startswith(prefix):
-        return False
-    if full == prefix:
-        return False
-    return not any(sec in full for sec in SECTION_PATHS)
-
-
-def get_nms_links(max_pages=8):
-    links = []
-    seen  = set()
-    kw_txt = ["volební", "model", "preference", "strany", "politick"]
-    kw_url = ["volebni", "preference", "volby"]
-    for page in range(1, max_pages + 1):
-        url  = NMS_CATEGORY if page == 1 else f"{NMS_CATEGORY}page/{page}/"
-        soup = fetch_with_retry(url)
-        if not soup:
-            break
-        found = 0
+def get_article_urls(historical=False):
+    """
+    Seznam článků z výpisu blogu (nejnovější) a ze sitemapy (celá historie).
+    Stránkování blogu nefiltruje podle kategorie, sitemapa má všechno.
+    """
+    urls = []
+    soup = fetch_with_retry(NMS_LIST)
+    if soup:
         for a in soup.find_all("a", href=True):
-            href = a["href"]
-            txt  = a.get_text().strip()
-            txt_lower = txt.lower()
-            full = href if href.startswith("http") else NMS_BASE + href
-            # Přeskočit regionální průzkumy
-            if _is_regional(txt, href):
-                continue
-            # Akceptovat pokud jde o NMS článek (ne sekci) s volebním klíčovým slovem
-            if _is_article_url(full) and (
-                any(k in txt_lower for k in kw_txt) or
-                any(k in full.lower() for k in kw_url)
-            ):
-                if full not in seen:
-                    seen.add(full)
-                    links.append({"url": full, "title": txt})
-                    found += 1
-        if found == 0:
-            break
-        time.sleep(0.8)
-    return links
+            href = a["href"].split("#")[0]
+            if ARTICLE_RE.match(href) and href not in urls:
+                urls.append(href)
+    if historical:
+        try:
+            r = requests.get(NMS_SITEMAP, headers=HEADERS, timeout=20)
+            for loc in re.findall(r"<loc>([^<]+)</loc>", r.text):
+                if ARTICLE_RE.match(loc) and loc not in urls:
+                    urls.append(loc)
+        except requests.RequestException as e:
+            print(f"[NMS] sitemapa: {e}")
+    return urls
 
 
-def get_novinky_links(max_pages=5):
-    """Záložní zdroj — Novinky.cz."""
-    links = []
-    seen  = set()
-    for page in range(1, max_pages + 1):
-        url  = NOVINKY_SEARCH if page == 1 else f"{NOVINKY_SEARCH}?page={page}"
-        soup = fetch_with_retry(url)
-        if not soup:
-            break
-        found = 0
-        for a in soup.find_all("a", href=True):
-            href = a["href"]
-            txt  = a.get_text().lower()
-            if any(kw in txt for kw in ["volební", "model", "preference", "průzkum"]):
-                full = href if href.startswith("http") else "https://www.novinky.cz" + href
-                if full not in seen:
-                    seen.add(full)
-                    links.append({"url": full, "title": a.get_text().strip()})
-                    found += 1
-        if found == 0:
-            break
-        time.sleep(0.8)
-    return links
-
-
-def scrape_article(url, title=""):
+def scrape_article(url):
     soup = fetch_with_retry(url)
     if not soup:
         return None
     print(f"[NMS] {url}")
+    for tag in soup(["script", "style", "nav", "header", "footer"]):
+        tag.decompose()
     text = soup.get_text(" ", strip=True)
 
-    if not any(kw in text.lower() for kw in ["volební model", "preference", "nms", "novinky"]):
-        return None
-
-    # Datum sběru
-    date_from, date_to = extract_fieldwork_dates(text)
-    if not date_to and title:
-        date_from, date_to = extract_fieldwork_dates(title)
+    # Termín sběru jen z metodiky článku
+    m = re.search(r"Sběr dat probíhal.{0,200}", text)
+    date_from, date_to = extract_fieldwork_dates(m.group(0) if m else text)
     if not date_to:
+        print(f"[NMS] Nenalezen termín sběru v {url}")
         return None
 
-    # Strany: tabulka jako první volba, pak text
-    parties = extract_parties_from_table(soup)
-    if not parties:
-        parties = extract_parties_from_text(text)
-    if not parties:
+    # Čísla stran: úvod a „Výsledky volebního modelu“, bez intervalů a demografie
+    body = re.split(
+        r"Výsledky volebního modelu v intervalu|Kde strany berou|Metodologie volebního modelu",
+        text,
+    )[0]
+    parties = extract_parties_nearest(body)
+    if len(parties) < 4:
+        print(f"[NMS] Málo stran ({len(parties)}) v {url}")
         return None
 
-    # Datum publikace
-    date_pub = extract_pub_date(soup) or date.today().isoformat()
-
-    sample = extract_sample_size(text)
+    date_pub = extract_pub_date(soup)
+    if not date_pub:
+        print(f"[NMS] Chybí datum vydání v {url}")
+        return None
 
     return build_poll_record(
         agency="NMS",
@@ -151,27 +94,31 @@ def scrape_article(url, title=""):
         raw_parties=parties,
         poll_type="model",
         view="coalitions" if "SPOLU" in parties else "parties",
-        sample_size=sample,
+        sample_size=extract_sample_size(text),
         method="CAWI",
         client="Novinky.cz",
         source_url=url,
     )
 
 
+def scrape_all(historical=False):
+    """Vrátí seznam záznamů bez ukládání (pro opravu dat)."""
+    urls = get_article_urls(historical)
+    records = []
+    for url in urls:
+        rec = scrape_article(url)
+        if rec:
+            records.append(rec)
+        time.sleep(1.5)
+    return records
+
+
 def run_scraper(historical=False):
     print(f"[NMS] start (historical={historical})")
-    max_p = 8 if historical else 2
-    links = get_nms_links(max_pages=max_p if historical else 1)
-    if not links:
-        print("[NMS] nms.global bez výsledků, zkouším Novinky.cz...")
-        links = get_novinky_links(max_pages=max_p)
-    limit = len(links) if historical else 3
-    new   = 0
-    for lnk in links[:limit]:
-        rec = scrape_article(lnk["url"], lnk["title"])
-        if rec and save_poll(rec):
+    new = 0
+    for rec in scrape_all(historical):
+        if save_poll(rec):
             new += 1
-        time.sleep(1.5)
     print(f"[NMS] hotovo, přidáno {new}")
     return new
 

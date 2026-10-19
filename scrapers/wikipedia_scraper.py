@@ -271,6 +271,9 @@ def parse_wiki_tables(soup, source_url):
 
             if not agency:
                 continue
+            # Řádky s výsledky voleb (Evropské volby 2024, sněmovní volby) nejsou průzkum
+            if re.search(r"volby|výsled", agency, re.I):
+                continue
 
             rec = build_poll_record(
                 agency=agency,

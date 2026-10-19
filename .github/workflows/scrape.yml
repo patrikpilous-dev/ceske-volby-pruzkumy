@@ -30,7 +30,7 @@ jobs:
           python-version: '3.11'
 
       - name: Závislosti
-        run: pip install requests beautifulsoup4 lxml
+        run: pip install requests beautifulsoup4 lxml pypdf
 
       - name: Spusť scrapers
         id: scrape
@@ -42,12 +42,12 @@ jobs:
             python run_all.py
           fi
 
-      - name: Commit (jen při nových datech)
-        if: steps.scrape.outputs.has_new_polls == 'true'
+      - name: Commit (jen při změně dat nebo karantény)
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add data/polls.json data/latest.json data/last_update.json
+          if [ -f data/karantena.json ]; then git add data/karantena.json; fi
           git diff --staged --quiet || {
             git commit -m "🗳️ Aktualizace průzkumů $(date -u +'%Y-%m-%d %H:%M UTC')"
             git pull --rebase

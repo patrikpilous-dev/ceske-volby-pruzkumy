@@ -47,6 +47,9 @@ def fetch_infogram_data():
     headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
     r = requests.get(INFOGRAM_URL, headers=headers, timeout=20)
     r.raise_for_status()
+    # Bez charsetu v hlavičce by requests dekódoval jako ISO-8859-1 (mojibake)
+    if "charset" not in r.headers.get("Content-Type", "").lower():
+        r.encoding = "utf-8"
 
     m = re.search(r"window\.infographicData\s*=\s*(\{.+)", r.text)
     if not m:

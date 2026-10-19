@@ -8,6 +8,8 @@ import re
 from datetime import datetime
 from pathlib import Path
 
+from scraper_utils import fix_mojibake
+
 BASE_DIR = Path(__file__).parent.parent
 ALIASES_FILE = BASE_DIR / "data" / "party_aliases.json"
 POLLS_FILE   = BASE_DIR / "data" / "polls.json"
@@ -33,7 +35,7 @@ ALIAS_MAP = load_aliases()
 # ---------- Normalizace názvů ----------
 
 def normalize_party_name(raw_name: str) -> str | None:
-    key = raw_name.lower().strip()
+    key = fix_mojibake(raw_name).lower().strip()
     if key in ALIAS_MAP:
         return ALIAS_MAP[key]
     cleaned = re.sub(r"[()~]", "", key).strip()
@@ -70,6 +72,7 @@ def load_polls() -> list:
     return []
 
 def poll_exists(polls: list, new_poll: dict) -> bool:
+    """Stejný průzkum už je uložený (opakované stažení téhož článku)."""
     for p in polls:
         if p["id"] == new_poll["id"]:
             return True
@@ -78,6 +81,115 @@ def poll_exists(polls: list, new_poll: dict) -> bool:
                 p["type"] == new_poll["type"]):
             return True
     return False
+
+# ---------- Validace před zveřejněním ----------
+
+KARANTENA_FILE = BASE_DIR / "data" / "karantena.json"
+
+SUM_MIN = 70.0          # součet stran pod tím = chybí strany nebo špatné parsování
+SUM_MAX = 105.0         # nad tím = zdvojené nebo posunuté hodnoty
+MIN_PARTIES = 4
+OUTLIER_PP = 8.0        # odchylka od klouzavého průměru v procentních bodech
+OUTLIER_DAYS = 45       # okno klouzavého průměru
+OUTLIER_MIN_POLLS = 2   # minimum jiných průzkumů v okně, jinak se nekontroluje
+DUP_OVERLAP = 0.6       # překryv termínů sběru vůči delšímu z nich
+
+
+def _d(iso):
+    return datetime.strptime(iso, "%Y-%m-%d")
+
+
+def find_duplicate(polls: list, rec: dict) -> dict | None:
+    """
+    Jiný záznam téže agentury se stejným termínem sběru (stejný konec,
+    nebo překryv aspoň 60 % delšího z obou termínů).
+    """
+    a_from, a_to = _d(rec["date_fieldwork_from"]), _d(rec["date_fieldwork_to"])
+    for p in polls:
+        if p["id"] == rec["id"] or p["agency"] != rec["agency"] or p["type"] != rec["type"]:
+            continue
+        if p["date_fieldwork_to"] == rec["date_fieldwork_to"]:
+            return p
+        b_from, b_to = _d(p["date_fieldwork_from"]), _d(p["date_fieldwork_to"])
+        overlap = (min(a_to, b_to) - max(a_from, b_from)).days + 1
+        longer = max((a_to - a_from).days, (b_to - b_from).days) + 1
+        if overlap > 0 and overlap / longer >= DUP_OVERLAP:
+            return p
+    return None
+
+
+def rolling_average(polls: list, rec: dict) -> dict:
+    """Průměr stran z ostatních volebních modelů s koncem sběru do 45 dní kolem záznamu."""
+    t = _d(rec["date_fieldwork_to"])
+    vals = {}
+    for p in polls:
+        if p["id"] == rec["id"] or p["type"] != "model" or p["agency"] == rec["agency"]:
+            continue
+        if abs((_d(p["date_fieldwork_to"]) - t).days) > OUTLIER_DAYS:
+            continue
+        for pid, v in p["parties"].items():
+            vals.setdefault(pid, []).append(v)
+    return {pid: sum(v) / len(v) for pid, v in vals.items() if len(v) >= OUTLIER_MIN_POLLS}
+
+
+def validate_poll(rec: dict, polls: list, dup_pool: list = None) -> list:
+    """
+    Vrátí seznam důvodů, proč záznam nezveřejnit (prázdný = v pořádku).
+    polls = ostatní záznamy pro klouzavý průměr, dup_pool = kde hledat duplicity
+    (výchozí totéž co polls).
+    """
+    errors = []
+    parties = rec.get("parties") or {}
+    total = sum(parties.values())
+    if len(parties) < MIN_PARTIES:
+        errors.append(f"jen {len(parties)} strany")
+    if not SUM_MIN <= total <= SUM_MAX:
+        errors.append(f"součet {total:.1f} % mimo {SUM_MIN:.0f} až {SUM_MAX:.0f} %")
+    try:
+        if rec["date_fieldwork_from"] > rec["date_fieldwork_to"]:
+            errors.append("začátek sběru po konci sběru")
+        if rec["date_fieldwork_to"] > rec["date_published"]:
+            errors.append(f"konec sběru {rec['date_fieldwork_to']} po vydání {rec['date_published']}")
+        if rec["date_published"] > datetime.utcnow().strftime("%Y-%m-%d"):
+            errors.append("datum vydání v budoucnosti")
+    except (KeyError, TypeError):
+        errors.append("chybí datum")
+        return errors
+    dup = find_duplicate(polls if dup_pool is None else dup_pool, rec)
+    if dup:
+        errors.append(f"duplicita s {dup['id']} (stejná agentura a termín sběru)")
+    if rec.get("type") == "model":
+        avg = rolling_average(polls, rec)
+        for pid, v in parties.items():
+            if pid in avg and abs(v - avg[pid]) > OUTLIER_PP:
+                errors.append(f"{pid} {v} % proti průměru {avg[pid]:.1f} % (odchylka nad {OUTLIER_PP:.0f} p. b.)")
+    return errors
+
+
+def load_karantena() -> list:
+    if KARANTENA_FILE.exists():
+        with open(KARANTENA_FILE, encoding="utf-8") as f:
+            return json.load(f)
+    return []
+
+
+def quarantine(rec: dict, reasons: list) -> bool:
+    """Uloží záznam do data/karantena.json místo zveřejnění. True = nový v karanténě."""
+    items = load_karantena()
+    if any(i["zaznam"]["id"] == rec["id"] and i["duvody"] == reasons for i in items):
+        return False
+    items = [i for i in items if i["zaznam"]["id"] != rec["id"]]
+    items.append({
+        "zaznam": rec,
+        "duvody": reasons,
+        "datum": datetime.utcnow().isoformat() + "Z",
+    })
+    items.sort(key=lambda i: i["zaznam"].get("date_fieldwork_to", ""), reverse=True)
+    with open(KARANTENA_FILE, "w", encoding="utf-8") as f:
+        json.dump(items, f, ensure_ascii=False, indent=2)
+    # GitHub Actions zobrazí varování v přehledu běhu
+    print(f"::warning::Karanténa {rec['id']}: {'; '.join(reasons)}")
+    return True
 
 # ---------- Sestavení záznamu ----------
 
@@ -96,6 +208,8 @@ def build_poll_record(
     coalition_notes: dict = None,
 ) -> dict | None:
 
+    client = fix_mojibake(client)
+    agency = fix_mojibake(agency)
     parties_normalized = {}
     unknown = []
 
@@ -107,7 +221,7 @@ def build_poll_record(
         elif not canon_id and value is not None:
             # Nová/neznámá strana — ulož s původním názvem, aby se neztratila
             # Přidej ji ručně do party_aliases.json až se stabilizuje
-            clean = raw_name.strip()
+            clean = fix_mojibake(raw_name).strip()
             if 2 <= len(clean) <= 40:
                 parties_normalized[clean] = value
                 unknown.append(clean)
@@ -147,15 +261,10 @@ def build_poll_record(
 
 # ---------- Uložení ----------
 
-def save_poll(record: dict) -> bool:
-    """Vrátí True pokud byl přidán nový průzkum."""
-    polls = load_polls()
-    if poll_exists(polls, record):
-        print(f"[SKIP] {record['id']} již existuje.")
-        return False
-
-    polls.append(record)
-    polls.sort(key=lambda x: x["date_fieldwork_to"], reverse=True)
+def write_polls(polls: list, record: dict = None, new_count: int = 1):
+    """Zapíše polls.json, latest.json a last_update.json (vždy UTF-8)."""
+    polls.sort(key=lambda x: (x["date_fieldwork_to"], x["agency"]), reverse=True)
+    record = record or polls[0]
 
     with open(POLLS_FILE, "w", encoding="utf-8") as f:
         json.dump(polls, f, ensure_ascii=False, indent=2)
@@ -166,7 +275,7 @@ def save_poll(record: dict) -> bool:
     # Aktualizuj last_update.json
     update = {
         "last_run": datetime.utcnow().isoformat() + "Z",
-        "new_polls_found": 1,
+        "new_polls_found": new_count,
         "latest_poll": {
             "agency": record["agency"],
             "date_published": record["date_published"],
@@ -176,5 +285,26 @@ def save_poll(record: dict) -> bool:
     with open(UPDATE_FILE, "w", encoding="utf-8") as f:
         json.dump(update, f, ensure_ascii=False, indent=2)
 
+
+def save_poll(record: dict) -> bool:
+    """
+    Vrátí True, pokud byl přidán nový průzkum.
+    Záznam, který neprojde validací, jde do data/karantena.json, ne do grafu.
+    """
+    polls = load_polls()
+    if poll_exists(polls, record):
+        print(f"[SKIP] {record['id']} již existuje.")
+        return False
+
+    reasons = validate_poll(record, polls)
+    if reasons:
+        if quarantine(record, reasons):
+            print(f"[KARANTÉNA] {record['id']}: {'; '.join(reasons)}")
+        else:
+            print(f"[SKIP] {record['id']} už je v karanténě.")
+        return False
+
+    polls.append(record)
+    write_polls(polls, record)
     print(f"[OK] Uložen {record['id']}")
     return True

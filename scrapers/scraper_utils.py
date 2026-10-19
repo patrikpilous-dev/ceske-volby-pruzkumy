@@ -6,6 +6,7 @@ Retry logika, extrakce dat a stran ze stránek
 import re
 import json
 import time
+import calendar
 import requests
 from datetime import date
 from bs4 import BeautifulSoup
@@ -74,7 +75,11 @@ def fetch_with_retry(url, max_retries=3, backoff=2.0, session=None):
         try:
             r = req.get(url, headers=HEADERS, timeout=20)
             if r.status_code == 200:
-                return BeautifulSoup(r.text, "html.parser")
+                # Bez charsetu v hlavičce requests dekóduje jako ISO-8859-1 a vzniká
+                # mojibake. Pak necháme kódování na BeautifulSoup (meta charset, UTF-8).
+                if "charset" in r.headers.get("Content-Type", "").lower():
+                    return BeautifulSoup(r.text, "html.parser")
+                return BeautifulSoup(r.content, "html.parser")
             elif r.status_code in (429, 503, 504):
                 wait = backoff * (2 ** attempt)
                 print(f"[WARN] {url} → HTTP {r.status_code}, čekám {wait:.0f}s (pokus {attempt+1}/{max_retries})")
@@ -159,6 +164,29 @@ def extract_fieldwork_dates(text):
     Vrátí (date_from, date_to) jako 'YYYY-MM-DD' nebo (None, None).
     Podporuje různé formáty + přechod přes měsíce.
     """
+    # Číselně: "od 3. 6. do 8. 6. 2026", "od 28. 8. do 2. 9. 2026" (NMS)
+    m = re.search(
+        r"od\s+(\d{1,2})\.\s*(\d{1,2})\.\s*(\d{4})?\s*do\s+(\d{1,2})\.\s*(\d{1,2})\.\s*(\d{4})",
+        text, re.I
+    )
+    if m:
+        y2 = int(m.group(6))
+        m1, m2 = int(m.group(2)), int(m.group(5))
+        y1 = int(m.group(3)) if m.group(3) else (y2 - 1 if m1 > m2 else y2)
+        return (f"{y1}-{m1:02d}-{int(m.group(1)):02d}",
+                f"{y2}-{m2:02d}-{int(m.group(4)):02d}")
+
+    # "Termín dotazování 1. září – 30. září 2026" (Median PDF)
+    m = re.search(
+        r"(\d{1,2})\.\s+([^\W\d_]+)\s*[–\-]\s*(\d{1,2})\.\s+([^\W\d_]+)\s+(\d{4})",
+        text, re.I
+    )
+    if m and MONTHS_CS.get(m.group(2).lower()) and MONTHS_CS.get(m.group(4).lower()):
+        mon1, mon2 = MONTHS_CS[m.group(2).lower()], MONTHS_CS[m.group(4).lower()]
+        y2 = int(m.group(5))
+        y1 = y2 - 1 if int(mon1) > int(mon2) else y2
+        return f"{y1}-{mon1}-{int(m.group(1)):02d}", f"{y2}-{mon2}-{int(m.group(3)):02d}"
+
     # "od X. do Y. měsíce RRRR"
     m = re.search(r"od\s+(\d+)\.\s+do\s+(\d+)\.\s+(\w+)(?:\s+(\d{4}))?", text, re.I)
     if m:
@@ -211,7 +239,9 @@ def extract_fieldwork_dates(text):
         if mon1 and mon2:
             return f"{y}-{mon1}-{int(m.group(1)):02d}", f"{y}-{mon2}-{int(m.group(3)):02d}"
 
-    # Fallback: jen "měsíc RRRR"
+    # Fallback: jen "měsíc RRRR" = sběr během celého měsíce. Konec sběru je
+    # poslední den měsíce, ne vymyšlený den. Neskončený měsíc nebereme, jinak by
+    # každé denní spuštění vyrobilo nový záznam s dnešním datem.
     m = re.search(
         r"\b(leden|únor|březen|duben|květen|červen|červenec|srpen|září|říjen|listopad|prosinec)\s+(\d{4})\b",
         text, re.I
@@ -219,13 +249,7 @@ def extract_fieldwork_dates(text):
     if m:
         mon = MONTHS_CS.get(m.group(1).lower())
         if mon:
-            y = int(m.group(2))
-            today = date.today().isoformat()
-            d_to = f"{y}-{mon}-28"
-            # Pokud je datum konce v budoucnosti, použijeme dnešní datum
-            if d_to > today:
-                d_to = today
-            return f"{y}-{mon}-01", d_to
+            return month_range(int(m.group(2)), int(mon))
 
     return None, None
 
@@ -335,6 +359,8 @@ def _parse_table(table):
 
 def extract_sample_size(text):
     """Extrahuje velikost vzorku respondentů z textu."""
+    # „1 352 respondentů“ → „1352 respondentů“
+    text = re.sub(r"(?<!\d)(\d{1,2})[\s\xa0](\d{3})(?!\d)", r"\1\2", text)
     # "N = 1234" nebo "n=1000"
     m = re.search(r"\bn\s*=\s*(\d{3,5})\b", text, re.I)
     if m:
@@ -354,21 +380,173 @@ def extract_sample_size(text):
     return None
 
 
+# ---------- Extrakce stran z volného textu (strana nejblíž číslu) ----------
+
+# Zmínky stran v textu článku → kanonické ID. Pořadí: delší tvary dřív.
+PARTY_MENTIONS = [
+    (r"Motorist[éůy]?(?:\s+sobě)?",          "Motoristé"),
+    (r"Naš(?:e|eho|ím)\s+Česk(?:o|a|u)",      "NašeČesko"),
+    (r"KDU[\s\-–]*ČSL|[Ll]idovc[iůe]",        "KDUČSL"),
+    (r"TOP\s*09",                              "TOP09"),
+    (r"STAČILO!?|Stačilo!?",                   "Stačilo"),
+    (r"KSČM",                                  "KSČM"),
+    (r"SOCDEM|ČSSD",                           "SOCDEM"),
+    (r"SPOLU",                                 "SPOLU"),
+    (r"Přísah[ay]?",                           "Přísaha"),
+    (r"Zelen[íi]",                             "Zelení"),
+    (r"Svobodn[íéých]+",                       "Svobodní"),
+    (r"Trikolor[auy]",                         "Trikolora"),
+    (r"Pirát[iůy]",                            "Piráti"),
+    (r"Starost(?:ov[éeéů]|ům)|STAN",           "STAN"),
+    (r"ODS",                                   "ODS"),
+    (r"SPD",                                   "SPD"),
+    (r"ANO",                                   "ANO"),
+    (r"PRO",                                   "PRO"),
+]
+_MENTION_RE = re.compile(
+    "|".join(f"(?P<p{i}>(?<![\\w])(?:{pat})(?![\\w]))" for i, (pat, _) in enumerate(PARTY_MENTIONS))
+)
+_PCT_RE = re.compile(r"(?<![\d,.])(\d{1,2}(?:,\d)?)\s*%")
+
+# Čísla, která nejsou podpora strany: změny, rozpětí, intervaly, jádra, potenciály.
+_NOISE_RES = [
+    r"\(\s*interval[^)]*\)",
+    r"\d+(?:,\d+)?\s*[–\-]\s*\d+(?:,\d+)?\s*%",
+    r"mezi\s+\d+(?:,\d+)?\s+a\s+\d+(?:,\d+)?\s*%",
+    r"\b(?:o|ze?|od|nad|pod|kolem|zhruba|přibližně|až)\s+\d+(?:,\d+)?\s*%",
+    r"[Jj]ádr\w*[^%.]{0,40}%",
+    r"[Pp]otenciál\w*[^%.]{0,40}%",
+    r"[+±−\-]\s*\d+(?:,\d+)?\s*%",
+    r"\d+(?:,\d+)?\s*%\s*(?:hranic|klauzul|pravděpodobnost)",
+]
+
+# Číslo patří straně před ním, ne té za slovesem předstižení („s 8,9 % předběhli SPD“)
+_FWD_BLOCK = re.compile(r"předb|předst|přesk|před\s|než|oproti|\bza\s|\bod\s")
+_OBJECT_BEFORE = re.compile(r"(?:předběh|předstih|přeskoč|překonal|než|oproti)\w*\s+(?:i\s+)?$")
+_AGGREGATE = re.compile(
+    r"\bblok|(?:vládní|opoziční|současná)\s+koalic\w*\s*(?:\(|by\s+získal|má\s|mají\s)"
+    r"|jako\s+celek|dohromady|celkem|prostým\s+součtem",
+    re.I,
+)
+
+_SENT_SPLIT = re.compile(r"(?<=[.!?])\s+(?=[A-ZÁČĎÉĚÍŇÓŘŠŤÚŮÝŽ„\"])")
+
+
+def _blank(text, pattern):
+    """Nahradí shody mezerami stejné délky (zachová pozice)."""
+    return re.sub(pattern, lambda m: " " * len(m.group(0)), text)
+
+
+def extract_parties_nearest(text, max_back=80, max_fwd=35):
+    """
+    Přiřadí každému procentu nejbližší zmínku strany ve stejné větě.
+    Funguje pro tvar „ANO by získalo 31,6 %“ i „vyhrálo by 32,2 % hnutí ANO“.
+    Strana dostane hodnotu z první věty, kde ji jde přiřadit (úvod článku má
+    hlavní čísla, další text jen změny a podrobnosti).
+    Dopředné přiřazení (číslo → strana za ním) neprojde přes čárku ani středník.
+    """
+    text = text.replace("\xa0", " ").replace("\xad", "").replace(" ", " ")
+    clean = text
+    for pat in _NOISE_RES:
+        clean = _blank(clean, pat)
+
+    result = {}
+    for sent in _SENT_SPLIT.split(clean):
+        # Součty bloků („Opoziční blok (STAN, ODS, …) by získal 43,8 %“) přeskočit
+        if _AGGREGATE.search(sent):
+            continue
+        mentions = []
+        for m in _MENTION_RE.finditer(sent):
+            idx = int(m.lastgroup[1:])
+            # Strana jako předmět předstižení („přeskočili SPD“) číslo nedostane
+            if _OBJECT_BEFORE.search(sent[max(0, m.start() - 25):m.start()]):
+                continue
+            mentions.append((m.start(), m.end(), PARTY_MENTIONS[idx][1]))
+        pcts = [(m.start(), m.end(), float(m.group(1).replace(",", ".")))
+                for m in _PCT_RE.finditer(sent)]
+        if not mentions or not pcts:
+            continue
+
+        pairs = []
+        for ps, pe, val in pcts:
+            for ms, me, pid in mentions:
+                if me <= ps and ps - me <= max_back:
+                    pairs.append((ps - me, ps, pid, val))
+                elif (ms >= pe and ms - pe <= max_fwd
+                      and not re.search(r"[,;:(]", sent[pe:ms])
+                      and not _FWD_BLOCK.search(sent[pe:ms])):
+                    pairs.append((ms - pe, ps, pid, val))
+        pairs.sort()
+        used_pct, got = set(), {}
+        for dist, ps, pid, val in pairs:
+            if ps in used_pct or pid in got:
+                continue
+            used_pct.add(ps)
+            got[pid] = val
+
+        # „KSČM a KDU-ČSL … obě na 2,4 %“, „PRO i KSČM by získaly shodně 1,8 %“
+        for ps, pe, val in pcts:
+            if re.search(r"(?:obě|oba|shodně)\W{0,3}(?:\w+\s+){0,2}$", sent[max(0, ps - 25):ps]):
+                for ms, me, pid in mentions:
+                    if me <= ps and pid not in got:
+                        got[pid] = val
+
+        for pid, val in got.items():
+            if pid not in result and 0.1 <= val <= 60:
+                result[pid] = val
+    return result
+
+
+# ---------- Oprava mojibake ----------
+
+def fix_mojibake(s):
+    """
+    Vrátí text poškozený dekódováním UTF-8 jako cp1250 nebo latin-1
+    („PirĂˇti“, „PirÃ¡ti“) do původní podoby. Nepoškozený text nechá být.
+    """
+    if not isinstance(s, str) or not re.search(r"[ĂÄĹÃÅâ€]", s):
+        return s
+    for enc in ("cp1250", "latin-1", "cp1252"):
+        try:
+            fixed = s.encode(enc).decode("utf-8")
+        except (UnicodeEncodeError, UnicodeDecodeError):
+            continue
+        if fixed != s:
+            return fixed
+    return s
+
+
+def fix_mojibake_deep(obj):
+    """Opraví mojibake v klíčích i hodnotách vnořené struktury."""
+    if isinstance(obj, dict):
+        return {fix_mojibake(k): fix_mojibake_deep(v) for k, v in obj.items()}
+    if isinstance(obj, list):
+        return [fix_mojibake_deep(v) for v in obj]
+    return fix_mojibake(obj)
+
+
 # ---------- Pomocné ----------
+
+def month_range(year, month):
+    """Celý kalendářní měsíc jako (od, do). Neskončený měsíc vrátí (None, None)."""
+    last = calendar.monthrange(year, month)[1]
+    d_to = f"{year}-{month:02d}-{last:02d}"
+    if d_to >= date.today().isoformat():
+        return None, None
+    return f"{year}-{month:02d}-01", d_to
+
 
 def month_url_to_date(url):
     """
     Z URL tvaru /volebni-tendence-ceske-verejnosti-leden-2025/
-    vrátí (date_from, date_to) nebo (None, None).
+    vrátí (date_from, date_to) celého měsíce nebo (None, None).
     """
-    for cs_month, num in MONTHS_CS.items():
-        if cs_month in url.lower():
-            yr = re.search(r"(\d{4})", url)
-            if yr:
-                y = int(yr.group(1))
-                today = date.today().isoformat()
-                d_to = f"{y}-{num}-28"
-                if d_to > today:
-                    d_to = today
-                return f"{y}-{num}-01", d_to
+    ascii_months = {
+        "leden": 1, "unor": 2, "brezen": 3, "duben": 4, "kveten": 5, "cerven": 6,
+        "cervenec": 7, "srpen": 8, "zari": 9, "rijen": 10, "rijna": 10,
+        "listopad": 11, "prosinec": 12,
+    }
+    m = re.search(r"-([a-z]+)-(\d{4})", url.lower())
+    if m and m.group(1) in ascii_months:
+        return month_range(int(m.group(2)), ascii_months[m.group(1)])
     return None, None

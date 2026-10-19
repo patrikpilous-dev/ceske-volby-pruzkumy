@@ -1,48 +1,40 @@
 """
 stem_scraper.py — Scraper pro STEM (stem.cz)
-Publikuje týdně, URL vzor: /volebni-tendence-ceske-verejnosti-MESIC-ROK/
+Články „Volební tendence české veřejnosti“ hledá ve výpisu kategorie
+stranicke-preference. URL se nedá odhadnout (…-cerven-2026/, …-zacatek-rijna-2026/).
 Klient: CNN Prima News
 """
 
 import re
 import sys
 import time
-from datetime import date, timedelta
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
 from scraper_utils import (
-    MONTHS_CS, MONTHS_NUM_TO_NAME, PARTY_PATTERNS,
     fetch_with_retry, extract_pub_date, extract_fieldwork_dates,
-    extract_parties_from_text, extract_sample_size, month_url_to_date,
+    extract_parties_nearest, extract_sample_size, month_url_to_date,
 )
 from normalizer import build_poll_record, save_poll
 
 BASE = "https://www.stem.cz"
-
-# STEM má předvídatelnou URL strukturu
-MONTHS_URL = {v: k for k, v in MONTHS_CS.items() if len(k) > 4}  # bez zkrácených tvarů
-# Opravíme na primární tvar pro každý měsíc
-# ASCII verze měsíců pro URL (bez háčků/čárek)
-MONTH_PRIMARY = {
-    "01": "leden",    "02": "unor",     "03": "brezen",   "04": "duben",
-    "05": "kveten",   "06": "cerven",   "07": "cervenec", "08": "srpen",
-    "09": "zari",     "10": "rijen",    "11": "listopad", "12": "prosinec",
-}
+CATEGORY = f"{BASE}/category/stranicke-preference/"
+ARTICLE_RE = re.compile(r"^https://www\.stem\.cz/volebni-tendence-ceske-verejnosti[a-z0-9\-]*/$")
 
 
-def get_urls_last_n_months(n=7):
-    """Vygeneruje seznam URL pro posledních n měsíců."""
+def get_article_urls(max_pages=1):
+    """Odkazy na články volebního modelu z výpisu kategorie, nejnovější první."""
     urls = []
-    today = date.today()
-    for i in range(n):
-        # Odečítáme měsíce přes timedelta na první den
-        first = date(today.year, today.month, 1)
-        d = first - timedelta(days=i * 31)
-        d = date(d.year, d.month, 1)
-        month_name = MONTH_PRIMARY.get(f"{d.month:02d}")
-        if month_name:
-            urls.append(f"{BASE}/volebni-tendence-ceske-verejnosti-{month_name}-{d.year}/")
+    for page in range(1, max_pages + 1):
+        url = CATEGORY if page == 1 else f"{CATEGORY}page/{page}/"
+        soup = fetch_with_retry(url)
+        if not soup:
+            break
+        for a in soup.find_all("a", href=True):
+            href = a["href"].split("#")[0]
+            if ARTICLE_RE.match(href) and href not in urls:
+                urls.append(href)
+        time.sleep(1.0)
     return urls
 
 
@@ -51,42 +43,31 @@ def scrape_article(url):
     if not soup:
         return None
     print(f"[STEM] {url}")
-    text = soup.get_text(" ", strip=True)
+    art = soup.find("article") or soup
+    text = art.get_text(" ", strip=True)
 
-    # Kontrola, zda jde o průzkumový článek
-    if not any(kw in text.lower() for kw in ["volební", "tendence", "preference", "ano", "ods"]):
+    if "volební model" not in text.lower() and "volby" not in text.lower():
         return None
 
-    # Datum sběru dat
+    # Termín sběru: „dotázaných v době od 16. do 21. června 2026“
     date_from, date_to = extract_fieldwork_dates(text)
-
-    # Fallback: z URL (STEM má spolehlivý URL vzor)
     if not date_to:
         date_from, date_to = month_url_to_date(url)
-
     if not date_to:
-        print(f"[STEM] Nepodařilo se zjistit datum pro {url}")
+        print(f"[STEM] Nepodařilo se zjistit termín sběru pro {url}")
         return None
 
-    # Strany
-    parties = extract_parties_from_text(text)
-    if not parties:
+    # Čísla stran jsou v úvodních odstavcích, metodika a shrnutí je za nimi
+    body = re.split(r"Výběr dotazovaných|Dotazování probíhalo|SHRNUTÍ", text)[0]
+    parties = extract_parties_nearest(body)
+    if len(parties) < 4:
+        print(f"[STEM] Málo stran ({len(parties)}) v {url}")
         return None
 
-    # Datum publikace — zkusíme více zdrojů
     date_pub = extract_pub_date(soup)
     if not date_pub:
-        # Fallback: z URL odhadneme přibližné datum publikace (konec měsíce)
-        m = re.search(r"(\d{4})", url)
-        df, _ = month_url_to_date(url)
-        if df and m:
-            # Publikace bývá v průběhu měsíce, odhadneme 15. den
-            date_pub = f"{df[:7]}-15"
-        else:
-            date_pub = date.today().isoformat()
-
-    # Velikost vzorku
-    sample = extract_sample_size(text)
+        print(f"[STEM] Chybí datum vydání pro {url}")
+        return None
 
     poll_type = (
         "preference"
@@ -102,23 +83,31 @@ def scrape_article(url):
         raw_parties=parties,
         poll_type=poll_type,
         view="coalitions" if "SPOLU" in parties else "parties",
-        sample_size=sample,
+        sample_size=extract_sample_size(text),
         method="CAWI",
         client="CNN Prima News",
         source_url=url,
     )
 
 
-def run_scraper(historical=False):
-    print(f"[STEM] start (historical={historical})")
-    # 52 měsíců = ~4.5 roku zpět, pokrývá od počátku 2022
-    urls = get_urls_last_n_months(52 if historical else 3)
-    new = 0
+def scrape_all(historical=False):
+    """Vrátí seznam záznamů bez ukládání (pro opravu dat)."""
+    urls = get_article_urls(max_pages=5 if historical else 1)
+    records = []
     for url in urls:
         rec = scrape_article(url)
-        if rec and save_poll(rec):
-            new += 1
+        if rec:
+            records.append(rec)
         time.sleep(1.5)
+    return records
+
+
+def run_scraper(historical=False):
+    print(f"[STEM] start (historical={historical})")
+    new = 0
+    for rec in scrape_all(historical):
+        if save_poll(rec):
+            new += 1
     print(f"[STEM] hotovo, přidáno {new}")
     return new
 

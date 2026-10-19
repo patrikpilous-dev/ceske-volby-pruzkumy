@@ -74,14 +74,63 @@ const EMBEDDED = [
 ];
 
 async function loadPolls() {
-  try {
-    const r = await fetch("https://patrikpilous-dev.github.io/ceske-volby-pruzkumy/data/polls.json");
-    if (!r.ok) throw new Error();
-    POLLS = await r.json();
-  } catch {
-    POLLS = EMBEDDED;
+  const sources = [
+    "../data/polls.json",
+    "https://patrikpilous-dev.github.io/ceske-volby-pruzkumy/data/polls.json",
+  ];
+  POLLS = EMBEDDED;
+  for (const url of sources) {
+    try {
+      const r = await fetch(url, { cache: "no-cache" });
+      if (!r.ok) continue;
+      POLLS = await r.json();
+      break;
+    } catch { /* další zdroj */ }
   }
   init();
+}
+
+// ══ Aktuální průzkumy a průměr ════════════════════════════
+// Aktuální = konec sběru nejvýš 60 dní před dneškem. Starší průzkum agentury
+// do grafu ani průměru nepatří (jinak se míchá září s prosincem a eurovolbami).
+const CURRENT_DAYS = 60;
+let CURRENT = [];   // nejnovější aktuální průzkum každé agentury
+
+function daysAgo(iso) {
+  return (Date.now() - new Date(iso + "T00:00:00").getTime()) / 86400000;
+}
+
+function pickCurrentPolls() {
+  let pool = POLLS.filter(p => daysAgo(p.date_fieldwork_to) <= CURRENT_DAYS);
+  if (!pool.length && POLLS.length) {
+    // Žádný průzkum za 60 dní: vezmi 60 dní před nejnovějším, ať graf není prázdný
+    const newest = POLLS.reduce((m, p) => p.date_fieldwork_to > m ? p.date_fieldwork_to : m, "");
+    const limit = daysAgo(newest) + CURRENT_DAYS;
+    pool = POLLS.filter(p => daysAgo(p.date_fieldwork_to) <= limit);
+  }
+  const map = {};
+  pool.forEach(p => {
+    if (!map[p.agency] || p.date_fieldwork_to > map[p.agency].date_fieldwork_to)
+      map[p.agency] = p;
+  });
+  return Object.values(map).sort((a,b) => a.agency.localeCompare(b.agency));
+}
+
+// Průměr počítáme jen z volebních modelů. Preference (CVVM) mají jiný základ.
+// Strana, kterou agentura neměřila, se do průměru nepočítá, nic se nedosazuje.
+function isModel(p) {
+  return (p.type || "model") === "model" && AGENCY_TYPE[p.agency] !== "preference";
+}
+
+function averageOf(polls, pid) {
+  const vals = polls.filter(isModel).map(p => p.parties[pid]).filter(v => v != null);
+  if (!vals.length) return null;
+  return { avg: vals.reduce((s,v) => s+v, 0) / vals.length, n: vals.length };
+}
+
+function fmtDay(iso) {
+  const d = new Date(iso + "T00:00:00");
+  return `${d.getDate()}. ${d.getMonth()+1}. ${d.getFullYear()}`;
 }
 
 // ══ Stav ══════════════════════════════════════════════════
@@ -92,16 +141,22 @@ const S2  = { view:"parties", showAvg:true, ag:new Set(), hide:new Set(), chart:
 // ══ Init ══════════════════════════════════════════════════
 function init() {
   POLLS = POLLS.filter(p =>
-    p.agency !== 'Evropsk\xe9 volby 2024' &&
+    !String(p.agency).startsWith("Evropsk") &&
     Object.values(p.parties).every(v => v <= 45)
   );
-  // Dnešní datum do nadpisů
-  const _d = new Date();
-  const _ds = `${_d.getDate()}.\u00a0${_d.getMonth()+1}.\u00a0${_d.getFullYear()}`;
-  const _t1  = document.getElementById('title1');
-  const _t1b = document.getElementById('title1b');
-  if (_t1)  _t1.textContent  = `Aktu\xe1ln\xed volebn\xed preference \u2013 ${_ds}`;
-  if (_t1b) _t1b.textContent = `Pr\u016fm\u011br volebn\xedch preferenc\xed v\u0161ech agentur \u2013 ${_ds}`;
+  CURRENT = pickCurrentPolls();
+
+  // Nadpis nese datum nejnovějšího průzkumu, ne dnešní datum
+  const newest = CURRENT.reduce((m, p) => {
+    const d = p.date_published || p.date_fieldwork_to;
+    return d > m ? d : m;
+  }, "");
+  const ds = newest ? `, stav k ${fmtDay(newest)}` : "";
+  const t1  = document.getElementById("title1");
+  const t1b = document.getElementById("title1b");
+  if (t1)  t1.textContent  = `Aktuální volební průzkumy${ds}`;
+  if (t1b) t1b.textContent = `Průměr volebních modelů${ds}`;
+
   // S2.ag starts empty — výchozí je jen Průměr
   buildChips2();
   showBanner();
@@ -115,13 +170,7 @@ function init() {
 
 // ══ Banner ════════════════════════════════════════════════
 function showBanner() {
-  // Nejnovější průzkum za každou agenturu (1× per agentura)
-  const byAgency = {};
-  POLLS.forEach(p => {
-    if (!byAgency[p.agency] || p.date_fieldwork_to > byAgency[p.agency].date_fieldwork_to)
-      byAgency[p.agency] = p;
-  });
-  const latest = Object.values(byAgency)
+  const latest = CURRENT.slice()
     .sort((a,b) => b.date_fieldwork_to.localeCompare(a.date_fieldwork_to))
     .slice(0, 6);
   if (!latest.length) return;
@@ -129,20 +178,10 @@ function showBanner() {
     const url = AGENCY_URLS[p.agency] || "#";
     return `<div class="lbox-item">
       <a href="${url}" target="_blank">${p.agency}</a>
-      <span class="dt">${fmt(p.date_fieldwork_to)}</span>
+      <span class="dt">${fmt(p.date_published || p.date_fieldwork_to)}</span>
     </div>`;
   }).join("");
   document.getElementById("lbox").classList.add("on");
-}
-
-// ══ Nejnovější průzkum od každé agentury ══════════════════
-function getLatestPerAgency() {
-  const map = {};
-  POLLS.forEach(p => {
-    if (!map[p.agency] || p.date_fieldwork_to > map[p.agency].date_fieldwork_to)
-      map[p.agency] = p;
-  });
-  return Object.values(map).sort((a,b) => a.agency.localeCompare(b.agency));
 }
 
 // ══ Seznam stran/koalic ═══════════════════════════════════
@@ -162,7 +201,7 @@ function getParties(polls, view) {
   );
 }
 
-// ══ Strany z průzkumů bez filtru koalic (pro graf 3) ══════
+// ══ Strany z průzkumů bez filtru koalic (pro graf 2) ══════
 function getPartiesRaw(polls) {
   const scores = {}, count = {};
   polls.forEach(p => {
@@ -200,36 +239,48 @@ const barLabelsPlugin = {
   }
 };
 
-// ══ Plugin: červená čára volebního cenzu (5 %) ════════════
+// ══ Plugin: hranice pro vstup do Sněmovny ═════════════════
+// Strany 5 %, koalice dvou stran 8 %, koalice tří a více stran 11 %.
+const THRESHOLDS = {
+  parties:    [{ v:5,  t:"5 % hranice pro stranu" }],
+  coalitions: [{ v:5,  t:"5 % strana" },
+               { v:8,  t:"8 % koalice 2 stran" },
+               { v:11, t:"11 % koalice 3 a více stran" }],
+};
+
 const censusLinePlugin = {
   id: "censusLine",
-  afterDraw(chart) {
+  afterDraw(chart, args, opts) {
     const { ctx, scales: { y } } = chart;
     if (!y) return;
-    const yPos = y.getPixelForValue(5);
+    const lines = THRESHOLDS[opts.view] || THRESHOLDS.parties;
     const left  = chart.chartArea.left;
     const right = chart.chartArea.right;
-    ctx.save();
-    ctx.strokeStyle = "#C0272D";
-    ctx.lineWidth = 1.5;
-    ctx.setLineDash([5, 4]);
-    ctx.beginPath();
-    ctx.moveTo(left, yPos);
-    ctx.lineTo(right, yPos);
-    ctx.stroke();
-    ctx.setLineDash([]);
-    ctx.fillStyle = "#C0272D";
-    ctx.font = "600 10px 'Source Sans 3', sans-serif";
-    ctx.textAlign = "right";
-    ctx.textBaseline = "bottom";
-    ctx.fillText("5 % — volebni cenzus", right - 4, yPos - 3);
-    ctx.restore();
+    lines.forEach(({ v, t }) => {
+      const yPos = y.getPixelForValue(v);
+      ctx.save();
+      ctx.strokeStyle = "#C0272D";
+      ctx.globalAlpha = v === 5 ? 1 : 0.7;
+      ctx.lineWidth = 1.5;
+      ctx.setLineDash(v === 5 ? [5, 4] : [2, 3]);
+      ctx.beginPath();
+      ctx.moveTo(left, yPos);
+      ctx.lineTo(right, yPos);
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle = "#C0272D";
+      ctx.font = "600 10px 'Source Sans 3', sans-serif";
+      ctx.textAlign = "right";
+      ctx.textBaseline = "bottom";
+      ctx.fillText(t, right - 4, yPos - 3);
+      ctx.restore();
+    });
   }
 };
 
 // ══ GRAF 1 — grouped bar ══════════════════════════════════
 function render1() {
-  const latestPolls = getLatestPerAgency();
+  const latestPolls = CURRENT;
   const parties     = getParties(latestPolls, S1.view);
 
   if (!parties.length) {
@@ -239,17 +290,20 @@ function render1() {
     document.getElementById("avgRow").innerHTML = "";
     document.getElementById("leg1").innerHTML = "";
     document.getElementById("meta1").innerHTML = "";
+    render1b([], []);
     return;
   }
 
+  // Strana, kterou agentura neměřila, nemá sloupec (žádná dosazená hodnota)
   const datasets = latestPolls.map(poll => {
     const col = AC[poll.agency] || "#888";
     return {
       label: poll.agency,
-      data:            parties.map(pid => poll.parties[pid] ?? 2.0),
-      backgroundColor: parties.map(pid => poll.parties[pid] != null ? col+"CC" : col+"30"),
-      borderColor:     parties.map(pid => poll.parties[pid] != null ? col      : col+"55"),
+      data:            parties.map(pid => poll.parties[pid] ?? null),
+      backgroundColor: col + "CC",
+      borderColor:     col,
       borderWidth: 1.5,
+      pubDates:        parties.map(() => poll.date_published),
     };
   });
 
@@ -261,7 +315,7 @@ function render1() {
     options: {
       responsive: true, maintainAspectRatio: false,
       interaction: { mode:"index", intersect:false },
-      plugins: { legend:{display:false}, tooltip:tooltipOpts() },
+      plugins: { legend:{display:false}, tooltip:tooltipOpts(), censusLine:{ view:S1.view } },
       scales: {
         x: { grid:{display:false}, ticks:ticksOpts() },
         y: { min:0, max:45,
@@ -272,46 +326,46 @@ function render1() {
     plugins: [barLabelsPlugin, censusLinePlugin],
   });
 
+  // Štítky průměru = stejná čísla jako graf průměru pod tím
   let avgHtml = ``;
   parties.forEach(pid => {
-    const vals = latestPolls.map(p => p.parties[pid]).filter(v => v != null);
-    if (!vals.length) return;
-    const avg = vals.reduce((s,v) => s+v, 0) / vals.length;
+    const a = averageOf(latestPolls, pid);
+    if (!a) return;
     const cfg = PC[pid];
     avgHtml += `<div class="avg-chip">
       <div class="dot" style="background:${cfg.c}"></div>
       <span>${cfg.d}</span>
-      <strong>${avg.toFixed(1)} %</strong>
+      <strong>${a.avg.toFixed(1)} %</strong>
     </div>`;
   });
   document.getElementById("avgRow").innerHTML = avgHtml;
 
   document.getElementById("leg1").innerHTML = latestPolls.map(poll => {
-    const isP = AGENCY_TYPE[poll.agency] === "preference";
+    const isP = !isModel(poll);
     return `<div class="li nodim">
       <div class="ld" style="background:${AC[poll.agency]||'#888'}"></div>
-      <span>${poll.agency}${isP ? ' <span class="pref-badge">pref</span>' : ''} &mdash; ${fmt(poll.date_fieldwork_to)}</span>
+      <span>${poll.agency}${isP ? ' <span class="pref-badge">pref</span>' : ''}, sběr do ${fmt(poll.date_fieldwork_to)}</span>
     </div>`;
   }).join("");
 
   const agLinks = latestPolls.map(p =>
     `<a href="${AGENCY_URLS[p.agency]||'#'}" target="_blank">${p.agency}</a>`
   ).join(", ");
+  const hasPref = latestPolls.some(p => !isModel(p));
   document.getElementById("meta1").innerHTML = `
     <span>Agentury: <b>${agLinks}</b></span>
-    <span>Zobrazeno: <b>${S1.view === "parties" ? "Strany" : "Koalice"}</b></span>`;
+    <span>Zobrazeno: <b>${S1.view === "parties" ? "Strany" : "Koalice"}</b></span>
+    <span>Průzkumy se sběrem za posledních ${CURRENT_DAYS} dní${hasPref ? ", preference CVVM nejsou v průměru" : ""}</span>`;
 
   render1b(latestPolls, parties);
 }
 
-// ══ GRAF 1b — Průměr přes všechny agentury ════════════════
+// ══ GRAF 1b — Průměr přes agentury ════════════════════════
 function render1b(latestPolls, parties) {
-  const partyData = parties.map(pid => {
-    // Agentury, které stranu neměřily → 2 % (stejně jako v grafu 1)
-    const vals = latestPolls.map(p => p.parties[pid] ?? 2.0);
-    const avg  = vals.reduce((s,v) => s+v, 0) / vals.length;
-    return { pid, avg };
-  });
+  const partyData = parties
+    .map(pid => ({ pid, a: averageOf(latestPolls, pid) }))
+    .filter(d => d.a)
+    .sort((x, y) => y.a.avg - x.a.avg);
 
   if (!partyData.length) {
     if (S1b.chart) { S1b.chart.destroy(); S1b.chart = null; }
@@ -325,8 +379,9 @@ function render1b(latestPolls, parties) {
     data: {
       labels: partyData.map(d => PC[d.pid]?.d || d.pid),
       datasets: [{
-        label: "Pr\u016fm\u011br",
-        data:  partyData.map(d => +d.avg.toFixed(1)),
+        label: "Průměr",
+        data:  partyData.map(d => +d.a.avg.toFixed(1)),
+        counts: partyData.map(d => d.a.n),
         backgroundColor: partyData.map(d => (PC[d.pid]?.c || "#888") + "CC"),
         borderColor:     partyData.map(d => PC[d.pid]?.c || "#888"),
         borderWidth: 1.5,
@@ -336,12 +391,18 @@ function render1b(latestPolls, parties) {
       responsive: true, maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
+        censusLine: { view: S1.view },
         tooltip: {
           backgroundColor: "#2A2E4A",
           titleFont: { family:"'Source Sans 3',sans-serif", size:11, weight:"600" },
           bodyFont:  { family:"'Source Sans 3',sans-serif", size:12 },
           padding: 9,
-          callbacks: { label: c => ` Pr\u016fm\u011br: ${c.parsed.y} %` },
+          callbacks: {
+            label: c => {
+              const n = c.dataset.counts[c.dataIndex];
+              return ` Průměr: ${c.parsed.y} % (${n} ${n === 1 ? "průzkum" : n < 5 ? "průzkumy" : "průzkumů"})`;
+            }
+          },
         },
       },
       scales: {
@@ -352,20 +413,6 @@ function render1b(latestPolls, parties) {
     },
     plugins: [barLabelsPlugin, censusLinePlugin],
   });
-}
-
-// ══ Lineární interpolace chybějících měsíců ═══════════════
-function interpolate(data) {
-  const r = data.slice();
-  for (let i = 1; i < r.length - 1; i++) {
-    if (r[i] !== null) continue;
-    let prev = -1, next = -1;
-    for (let j = i-1; j >= 0; j--)            { if (r[j] !== null) { prev = j; break; } }
-    for (let j = i+1; j < r.length; j++)       { if (r[j] !== null) { next = j; break; } }
-    if (prev >= 0 && next >= 0)
-      r[i] = +(r[prev] + (r[next] - r[prev]) * (i - prev) / (next - prev)).toFixed(1);
-  }
-  return r;
 }
 
 // ══ Pomocné: všechny měsíce od 2022-01 do dnes ═══════════
@@ -381,12 +428,13 @@ function getAllMonths() {
 }
 
 function fmtMonth(ym) {
-  const cs = ['led','\xfano','b\u0159e','dub','kv\u011b','\u010dvn','\u010dvc','srp','z\u00e1\u0159','\u0159\xedj','lis','pro'];
+  const cs = ['led','úno','bře','dub','kvě','čvn','čvc','srp','zář','říj','lis','pro'];
   const [y, m] = ym.split('-');
   return `${cs[parseInt(m)-1]} ${y.slice(2)}`;
 }
 
 // ══ GRAF 2 — spojnicový (Průměr + agentury) ═══════════════
+// Měsíc bez průzkumu zůstane prázdný, nic se nedopočítává.
 function render2() {
   // Průzkumy pro aktuální pohled (strany / koalice)
   const viewPolls = POLLS
@@ -419,20 +467,19 @@ function render2() {
   const monthLabels = allMonths.map(fmtMonth);
   const datasets    = [];
 
-  // ── Průměr přes všechny agentury ────────────────────────
+  // ── Průměr volebních modelů ─────────────────────────────
   if (S2.showAvg) {
     parties.forEach(pid => {
       const cfg = PC[pid] || { d:pid, c:"#888" };
-      const rawData = allMonths.map(mo => {
-        const agVals = Object.values(mpm[mo] || {})
-          .map(p => p.parties[pid]).filter(v => v != null);
-        return agVals.length ? agVals.reduce((s,v)=>s+v,0)/agVals.length : null;
+      const data = allMonths.map(mo => {
+        const a = averageOf(Object.values(mpm[mo] || {}), pid);
+        return a ? +a.avg.toFixed(1) : null;
       });
-      if (!rawData.some(v => v !== null)) return;
+      if (!data.some(v => v !== null)) return;
       datasets.push({
-        label: `${cfg.d} \xb7 Pr\u016fm\u011br`,
+        label: `${cfg.d} \xb7 Průměr`,
         isAvg: true,
-        data: interpolate(rawData),
+        data,
         borderColor: cfg.c,
         backgroundColor: "transparent",
         borderWidth: 3.5,
@@ -440,7 +487,7 @@ function render2() {
         pointRadius: 4, pointHoverRadius: 6,
         pointBackgroundColor: cfg.c,
         pointBorderColor: "#fff", pointBorderWidth: 1.5,
-        tension: 0.3, spanGaps: false,
+        tension: 0.2, spanGaps: false,
       });
     });
   }
@@ -451,14 +498,14 @@ function render2() {
     agencies.forEach(ag => {
       const hasAny = allMonths.some(m => mpm[m]?.[ag]?.parties[pid] != null);
       if (!hasAny) return;
-      const rawData = allMonths.map(m => {
+      const data = allMonths.map(m => {
         const p = mpm[m]?.[ag];
         return (p && p.parties[pid] != null) ? p.parties[pid] : null;
       });
       datasets.push({
         label: `${cfg.d} \xb7 ${ag}`,
         isAvg: false,
-        data: interpolate(rawData),
+        data,
         borderColor: cfg.c + "99",
         backgroundColor: "transparent",
         borderWidth: 1.5,
@@ -466,7 +513,7 @@ function render2() {
         pointRadius: 2.5, pointHoverRadius: 4,
         pointBackgroundColor: cfg.c + "99",
         pointBorderColor: "#fff", pointBorderWidth: 1,
-        tension: 0.3, spanGaps: false,
+        tension: 0.2, spanGaps: false,
       });
     });
   });
@@ -488,11 +535,10 @@ function render2() {
           label: c => {
             const val = c.parsed.y;
             if (val == null) return null;
-            const suf = c.dataset.isAvg ? " (pr\u016fm\u011br)" : "";
-            return ` ${c.dataset.label}${suf}: ${val.toFixed(1)} %`;
+            return ` ${c.dataset.label}: ${val.toFixed(1)} %`;
           }
         }
-      }},
+      }, censusLine:{ view:S2.view } },
       scales: {
         x: { grid:{color:"#E8EAF0"},
              ticks:{ ...ticksOpts(), maxRotation:0, maxTicksLimit:18,
@@ -501,6 +547,7 @@ function render2() {
              ticks:{ ...ticksOpts(), callback:v => v+" %" } },
       },
     },
+    plugins: [censusLinePlugin],
   });
 
   // ── Legenda stran ────────────────────────────────────────
@@ -510,7 +557,7 @@ function render2() {
     const hidden = S2.hide.has(pid);
     legHtml += `<div class="li ${hidden?"off":""}" onclick="toggleParty2('${pid}')">
       <div style="width:14px;height:14px;flex-shrink:0;background:${hidden?"#D8DAEA":cfg.c};display:flex;align-items:center;justify-content:center;border:1px solid ${cfg.c}">
-        ${hidden?"":"<span style=\"color:#fff;font-size:9px;line-height:1;font-weight:700\">\u2713</span>"}
+        ${hidden?"":"<span style=\"color:#fff;font-size:9px;line-height:1;font-weight:700\">✓</span>"}
       </div>
       <span>${cfg.d}</span>
     </div>`;
@@ -524,7 +571,7 @@ function render2() {
       <svg width="24" height="12" style="flex-shrink:0">
         <line x1="0" y1="6" x2="24" y2="6" stroke="#3D4263" stroke-width="3.5"/>
       </svg>
-      <span><b>Pr\u016fm\u011br</b></span>
+      <span><b>Průměr volebních modelů</b></span>
     </div>`;
   }
   agencies.forEach(ag => {
@@ -550,8 +597,8 @@ function render2() {
   ).join(", ");
   document.getElementById("meta2").innerHTML = `
     <span>Agentury: <b>${agLinks}</b></span>
-    <span>Pr\u016fzkum\u016f: <b>${metaPolls.length}</b></span>
-    <span>Obdob\xed: <b>${fmt(allDates[0])} &ndash; ${fmt(allDates[allDates.length-1])}</b></span>`;
+    <span>Průzkumů: <b>${metaPolls.length}</b></span>
+    <span>Období: <b>${fmt(allDates[0])} až ${fmt(allDates[allDates.length-1])}</b></span>`;
 }
 
 function toggleParty2(pid) {
@@ -564,7 +611,7 @@ function buildChips2() {
   const avgCol = "#3D4263";
   const avgChip = `<div class="ac on" id="af2-avg" data-color="${avgCol}"
     style="background:${avgCol};border-color:${avgCol};color:#fff;font-weight:600"
-    onclick="toggleAvg2()">\u2713 Pr\u016fm\u011br</div>`;
+    onclick="toggleAvg2()">✓ Průměr</div>`;
 
   const agencies = [...new Set(POLLS.map(p => p.agency))];
   const agHtml = agencies.map(a => {
@@ -585,12 +632,12 @@ function toggleAvg2() {
     chip.classList.add("on");
     chip.style.background  = col;
     chip.style.color       = '#fff';
-    chip.textContent       = '\u2713 Pr\u016fm\u011br';
+    chip.textContent       = '✓ Průměr';
   } else {
     chip.classList.remove("on");
     chip.style.background  = '';
     chip.style.color       = col;
-    chip.textContent       = 'Pr\u016fm\u011br';
+    chip.textContent       = 'Průměr';
   }
   render2();
 }
@@ -612,7 +659,7 @@ function toggleAg2(agency) {
     chip.style.background = col;
     chip.style.borderColor = col;
     chip.style.color = '#fff';
-    chip.textContent = '\u2713 ' + agency;
+    chip.textContent = '✓ ' + agency;
   }
   render2();
 }
@@ -651,7 +698,7 @@ function tooltipOpts() {
         const val = c.parsed.y;
         if (val == null) return null;
         const pub = c.dataset.pubDates?.[c.dataIndex];
-        const dateStr = pub ? `  (vydano ${fmt(pub)})` : "";
+        const dateStr = pub ? `  (vydáno ${fmt(pub)})` : "";
         return ` ${c.dataset.label}: ${val} %${dateStr}`;
       }
     },

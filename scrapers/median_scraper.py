@@ -164,11 +164,20 @@ def scrape_article(url, title=""):
         return None
 
     parties, date_from, date_to, sample, pub_pdf = {}, None, None, None, None
+    method, client = "CAPI", "Český rozhlas"
     pdf = next((a["href"] for a in soup.find_all("a", href=True)
                 if a["href"].lower().endswith(".pdf")), None)
     if pdf:
         pdf = pdf if pdf.startswith("http") else BASE + pdf
-        parties, date_from, date_to, sample, pub_pdf = parse_model_pdf(_pdf_text_pages(pdf))
+        pages = _pdf_text_pages(pdf)
+        parties, date_from, date_to, sample, pub_pdf = parse_model_pdf(pages)
+        full = "\n".join(pages)
+        # Metodika v PDF: „CAPI … CATI … CAWI“, „Realizátor a zadavatel … bez zadavatele“
+        found = [m for m in ("CAPI", "CATI", "CAWI") if m in full]
+        if found:
+            method = "+".join(found)
+        if "bez zadavatele" in full:
+            client = None
 
     # Záloha: text článku
     if len(parties) < 4:
@@ -196,8 +205,8 @@ def scrape_article(url, title=""):
         poll_type="model",
         view="coalitions" if "SPOLU" in parties else "parties",
         sample_size=sample or extract_sample_size(text),
-        method="CAPI",
-        client="Český rozhlas",
+        method=method,
+        client=client,
         source_url=url,
     )
 

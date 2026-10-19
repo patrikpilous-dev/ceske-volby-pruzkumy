@@ -69,8 +69,8 @@
     "type": "model",
     "view": "parties",
     "sample_size": 1018,
-    "method": "CAPI",
-    "client": "Český rozhlas",
+    "method": "CAPI+CATI+CAWI",
+    "client": null,
     "parties": {
       "ANO": 29.5,
       "STAN": 17.0,
@@ -86,7 +86,7 @@
     },
     "coalition_notes": {},
     "source_url": "https://www.median.eu/cs/?p=3814",
-    "scraped_at": "2026-10-19T06:57:50.675031Z"
+    "scraped_at": "2026-10-19T07:16:01.445091Z"
   },
   {
     "id": "stem-2026-09-07",
@@ -156,8 +156,8 @@
     "type": "model",
     "view": "parties",
     "sample_size": 1021,
-    "method": "CAPI",
-    "client": "Český rozhlas",
+    "method": "CAPI+CATI+CAWI",
+    "client": null,
     "parties": {
       "ANO": 34.0,
       "STAN": 12.0,
@@ -172,7 +172,7 @@
     },
     "coalition_notes": {},
     "source_url": "https://www.median.eu/cs/?p=3809",
-    "scraped_at": "2026-10-19T06:57:55.050665Z"
+    "scraped_at": "2026-10-19T07:16:07.385279Z"
   },
   {
     "id": "median-2026-07-31",
@@ -183,8 +183,8 @@
     "type": "model",
     "view": "parties",
     "sample_size": 1022,
-    "method": "CAPI",
-    "client": "Český rozhlas",
+    "method": "CAPI+CATI+CAWI",
+    "client": null,
     "parties": {
       "ANO": 34.0,
       "STAN": 15.0,
@@ -199,7 +199,7 @@
     },
     "coalition_notes": {},
     "source_url": "https://www.median.eu/cs/?p=3748",
-    "scraped_at": "2026-10-19T06:57:59.554107Z"
+    "scraped_at": "2026-10-19T07:16:13.134123Z"
   },
   {
     "id": "median-2026-06-30",
@@ -210,8 +210,8 @@
     "type": "model",
     "view": "parties",
     "sample_size": 1022,
-    "method": "CAPI",
-    "client": "Český rozhlas",
+    "method": "CAPI+CATI+CAWI",
+    "client": null,
     "parties": {
       "ANO": 34.0,
       "ODS": 13.0,
@@ -227,7 +227,7 @@
     },
     "coalition_notes": {},
     "source_url": "https://www.median.eu/cs/?p=3733",
-    "scraped_at": "2026-10-19T06:58:03.816687Z"
+    "scraped_at": "2026-10-19T07:16:19.108059Z"
   },
   {
     "id": "stem-2026-06-21",
@@ -297,8 +297,8 @@
     "type": "model",
     "view": "parties",
     "sample_size": 1020,
-    "method": "CAPI",
-    "client": "Český rozhlas",
+    "method": "CAPI+CATI+CAWI",
+    "client": null,
     "parties": {
       "ANO": 35.5,
       "STAN": 14.5,
@@ -314,7 +314,7 @@
     },
     "coalition_notes": {},
     "source_url": "https://www.median.eu/cs/?p=3726",
-    "scraped_at": "2026-10-19T06:58:08.131485Z"
+    "scraped_at": "2026-10-19T07:16:25.108286Z"
   },
   {
     "id": "nms-2026-05-05",

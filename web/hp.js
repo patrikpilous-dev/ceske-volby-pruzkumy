@@ -29,7 +29,7 @@ const MES = ["led","úno","bře","dub","kvě","čvn","čvc","srp","zář","říj
 
 let POLLS = [], KRAJE = null, CUR = [], AVG = {}, SEATS = {}, N = {}, HLAVY = {}, POSLANCI = {};
 // Politici s vlastní stránkou na ceske-volby.cz/politici/<slug>/
-const PROFILY = new Set(["andrej-babis"]);
+const PROFILY = new Set(["andrej-babis", "petr-macinka"]);
 const S = {m1:"avg", v2:"parties", per:"volby", showAvg:true, ag:new Set(), hide:new Set(), sel:new Set(VLADA), c1:null, c2:null};
 
 const $ = id => document.getElementById(id);

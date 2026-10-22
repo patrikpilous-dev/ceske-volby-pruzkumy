@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Politický systém České republiky, České volby</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#3D4263;--navy2:#2A2E4A;--red:#C0272D;--blue:#11457E;--bg:#F7F8FB;--line:#D8DAEA;--muted:#8890B0;--text:#1E2240;--text2:#4A5070;
+--voli:#1D7A3A;--jmenuje:#11457E;--kontroluje:#C0272D;--zakony:#E07000}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{overflow-x:hidden}
+body{font-family:'Source Sans 3',Verdana,sans-serif;background:transparent;color:var(--text);line-height:1.45}
+.w{background:#fff;border:1px solid var(--line)}
+.tri{display:flex;height:6px}.tri div{flex:1}
+.ser{font-family:Merriweather,Georgia,serif;font-weight:400;color:var(--navy2)}
+.hd{padding:18px 22px 12px;border-bottom:2px solid var(--navy)}
+.kick{font-size:11px;letter-spacing:.08em;color:var(--red);font-weight:600;text-transform:uppercase}
+.hd h2{font-size:24px;margin:6px 0 4px}
+.lead{font-size:15px;color:var(--text2)}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:12px 22px;border-bottom:1px solid var(--line);background:var(--bg)}
+.bar .bl{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-right:4px}
+.f{cursor:pointer;user-select:none;display:inline-flex;align-items:center;gap:7px;padding:5px 11px;font-size:13px;border:1.5px solid var(--line);background:#fff;color:var(--text)}
+.f i{display:inline-block;width:18px;height:3px}
+.f.off{opacity:.4}
+.btn{cursor:pointer;font:inherit;font-size:13px;padding:6px 12px;border:1px solid var(--navy);background:var(--navy);color:#fff;margin-left:auto}
+.btn.o{background:#fff;color:var(--navy)}
+.g{display:grid;grid-template-columns:minmax(0,1fr)}
+.g>div:first-child{border-bottom:1px solid var(--line);padding:10px 12px}
+.det{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0 28px}
+.det>.c1,.det>.c2{min-width:0}
+svg{display:block;width:100%;height:auto}
+.node{cursor:pointer}
+.node rect{fill:#fff;stroke:var(--line);stroke-width:1.5;transition:fill .15s,stroke .15s}
+.node:hover rect{stroke:var(--navy)}
+.node.sel rect{fill:var(--navy);stroke:var(--navy)}
+.node.sel text{fill:#fff}
+.node.dim{opacity:.28}
+.node text{font-family:'Source Sans 3',Verdana,sans-serif;fill:var(--navy2);pointer-events:none}
+.node .t1{font-size:14px;font-weight:600}
+.node .t2{font-size:11.5px;fill:var(--muted)}
+.node.sel .t2{fill:#D8DAEA}
+.node.krok rect{stroke:var(--red);stroke-width:3}
+.e path{fill:none;stroke-width:2;transition:opacity .15s}
+.e text{font-size:11px;font-family:'Source Sans 3',Verdana,sans-serif;paint-order:stroke;stroke:#fff;stroke-width:4px;stroke-linejoin:round}
+.e.dim{opacity:.08}
+.e.hide{display:none}
+.det{padding:18px 22px}
+.det h3{font-size:20px;margin-bottom:4px}
+.det .sub{font-size:13px;color:var(--muted);margin-bottom:12px}
+.fa{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:14px}
+.fa div{background:var(--bg);border:1px solid var(--line);padding:8px 10px}
+.fa b{display:block;font-family:Merriweather,Georgia,serif;font-weight:400;font-size:18px;color:var(--navy2)}
+.fa span{font-size:12px;color:var(--muted)}
+.det ul{list-style:none;margin:0 0 12px}
+.det li{position:relative;padding-left:16px;margin-bottom:5px;font-size:14.5px}
+.det li:before{content:"";position:absolute;left:0;top:8px;width:7px;height:7px;background:var(--navy)}
+.os{display:flex;align-items:center;gap:12px;padding:10px;border:1px solid var(--line);margin-bottom:10px;text-decoration:none;color:var(--text)}
+.os img{width:52px;height:52px;border-radius:50%;object-fit:cover;flex-shrink:0}
+.os b{display:block;font-family:Merriweather,Georgia,serif;font-weight:400;font-size:16px;color:var(--navy2)}
+.os span{font-size:12.5px;color:var(--muted)}
+a.os:hover{border-color:var(--navy)}
+.rel{font-size:13px;color:var(--text2)}
+.rel div{margin-bottom:4px}
+.rel i{display:inline-block;width:14px;height:3px;vertical-align:middle;margin-right:6px}
+.det a.ln{color:var(--red);font-weight:600;text-decoration:none;font-size:14px}
+.krokbox{padding:14px 22px;border-bottom:1px solid var(--line);background:#FFF8EE;display:none}
+.krokbox.on{display:block}
+.krokbox .kc{font-size:12px;color:var(--red);font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+.krokbox .kt{font-family:Merriweather,Georgia,serif;font-size:17px;color:var(--navy2);margin:4px 0}
+.krokbox .kp{font-size:14.5px;color:var(--text2)}
+.krokbox .kn{margin-top:10px;display:flex;gap:8px}
+.meta{padding:10px 22px 14px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}
+@container (max-width:800px){}
+@media(max-width:820px){
+  .det{grid-template-columns:1fr}
+  .g>div:first-child{padding:6px 4px}
+  .hd,.bar,.det,.meta,.krokbox{padding-left:14px;padding-right:14px}
+  .btn{margin-left:0}
+}
+</style>
+</head>
+<body>
+<div class="w" id="app">
+  <div class="tri"><div style="background:#fff;border-bottom:1px solid var(--line)"></div><div style="background:var(--red)"></div><div style="background:var(--blue)"></div></div>
+  <div class="hd">
+    <div class="kick">Interaktivní schéma · stav k 22. 10. 2026</div>
+    <h2 class="ser">Politický systém České republiky</h2>
+    <div class="lead">Kdo koho volí, jmenuje a kontroluje. Klikněte na instituci a uvidíte její pravomoci, vazby a kdo ji právě vede.</div>
+  </div>
+  <div class="bar" id="bar">
+    <span class="bl">Vazby</span>
+    <span class="f" data-t="voli"><i style="background:var(--voli)"></i>volí</span>
+    <span class="f" data-t="jmenuje"><i style="background:var(--jmenuje)"></i>jmenuje</span>
+    <span class="f" data-t="kontroluje"><i style="background:var(--kontroluje)"></i>kontroluje</span>
+    <span class="f" data-t="zakony"><i style="background:var(--zakony)"></i>zákony</span>
+    <button class="btn" id="zakon">Jak vzniká zákon</button>
+  </div>
+  <div class="krokbox" id="kb">
+    <div class="kc" id="kc"></div>
+    <div class="kt" id="kt"></div>
+    <div class="kp" id="kp"></div>
+    <div class="kn"><button class="btn o" id="kz">Zpět</button><button class="btn" id="kd">Další krok</button><button class="btn o" id="kx">Zavřít</button></div>
+  </div>
+  <div class="g">
+    <div><svg id="sv" viewBox="0 0 900 585" role="img" aria-label="Schéma politického systému ČR"></svg></div>
+    <div class="det" id="det"></div>
+  </div>
+  <div class="meta">Zdroj Ústava ČR, volební zákony a weby institucí. Fotografie Wikimedia Commons, autoři a licence v profilech politiků. <a target="_top" href="https://www.ceske-volby.cz/politici/" style="color:var(--red);font-weight:600;text-decoration:none">Profily politiků</a></div>
+</div>
+<script src="system.js"></script>
+</body>
+</html>

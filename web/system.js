@@ -189,4 +189,6 @@ function report() {
 }
 window.addEventListener("resize", () => { clearTimeout(window._rh); window._rh = setTimeout(report, 150); });
 
+// Ve vložení na stránce s vlastním H1 se nadpis schématu skryje (?n=0).
+if (new URLSearchParams(location.search).get("n") === "0") document.querySelector(".hd h2").style.display = "none";
 kresli(); vyber("obcane"); setTimeout(report, 600);

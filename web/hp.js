@@ -28,8 +28,7 @@ const BASE = {ANO:"ANO",STAN:"STAN",ODS:"SPOLU",TOP09:"SPOLU","KDUČSL":"SPOLU",
 const MES = ["led","úno","bře","dub","kvě","čvn","čvc","srp","zář","říj","lis","pro"];
 
 let POLLS = [], KRAJE = null, CUR = [], AVG = {}, SEATS = {}, N = {}, HLAVY = {}, POSLANCI = {};
-// Politici s vlastní stránkou na ceske-volby.cz/politici/<slug>/
-const PROFILY = new Set(["andrej-babis", "petr-macinka", "tomio-okamura", "petr-fiala", "alena-schillerova", "vit-rakusan", "martin-kupka", "filip-turek"]);
+// Každý poslanec má od 23. 10. 2026 stránku na ceske-volby.cz/politici/<slug>/
 const S = {m1:"avg", v2:"parties", per:"volby", showAvg:true, ag:new Set(), hide:new Set(), sel:new Set(VLADA), c1:null, c2:null};
 
 const $ = id => document.getElementById(id);
@@ -210,7 +209,7 @@ function renderSeats() {
   $("sn").innerHTML = ks.map(k => {
     const os = lidi ? (POSLANCI[k] || []).slice(0, SV[k]) : [];
     return os.map(p => {
-      const url = PROFILY.has(p.slug) ? `https://www.ceske-volby.cz/politici/${p.slug}/` : (p.psp || "");
+      const url = p.slug ? `https://www.ceske-volby.cz/politici/${p.slug}/` : (p.psp || "");
       const tit = `${p.jmeno}, ${nm(k)}${p.funkce ? ", " + p.funkce : ""}`;
       const img = `<img src="poslanci/${p.soubor}" alt="${esc(p.jmeno)}" loading="lazy">`;
       return url ? `<a class="os" target="_top" href="${esc(url)}" title="${esc(tit)}" style="border-color:${col(k)}">${img}</a>` : `<span class="os" title="${esc(tit)}" style="border-color:${col(k)}">${img}</span>`;

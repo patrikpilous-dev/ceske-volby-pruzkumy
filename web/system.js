@@ -73,10 +73,10 @@ const E = [
   ["prezident", "us", "jmenuje", "jmenuje soudce"], ["senat", "us", "jmenuje", "souhlasí"],
   ["prezident", "cnb", "jmenuje", "bankovní rada"], ["prezident", "soudy", "jmenuje", "jmenuje soudce"],
   ["snemovna", "ombudsman", "voli", "volí"], ["snemovna", "nku", "jmenuje", "navrhuje vedení"],
-  ["prezident", "snemovna", "kontroluje", "veto"], ["us", "snemovna", "kontroluje", "ruší zákony", -25],
+  ["prezident", "snemovna", "kontroluje", "veto", 80], ["us", "snemovna", "kontroluje", "ruší zákony", -25],
   ["nku", "vlada", "kontroluje", "kontroluje"], ["ombudsman", "vlada", "kontroluje", "úřady"],
   ["vlada", "snemovna", "zakony", "návrh zákona"], ["snemovna", "senat", "zakony", "zákon"], ["senat", "snemovna", "zakony", "vrací"],
-  ["snemovna", "prezident", "zakony", "k podpisu"]
+  ["snemovna", "prezident", "zakony", "k podpisu", 80]
 ];
 
 const KROKY = [

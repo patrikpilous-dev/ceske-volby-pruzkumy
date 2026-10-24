@@ -193,7 +193,7 @@ function render1() {
 // Malý kulatý portrét předsedy strany za názvem (Wikimedia Commons, autor a licence v popisku).
 function hlava(k) {
   const h = HLAVY[k]; if (!h) return Object.keys(HLAVY).length ? `<span class="hl hl0"></span>` : "";
-  return `<img class="hl" src="hlavy/${h.soubor}" alt="${esc(h.jmeno)}" title="${esc(h.jmeno)}, předseda. Foto ${esc(h.autor)}, ${esc(h.licence)}" loading="lazy" width="34" height="34">`;
+  return `<img class="hl" src="hlavy/${h.soubor}" alt="${esc(h.jmeno)}" title="${esc(h.jmeno)}, předseda.${h.avatar ? " Volná fotografie zatím není." : " Foto " + esc(h.autor) + ", " + esc(h.licence)}" loading="lazy" width="34" height="34">`;
 }
 
 function renderSeats() {
@@ -310,7 +310,7 @@ function meta() {
   const n = POLLS.length, od = POLLS.reduce((m, p) => !m || p.date_fieldwork_to < m ? p.date_fieldwork_to : m, "");
   $("meta").innerHTML = `<span>Průzkumů v databázi: <b>${n}</b> od ${fd(od)}</span><span>Statistická chyba zhruba ±1 až 3 p. b.</span>`
     + `<a target="_top" href="https://www.ceske-volby.cz/preference/">Metodika a tabulka všech průzkumů</a>`
-    + (Object.keys(HLAVY).length ? `<details style="width:100%"><summary style="cursor:pointer">Fotografie předsedů stran</summary>` + Object.values(HLAVY).map(h =>
+    + (Object.keys(HLAVY).length ? `<details style="width:100%"><summary style="cursor:pointer">Fotografie předsedů stran</summary>` + Object.values(HLAVY).filter(h => !h.avatar).map(h =>
       `${esc(h.jmeno)}, foto <a target="_blank" rel="noopener" href="${esc(h.zdroj)}" style="color:inherit;font-weight:400">${esc(h.autor)}</a>, <a target="_blank" rel="noopener" href="${esc(h.licence_url || h.zdroj)}" style="color:inherit;font-weight:400">${esc(h.licence)}</a>`).join("; ") + `, Wikimedia Commons, oříznuto.</details>` : "")
     + (Object.keys(POSLANCI).length ? `<details style="width:100%"><summary style="cursor:pointer">Fotografie poslanců</summary>` + Object.values(POSLANCI).flat().map(h =>
       `${esc(h.jmeno)}, foto <a target="_blank" rel="noopener" href="${esc(h.zdroj)}" style="color:inherit;font-weight:400">${esc(h.autor)}</a>, <a target="_blank" rel="noopener" href="${esc(h.licence_url || h.zdroj)}" style="color:inherit;font-weight:400">${esc(h.licence)}</a>`).join("; ") + `, Wikimedia Commons, oříznuto.</details>` : "");

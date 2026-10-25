@@ -44,12 +44,15 @@
   function sv(t, a, x) { var n = document.createElementNS(NS, t); for (var k in a) n.setAttribute(k, a[k]); if (x != null) n.textContent = x; return n; }
   function el(t, a, x) { var n = document.createElement(t); if (a) for (var k in a) n.setAttribute(k, a[k]); if (x != null) n.textContent = x; return n; }
 
+  var poradi = 0;
   function start() {
-    var w = document.querySelector(".ido[data-osa]");
-    if (!w || w.getAttribute("data-hotovo")) return;
-    w.setAttribute("data-hotovo", "1");
-    w.classList.add("js");
+    var vse = document.querySelectorAll(".ido[data-osa]");
+    if (!vse.length) return;
     var st = document.createElement("style"); st.textContent = CSS; document.head.appendChild(st);
+    vse.forEach(function (w) { if (!w.getAttribute("data-hotovo")) { w.setAttribute("data-hotovo", "1"); w.classList.add("js"); kruh(w); } });
+  }
+  function kruh(w) {
+    var cid = "idofoto" + (poradi++);
     var O = JSON.parse(w.getAttribute("data-osa")), foto = w.getAttribute("data-foto"), osoba = w.getAttribute("data-osoba") || "";
     var n = O.length, C = 280, R = 200, MEZ = 40 * Math.PI / 180;           // mezera 40° nahoře
     var A0 = -Math.PI / 2 + MEZ / 2, A1 = -Math.PI / 2 - MEZ / 2 + 2 * Math.PI;
@@ -59,7 +62,7 @@
 
     var gr = el("div", { "class": "gr" });
     var s = sv("svg", { viewBox: "-40 -20 640 600", role: "img", "aria-label": "Časová osa ideologie" });
-    var defs = sv("defs"), cp = sv("clipPath", { id: "idofoto" });
+    var defs = sv("defs"), cp = sv("clipPath", { id: cid });
     cp.appendChild(sv("circle", { cx: C, cy: C, r: 132 })); defs.appendChild(cp); s.appendChild(defs);
     var p0 = bodXY(A0, R), p1 = bodXY(A1, R);
     var d = "M" + p0[0] + "," + p0[1] + " A" + R + "," + R + " 0 1 1 " + p1[0] + "," + p1[1];
@@ -69,7 +72,7 @@
     var delka = R * (A1 - A0);
     prog.setAttribute("stroke-dasharray", delka); prog.setAttribute("stroke-dashoffset", delka);
     s.appendChild(sv("circle", { cx: C, cy: C, r: 138, fill: "#ED1C24" }));
-    var im = sv("image", { "class": "stred", href: foto, x: C - 132, y: C - 132, width: 264, height: 264, "clip-path": "url(#idofoto)", preserveAspectRatio: "xMidYMid slice" });
+    var im = sv("image", { "class": "stred", href: foto, x: C - 132, y: C - 132, width: 264, height: 264, "clip-path": "url(#" + cid + ")", preserveAspectRatio: "xMidYMid slice" });
     var imT = sv("title", {}, osoba); im.appendChild(imT); s.appendChild(im);
     var body = [];
     O.forEach(function (u, i) {

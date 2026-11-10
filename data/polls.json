@@ -1,5 +1,33 @@
 [
   {
+    "id": "median-2026-10-31",
+    "agency": "Median",
+    "date_published": "2026-11-10",
+    "date_fieldwork_from": "2026-10-01",
+    "date_fieldwork_to": "2026-10-31",
+    "type": "model",
+    "view": "parties",
+    "sample_size": 1021,
+    "method": "CAPI+CATI+CAWI",
+    "client": null,
+    "parties": {
+      "ANO": 32.0,
+      "STAN": 18.5,
+      "ODS": 10.5,
+      "SPD": 8.5,
+      "Piráti": 7.5,
+      "KDUČSL": 4.0,
+      "Motoristé": 3.0,
+      "NašeČesko": 3.0,
+      "TOP09": 2.5,
+      "KSČM": 2.5,
+      "PRO": 2.0
+    },
+    "coalition_notes": {},
+    "source_url": "https://www.median.eu/cs/?p=3831",
+    "scraped_at": "2026-11-10T15:52:49.024930Z"
+  },
+  {
     "id": "stem-2026-10-06",
     "agency": "STEM",
     "date_published": "2026-10-11",

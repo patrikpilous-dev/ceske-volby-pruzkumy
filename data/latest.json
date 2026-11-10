@@ -1,5 +1,33 @@
 [
   {
+    "id": "median-2026-10-31",
+    "agency": "Median",
+    "date_published": "2026-11-10",
+    "date_fieldwork_from": "2026-10-01",
+    "date_fieldwork_to": "2026-10-31",
+    "type": "model",
+    "view": "parties",
+    "sample_size": 1021,
+    "method": "CAPI+CATI+CAWI",
+    "client": null,
+    "parties": {
+      "ANO": 32.0,
+      "STAN": 18.5,
+      "ODS": 10.5,
+      "SPD": 8.5,
+      "Piráti": 7.5,
+      "KDUČSL": 4.0,
+      "Motoristé": 3.0,
+      "NašeČesko": 3.0,
+      "TOP09": 2.5,
+      "KSČM": 2.5,
+      "PRO": 2.0
+    },
+    "coalition_notes": {},
+    "source_url": "https://www.median.eu/cs/?p=3831",
+    "scraped_at": "2026-11-10T15:52:49.024930Z"
+  },
+  {
     "id": "stem-2026-10-06",
     "agency": "STEM",
     "date_published": "2026-10-11",
@@ -1533,32 +1561,5 @@
     "coalition_notes": {},
     "source_url": "https://cs.wikipedia.org/wiki/P%C5%99edvolebn%C3%AD_pr%C5%AFzkumy_k_volb%C3%A1m_do_Poslaneck%C3%A9_sn%C4%9Bmovny_Parlamentu_%C4%8Cesk%C3%A9_republiky_2025",
     "scraped_at": "2026-03-28T20:13:30.395360Z"
-  },
-  {
-    "id": "kantar-2025-01-31",
-    "agency": "Kantar",
-    "date_published": null,
-    "date_fieldwork_from": "2025-01-01",
-    "date_fieldwork_to": "2025-01-31",
-    "type": "model",
-    "view": "parties",
-    "sample_size": 1200,
-    "method": "mixed",
-    "client": "Česká televize",
-    "parties": {
-      "ANO": 33.5,
-      "KSČM": 3.0,
-      "TOP09": 4.0,
-      "ODS": 13.0,
-      "KDUČSL": 3.0,
-      "Piráti": 7.5,
-      "SPD": 6.5,
-      "STAN": 12.5,
-      "Motoristé": 7.5
-    },
-    "coalition_notes": {},
-    "source_url": "https://e.infogram.com/81040855-01fa-4085-9f57-b024ff49e9d3",
-    "scraped_at": "2026-10-19T08:36:34.765344Z",
-    "poznamka": "Vzorek 1 200 respondentů, do volebního modelu vstupuje 885."
   }
 ]
